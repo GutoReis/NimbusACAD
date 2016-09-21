@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Curriculo" Width="1.75" PointX="18.375" PointY="20.375" IsExpanded="true" />
         <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Curso" Width="2.375" PointX="24.375" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Disciplina" Width="2.25" PointX="28.375" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Documento" Width="2" PointX="21.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Documento" Width="2" PointX="21.625" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Endereco" Width="2.125" PointX="17" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Frequencia" Width="1.5" PointX="32.375" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Funcionario" Width="2.125" PointX="20.25" PointY="9.875" IsExpanded="true" />
