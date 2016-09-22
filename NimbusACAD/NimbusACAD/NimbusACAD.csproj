@@ -163,6 +163,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Identity\Security\SecurityMethods.cs" />
     <Compile Include="Models\Negocio_Base_Endereco.cs">
       <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
     </Compile>
@@ -298,6 +299,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ExtendedMethods\" />
+    <Folder Include="Identity\Email\" />
+    <Folder Include="Identity\Role\" />
+    <Folder Include="Identity\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
