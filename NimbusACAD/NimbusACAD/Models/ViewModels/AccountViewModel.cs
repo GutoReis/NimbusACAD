@@ -43,6 +43,7 @@ namespace NimbusACAD.Models.ViewModels
 
         [Required]
         [Display(Name = "Data de Nascimento")]
+        [DataType(DataType.Date)]
         public DateTime DtNascimento { get; set; }
 
         [Required]
@@ -92,17 +93,18 @@ namespace NimbusACAD.Models.ViewModels
     {
         [Required]
         [Display(Name = "Usuário")]
-        public string Pessoa_ID { get; set; }
+        public string PessoaID { get; set; }
 
         [Required]
         [Display(Name = "Documento")]
-        public string Documento_ID { get; set; }
+        public string DocumentoID { get; set; }
 
         [Display(Name = "Orgão Emissor")]
-        public string Orgao_Emissor { get; set; }
+        public string OrgaoEmissor { get; set; }
 
         [Display(Name = "Data de Emissão")]
-        public DateTime Dt_Emissao { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DtEmissao { get; set; }
 
         [Display(Name = "Cidade de Emissão")]
         public string Cidade { get; set; }
@@ -114,4 +116,59 @@ namespace NimbusACAD.Models.ViewModels
         public string Pais { get; set; }
     }
 
+    public class EsqueceuSenhaViewModel
+    {
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+    }
+
+    public class AlterarSenhaViewModel
+    {
+        [Required]
+        [Display(Name = "Nova Senha")]
+        public string Senha { get; set; }
+
+        [Required]
+        [Display(Name = "Confirmar Senha")]
+        public string ConfirmarSenha { get; set; }
+    }
+
+    public class PerfilDeUsuarioViewModel
+    {
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Display(Name = "Nome completo")]
+        public string NmCompleto { get; set; }
+
+        [Display(Name = "CPF")]
+        public string CPF { get; set; }
+
+        [Display(Name = "RG")]
+        public string RG { get; set; }
+
+        [Display(Name = "Sexo")]
+        public string Sexo { get; set; }
+
+        [Display(Name = "Data de nascimento")]
+        [DataType(DataType.Date)]
+        public DateTime DtNascimento { get; set; }
+
+        [Display(Name = "Telefone principal")]
+        public string TelPrincipal { get; set; }
+
+        [Display(Name = "Telefone secundário")]
+        public string TelSecundario { get; set; }
+
+        [Display(Name = "Endereço completo")]
+        public string EndCompleto { get; set; }
+
+        [Display(Name = "Data da ultima modificação")]
+        public string DtModif { get; set; }
+
+        //Fazer conversão de bool -> string
+        [Display(Name = "Bloqueado")]
+        public string Bloqueado { get; set; }
+    }
 }
