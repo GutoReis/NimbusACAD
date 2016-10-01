@@ -93,11 +93,11 @@ namespace NimbusACAD.Models.ViewModels
     {
         [Required]
         [Display(Name = "Usuário")]
-        public string PessoaID { get; set; }
+        public int PessoaID { get; set; }
 
         [Required]
         [Display(Name = "Documento")]
-        public string DocumentoID { get; set; }
+        public int DocumentoID { get; set; }
 
         [Display(Name = "Orgão Emissor")]
         public string OrgaoEmissor { get; set; }
