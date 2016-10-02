@@ -38,5 +38,7 @@ namespace NimbusACAD.Models.ViewModels
         [Required]
         [Display(Name = "Carga horária")]
         public int CargaHoraria { get; set; }
+
+        DisciplinaViewModel DVM = new DisciplinaViewModel();
     }
 }
