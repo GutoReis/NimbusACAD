@@ -116,12 +116,14 @@ namespace NimbusACAD.Models.ViewModels
             public float MediaFinal { get; set; }
 
             [Required]
+            [Display(Name = "Total de aulas dadas")]
+            public int TotAulasDadas { get; set; }
+
+            [Required]
             [Display(Name = "Frequencia")]
             public int Frequencia { get; set; }
 
-            [Required]
-            [Display(Name = "Horario")]
-            public string DiaHorarioDisc { get; set; }
+            HorarioViewModel HVM = new HorarioViewModel();
         }
 
         //Notas de todas as disciplinas + frequencia por disciplina
