@@ -241,6 +241,7 @@
     </Compile>
     <Compile Include="Models\ViewModels\AccountViewModel.cs" />
     <Compile Include="Models\ViewModels\AlunoViewModel.cs" />
+    <Compile Include="Models\ViewModels\FuncionarioViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfessorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

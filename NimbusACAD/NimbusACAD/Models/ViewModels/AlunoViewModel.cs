@@ -12,7 +12,7 @@ namespace NimbusACAD.Models.ViewModels
         {
             [Required]
             [Display(Name = "Aluno")]
-            public int AlunoID { get; set; }
+            public int PessoaID { get; set; }
 
             [Required]
             [Display(Name = "Identificador do Curso")]
