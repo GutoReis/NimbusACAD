@@ -114,6 +114,10 @@ namespace NimbusACAD.Models.ViewModels
             [Required]
             [Display(Name = "Frequencia")]
             public int Frequencia { get; set; }
+
+            [Required]
+            [Display(Name = "Horario")]
+            public string DiaHorarioDisc { get; set; }
         }
 
         //Notas de todas as disciplinas + frequencia por disciplina
