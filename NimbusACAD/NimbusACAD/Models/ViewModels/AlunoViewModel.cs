@@ -92,12 +92,16 @@ namespace NimbusACAD.Models.ViewModels
             public string DisciplinaNm { get; set; }
 
             [Required]
+            [Display(Name = "Professor")]
+            public string Professor { get; set; }
+
+            [Required]
             [Display(Name = "Aluno")]
             public string NmAluno { get; set; }
 
             [Required]
             [Display(Name = "Numero de chamada")]
-            public int NumChamado { get; set; }
+            public int NumChamada { get; set; }
 
             [Required]
             [Display(Name = "1ª Avalição")]
@@ -126,6 +130,10 @@ namespace NimbusACAD.Models.ViewModels
             [Required]
             [Display(Name = "Disciplina")]
             public string DisciplinaNm { get; set; }
+
+            [Required]
+            [Display(Name = "Professor")]
+            public string Professor { get; set; }
 
             [Display(Name = "1º Avaliação")]
             public float Nota1 { get; set; }
