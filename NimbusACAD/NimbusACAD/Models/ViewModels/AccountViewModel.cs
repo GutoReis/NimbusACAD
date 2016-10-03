@@ -70,7 +70,7 @@ namespace NimbusACAD.Models.ViewModels
         public string Complemento { get; set; }
 
         [Display(Name = "Numero")]
-        public string Numero { get; set; }
+        public int Numero { get; set; }
 
         [Required]
         [Display(Name = "Bairro")]
