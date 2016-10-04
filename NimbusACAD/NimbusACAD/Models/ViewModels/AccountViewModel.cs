@@ -171,4 +171,26 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Bloqueado")]
         public string Bloqueado { get; set; }
     }
+
+    public class ListaPerfisViewModel
+    {
+        [Display(Name = "Nome completo")]
+        public string NmCompleto { get; set; }
+
+        [Display(Name = "CPF")]
+        public string CPF { get; set; }
+
+        [Display(Name = "RG")]
+        public string RG { get; set; }
+
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Display(Name = "Telefone principal")]
+        public string TelPrincipal { get; set; }
+
+        //Fazer conversão de bool -> string
+        [Display(Name = "Bloqueado")]
+        public string Bloqueado { get; set; }
+    }
 }
