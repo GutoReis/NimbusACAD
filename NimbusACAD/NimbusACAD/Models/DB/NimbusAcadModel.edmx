@@ -1,0 +1,1797 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NimbusAcad_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Negocio_Base_Endereco">
+          <Key>
+            <PropertyRef Name="CEP" />
+          </Key>
+          <Property Name="CEP" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="Logradouro" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Bairro" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cidade" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Pais" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Negocio_Curriculo">
+          <Key>
+            <PropertyRef Name="Curriculo_ID" />
+          </Key>
+          <Property Name="Curriculo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pessoa_ID" Type="int" Nullable="false" />
+          <Property Name="Documento_ID" Type="int" Nullable="false" />
+          <Property Name="Orgao_Emissor" Type="nvarchar" MaxLength="50" />
+          <Property Name="Dt_Emissao" Type="date" />
+          <Property Name="Cidade_Emissao" Type="nvarchar" MaxLength="30" />
+          <Property Name="Estado_Emissao" Type="nvarchar" MaxLength="2" />
+          <Property Name="Pais_Emissao" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Negocio_Curso">
+          <Key>
+            <PropertyRef Name="Curso_ID" />
+          </Key>
+          <Property Name="Curso_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Curso_Nome" Type="nvarchar" MaxLength="30" />
+          <Property Name="Descricao" Type="nvarchar(max)" />
+          <Property Name="Periodo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Coordenador_ID" Type="int" Nullable="false" />
+          <Property Name="Carga_Horaria" Type="int" />
+        </EntityType>
+        <EntityType Name="Negocio_Disciplina">
+          <Key>
+            <PropertyRef Name="Disciplina_ID" />
+          </Key>
+          <Property Name="Disciplina_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modulo_ID" Type="int" Nullable="false" />
+          <Property Name="Disciplina_Nome" Type="nvarchar" MaxLength="30" />
+          <Property Name="Descricao" Type="nvarchar(max)" />
+          <Property Name="Professor_ID" Type="int" Nullable="false" />
+          <Property Name="Tot_Aulas_Dadas" Type="int" />
+          <Property Name="Carga_Horaria" Type="int" />
+        </EntityType>
+        <EntityType Name="Negocio_Doc_Devente">
+          <Key>
+            <PropertyRef Name="Documento_ID" />
+            <PropertyRef Name="Matricula_ID" />
+          </Key>
+          <Property Name="Doc_Devente_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Documento_ID" Type="int" Nullable="false" />
+          <Property Name="Matricula_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Negocio_Documento">
+          <Key>
+            <PropertyRef Name="Documento_ID" />
+          </Key>
+          <Property Name="Documento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Documento_Nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Negocio_Endereco">
+          <Key>
+            <PropertyRef Name="Endereco_ID" />
+          </Key>
+          <Property Name="Endereco_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CEP" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="Complemento" Type="nvarchar" MaxLength="20" />
+          <Property Name="Numero" Type="int" />
+          <Property Name="Ativo" Type="bit" />
+          <Property Name="Pessoa_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Negocio_Frequencia">
+          <Key>
+            <PropertyRef Name="Frequencia_ID" />
+          </Key>
+          <Property Name="Frequencia_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Disciplina_ID" Type="int" Nullable="false" />
+          <Property Name="Professor_ID" Type="int" Nullable="false" />
+          <Property Name="Dt_Aula" Type="date" />
+          <Property Name="Qtde_Aula" Type="int" />
+          <Property Name="Aula_Ministrada" Type="nvarchar(max)" />
+          <Property Name="Matricula_Presente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Negocio_Funcionario">
+          <Key>
+            <PropertyRef Name="Funcionario_ID" />
+          </Key>
+          <Property Name="Funcionario_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pessoa_ID" Type="int" Nullable="false" />
+          <Property Name="Cargo_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Negocio_Matricula_Aluno">
+          <Key>
+            <PropertyRef Name="Matricula_ID" />
+          </Key>
+          <Property Name="Matricula_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pessoa_ID" Type="int" Nullable="false" />
+          <Property Name="Curso_ID" Type="int" Nullable="false" />
+          <Property Name="Ano" Type="int" />
+          <Property Name="Ativo" Type="bit" />
+          <Property Name="Deve_Documento" Type="bit" />
+        </EntityType>
+        <EntityType Name="Negocio_Modulo">
+          <Key>
+            <PropertyRef Name="Modulo_ID" />
+          </Key>
+          <Property Name="Modulo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modulo_Nome" Type="varchar" MaxLength="10" />
+          <Property Name="Curso_ID" Type="int" Nullable="false" />
+          <Property Name="Max_Alunos" Type="int" />
+          <Property Name="Tot_Inscritos" Type="int" />
+          <Property Name="Carga_Horaria" Type="int" />
+        </EntityType>
+        <EntityType Name="Negocio_Notificacao">
+          <Key>
+            <PropertyRef Name="Notificacao_ID" />
+          </Key>
+          <Property Name="Notificacao_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pessoa_Emissor_ID" Type="int" Nullable="false" />
+          <Property Name="Pessoa_Receptor_ID" Type="int" Nullable="false" />
+          <Property Name="Assunto" Type="nvarchar" MaxLength="50" />
+          <Property Name="Corpo" Type="nvarchar(max)" />
+          <Property Name="Lida" Type="bit" />
+        </EntityType>
+        <EntityType Name="Negocio_Pessoa">
+          <Key>
+            <PropertyRef Name="Pessoa_ID" />
+          </Key>
+          <Property Name="Pessoa_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Primeiro_Nome" Type="nvarchar" MaxLength="30" />
+          <Property Name="Sobrenome" Type="nvarchar" MaxLength="30" />
+          <Property Name="CPF" Type="nvarchar" MaxLength="14" />
+          <Property Name="RG" Type="nvarchar" MaxLength="12" />
+          <Property Name="Sexo" Type="nvarchar" MaxLength="1" />
+          <Property Name="Dt_Nascimento" Type="date" />
+          <Property Name="Tel_Principal" Type="nvarchar" MaxLength="15" />
+          <Property Name="Tel_Opcional" Type="nvarchar" MaxLength="15" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email_Confirmado" Type="bit" />
+          <Property Name="Tot_Notif_NL" Type="int" />
+        </EntityType>
+        <EntityType Name="Negocio_Quadro_Horario">
+          <Key>
+            <PropertyRef Name="Quadro_Horario_ID" />
+          </Key>
+          <Property Name="Quadro_Horario_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Disciplina_ID" Type="int" Nullable="false" />
+          <Property Name="Dia_Semana" Type="nvarchar" MaxLength="15" />
+          <Property Name="Hora_Inicio" Type="time" Precision="7" />
+          <Property Name="Hora_Fim" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Negocio_Tipo_Funcionario">
+          <Key>
+            <PropertyRef Name="Tipo_Funcionario_ID" />
+          </Key>
+          <Property Name="Tipo_Funcionario_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cargo" Type="nvarchar" MaxLength="30" />
+          <Property Name="Descricao" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Negocio_Vinculo_Disciplina">
+          <Key>
+            <PropertyRef Name="Disciplina_ID" />
+            <PropertyRef Name="Matricula_ID" />
+          </Key>
+          <Property Name="Vinculo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Disciplina_ID" Type="int" Nullable="false" />
+          <Property Name="Matricula_ID" Type="int" Nullable="false" />
+          <Property Name="Nota1" Type="float" />
+          <Property Name="Nota2" Type="float" />
+          <Property Name="Media_Final" Type="float" />
+          <Property Name="Frequencia" Type="int" />
+          <Property Name="Num_Chamada" Type="int" />
+        </EntityType>
+        <EntityType Name="Negocio_Vinculo_Modulo">
+          <Key>
+            <PropertyRef Name="Modulo_ID" />
+            <PropertyRef Name="Matricula_ID" />
+          </Key>
+          <Property Name="Vinculo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modulo_ID" Type="int" Nullable="false" />
+          <Property Name="Matricula_ID" Type="int" Nullable="false" />
+          <Property Name="Status_Vinculo" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="RBAC_Link_Perfil_Permissao">
+          <Key>
+            <PropertyRef Name="Perfil_ID" />
+            <PropertyRef Name="Permissao_ID" />
+          </Key>
+          <Property Name="Link_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Perfil_ID" Type="int" Nullable="false" />
+          <Property Name="Permissao_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RBAC_Link_Usuario_Perfil">
+          <Key>
+            <PropertyRef Name="Usuario_ID" />
+            <PropertyRef Name="Perfil_ID" />
+          </Key>
+          <Property Name="Link_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario_ID" Type="int" Nullable="false" />
+          <Property Name="Perfil_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RBAC_Perfil">
+          <Key>
+            <PropertyRef Name="Perfil_ID" />
+          </Key>
+          <Property Name="Perfil_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Perfil_Nome" Type="nvarchar" MaxLength="30" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="RBAC_Permissao">
+          <Key>
+            <PropertyRef Name="Permissao_ID" />
+          </Key>
+          <Property Name="Permissao_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Permissao_Nome" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="RBAC_Usuario">
+          <Key>
+            <PropertyRef Name="Usuario_ID" />
+          </Key>
+          <Property Name="Usuario_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pessoa_ID" Type="int" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Senha_Hash" Type="nvarchar(max)" />
+          <Property Name="Salt" Type="nvarchar(max)" />
+          <Property Name="Dt_Criacao" Type="date" />
+          <Property Name="Dt_Ultima_Modif" Type="date" />
+          <Property Name="Bloqueado" Type="bit" />
+        </EntityType>
+        <Association Name="FK_dbo_Negocio_Curriculo_dbo_Negocio_Documento_Documento_ID">
+          <End Role="Negocio_Documento" Type="Self.Negocio_Documento" Multiplicity="1" />
+          <End Role="Negocio_Curriculo" Type="Self.Negocio_Curriculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Documento">
+              <PropertyRef Name="Documento_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Curriculo">
+              <PropertyRef Name="Documento_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Curriculo_dbo_Negocio_Pessoa_Pessoa_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1" />
+          <End Role="Negocio_Curriculo" Type="Self.Negocio_Curriculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Curriculo">
+              <PropertyRef Name="Pessoa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID">
+          <End Role="Negocio_Funcionario" Type="Self.Negocio_Funcionario" Multiplicity="1" />
+          <End Role="Negocio_Curso" Type="Self.Negocio_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Funcionario">
+              <PropertyRef Name="Funcionario_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Curso">
+              <PropertyRef Name="Coordenador_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID">
+          <End Role="Negocio_Funcionario" Type="Self.Negocio_Funcionario" Multiplicity="1" />
+          <End Role="Negocio_Disciplina" Type="Self.Negocio_Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Funcionario">
+              <PropertyRef Name="Funcionario_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Disciplina">
+              <PropertyRef Name="Professor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Disciplina_dbo_Negocio_Modulo_Modulo_ID">
+          <End Role="Negocio_Modulo" Type="Self.Negocio_Modulo" Multiplicity="1" />
+          <End Role="Negocio_Disciplina" Type="Self.Negocio_Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Modulo">
+              <PropertyRef Name="Modulo_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Disciplina">
+              <PropertyRef Name="Modulo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Documento_Documento_ID">
+          <End Role="Negocio_Documento" Type="Self.Negocio_Documento" Multiplicity="1" />
+          <End Role="Negocio_Doc_Devente" Type="Self.Negocio_Doc_Devente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Documento">
+              <PropertyRef Name="Documento_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Doc_Devente">
+              <PropertyRef Name="Documento_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="1" />
+          <End Role="Negocio_Doc_Devente" Type="Self.Negocio_Doc_Devente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Matricula_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Doc_Devente">
+              <PropertyRef Name="Matricula_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Endereco_dbo_Negocio_Base_Endereco_CEP">
+          <End Role="Negocio_Base_Endereco" Type="Self.Negocio_Base_Endereco" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Negocio_Endereco" Type="Self.Negocio_Endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Base_Endereco">
+              <PropertyRef Name="CEP" />
+            </Principal>
+            <Dependent Role="Negocio_Endereco">
+              <PropertyRef Name="CEP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Endereco_dbo_Negocio_Pessoa_Pessoa_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Negocio_Endereco" Type="Self.Negocio_Endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Endereco">
+              <PropertyRef Name="Pessoa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Frequencia_dbo_Matricula_Aluno_Matricula_ID">
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="1" />
+          <End Role="Negocio_Frequencia" Type="Self.Negocio_Frequencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Matricula_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Frequencia">
+              <PropertyRef Name="Matricula_Presente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Frequencia_dbo_Negocio_Disciplina_Disciplina_ID">
+          <End Role="Negocio_Disciplina" Type="Self.Negocio_Disciplina" Multiplicity="1" />
+          <End Role="Negocio_Frequencia" Type="Self.Negocio_Frequencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Disciplina">
+              <PropertyRef Name="Disciplina_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Frequencia">
+              <PropertyRef Name="Disciplina_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID">
+          <End Role="Negocio_Funcionario" Type="Self.Negocio_Funcionario" Multiplicity="1" />
+          <End Role="Negocio_Frequencia" Type="Self.Negocio_Frequencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Funcionario">
+              <PropertyRef Name="Funcionario_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Frequencia">
+              <PropertyRef Name="Professor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Funcionario_dbo_Negocio_Pessoa_Pessoa_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1" />
+          <End Role="Negocio_Funcionario" Type="Self.Negocio_Funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Funcionario">
+              <PropertyRef Name="Pessoa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Funcionario_dbo_Negocio_Tipo_Funcionario_Cargo_ID">
+          <End Role="Negocio_Tipo_Funcionario" Type="Self.Negocio_Tipo_Funcionario" Multiplicity="1" />
+          <End Role="Negocio_Funcionario" Type="Self.Negocio_Funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Tipo_Funcionario">
+              <PropertyRef Name="Tipo_Funcionario_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Funcionario">
+              <PropertyRef Name="Cargo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Curso_Curso_ID">
+          <End Role="Negocio_Curso" Type="Self.Negocio_Curso" Multiplicity="1" />
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Curso">
+              <PropertyRef Name="Curso_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Curso_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Pessoa_Pessoa_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1" />
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Pessoa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Modulo_dbo_Negocio_Curso_Curso_ID">
+          <End Role="Negocio_Curso" Type="Self.Negocio_Curso" Multiplicity="1" />
+          <End Role="Negocio_Modulo" Type="Self.Negocio_Modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Curso">
+              <PropertyRef Name="Curso_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Modulo">
+              <PropertyRef Name="Curso_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Emissor_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1" />
+          <End Role="Negocio_Notificacao" Type="Self.Negocio_Notificacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Notificacao">
+              <PropertyRef Name="Pessoa_Emissor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Receptor_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1" />
+          <End Role="Negocio_Notificacao" Type="Self.Negocio_Notificacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Notificacao">
+              <PropertyRef Name="Pessoa_Receptor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Quadro_Horario_dbo_Negocio_Disciplina_Disciplina_ID">
+          <End Role="Negocio_Disciplina" Type="Self.Negocio_Disciplina" Multiplicity="1" />
+          <End Role="Negocio_Quadro_Horario" Type="Self.Negocio_Quadro_Horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Disciplina">
+              <PropertyRef Name="Disciplina_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Quadro_Horario">
+              <PropertyRef Name="Disciplina_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Disciplina_Disciplina_ID">
+          <End Role="Negocio_Disciplina" Type="Self.Negocio_Disciplina" Multiplicity="1" />
+          <End Role="Negocio_Vinculo_Disciplina" Type="Self.Negocio_Vinculo_Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Disciplina">
+              <PropertyRef Name="Disciplina_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Vinculo_Disciplina">
+              <PropertyRef Name="Disciplina_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="1" />
+          <End Role="Negocio_Vinculo_Disciplina" Type="Self.Negocio_Vinculo_Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Matricula_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Vinculo_Disciplina">
+              <PropertyRef Name="Matricula_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="1" />
+          <End Role="Negocio_Vinculo_Modulo" Type="Self.Negocio_Vinculo_Modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Matricula_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Vinculo_Modulo">
+              <PropertyRef Name="Matricula_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Modulo_Modulo_ID">
+          <End Role="Negocio_Modulo" Type="Self.Negocio_Modulo" Multiplicity="1" />
+          <End Role="Negocio_Vinculo_Modulo" Type="Self.Negocio_Vinculo_Modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Modulo">
+              <PropertyRef Name="Modulo_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Vinculo_Modulo">
+              <PropertyRef Name="Modulo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Perfil_Perfil_ID">
+          <End Role="RBAC_Perfil" Type="Self.RBAC_Perfil" Multiplicity="1" />
+          <End Role="RBAC_Link_Perfil_Permissao" Type="Self.RBAC_Link_Perfil_Permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RBAC_Perfil">
+              <PropertyRef Name="Perfil_ID" />
+            </Principal>
+            <Dependent Role="RBAC_Link_Perfil_Permissao">
+              <PropertyRef Name="Perfil_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Permissao_Permissaro_ID">
+          <End Role="RBAC_Permissao" Type="Self.RBAC_Permissao" Multiplicity="1" />
+          <End Role="RBAC_Link_Perfil_Permissao" Type="Self.RBAC_Link_Perfil_Permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RBAC_Permissao">
+              <PropertyRef Name="Permissao_ID" />
+            </Principal>
+            <Dependent Role="RBAC_Link_Perfil_Permissao">
+              <PropertyRef Name="Permissao_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Perfil_Perfil_ID">
+          <End Role="RBAC_Perfil" Type="Self.RBAC_Perfil" Multiplicity="1" />
+          <End Role="RBAC_Link_Usuario_Perfil" Type="Self.RBAC_Link_Usuario_Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RBAC_Perfil">
+              <PropertyRef Name="Perfil_ID" />
+            </Principal>
+            <Dependent Role="RBAC_Link_Usuario_Perfil">
+              <PropertyRef Name="Perfil_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Usuario_Usuario_ID">
+          <End Role="RBAC_Usuario" Type="Self.RBAC_Usuario" Multiplicity="1" />
+          <End Role="RBAC_Link_Usuario_Perfil" Type="Self.RBAC_Link_Usuario_Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RBAC_Usuario">
+              <PropertyRef Name="Usuario_ID" />
+            </Principal>
+            <Dependent Role="RBAC_Link_Usuario_Perfil">
+              <PropertyRef Name="Usuario_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RBAC_Usuario_dbo_Negocio_Pessoa_Pessoa_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="0..1" />
+          <End Role="RBAC_Usuario" Type="Self.RBAC_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="RBAC_Usuario">
+              <PropertyRef Name="Pessoa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NimbusAcad_DBModelStoreContainer">
+          <EntitySet Name="Negocio_Base_Endereco" EntityType="Self.Negocio_Base_Endereco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Curriculo" EntityType="Self.Negocio_Curriculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Curso" EntityType="Self.Negocio_Curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Disciplina" EntityType="Self.Negocio_Disciplina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Doc_Devente" EntityType="Self.Negocio_Doc_Devente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Documento" EntityType="Self.Negocio_Documento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Endereco" EntityType="Self.Negocio_Endereco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Frequencia" EntityType="Self.Negocio_Frequencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Funcionario" EntityType="Self.Negocio_Funcionario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Matricula_Aluno" EntityType="Self.Negocio_Matricula_Aluno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Modulo" EntityType="Self.Negocio_Modulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Notificacao" EntityType="Self.Negocio_Notificacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Pessoa" EntityType="Self.Negocio_Pessoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Quadro_Horario" EntityType="Self.Negocio_Quadro_Horario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Tipo_Funcionario" EntityType="Self.Negocio_Tipo_Funcionario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Vinculo_Disciplina" EntityType="Self.Negocio_Vinculo_Disciplina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negocio_Vinculo_Modulo" EntityType="Self.Negocio_Vinculo_Modulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RBAC_Link_Perfil_Permissao" EntityType="Self.RBAC_Link_Perfil_Permissao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RBAC_Link_Usuario_Perfil" EntityType="Self.RBAC_Link_Usuario_Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RBAC_Perfil" EntityType="Self.RBAC_Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RBAC_Permissao" EntityType="Self.RBAC_Permissao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RBAC_Usuario" EntityType="Self.RBAC_Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Negocio_Curriculo_dbo_Negocio_Documento_Documento_ID" Association="Self.FK_dbo_Negocio_Curriculo_dbo_Negocio_Documento_Documento_ID">
+            <End Role="Negocio_Documento" EntitySet="Negocio_Documento" />
+            <End Role="Negocio_Curriculo" EntitySet="Negocio_Curriculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Curriculo_dbo_Negocio_Pessoa_Pessoa_ID" Association="Self.FK_dbo_Negocio_Curriculo_dbo_Negocio_Pessoa_Pessoa_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Curriculo" EntitySet="Negocio_Curriculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID" Association="Self.FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID">
+            <End Role="Negocio_Funcionario" EntitySet="Negocio_Funcionario" />
+            <End Role="Negocio_Curso" EntitySet="Negocio_Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID" Association="Self.FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID">
+            <End Role="Negocio_Funcionario" EntitySet="Negocio_Funcionario" />
+            <End Role="Negocio_Disciplina" EntitySet="Negocio_Disciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Disciplina_dbo_Negocio_Modulo_Modulo_ID" Association="Self.FK_dbo_Negocio_Disciplina_dbo_Negocio_Modulo_Modulo_ID">
+            <End Role="Negocio_Modulo" EntitySet="Negocio_Modulo" />
+            <End Role="Negocio_Disciplina" EntitySet="Negocio_Disciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Documento_Documento_ID" Association="Self.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Documento_Documento_ID">
+            <End Role="Negocio_Documento" EntitySet="Negocio_Documento" />
+            <End Role="Negocio_Doc_Devente" EntitySet="Negocio_Doc_Devente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Matricula_Aluno_Matricula_ID" Association="Self.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+            <End Role="Negocio_Doc_Devente" EntitySet="Negocio_Doc_Devente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Endereco_dbo_Negocio_Base_Endereco_CEP" Association="Self.FK_dbo_Negocio_Endereco_dbo_Negocio_Base_Endereco_CEP">
+            <End Role="Negocio_Base_Endereco" EntitySet="Negocio_Base_Endereco" />
+            <End Role="Negocio_Endereco" EntitySet="Negocio_Endereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Endereco_dbo_Negocio_Pessoa_Pessoa_ID" Association="Self.FK_dbo_Negocio_Endereco_dbo_Negocio_Pessoa_Pessoa_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Endereco" EntitySet="Negocio_Endereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Frequencia_dbo_Matricula_Aluno_Matricula_ID" Association="Self.FK_dbo_Negocio_Frequencia_dbo_Matricula_Aluno_Matricula_ID">
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+            <End Role="Negocio_Frequencia" EntitySet="Negocio_Frequencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Frequencia_dbo_Negocio_Disciplina_Disciplina_ID" Association="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Disciplina_Disciplina_ID">
+            <End Role="Negocio_Disciplina" EntitySet="Negocio_Disciplina" />
+            <End Role="Negocio_Frequencia" EntitySet="Negocio_Frequencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID" Association="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID">
+            <End Role="Negocio_Funcionario" EntitySet="Negocio_Funcionario" />
+            <End Role="Negocio_Frequencia" EntitySet="Negocio_Frequencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Funcionario_dbo_Negocio_Pessoa_Pessoa_ID" Association="Self.FK_dbo_Negocio_Funcionario_dbo_Negocio_Pessoa_Pessoa_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Funcionario" EntitySet="Negocio_Funcionario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Funcionario_dbo_Negocio_Tipo_Funcionario_Cargo_ID" Association="Self.FK_dbo_Negocio_Funcionario_dbo_Negocio_Tipo_Funcionario_Cargo_ID">
+            <End Role="Negocio_Tipo_Funcionario" EntitySet="Negocio_Tipo_Funcionario" />
+            <End Role="Negocio_Funcionario" EntitySet="Negocio_Funcionario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Curso_Curso_ID" Association="Self.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Curso_Curso_ID">
+            <End Role="Negocio_Curso" EntitySet="Negocio_Curso" />
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Pessoa_Pessoa_ID" Association="Self.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Pessoa_Pessoa_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Modulo_dbo_Negocio_Curso_Curso_ID" Association="Self.FK_dbo_Negocio_Modulo_dbo_Negocio_Curso_Curso_ID">
+            <End Role="Negocio_Curso" EntitySet="Negocio_Curso" />
+            <End Role="Negocio_Modulo" EntitySet="Negocio_Modulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Emissor_ID" Association="Self.FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Emissor_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Notificacao" EntitySet="Negocio_Notificacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Receptor_ID" Association="Self.FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Receptor_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Notificacao" EntitySet="Negocio_Notificacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Quadro_Horario_dbo_Negocio_Disciplina_Disciplina_ID" Association="Self.FK_dbo_Negocio_Quadro_Horario_dbo_Negocio_Disciplina_Disciplina_ID">
+            <End Role="Negocio_Disciplina" EntitySet="Negocio_Disciplina" />
+            <End Role="Negocio_Quadro_Horario" EntitySet="Negocio_Quadro_Horario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Disciplina_Disciplina_ID" Association="Self.FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Disciplina_Disciplina_ID">
+            <End Role="Negocio_Disciplina" EntitySet="Negocio_Disciplina" />
+            <End Role="Negocio_Vinculo_Disciplina" EntitySet="Negocio_Vinculo_Disciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Matricula_Aluno_Matricula_ID" Association="Self.FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+            <End Role="Negocio_Vinculo_Disciplina" EntitySet="Negocio_Vinculo_Disciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Matricula_Aluno_Matricula_ID" Association="Self.FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+            <End Role="Negocio_Vinculo_Modulo" EntitySet="Negocio_Vinculo_Modulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Modulo_Modulo_ID" Association="Self.FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Modulo_Modulo_ID">
+            <End Role="Negocio_Modulo" EntitySet="Negocio_Modulo" />
+            <End Role="Negocio_Vinculo_Modulo" EntitySet="Negocio_Vinculo_Modulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Perfil_Perfil_ID" Association="Self.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Perfil_Perfil_ID">
+            <End Role="RBAC_Perfil" EntitySet="RBAC_Perfil" />
+            <End Role="RBAC_Link_Perfil_Permissao" EntitySet="RBAC_Link_Perfil_Permissao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Permissao_Permissaro_ID" Association="Self.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Permissao_Permissaro_ID">
+            <End Role="RBAC_Permissao" EntitySet="RBAC_Permissao" />
+            <End Role="RBAC_Link_Perfil_Permissao" EntitySet="RBAC_Link_Perfil_Permissao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Perfil_Perfil_ID" Association="Self.FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Perfil_Perfil_ID">
+            <End Role="RBAC_Perfil" EntitySet="RBAC_Perfil" />
+            <End Role="RBAC_Link_Usuario_Perfil" EntitySet="RBAC_Link_Usuario_Perfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Usuario_Usuario_ID" Association="Self.FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Usuario_Usuario_ID">
+            <End Role="RBAC_Usuario" EntitySet="RBAC_Usuario" />
+            <End Role="RBAC_Link_Usuario_Perfil" EntitySet="RBAC_Link_Usuario_Perfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RBAC_Usuario_dbo_Negocio_Pessoa_Pessoa_ID" Association="Self.FK_dbo_RBAC_Usuario_dbo_Negocio_Pessoa_Pessoa_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="RBAC_Usuario" EntitySet="RBAC_Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NimbusAcad_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Negocio_Base_Endereco">
+          <Key>
+            <PropertyRef Name="CEP" />
+          </Key>
+          <Property Name="CEP" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Logradouro" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Bairro" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cidade" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pais" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Negocio_Endereco" Relationship="Self.FK_dbo_Negocio_Endereco_dbo_Negocio_Base_Endereco_CEP" FromRole="Negocio_Base_Endereco" ToRole="Negocio_Endereco" />
+        </EntityType>
+        <EntityType Name="Negocio_Curriculo">
+          <Key>
+            <PropertyRef Name="Curriculo_ID" />
+          </Key>
+          <Property Name="Curriculo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pessoa_ID" Type="Int32" Nullable="false" />
+          <Property Name="Documento_ID" Type="Int32" Nullable="false" />
+          <Property Name="Orgao_Emissor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dt_Emissao" Type="DateTime" Precision="0" />
+          <Property Name="Cidade_Emissao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Estado_Emissao" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Pais_Emissao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Negocio_Documento" Relationship="Self.FK_dbo_Negocio_Curriculo_dbo_Negocio_Documento_Documento_ID" FromRole="Negocio_Curriculo" ToRole="Negocio_Documento" />
+          <NavigationProperty Name="Negocio_Pessoa" Relationship="Self.FK_dbo_Negocio_Curriculo_dbo_Negocio_Pessoa_Pessoa_ID" FromRole="Negocio_Curriculo" ToRole="Negocio_Pessoa" />
+        </EntityType>
+        <EntityType Name="Negocio_Curso">
+          <Key>
+            <PropertyRef Name="Curso_ID" />
+          </Key>
+          <Property Name="Curso_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Curso_Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Periodo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Coordenador_ID" Type="Int32" Nullable="false" />
+          <Property Name="Carga_Horaria" Type="Int32" />
+          <NavigationProperty Name="Negocio_Funcionario" Relationship="Self.FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID" FromRole="Negocio_Curso" ToRole="Negocio_Funcionario" />
+          <NavigationProperty Name="Negocio_Matricula_Aluno" Relationship="Self.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Curso_Curso_ID" FromRole="Negocio_Curso" ToRole="Negocio_Matricula_Aluno" />
+          <NavigationProperty Name="Negocio_Modulo" Relationship="Self.FK_dbo_Negocio_Modulo_dbo_Negocio_Curso_Curso_ID" FromRole="Negocio_Curso" ToRole="Negocio_Modulo" />
+        </EntityType>
+        <EntityType Name="Negocio_Disciplina">
+          <Key>
+            <PropertyRef Name="Disciplina_ID" />
+          </Key>
+          <Property Name="Disciplina_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modulo_ID" Type="Int32" Nullable="false" />
+          <Property Name="Disciplina_Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Professor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Tot_Aulas_Dadas" Type="Int32" />
+          <Property Name="Carga_Horaria" Type="Int32" />
+          <NavigationProperty Name="Negocio_Funcionario" Relationship="Self.FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID" FromRole="Negocio_Disciplina" ToRole="Negocio_Funcionario" />
+          <NavigationProperty Name="Negocio_Modulo" Relationship="Self.FK_dbo_Negocio_Disciplina_dbo_Negocio_Modulo_Modulo_ID" FromRole="Negocio_Disciplina" ToRole="Negocio_Modulo" />
+          <NavigationProperty Name="Negocio_Frequencia" Relationship="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Disciplina_Disciplina_ID" FromRole="Negocio_Disciplina" ToRole="Negocio_Frequencia" />
+          <NavigationProperty Name="Negocio_Quadro_Horario" Relationship="Self.FK_dbo_Negocio_Quadro_Horario_dbo_Negocio_Disciplina_Disciplina_ID" FromRole="Negocio_Disciplina" ToRole="Negocio_Quadro_Horario" />
+          <NavigationProperty Name="Negocio_Vinculo_Disciplina" Relationship="Self.FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Disciplina_Disciplina_ID" FromRole="Negocio_Disciplina" ToRole="Negocio_Vinculo_Disciplina" />
+        </EntityType>
+        <EntityType Name="Negocio_Doc_Devente">
+          <Key>
+            <PropertyRef Name="Documento_ID" />
+            <PropertyRef Name="Matricula_ID" />
+          </Key>
+          <Property Name="Doc_Devente_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento_ID" Type="Int32" Nullable="false" />
+          <Property Name="Matricula_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Negocio_Documento" Relationship="Self.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Documento_Documento_ID" FromRole="Negocio_Doc_Devente" ToRole="Negocio_Documento" />
+          <NavigationProperty Name="Negocio_Matricula_Aluno" Relationship="Self.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Matricula_Aluno_Matricula_ID" FromRole="Negocio_Doc_Devente" ToRole="Negocio_Matricula_Aluno" />
+        </EntityType>
+        <EntityType Name="Negocio_Documento">
+          <Key>
+            <PropertyRef Name="Documento_ID" />
+          </Key>
+          <Property Name="Documento_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento_Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Negocio_Curriculo" Relationship="Self.FK_dbo_Negocio_Curriculo_dbo_Negocio_Documento_Documento_ID" FromRole="Negocio_Documento" ToRole="Negocio_Curriculo" />
+          <NavigationProperty Name="Negocio_Doc_Devente" Relationship="Self.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Documento_Documento_ID" FromRole="Negocio_Documento" ToRole="Negocio_Doc_Devente" />
+        </EntityType>
+        <EntityType Name="Negocio_Endereco">
+          <Key>
+            <PropertyRef Name="Endereco_ID" />
+          </Key>
+          <Property Name="Endereco_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CEP" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Complemento" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="Int32" />
+          <Property Name="Ativo" Type="Boolean" />
+          <Property Name="Pessoa_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Negocio_Base_Endereco" Relationship="Self.FK_dbo_Negocio_Endereco_dbo_Negocio_Base_Endereco_CEP" FromRole="Negocio_Endereco" ToRole="Negocio_Base_Endereco" />
+          <NavigationProperty Name="Negocio_Pessoa" Relationship="Self.FK_dbo_Negocio_Endereco_dbo_Negocio_Pessoa_Pessoa_ID" FromRole="Negocio_Endereco" ToRole="Negocio_Pessoa" />
+        </EntityType>
+        <EntityType Name="Negocio_Frequencia">
+          <Key>
+            <PropertyRef Name="Frequencia_ID" />
+          </Key>
+          <Property Name="Frequencia_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Disciplina_ID" Type="Int32" Nullable="false" />
+          <Property Name="Professor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Dt_Aula" Type="DateTime" Precision="0" />
+          <Property Name="Qtde_Aula" Type="Int32" />
+          <Property Name="Aula_Ministrada" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Matricula_Presente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Negocio_Disciplina" Relationship="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Disciplina_Disciplina_ID" FromRole="Negocio_Frequencia" ToRole="Negocio_Disciplina" />
+          <NavigationProperty Name="Negocio_Matricula_Aluno" Relationship="Self.FK_dbo_Negocio_Frequencia_dbo_Matricula_Aluno_Matricula_ID" FromRole="Negocio_Frequencia" ToRole="Negocio_Matricula_Aluno" />
+          <NavigationProperty Name="Negocio_Funcionario" Relationship="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID" FromRole="Negocio_Frequencia" ToRole="Negocio_Funcionario" />
+        </EntityType>
+        <EntityType Name="Negocio_Funcionario">
+          <Key>
+            <PropertyRef Name="Funcionario_ID" />
+          </Key>
+          <Property Name="Funcionario_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pessoa_ID" Type="Int32" Nullable="false" />
+          <Property Name="Cargo_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Negocio_Curso" Relationship="Self.FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID" FromRole="Negocio_Funcionario" ToRole="Negocio_Curso" />
+          <NavigationProperty Name="Negocio_Disciplina" Relationship="Self.FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID" FromRole="Negocio_Funcionario" ToRole="Negocio_Disciplina" />
+          <NavigationProperty Name="Negocio_Frequencia" Relationship="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID" FromRole="Negocio_Funcionario" ToRole="Negocio_Frequencia" />
+          <NavigationProperty Name="Negocio_Pessoa" Relationship="Self.FK_dbo_Negocio_Funcionario_dbo_Negocio_Pessoa_Pessoa_ID" FromRole="Negocio_Funcionario" ToRole="Negocio_Pessoa" />
+          <NavigationProperty Name="Negocio_Tipo_Funcionario" Relationship="Self.FK_dbo_Negocio_Funcionario_dbo_Negocio_Tipo_Funcionario_Cargo_ID" FromRole="Negocio_Funcionario" ToRole="Negocio_Tipo_Funcionario" />
+        </EntityType>
+        <EntityType Name="Negocio_Matricula_Aluno">
+          <Key>
+            <PropertyRef Name="Matricula_ID" />
+          </Key>
+          <Property Name="Matricula_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pessoa_ID" Type="Int32" Nullable="false" />
+          <Property Name="Curso_ID" Type="Int32" Nullable="false" />
+          <Property Name="Ano" Type="Int32" />
+          <Property Name="Ativo" Type="Boolean" />
+          <Property Name="Deve_Documento" Type="Boolean" />
+          <NavigationProperty Name="Negocio_Curso" Relationship="Self.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Curso_Curso_ID" FromRole="Negocio_Matricula_Aluno" ToRole="Negocio_Curso" />
+          <NavigationProperty Name="Negocio_Doc_Devente" Relationship="Self.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Matricula_Aluno_Matricula_ID" FromRole="Negocio_Matricula_Aluno" ToRole="Negocio_Doc_Devente" />
+          <NavigationProperty Name="Negocio_Frequencia" Relationship="Self.FK_dbo_Negocio_Frequencia_dbo_Matricula_Aluno_Matricula_ID" FromRole="Negocio_Matricula_Aluno" ToRole="Negocio_Frequencia" />
+          <NavigationProperty Name="Negocio_Pessoa" Relationship="Self.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Pessoa_Pessoa_ID" FromRole="Negocio_Matricula_Aluno" ToRole="Negocio_Pessoa" />
+          <NavigationProperty Name="Negocio_Vinculo_Disciplina" Relationship="Self.FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Matricula_Aluno_Matricula_ID" FromRole="Negocio_Matricula_Aluno" ToRole="Negocio_Vinculo_Disciplina" />
+          <NavigationProperty Name="Negocio_Vinculo_Modulo" Relationship="Self.FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Matricula_Aluno_Matricula_ID" FromRole="Negocio_Matricula_Aluno" ToRole="Negocio_Vinculo_Modulo" />
+        </EntityType>
+        <EntityType Name="Negocio_Modulo">
+          <Key>
+            <PropertyRef Name="Modulo_ID" />
+          </Key>
+          <Property Name="Modulo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modulo_Nome" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Curso_ID" Type="Int32" Nullable="false" />
+          <Property Name="Max_Alunos" Type="Int32" />
+          <Property Name="Tot_Inscritos" Type="Int32" />
+          <Property Name="Carga_Horaria" Type="Int32" />
+          <NavigationProperty Name="Negocio_Curso" Relationship="Self.FK_dbo_Negocio_Modulo_dbo_Negocio_Curso_Curso_ID" FromRole="Negocio_Modulo" ToRole="Negocio_Curso" />
+          <NavigationProperty Name="Negocio_Disciplina" Relationship="Self.FK_dbo_Negocio_Disciplina_dbo_Negocio_Modulo_Modulo_ID" FromRole="Negocio_Modulo" ToRole="Negocio_Disciplina" />
+          <NavigationProperty Name="Negocio_Vinculo_Modulo" Relationship="Self.FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Modulo_Modulo_ID" FromRole="Negocio_Modulo" ToRole="Negocio_Vinculo_Modulo" />
+        </EntityType>
+        <EntityType Name="Negocio_Notificacao">
+          <Key>
+            <PropertyRef Name="Notificacao_ID" />
+          </Key>
+          <Property Name="Notificacao_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pessoa_Emissor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pessoa_Receptor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Assunto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Corpo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lida" Type="Boolean" />
+          <NavigationProperty Name="Negocio_Pessoa" Relationship="Self.FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Emissor_ID" FromRole="Negocio_Notificacao" ToRole="Negocio_Pessoa" />
+          <NavigationProperty Name="Negocio_Pessoa1" Relationship="Self.FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Receptor_ID" FromRole="Negocio_Notificacao" ToRole="Negocio_Pessoa" />
+        </EntityType>
+        <EntityType Name="Negocio_Pessoa">
+          <Key>
+            <PropertyRef Name="Pessoa_ID" />
+          </Key>
+          <Property Name="Pessoa_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Primeiro_Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Sobrenome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CPF" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="RG" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Dt_Nascimento" Type="DateTime" Precision="0" />
+          <Property Name="Tel_Principal" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Tel_Opcional" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email_Confirmado" Type="Boolean" />
+          <Property Name="Tot_Notif_NL" Type="Int32" />
+          <NavigationProperty Name="Negocio_Curriculo" Relationship="Self.FK_dbo_Negocio_Curriculo_dbo_Negocio_Pessoa_Pessoa_ID" FromRole="Negocio_Pessoa" ToRole="Negocio_Curriculo" />
+          <NavigationProperty Name="Negocio_Endereco" Relationship="Self.FK_dbo_Negocio_Endereco_dbo_Negocio_Pessoa_Pessoa_ID" FromRole="Negocio_Pessoa" ToRole="Negocio_Endereco" />
+          <NavigationProperty Name="Negocio_Funcionario" Relationship="Self.FK_dbo_Negocio_Funcionario_dbo_Negocio_Pessoa_Pessoa_ID" FromRole="Negocio_Pessoa" ToRole="Negocio_Funcionario" />
+          <NavigationProperty Name="Negocio_Matricula_Aluno" Relationship="Self.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Pessoa_Pessoa_ID" FromRole="Negocio_Pessoa" ToRole="Negocio_Matricula_Aluno" />
+          <NavigationProperty Name="Negocio_Notificacao" Relationship="Self.FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Emissor_ID" FromRole="Negocio_Pessoa" ToRole="Negocio_Notificacao" />
+          <NavigationProperty Name="Negocio_Notificacao1" Relationship="Self.FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Receptor_ID" FromRole="Negocio_Pessoa" ToRole="Negocio_Notificacao" />
+          <NavigationProperty Name="RBAC_Usuario" Relationship="Self.FK_dbo_RBAC_Usuario_dbo_Negocio_Pessoa_Pessoa_ID" FromRole="Negocio_Pessoa" ToRole="RBAC_Usuario" />
+        </EntityType>
+        <EntityType Name="Negocio_Quadro_Horario">
+          <Key>
+            <PropertyRef Name="Quadro_Horario_ID" />
+          </Key>
+          <Property Name="Quadro_Horario_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Disciplina_ID" Type="Int32" Nullable="false" />
+          <Property Name="Dia_Semana" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Hora_Inicio" Type="Time" Precision="7" />
+          <Property Name="Hora_Fim" Type="Time" Precision="7" />
+          <NavigationProperty Name="Negocio_Disciplina" Relationship="Self.FK_dbo_Negocio_Quadro_Horario_dbo_Negocio_Disciplina_Disciplina_ID" FromRole="Negocio_Quadro_Horario" ToRole="Negocio_Disciplina" />
+        </EntityType>
+        <EntityType Name="Negocio_Tipo_Funcionario">
+          <Key>
+            <PropertyRef Name="Tipo_Funcionario_ID" />
+          </Key>
+          <Property Name="Tipo_Funcionario_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cargo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Negocio_Funcionario" Relationship="Self.FK_dbo_Negocio_Funcionario_dbo_Negocio_Tipo_Funcionario_Cargo_ID" FromRole="Negocio_Tipo_Funcionario" ToRole="Negocio_Funcionario" />
+        </EntityType>
+        <EntityType Name="Negocio_Vinculo_Disciplina">
+          <Key>
+            <PropertyRef Name="Disciplina_ID" />
+            <PropertyRef Name="Matricula_ID" />
+          </Key>
+          <Property Name="Vinculo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Disciplina_ID" Type="Int32" Nullable="false" />
+          <Property Name="Matricula_ID" Type="Int32" Nullable="false" />
+          <Property Name="Nota1" Type="Double" />
+          <Property Name="Nota2" Type="Double" />
+          <Property Name="Media_Final" Type="Double" />
+          <Property Name="Frequencia" Type="Int32" />
+          <Property Name="Num_Chamada" Type="Int32" />
+          <NavigationProperty Name="Negocio_Disciplina" Relationship="Self.FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Disciplina_Disciplina_ID" FromRole="Negocio_Vinculo_Disciplina" ToRole="Negocio_Disciplina" />
+          <NavigationProperty Name="Negocio_Matricula_Aluno" Relationship="Self.FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Matricula_Aluno_Matricula_ID" FromRole="Negocio_Vinculo_Disciplina" ToRole="Negocio_Matricula_Aluno" />
+        </EntityType>
+        <EntityType Name="Negocio_Vinculo_Modulo">
+          <Key>
+            <PropertyRef Name="Modulo_ID" />
+            <PropertyRef Name="Matricula_ID" />
+          </Key>
+          <Property Name="Vinculo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modulo_ID" Type="Int32" Nullable="false" />
+          <Property Name="Matricula_ID" Type="Int32" Nullable="false" />
+          <Property Name="Status_Vinculo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Negocio_Matricula_Aluno" Relationship="Self.FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Matricula_Aluno_Matricula_ID" FromRole="Negocio_Vinculo_Modulo" ToRole="Negocio_Matricula_Aluno" />
+          <NavigationProperty Name="Negocio_Modulo" Relationship="Self.FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Modulo_Modulo_ID" FromRole="Negocio_Vinculo_Modulo" ToRole="Negocio_Modulo" />
+        </EntityType>
+        <EntityType Name="RBAC_Link_Perfil_Permissao">
+          <Key>
+            <PropertyRef Name="Perfil_ID" />
+            <PropertyRef Name="Permissao_ID" />
+          </Key>
+          <Property Name="Link_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Perfil_ID" Type="Int32" Nullable="false" />
+          <Property Name="Permissao_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RBAC_Perfil" Relationship="Self.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Perfil_Perfil_ID" FromRole="RBAC_Link_Perfil_Permissao" ToRole="RBAC_Perfil" />
+          <NavigationProperty Name="RBAC_Permissao" Relationship="Self.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Permissao_Permissaro_ID" FromRole="RBAC_Link_Perfil_Permissao" ToRole="RBAC_Permissao" />
+        </EntityType>
+        <EntityType Name="RBAC_Link_Usuario_Perfil">
+          <Key>
+            <PropertyRef Name="Usuario_ID" />
+            <PropertyRef Name="Perfil_ID" />
+          </Key>
+          <Property Name="Link_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario_ID" Type="Int32" Nullable="false" />
+          <Property Name="Perfil_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RBAC_Perfil" Relationship="Self.FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Perfil_Perfil_ID" FromRole="RBAC_Link_Usuario_Perfil" ToRole="RBAC_Perfil" />
+          <NavigationProperty Name="RBAC_Usuario" Relationship="Self.FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Usuario_Usuario_ID" FromRole="RBAC_Link_Usuario_Perfil" ToRole="RBAC_Usuario" />
+        </EntityType>
+        <EntityType Name="RBAC_Perfil">
+          <Key>
+            <PropertyRef Name="Perfil_ID" />
+          </Key>
+          <Property Name="Perfil_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Perfil_Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RBAC_Link_Perfil_Permissao" Relationship="Self.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Perfil_Perfil_ID" FromRole="RBAC_Perfil" ToRole="RBAC_Link_Perfil_Permissao" />
+          <NavigationProperty Name="RBAC_Link_Usuario_Perfil" Relationship="Self.FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Perfil_Perfil_ID" FromRole="RBAC_Perfil" ToRole="RBAC_Link_Usuario_Perfil" />
+        </EntityType>
+        <EntityType Name="RBAC_Permissao">
+          <Key>
+            <PropertyRef Name="Permissao_ID" />
+          </Key>
+          <Property Name="Permissao_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Permissao_Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RBAC_Link_Perfil_Permissao" Relationship="Self.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Permissao_Permissaro_ID" FromRole="RBAC_Permissao" ToRole="RBAC_Link_Perfil_Permissao" />
+        </EntityType>
+        <EntityType Name="RBAC_Usuario">
+          <Key>
+            <PropertyRef Name="Usuario_ID" />
+          </Key>
+          <Property Name="Usuario_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pessoa_ID" Type="Int32" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Senha_Hash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Salt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dt_Criacao" Type="DateTime" Precision="0" />
+          <Property Name="Dt_Ultima_Modif" Type="DateTime" Precision="0" />
+          <Property Name="Bloqueado" Type="Boolean" />
+          <NavigationProperty Name="Negocio_Pessoa" Relationship="Self.FK_dbo_RBAC_Usuario_dbo_Negocio_Pessoa_Pessoa_ID" FromRole="RBAC_Usuario" ToRole="Negocio_Pessoa" />
+          <NavigationProperty Name="RBAC_Link_Usuario_Perfil" Relationship="Self.FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Usuario_Usuario_ID" FromRole="RBAC_Usuario" ToRole="RBAC_Link_Usuario_Perfil" />
+        </EntityType>
+        <Association Name="FK_dbo_Negocio_Endereco_dbo_Negocio_Base_Endereco_CEP">
+          <End Role="Negocio_Base_Endereco" Type="Self.Negocio_Base_Endereco" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Negocio_Endereco" Type="Self.Negocio_Endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Base_Endereco">
+              <PropertyRef Name="CEP" />
+            </Principal>
+            <Dependent Role="Negocio_Endereco">
+              <PropertyRef Name="CEP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Curriculo_dbo_Negocio_Documento_Documento_ID">
+          <End Role="Negocio_Documento" Type="Self.Negocio_Documento" Multiplicity="1" />
+          <End Role="Negocio_Curriculo" Type="Self.Negocio_Curriculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Documento">
+              <PropertyRef Name="Documento_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Curriculo">
+              <PropertyRef Name="Documento_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Curriculo_dbo_Negocio_Pessoa_Pessoa_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1" />
+          <End Role="Negocio_Curriculo" Type="Self.Negocio_Curriculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Curriculo">
+              <PropertyRef Name="Pessoa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID">
+          <End Role="Negocio_Funcionario" Type="Self.Negocio_Funcionario" Multiplicity="1" />
+          <End Role="Negocio_Curso" Type="Self.Negocio_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Funcionario">
+              <PropertyRef Name="Funcionario_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Curso">
+              <PropertyRef Name="Coordenador_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Curso_Curso_ID">
+          <End Role="Negocio_Curso" Type="Self.Negocio_Curso" Multiplicity="1" />
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Curso">
+              <PropertyRef Name="Curso_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Curso_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Modulo_dbo_Negocio_Curso_Curso_ID">
+          <End Role="Negocio_Curso" Type="Self.Negocio_Curso" Multiplicity="1" />
+          <End Role="Negocio_Modulo" Type="Self.Negocio_Modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Curso">
+              <PropertyRef Name="Curso_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Modulo">
+              <PropertyRef Name="Curso_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID">
+          <End Role="Negocio_Funcionario" Type="Self.Negocio_Funcionario" Multiplicity="1" />
+          <End Role="Negocio_Disciplina" Type="Self.Negocio_Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Funcionario">
+              <PropertyRef Name="Funcionario_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Disciplina">
+              <PropertyRef Name="Professor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Disciplina_dbo_Negocio_Modulo_Modulo_ID">
+          <End Role="Negocio_Modulo" Type="Self.Negocio_Modulo" Multiplicity="1" />
+          <End Role="Negocio_Disciplina" Type="Self.Negocio_Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Modulo">
+              <PropertyRef Name="Modulo_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Disciplina">
+              <PropertyRef Name="Modulo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Frequencia_dbo_Negocio_Disciplina_Disciplina_ID">
+          <End Role="Negocio_Disciplina" Type="Self.Negocio_Disciplina" Multiplicity="1" />
+          <End Role="Negocio_Frequencia" Type="Self.Negocio_Frequencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Disciplina">
+              <PropertyRef Name="Disciplina_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Frequencia">
+              <PropertyRef Name="Disciplina_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Quadro_Horario_dbo_Negocio_Disciplina_Disciplina_ID">
+          <End Role="Negocio_Disciplina" Type="Self.Negocio_Disciplina" Multiplicity="1" />
+          <End Role="Negocio_Quadro_Horario" Type="Self.Negocio_Quadro_Horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Disciplina">
+              <PropertyRef Name="Disciplina_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Quadro_Horario">
+              <PropertyRef Name="Disciplina_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Disciplina_Disciplina_ID">
+          <End Role="Negocio_Disciplina" Type="Self.Negocio_Disciplina" Multiplicity="1" />
+          <End Role="Negocio_Vinculo_Disciplina" Type="Self.Negocio_Vinculo_Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Disciplina">
+              <PropertyRef Name="Disciplina_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Vinculo_Disciplina">
+              <PropertyRef Name="Disciplina_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Documento_Documento_ID">
+          <End Role="Negocio_Documento" Type="Self.Negocio_Documento" Multiplicity="1" />
+          <End Role="Negocio_Doc_Devente" Type="Self.Negocio_Doc_Devente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Documento">
+              <PropertyRef Name="Documento_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Doc_Devente">
+              <PropertyRef Name="Documento_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="1" />
+          <End Role="Negocio_Doc_Devente" Type="Self.Negocio_Doc_Devente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Matricula_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Doc_Devente">
+              <PropertyRef Name="Matricula_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Endereco_dbo_Negocio_Pessoa_Pessoa_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Negocio_Endereco" Type="Self.Negocio_Endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Endereco">
+              <PropertyRef Name="Pessoa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Frequencia_dbo_Matricula_Aluno_Matricula_ID">
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="1" />
+          <End Role="Negocio_Frequencia" Type="Self.Negocio_Frequencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Matricula_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Frequencia">
+              <PropertyRef Name="Matricula_Presente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID">
+          <End Role="Negocio_Funcionario" Type="Self.Negocio_Funcionario" Multiplicity="1" />
+          <End Role="Negocio_Frequencia" Type="Self.Negocio_Frequencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Funcionario">
+              <PropertyRef Name="Funcionario_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Frequencia">
+              <PropertyRef Name="Professor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Funcionario_dbo_Negocio_Pessoa_Pessoa_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1" />
+          <End Role="Negocio_Funcionario" Type="Self.Negocio_Funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Funcionario">
+              <PropertyRef Name="Pessoa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Funcionario_dbo_Negocio_Tipo_Funcionario_Cargo_ID">
+          <End Role="Negocio_Tipo_Funcionario" Type="Self.Negocio_Tipo_Funcionario" Multiplicity="1" />
+          <End Role="Negocio_Funcionario" Type="Self.Negocio_Funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Tipo_Funcionario">
+              <PropertyRef Name="Tipo_Funcionario_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Funcionario">
+              <PropertyRef Name="Cargo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Pessoa_Pessoa_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1" />
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Pessoa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="1" />
+          <End Role="Negocio_Vinculo_Disciplina" Type="Self.Negocio_Vinculo_Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Matricula_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Vinculo_Disciplina">
+              <PropertyRef Name="Matricula_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+          <End Role="Negocio_Matricula_Aluno" Type="Self.Negocio_Matricula_Aluno" Multiplicity="1" />
+          <End Role="Negocio_Vinculo_Modulo" Type="Self.Negocio_Vinculo_Modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Matricula_Aluno">
+              <PropertyRef Name="Matricula_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Vinculo_Modulo">
+              <PropertyRef Name="Matricula_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Modulo_Modulo_ID">
+          <End Role="Negocio_Modulo" Type="Self.Negocio_Modulo" Multiplicity="1" />
+          <End Role="Negocio_Vinculo_Modulo" Type="Self.Negocio_Vinculo_Modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Modulo">
+              <PropertyRef Name="Modulo_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Vinculo_Modulo">
+              <PropertyRef Name="Modulo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Emissor_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1" />
+          <End Role="Negocio_Notificacao" Type="Self.Negocio_Notificacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Notificacao">
+              <PropertyRef Name="Pessoa_Emissor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Receptor_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="1" />
+          <End Role="Negocio_Notificacao" Type="Self.Negocio_Notificacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="Negocio_Notificacao">
+              <PropertyRef Name="Pessoa_Receptor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RBAC_Usuario_dbo_Negocio_Pessoa_Pessoa_ID">
+          <End Role="Negocio_Pessoa" Type="Self.Negocio_Pessoa" Multiplicity="0..1" />
+          <End Role="RBAC_Usuario" Type="Self.RBAC_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Negocio_Pessoa">
+              <PropertyRef Name="Pessoa_ID" />
+            </Principal>
+            <Dependent Role="RBAC_Usuario">
+              <PropertyRef Name="Pessoa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Perfil_Perfil_ID">
+          <End Role="RBAC_Perfil" Type="Self.RBAC_Perfil" Multiplicity="1" />
+          <End Role="RBAC_Link_Perfil_Permissao" Type="Self.RBAC_Link_Perfil_Permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RBAC_Perfil">
+              <PropertyRef Name="Perfil_ID" />
+            </Principal>
+            <Dependent Role="RBAC_Link_Perfil_Permissao">
+              <PropertyRef Name="Perfil_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Permissao_Permissaro_ID">
+          <End Role="RBAC_Permissao" Type="Self.RBAC_Permissao" Multiplicity="1" />
+          <End Role="RBAC_Link_Perfil_Permissao" Type="Self.RBAC_Link_Perfil_Permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RBAC_Permissao">
+              <PropertyRef Name="Permissao_ID" />
+            </Principal>
+            <Dependent Role="RBAC_Link_Perfil_Permissao">
+              <PropertyRef Name="Permissao_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Perfil_Perfil_ID">
+          <End Role="RBAC_Perfil" Type="Self.RBAC_Perfil" Multiplicity="1" />
+          <End Role="RBAC_Link_Usuario_Perfil" Type="Self.RBAC_Link_Usuario_Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RBAC_Perfil">
+              <PropertyRef Name="Perfil_ID" />
+            </Principal>
+            <Dependent Role="RBAC_Link_Usuario_Perfil">
+              <PropertyRef Name="Perfil_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Usuario_Usuario_ID">
+          <End Role="RBAC_Usuario" Type="Self.RBAC_Usuario" Multiplicity="1" />
+          <End Role="RBAC_Link_Usuario_Perfil" Type="Self.RBAC_Link_Usuario_Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RBAC_Usuario">
+              <PropertyRef Name="Usuario_ID" />
+            </Principal>
+            <Dependent Role="RBAC_Link_Usuario_Perfil">
+              <PropertyRef Name="Usuario_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NimbusAcad_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Negocio_Base_Endereco" EntityType="Self.Negocio_Base_Endereco" />
+          <EntitySet Name="Negocio_Curriculo" EntityType="Self.Negocio_Curriculo" />
+          <EntitySet Name="Negocio_Curso" EntityType="Self.Negocio_Curso" />
+          <EntitySet Name="Negocio_Disciplina" EntityType="Self.Negocio_Disciplina" />
+          <EntitySet Name="Negocio_Doc_Devente" EntityType="Self.Negocio_Doc_Devente" />
+          <EntitySet Name="Negocio_Documento" EntityType="Self.Negocio_Documento" />
+          <EntitySet Name="Negocio_Endereco" EntityType="Self.Negocio_Endereco" />
+          <EntitySet Name="Negocio_Frequencia" EntityType="Self.Negocio_Frequencia" />
+          <EntitySet Name="Negocio_Funcionario" EntityType="Self.Negocio_Funcionario" />
+          <EntitySet Name="Negocio_Matricula_Aluno" EntityType="Self.Negocio_Matricula_Aluno" />
+          <EntitySet Name="Negocio_Modulo" EntityType="Self.Negocio_Modulo" />
+          <EntitySet Name="Negocio_Notificacao" EntityType="Self.Negocio_Notificacao" />
+          <EntitySet Name="Negocio_Pessoa" EntityType="Self.Negocio_Pessoa" />
+          <EntitySet Name="Negocio_Quadro_Horario" EntityType="Self.Negocio_Quadro_Horario" />
+          <EntitySet Name="Negocio_Tipo_Funcionario" EntityType="Self.Negocio_Tipo_Funcionario" />
+          <EntitySet Name="Negocio_Vinculo_Disciplina" EntityType="Self.Negocio_Vinculo_Disciplina" />
+          <EntitySet Name="Negocio_Vinculo_Modulo" EntityType="Self.Negocio_Vinculo_Modulo" />
+          <EntitySet Name="RBAC_Link_Perfil_Permissao" EntityType="Self.RBAC_Link_Perfil_Permissao" />
+          <EntitySet Name="RBAC_Link_Usuario_Perfil" EntityType="Self.RBAC_Link_Usuario_Perfil" />
+          <EntitySet Name="RBAC_Perfil" EntityType="Self.RBAC_Perfil" />
+          <EntitySet Name="RBAC_Permissao" EntityType="Self.RBAC_Permissao" />
+          <EntitySet Name="RBAC_Usuario" EntityType="Self.RBAC_Usuario" />
+          <AssociationSet Name="FK_dbo_Negocio_Endereco_dbo_Negocio_Base_Endereco_CEP" Association="Self.FK_dbo_Negocio_Endereco_dbo_Negocio_Base_Endereco_CEP">
+            <End Role="Negocio_Base_Endereco" EntitySet="Negocio_Base_Endereco" />
+            <End Role="Negocio_Endereco" EntitySet="Negocio_Endereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Curriculo_dbo_Negocio_Documento_Documento_ID" Association="Self.FK_dbo_Negocio_Curriculo_dbo_Negocio_Documento_Documento_ID">
+            <End Role="Negocio_Documento" EntitySet="Negocio_Documento" />
+            <End Role="Negocio_Curriculo" EntitySet="Negocio_Curriculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Curriculo_dbo_Negocio_Pessoa_Pessoa_ID" Association="Self.FK_dbo_Negocio_Curriculo_dbo_Negocio_Pessoa_Pessoa_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Curriculo" EntitySet="Negocio_Curriculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID" Association="Self.FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID">
+            <End Role="Negocio_Funcionario" EntitySet="Negocio_Funcionario" />
+            <End Role="Negocio_Curso" EntitySet="Negocio_Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Curso_Curso_ID" Association="Self.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Curso_Curso_ID">
+            <End Role="Negocio_Curso" EntitySet="Negocio_Curso" />
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Modulo_dbo_Negocio_Curso_Curso_ID" Association="Self.FK_dbo_Negocio_Modulo_dbo_Negocio_Curso_Curso_ID">
+            <End Role="Negocio_Curso" EntitySet="Negocio_Curso" />
+            <End Role="Negocio_Modulo" EntitySet="Negocio_Modulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID" Association="Self.FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID">
+            <End Role="Negocio_Funcionario" EntitySet="Negocio_Funcionario" />
+            <End Role="Negocio_Disciplina" EntitySet="Negocio_Disciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Disciplina_dbo_Negocio_Modulo_Modulo_ID" Association="Self.FK_dbo_Negocio_Disciplina_dbo_Negocio_Modulo_Modulo_ID">
+            <End Role="Negocio_Modulo" EntitySet="Negocio_Modulo" />
+            <End Role="Negocio_Disciplina" EntitySet="Negocio_Disciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Frequencia_dbo_Negocio_Disciplina_Disciplina_ID" Association="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Disciplina_Disciplina_ID">
+            <End Role="Negocio_Disciplina" EntitySet="Negocio_Disciplina" />
+            <End Role="Negocio_Frequencia" EntitySet="Negocio_Frequencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Quadro_Horario_dbo_Negocio_Disciplina_Disciplina_ID" Association="Self.FK_dbo_Negocio_Quadro_Horario_dbo_Negocio_Disciplina_Disciplina_ID">
+            <End Role="Negocio_Disciplina" EntitySet="Negocio_Disciplina" />
+            <End Role="Negocio_Quadro_Horario" EntitySet="Negocio_Quadro_Horario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Disciplina_Disciplina_ID" Association="Self.FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Disciplina_Disciplina_ID">
+            <End Role="Negocio_Disciplina" EntitySet="Negocio_Disciplina" />
+            <End Role="Negocio_Vinculo_Disciplina" EntitySet="Negocio_Vinculo_Disciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Documento_Documento_ID" Association="Self.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Documento_Documento_ID">
+            <End Role="Negocio_Documento" EntitySet="Negocio_Documento" />
+            <End Role="Negocio_Doc_Devente" EntitySet="Negocio_Doc_Devente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Matricula_Aluno_Matricula_ID" Association="Self.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+            <End Role="Negocio_Doc_Devente" EntitySet="Negocio_Doc_Devente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Endereco_dbo_Negocio_Pessoa_Pessoa_ID" Association="Self.FK_dbo_Negocio_Endereco_dbo_Negocio_Pessoa_Pessoa_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Endereco" EntitySet="Negocio_Endereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Frequencia_dbo_Matricula_Aluno_Matricula_ID" Association="Self.FK_dbo_Negocio_Frequencia_dbo_Matricula_Aluno_Matricula_ID">
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+            <End Role="Negocio_Frequencia" EntitySet="Negocio_Frequencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID" Association="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID">
+            <End Role="Negocio_Funcionario" EntitySet="Negocio_Funcionario" />
+            <End Role="Negocio_Frequencia" EntitySet="Negocio_Frequencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Funcionario_dbo_Negocio_Pessoa_Pessoa_ID" Association="Self.FK_dbo_Negocio_Funcionario_dbo_Negocio_Pessoa_Pessoa_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Funcionario" EntitySet="Negocio_Funcionario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Funcionario_dbo_Negocio_Tipo_Funcionario_Cargo_ID" Association="Self.FK_dbo_Negocio_Funcionario_dbo_Negocio_Tipo_Funcionario_Cargo_ID">
+            <End Role="Negocio_Tipo_Funcionario" EntitySet="Negocio_Tipo_Funcionario" />
+            <End Role="Negocio_Funcionario" EntitySet="Negocio_Funcionario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Pessoa_Pessoa_ID" Association="Self.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Pessoa_Pessoa_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Matricula_Aluno_Matricula_ID" Association="Self.FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+            <End Role="Negocio_Vinculo_Disciplina" EntitySet="Negocio_Vinculo_Disciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Matricula_Aluno_Matricula_ID" Association="Self.FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Matricula_Aluno_Matricula_ID">
+            <End Role="Negocio_Matricula_Aluno" EntitySet="Negocio_Matricula_Aluno" />
+            <End Role="Negocio_Vinculo_Modulo" EntitySet="Negocio_Vinculo_Modulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Modulo_Modulo_ID" Association="Self.FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Modulo_Modulo_ID">
+            <End Role="Negocio_Modulo" EntitySet="Negocio_Modulo" />
+            <End Role="Negocio_Vinculo_Modulo" EntitySet="Negocio_Vinculo_Modulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Emissor_ID" Association="Self.FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Emissor_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Notificacao" EntitySet="Negocio_Notificacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Receptor_ID" Association="Self.FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Receptor_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="Negocio_Notificacao" EntitySet="Negocio_Notificacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RBAC_Usuario_dbo_Negocio_Pessoa_Pessoa_ID" Association="Self.FK_dbo_RBAC_Usuario_dbo_Negocio_Pessoa_Pessoa_ID">
+            <End Role="Negocio_Pessoa" EntitySet="Negocio_Pessoa" />
+            <End Role="RBAC_Usuario" EntitySet="RBAC_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Perfil_Perfil_ID" Association="Self.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Perfil_Perfil_ID">
+            <End Role="RBAC_Perfil" EntitySet="RBAC_Perfil" />
+            <End Role="RBAC_Link_Perfil_Permissao" EntitySet="RBAC_Link_Perfil_Permissao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Permissao_Permissaro_ID" Association="Self.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Permissao_Permissaro_ID">
+            <End Role="RBAC_Permissao" EntitySet="RBAC_Permissao" />
+            <End Role="RBAC_Link_Perfil_Permissao" EntitySet="RBAC_Link_Perfil_Permissao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Perfil_Perfil_ID" Association="Self.FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Perfil_Perfil_ID">
+            <End Role="RBAC_Perfil" EntitySet="RBAC_Perfil" />
+            <End Role="RBAC_Link_Usuario_Perfil" EntitySet="RBAC_Link_Usuario_Perfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Usuario_Usuario_ID" Association="Self.FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Usuario_Usuario_ID">
+            <End Role="RBAC_Usuario" EntitySet="RBAC_Usuario" />
+            <End Role="RBAC_Link_Usuario_Perfil" EntitySet="RBAC_Link_Usuario_Perfil" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NimbusAcad_DBModelStoreContainer" CdmEntityContainer="NimbusAcad_DBEntities">
+          <EntitySetMapping Name="Negocio_Base_Endereco">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Base_Endereco">
+              <MappingFragment StoreEntitySet="Negocio_Base_Endereco">
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Curriculo">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Curriculo">
+              <MappingFragment StoreEntitySet="Negocio_Curriculo">
+                <ScalarProperty Name="Curriculo_ID" ColumnName="Curriculo_ID" />
+                <ScalarProperty Name="Pessoa_ID" ColumnName="Pessoa_ID" />
+                <ScalarProperty Name="Documento_ID" ColumnName="Documento_ID" />
+                <ScalarProperty Name="Orgao_Emissor" ColumnName="Orgao_Emissor" />
+                <ScalarProperty Name="Dt_Emissao" ColumnName="Dt_Emissao" />
+                <ScalarProperty Name="Cidade_Emissao" ColumnName="Cidade_Emissao" />
+                <ScalarProperty Name="Estado_Emissao" ColumnName="Estado_Emissao" />
+                <ScalarProperty Name="Pais_Emissao" ColumnName="Pais_Emissao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Curso">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Curso">
+              <MappingFragment StoreEntitySet="Negocio_Curso">
+                <ScalarProperty Name="Curso_ID" ColumnName="Curso_ID" />
+                <ScalarProperty Name="Curso_Nome" ColumnName="Curso_Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Coordenador_ID" ColumnName="Coordenador_ID" />
+                <ScalarProperty Name="Carga_Horaria" ColumnName="Carga_Horaria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Disciplina">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Disciplina">
+              <MappingFragment StoreEntitySet="Negocio_Disciplina">
+                <ScalarProperty Name="Disciplina_ID" ColumnName="Disciplina_ID" />
+                <ScalarProperty Name="Modulo_ID" ColumnName="Modulo_ID" />
+                <ScalarProperty Name="Disciplina_Nome" ColumnName="Disciplina_Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Professor_ID" ColumnName="Professor_ID" />
+                <ScalarProperty Name="Tot_Aulas_Dadas" ColumnName="Tot_Aulas_Dadas" />
+                <ScalarProperty Name="Carga_Horaria" ColumnName="Carga_Horaria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Doc_Devente">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Doc_Devente">
+              <MappingFragment StoreEntitySet="Negocio_Doc_Devente">
+                <ScalarProperty Name="Doc_Devente_ID" ColumnName="Doc_Devente_ID" />
+                <ScalarProperty Name="Documento_ID" ColumnName="Documento_ID" />
+                <ScalarProperty Name="Matricula_ID" ColumnName="Matricula_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Documento">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Documento">
+              <MappingFragment StoreEntitySet="Negocio_Documento">
+                <ScalarProperty Name="Documento_ID" ColumnName="Documento_ID" />
+                <ScalarProperty Name="Documento_Nome" ColumnName="Documento_Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Endereco">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Endereco">
+              <MappingFragment StoreEntitySet="Negocio_Endereco">
+                <ScalarProperty Name="Endereco_ID" ColumnName="Endereco_ID" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="Pessoa_ID" ColumnName="Pessoa_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Frequencia">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Frequencia">
+              <MappingFragment StoreEntitySet="Negocio_Frequencia">
+                <ScalarProperty Name="Frequencia_ID" ColumnName="Frequencia_ID" />
+                <ScalarProperty Name="Disciplina_ID" ColumnName="Disciplina_ID" />
+                <ScalarProperty Name="Professor_ID" ColumnName="Professor_ID" />
+                <ScalarProperty Name="Dt_Aula" ColumnName="Dt_Aula" />
+                <ScalarProperty Name="Qtde_Aula" ColumnName="Qtde_Aula" />
+                <ScalarProperty Name="Aula_Ministrada" ColumnName="Aula_Ministrada" />
+                <ScalarProperty Name="Matricula_Presente" ColumnName="Matricula_Presente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Funcionario">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Funcionario">
+              <MappingFragment StoreEntitySet="Negocio_Funcionario">
+                <ScalarProperty Name="Funcionario_ID" ColumnName="Funcionario_ID" />
+                <ScalarProperty Name="Pessoa_ID" ColumnName="Pessoa_ID" />
+                <ScalarProperty Name="Cargo_ID" ColumnName="Cargo_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Matricula_Aluno">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Matricula_Aluno">
+              <MappingFragment StoreEntitySet="Negocio_Matricula_Aluno">
+                <ScalarProperty Name="Matricula_ID" ColumnName="Matricula_ID" />
+                <ScalarProperty Name="Pessoa_ID" ColumnName="Pessoa_ID" />
+                <ScalarProperty Name="Curso_ID" ColumnName="Curso_ID" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="Deve_Documento" ColumnName="Deve_Documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Modulo">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Modulo">
+              <MappingFragment StoreEntitySet="Negocio_Modulo">
+                <ScalarProperty Name="Modulo_ID" ColumnName="Modulo_ID" />
+                <ScalarProperty Name="Modulo_Nome" ColumnName="Modulo_Nome" />
+                <ScalarProperty Name="Curso_ID" ColumnName="Curso_ID" />
+                <ScalarProperty Name="Max_Alunos" ColumnName="Max_Alunos" />
+                <ScalarProperty Name="Tot_Inscritos" ColumnName="Tot_Inscritos" />
+                <ScalarProperty Name="Carga_Horaria" ColumnName="Carga_Horaria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Notificacao">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Notificacao">
+              <MappingFragment StoreEntitySet="Negocio_Notificacao">
+                <ScalarProperty Name="Notificacao_ID" ColumnName="Notificacao_ID" />
+                <ScalarProperty Name="Pessoa_Emissor_ID" ColumnName="Pessoa_Emissor_ID" />
+                <ScalarProperty Name="Pessoa_Receptor_ID" ColumnName="Pessoa_Receptor_ID" />
+                <ScalarProperty Name="Assunto" ColumnName="Assunto" />
+                <ScalarProperty Name="Corpo" ColumnName="Corpo" />
+                <ScalarProperty Name="Lida" ColumnName="Lida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Pessoa">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Pessoa">
+              <MappingFragment StoreEntitySet="Negocio_Pessoa">
+                <ScalarProperty Name="Pessoa_ID" ColumnName="Pessoa_ID" />
+                <ScalarProperty Name="Primeiro_Nome" ColumnName="Primeiro_Nome" />
+                <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="RG" ColumnName="RG" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Dt_Nascimento" ColumnName="Dt_Nascimento" />
+                <ScalarProperty Name="Tel_Principal" ColumnName="Tel_Principal" />
+                <ScalarProperty Name="Tel_Opcional" ColumnName="Tel_Opcional" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Email_Confirmado" ColumnName="Email_Confirmado" />
+                <ScalarProperty Name="Tot_Notif_NL" ColumnName="Tot_Notif_NL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Quadro_Horario">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Quadro_Horario">
+              <MappingFragment StoreEntitySet="Negocio_Quadro_Horario">
+                <ScalarProperty Name="Quadro_Horario_ID" ColumnName="Quadro_Horario_ID" />
+                <ScalarProperty Name="Disciplina_ID" ColumnName="Disciplina_ID" />
+                <ScalarProperty Name="Dia_Semana" ColumnName="Dia_Semana" />
+                <ScalarProperty Name="Hora_Inicio" ColumnName="Hora_Inicio" />
+                <ScalarProperty Name="Hora_Fim" ColumnName="Hora_Fim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Tipo_Funcionario">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Tipo_Funcionario">
+              <MappingFragment StoreEntitySet="Negocio_Tipo_Funcionario">
+                <ScalarProperty Name="Tipo_Funcionario_ID" ColumnName="Tipo_Funcionario_ID" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Vinculo_Disciplina">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Vinculo_Disciplina">
+              <MappingFragment StoreEntitySet="Negocio_Vinculo_Disciplina">
+                <ScalarProperty Name="Vinculo_ID" ColumnName="Vinculo_ID" />
+                <ScalarProperty Name="Disciplina_ID" ColumnName="Disciplina_ID" />
+                <ScalarProperty Name="Matricula_ID" ColumnName="Matricula_ID" />
+                <ScalarProperty Name="Nota1" ColumnName="Nota1" />
+                <ScalarProperty Name="Nota2" ColumnName="Nota2" />
+                <ScalarProperty Name="Media_Final" ColumnName="Media_Final" />
+                <ScalarProperty Name="Frequencia" ColumnName="Frequencia" />
+                <ScalarProperty Name="Num_Chamada" ColumnName="Num_Chamada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negocio_Vinculo_Modulo">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Vinculo_Modulo">
+              <MappingFragment StoreEntitySet="Negocio_Vinculo_Modulo">
+                <ScalarProperty Name="Vinculo_ID" ColumnName="Vinculo_ID" />
+                <ScalarProperty Name="Modulo_ID" ColumnName="Modulo_ID" />
+                <ScalarProperty Name="Matricula_ID" ColumnName="Matricula_ID" />
+                <ScalarProperty Name="Status_Vinculo" ColumnName="Status_Vinculo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RBAC_Link_Perfil_Permissao">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.RBAC_Link_Perfil_Permissao">
+              <MappingFragment StoreEntitySet="RBAC_Link_Perfil_Permissao">
+                <ScalarProperty Name="Link_ID" ColumnName="Link_ID" />
+                <ScalarProperty Name="Perfil_ID" ColumnName="Perfil_ID" />
+                <ScalarProperty Name="Permissao_ID" ColumnName="Permissao_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RBAC_Link_Usuario_Perfil">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.RBAC_Link_Usuario_Perfil">
+              <MappingFragment StoreEntitySet="RBAC_Link_Usuario_Perfil">
+                <ScalarProperty Name="Link_ID" ColumnName="Link_ID" />
+                <ScalarProperty Name="Usuario_ID" ColumnName="Usuario_ID" />
+                <ScalarProperty Name="Perfil_ID" ColumnName="Perfil_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RBAC_Perfil">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.RBAC_Perfil">
+              <MappingFragment StoreEntitySet="RBAC_Perfil">
+                <ScalarProperty Name="Perfil_ID" ColumnName="Perfil_ID" />
+                <ScalarProperty Name="Perfil_Nome" ColumnName="Perfil_Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RBAC_Permissao">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.RBAC_Permissao">
+              <MappingFragment StoreEntitySet="RBAC_Permissao">
+                <ScalarProperty Name="Permissao_ID" ColumnName="Permissao_ID" />
+                <ScalarProperty Name="Permissao_Nome" ColumnName="Permissao_Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RBAC_Usuario">
+            <EntityTypeMapping TypeName="NimbusAcad_DBModel.RBAC_Usuario">
+              <MappingFragment StoreEntitySet="RBAC_Usuario">
+                <ScalarProperty Name="Usuario_ID" ColumnName="Usuario_ID" />
+                <ScalarProperty Name="Pessoa_ID" ColumnName="Pessoa_ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Senha_Hash" ColumnName="Senha_Hash" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Dt_Criacao" ColumnName="Dt_Criacao" />
+                <ScalarProperty Name="Dt_Ultima_Modif" ColumnName="Dt_Ultima_Modif" />
+                <ScalarProperty Name="Bloqueado" ColumnName="Bloqueado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

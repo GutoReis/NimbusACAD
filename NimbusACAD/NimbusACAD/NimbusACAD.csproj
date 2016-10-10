@@ -167,6 +167,87 @@
     <Compile Include="Identity\Email\EmailManager.cs" />
     <Compile Include="Identity\Security\SecurityMethods.cs" />
     <Compile Include="Identity\User\UserStore.cs" />
+    <Compile Include="Models\DB\Negocio_Base_Endereco.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Curriculo.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Curso.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Disciplina.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Documento.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Doc_Devente.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Endereco.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Frequencia.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Funcionario.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Matricula_Aluno.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Modulo.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Notificacao.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Pessoa.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Quadro_Horario.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Tipo_Funcionario.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Vinculo_Disciplina.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Negocio_Vinculo_Modulo.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\NimbusAcadModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NimbusAcadModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\NimbusAcadModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\NimbusAcadModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NimbusAcadModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\RBAC_Link_Perfil_Permissao.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\RBAC_Link_Usuario_Perfil.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\RBAC_Perfil.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\RBAC_Permissao.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\RBAC_Usuario.cs">
+      <DependentUpon>NimbusAcadModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Negocio_Base_Endereco.cs">
       <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
     </Compile>
@@ -257,6 +338,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\DB\NimbusAcadModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NimbusAcadModel.edmx</DependentUpon>
+      <LastGenOutput>NimbusAcadModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DB\NimbusAcadModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NimbusAcadModel.edmx</DependentUpon>
+      <LastGenOutput>NimbusAcadModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\NimbusACAD_DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NimbusACAD_DB.edmx</DependentUpon>
@@ -280,6 +371,13 @@
     </EntityDeploy>
     <Content Include="Models\NimbusACAD_DB.edmx.diagram">
       <DependentUpon>NimbusACAD_DB.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DB\NimbusAcadModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NimbusAcadModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DB\NimbusAcadModel.edmx.diagram">
+      <DependentUpon>NimbusAcadModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ad5ea02a69294348bd3c37931267fd9e" Name="Diagram1" ZoomLevel="55" ShowGrid="true" DisplayType="true">
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Base_Endereco" Width="2.375" PointX="4.625" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Curriculo" Width="2.125" PointX="8.25" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Curso" Width="2.125" PointX="11.625" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Disciplina" Width="2.125" PointX="19.625" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Doc_Devente" Width="2.125" PointX="12.375" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Documento" Width="2" PointX="8.25" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Endereco" Width="1.75" PointX="8.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Frequencia" Width="2.125" PointX="22.875" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Funcionario" Width="1.875" PointX="17.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Matricula_Aluno" Width="2.125" PointX="11.875" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Modulo" Width="1.875" PointX="15.125" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Notificacao" Width="2.125" PointX="5.125" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Pessoa" Width="2.25" PointX="8.375" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Quadro_Horario" Width="2.5" PointX="20.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Tipo_Funcionario" Width="2.25" PointX="17.625" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Vinculo_Disciplina" Width="2.125" PointX="15.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.Negocio_Vinculo_Modulo" Width="2" PointX="15.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.RBAC_Link_Perfil_Permissao" Width="2.125" PointX="0.875" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.RBAC_Link_Usuario_Perfil" Width="2.25" PointX="0.875" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.RBAC_Perfil" Width="1.875" PointX="1" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.RBAC_Permissao" Width="2" PointX="1" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="NimbusAcad_DBModel.RBAC_Usuario" Width="2.25" PointX="0.875" PointY="15.375" IsExpanded="true" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Endereco_dbo_Negocio_Base_Endereco_CEP" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Curriculo_dbo_Negocio_Documento_Documento_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Curriculo_dbo_Negocio_Pessoa_Pessoa_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Curso_Curso_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Modulo_dbo_Negocio_Curso_Curso_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Disciplina_dbo_Negocio_Modulo_Modulo_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Frequencia_dbo_Negocio_Disciplina_Disciplina_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Quadro_Horario_dbo_Negocio_Disciplina_Disciplina_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Disciplina_Disciplina_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Documento_Documento_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Matricula_Aluno_Matricula_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Endereco_dbo_Negocio_Pessoa_Pessoa_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Frequencia_dbo_Matricula_Aluno_Matricula_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Funcionario_dbo_Negocio_Pessoa_Pessoa_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Funcionario_dbo_Negocio_Tipo_Funcionario_Cargo_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Pessoa_Pessoa_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Vinculo_Disciplina_dbo_Negocio_Matricula_Aluno_Matricula_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Matricula_Aluno_Matricula_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Vinculo_Modulo_dbo_Negocio_Modulo_Modulo_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Emissor_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_Negocio_Notifcacao_dbo_Negocio_Pessoa_Pessoa_Receptor_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_RBAC_Usuario_dbo_Negocio_Pessoa_Pessoa_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Perfil_Perfil_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Permissao_Permissaro_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Perfil_Perfil_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="NimbusAcad_DBModel.FK_dbo_RBAC_Link_Usuario_Perfil_dbo_RBAC_Usuario_Usuario_ID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
