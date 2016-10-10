@@ -248,78 +248,6 @@
     <Compile Include="Models\DB\RBAC_Usuario.cs">
       <DependentUpon>NimbusAcadModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Negocio_Base_Endereco.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Curriculo.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Curso.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Disciplina.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Documento.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Endereco.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Frequencia.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Funcionario.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Matricula_Aluno.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Modulo.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Notificacao.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Pessoa.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Quadro_Horario.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Tipo_Funcionario.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Vinculo_Disciplina.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Negocio_Vinculo_Modulo.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NimbusACAD_DB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NimbusACAD_DB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NimbusACAD_DB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NimbusACAD_DB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NimbusACAD_DB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RBAC_Perfil.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RBAC_Permissao.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RBAC_Usuario.cs">
-      <DependentUpon>NimbusACAD_DB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ViewModels\AccountViewModel.cs" />
     <Compile Include="Models\ViewModels\AlunoViewModel.cs" />
     <Compile Include="Models\ViewModels\CursoViewModel.cs" />
@@ -348,29 +276,12 @@
       <DependentUpon>NimbusAcadModel.edmx</DependentUpon>
       <LastGenOutput>NimbusAcadModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\NimbusACAD_DB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NimbusACAD_DB.edmx</DependentUpon>
-      <LastGenOutput>NimbusACAD_DB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\NimbusACAD_DB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NimbusACAD_DB.edmx</DependentUpon>
-      <LastGenOutput>NimbusACAD_DB.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\NimbusACAD_DB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NimbusACAD_DB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\NimbusACAD_DB.edmx.diagram">
-      <DependentUpon>NimbusACAD_DB.edmx</DependentUpon>
     </Content>
     <EntityDeploy Include="Models\DB\NimbusAcadModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -409,7 +320,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ExtendedMethods\" />
     <Folder Include="Identity\Role\" />
   </ItemGroup>
   <ItemGroup>
