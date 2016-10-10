@@ -165,11 +165,15 @@ namespace NimbusACAD.Models.ViewModels
         public string EndCompleto { get; set; }
 
         [Display(Name = "Data da ultima modificação")]
-        public string DtModif { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DtModif { get; set; }
 
         //Fazer conversão de bool -> string
         [Display(Name = "Bloqueado")]
         public string Bloqueado { get; set; }
+
+        [Display(Name = "Perfil")]
+        public string Perfil { get; set; }
     }
 
     public class ListaPerfisViewModel
