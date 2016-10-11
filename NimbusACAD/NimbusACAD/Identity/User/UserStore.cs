@@ -203,6 +203,23 @@ namespace NimbusACAD.Identity.User
                 }
             }
         }
+
+        public string GetEmailUsernameByNome(string nmCompleto)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                int pessoaID = GetPessoaIDporNome(nmCompleto);
+                var usuario = db.RBAC_Usuario.Where(o => o.Pessoa_ID == pessoaID);
+                if (usuario.Any())
+                {
+                    return usuario.FirstOrDefault().Username;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
         #endregion
 
         #region GET-Negocio_Pessoa
