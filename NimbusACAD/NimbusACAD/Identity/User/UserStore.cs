@@ -12,7 +12,7 @@ namespace NimbusACAD.Identity.User
 {
     public class UserStore
     {
-        #region USUARIO
+        #region CREATE
 
         //Add usuario será feito no AccountController, para enviar o email com a senha temporaria.
         public void AddPessoa(RegistrarComumViewModel pessoa)
@@ -81,35 +81,11 @@ namespace NimbusACAD.Identity.User
                     }
                 }
             }
-        }
-        
-        public bool IsEmailExist(string emailValidar)
-        {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
-            {
-                return db.Negocio_Pessoa.Where(o => o.Email.Equals(emailValidar)).Any();
-            }
-        }
-
-        public string GetUsuarioSenha(string Email)
-        {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
-            {
-                var usuario = db.RBAC_Usuario.Where(o => o.Username.ToLower().Equals(Email));
-                if (usuario.Any())
-                {
-                    return usuario.FirstOrDefault().Senha_Hash;
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
+        }      
 
         #endregion
 
-        #region RBAC-PERFIL
+        #region RBAC-Verifica_UsuarioInPerfil
 
         public bool IsUsuarioInPerfil(string usuarioNome, string perfilNome)
         {
@@ -136,6 +112,100 @@ namespace NimbusACAD.Identity.User
 
         #region GET
 
+        #region GET-RBAC_Usuario
+        public int GetUsuarioID(string Email)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
+                if (usuario.Any())
+                {
+                    return usuario.FirstOrDefault().Usuario_ID;
+                }
+            }
+            return 0;
+        }
+
+        public bool GetEmailUsernameExist(string Email)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                return db.RBAC_Usuario.Where(o => o.Username.Equals(Email)).Any();
+            }
+        }
+
+        public string GetUsuarioSenha(string Email)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
+                if (usuario.Any())
+                {
+                    return usuario.FirstOrDefault().Senha_Hash;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        public string GetUsuarioSalt(string Email)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
+                if (usuario.Any())
+                {
+                    return usuario.FirstOrDefault().Salt;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        public OperationStatus GetUsuarioEmailVerificado(string Email)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
+                if (usuario.Any())
+                {
+                    if (usuario.FirstOrDefault().Bloqueado.Value)
+                    {
+                        return OperationStatus.LockedOut;
+                    }
+                    else
+                    {
+                        var pessoa = db.Negocio_Pessoa.Where(o => o.Pessoa_ID == usuario.FirstOrDefault().Pessoa_ID);
+                        if (pessoa.Any())
+                        {
+                            if (pessoa.FirstOrDefault().Email_Confirmado.Value)
+                            {
+                                return OperationStatus.Success;
+                            }
+                            else
+                            {
+                                return OperationStatus.RequiresVerification;
+                            }
+                        }
+                        else
+                        {
+                            return OperationStatus.Failure;
+                        }
+                    }
+                }
+                else
+                {
+                    return OperationStatus.Failure;
+                }
+            }
+        }
+        #endregion
+
+        #region GET-Negocio_Pessoa
         public int GetPessoaIDporEmail(string Email)
         {
             using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
@@ -161,20 +231,9 @@ namespace NimbusACAD.Identity.User
             }
             return 0;
         }
+        #endregion
 
-        public int GetUsuarioID(string Email)
-        {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
-            {
-                var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
-                if (usuario.Any())
-                {
-                    return usuario.FirstOrDefault().Usuario_ID;
-                }
-            }
-            return 0;
-        }
-
+        #region GET-Perfil_Completo
         public List<ListaPerfisViewModel> GetAllPerfilUsuario()
         {
             List<ListaPerfisViewModel> perfis = new List<ListaPerfisViewModel>();
@@ -234,7 +293,9 @@ namespace NimbusACAD.Identity.User
                 return PUVM;
             }
         }
+        #endregion
 
+        #region GET-Auxiliares
         public string GetUsuarioPerfilRBACNome(int usuarioID)
         {
             using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
@@ -258,13 +319,13 @@ namespace NimbusACAD.Identity.User
                 return end;
             }
         }
-
-
+        #endregion
 
         #endregion
 
         #region UPDATE
 
+        #region UPDATE-Usuario
         public void UpdateContaUsuario(PerfilDeUsuarioViewModel usuario)
         {
             using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
@@ -316,6 +377,65 @@ namespace NimbusACAD.Identity.User
                 }
             }
         }
+        #endregion
+
+        #region UPDATE-PASSWORD
+
+        #region FORGOT-PASSWORD
+        public string ForgotPassword(int usuarioID)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                var usuario = db.RBAC_Usuario.Find(usuarioID);
+                if(usuario != null)
+                {
+                    string newSalt = SecurityMethods.GenerateSalt();
+                    string newToken = SecurityMethods.GenerateTempTokenAccess();
+                    string newTokenEncrypted = SecurityMethods.HashPasswordPBKDF2(newToken, newSalt);
+
+                    usuario.Senha_Hash = newTokenEncrypted;
+                    usuario.Salt = newSalt;
+                    db.Entry(usuario).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return newToken;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+        #endregion
+
+        #region CHANGE-PASSWORD
+        public OperationStatus ChangePasswod(int usuarioID, AlterarSenhaViewModel model)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                var usuario = db.RBAC_Usuario.Find(usuarioID);
+                if (usuario != null)
+                {
+                    string newSalt = SecurityMethods.GenerateSalt();
+                    string newEncrypted = SecurityMethods.HashPasswordPBKDF2(model.Senha, newSalt);
+
+                    usuario.Senha_Hash = newEncrypted;
+                    usuario.Salt = newSalt;
+
+                    db.Entry(usuario).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return OperationStatus.Success;
+                }
+                else
+                {
+                    return OperationStatus.Failure;
+                }
+            }
+        }
+        #endregion
+
+        #endregion
 
         #endregion
 
