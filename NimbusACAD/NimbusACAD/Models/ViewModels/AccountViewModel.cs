@@ -136,42 +136,90 @@ namespace NimbusACAD.Models.ViewModels
 
     public class PerfilDeUsuarioViewModel
     {
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        //Infos de Negocio_Pessoa
+        //Preenchido pelo sistema, não será alterado pelo usuário
+        public int PessoaID { get; set; } //Vale tanto para Negocio_Pessoa como para RBAC_Usuario
 
-        [Display(Name = "Nome completo")]
-        public string NmCompleto { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Primerio Nome")]
+        public string PrimeiroNome { get; set; }
 
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Sobrenome")]
+        public string Sobrenome { get; set; }
+
+        [Required(ErrorMessage = "*")]
         [Display(Name = "CPF")]
         public string CPF { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "RG")]
         public string RG { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Sexo")]
         public string Sexo { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Data de nascimento")]
         [DataType(DataType.Date)]
         public DateTime DtNascimento { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Telefone principal")]
         public string TelPrincipal { get; set; }
 
+        //Pode ser Nulo
         [Display(Name = "Telefone secundário")]
         public string TelSecundario { get; set; }
 
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Email")]
+        public string Email { get; set; } //Vale tanto para Negocio_Pessoa como para RBAC_Usuario
+
+
+        //Preenchido pelo sistema, não será alterado pelo usuário
+        [Display(Name = "Email confrimado")]
+        public bool EmailConfirmado { get; set; }
+
+        //Preenchido pelo sistema, não será alterado pelo usuário
+        [Display(Name = "Total de notificações não lidas")]
+        public int TotNotifNL { get; set; }
+
+        //Infos de Negocio_Endereço
+        //Preenchido pelo sistema, terá a opção alterar endereço
         [Display(Name = "Endereço completo")]
         public string EndCompleto { get; set; }
 
+
+        //Infos de RBAC_Usuario
+        //Preenchido pelo sistema, não será alterado pelo usuário
+        public int UsuarioID { get; set; }
+
+        //Deverá ser trocada apenas na área "Alterar senha"
+        [Display(Name = "Senha criptografada")]
+        public string SenhaHash { get; set; }
+
+        //Deverá ser trocada apenas na área "Alterar senha"
+        [Display(Name = "Salt")]
+        public string Salt { get; set; }
+
+        //Preenchido pelo sistema, não será alterado pelo usuário
+        [Display(Name = "Data de criação")]
+        [DataType(DataType.Date)]
+        public DateTime DtCriacao { get; set; }
+
+        //Preenchido pelo sistema, será alterado pelo sisteman na atualização dos dados
         [Display(Name = "Data da ultima modificação")]
         [DataType(DataType.Date)]
         public DateTime DtModif { get; set; }
 
-        //Fazer conversão de bool -> string
+        //Preenchido pelo sistema, não será alterado pelo usuário
         [Display(Name = "Bloqueado")]
         public string Bloqueado { get; set; }
 
+        //Info de RBAC_Perfil
+        //Preenchido pelo sistema, não será alterado pelo usuário
         [Display(Name = "Perfil")]
         public string Perfil { get; set; }
     }
@@ -196,5 +244,52 @@ namespace NimbusACAD.Models.ViewModels
         //Fazer conversão de bool -> string
         [Display(Name = "Bloqueado")]
         public string Bloqueado { get; set; }
+    }
+
+    public class AlterarEnderecoViewModel
+    {
+        //Preenchido pelo sistema, não será alterado pelo usuário
+        public int EnderecoID { get; set; }
+
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "CEP")]
+        public string CEP { get; set; }
+
+        [Display(Name = "Complemento")]
+        public string Complemento { get; set; }
+
+        [Display(Name = "Número")]
+        public int Numero { get; set; }
+
+        //Preenchido pelo sistema, não será alterado pelo usuário
+        public bool Ativo { get; set; }
+
+        //Preenchido pelo sistema, não será alterado pelo usuário
+        public int PessoaID { get; set; }
+
+        //Preenchido pelo sistema se o CEP já estiver cadastrado
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Logradouro")]
+        public string Logradouro { get; set; }
+
+        //Preenchido pelo sistema se o CEP já estiver cadastrado
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Bairro")]
+        public string Bairro { get; set; }
+
+        //Preenchido pelo sistema se o CEP já estiver cadastrado
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Cidade")]
+        public string Cidade { get; set; }
+
+        //Preenchido pelo sistema se o CEP já estiver cadastrado
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Estado")]
+        public string Estado { get; set; }
+
+        //Preenchido pelo sistema se o CEP já estiver cadastrado
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "País")]
+        public string Pais { get; set; }
     }
 }

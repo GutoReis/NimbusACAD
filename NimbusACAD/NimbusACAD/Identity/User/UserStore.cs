@@ -1,20 +1,23 @@
-﻿using NimbusACAD.Models;
+﻿using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
+using NimbusACAD.Identity.Security;
 using NimbusACAD.Identity;
 using System.Linq;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System;
 
 namespace NimbusACAD.Identity.User
 {
     public class UserStore
     {
-        #region USER
+        #region USUARIO
 
+        //Add usuario será feito no AccountController, para enviar o email com a senha temporaria.
         public void AddPessoa(RegistrarComumViewModel pessoa)
         {
-            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 Negocio_Pessoa NP = new Negocio_Pessoa();
                 Negocio_Endereco NE = new Negocio_Endereco();
@@ -82,7 +85,7 @@ namespace NimbusACAD.Identity.User
         
         public bool IsEmailExist(string emailValidar)
         {
-            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 return db.Negocio_Pessoa.Where(o => o.Email.Equals(emailValidar)).Any();
             }
@@ -90,7 +93,7 @@ namespace NimbusACAD.Identity.User
 
         public string GetUsuarioSenha(string Email)
         {
-            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.ToLower().Equals(Email));
                 if (usuario.Any())
@@ -103,14 +106,39 @@ namespace NimbusACAD.Identity.User
                 }
             }
         }
-        
+
+        #endregion
+
+        #region RBAC-PERFIL
+
+        public bool IsUsuarioInPerfil(string usuarioNome, string perfilNome)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                RBAC_Usuario usuario = db.RBAC_Usuario.Where(o => o.Username.ToLower().Equals(usuarioNome))?.FirstOrDefault();
+                if (usuario != null)
+                {
+                    var perfilRBAC = from q in db.RBAC_Link_Usuario_Perfil
+                                     join r in db.RBAC_Perfil
+                                     on q.Perfil_ID equals r.Perfil_ID
+                                     where r.Perfil_Nome.Equals(perfilNome) && q.Usuario_ID.Equals(usuario.Usuario_ID)
+                                     select r.Perfil_Nome;
+                    if (perfilRBAC != null)
+                    {
+                        return perfilRBAC.Any();
+                    }
+                }
+                return false;
+            }
+        }
+
         #endregion
 
         #region GET
 
         public int GetPessoaIDporEmail(string Email)
         {
-            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 var pessoa = db.Negocio_Pessoa.Where(o => o.Email.Equals(Email));
                 if (pessoa.Any())
@@ -123,7 +151,7 @@ namespace NimbusACAD.Identity.User
 
         public int GetPessoaIDporNome(string nmCompleto)
         {
-            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 var pessoa = db.Negocio_Pessoa.Where(o => (o.Primeiro_Nome + o.Sobrenome).Equals(nmCompleto));
                 if (pessoa.Any())
@@ -136,7 +164,7 @@ namespace NimbusACAD.Identity.User
 
         public int GetUsuarioID(string Email)
         {
-            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
                 if (usuario.Any())
@@ -150,7 +178,7 @@ namespace NimbusACAD.Identity.User
         public List<ListaPerfisViewModel> GetAllPerfilUsuario()
         {
             List<ListaPerfisViewModel> perfis = new List<ListaPerfisViewModel>();
-            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 ListaPerfisViewModel LPVM;
                 var pessoas = db.Negocio_Pessoa.ToList();
@@ -183,12 +211,15 @@ namespace NimbusACAD.Identity.User
         {
             PerfilDeUsuarioViewModel PUVM = new PerfilDeUsuarioViewModel();
 
-            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(nomeUsuario)).FirstOrDefault();
 
+                PUVM.UsuarioID = usuario.Usuario_ID;
+                PUVM.PessoaID = usuario.Pessoa_ID.Value;
                 PUVM.Email = usuario.Username;
-                PUVM.NmCompleto = usuario.Negocio_Pessoa.Primeiro_Nome + " " + usuario.Negocio_Pessoa.Sobrenome;
+                PUVM.PrimeiroNome = usuario.Negocio_Pessoa.Primeiro_Nome;
+                PUVM.Sobrenome = usuario.Negocio_Pessoa.Sobrenome;
                 PUVM.CPF = usuario.Negocio_Pessoa.CPF;
                 PUVM.RG = usuario.Negocio_Pessoa.RG;
                 PUVM.Sexo = usuario.Negocio_Pessoa.Sexo;
@@ -197,16 +228,26 @@ namespace NimbusACAD.Identity.User
                 PUVM.TelSecundario = usuario.Negocio_Pessoa.Tel_Opcional;
                 PUVM.EndCompleto = GetUsuarioEndereco(usuario.Pessoa_ID.Value);
                 PUVM.DtModif = usuario.Dt_Ultima_Modif.Value;
-                PUVM.Bloqueado = usuario.Bloqueado == true ? "Bloqueado" : "Desbloqueado";
-                PUVM.Perfil = usuario.RBAC_Perfil.FirstOrDefault().Perfil_Nome;
+                PUVM.Bloqueado = usuario.Bloqueado.Value ? "Bloqueado" : "Desbloqueado";
+                PUVM.Perfil = GetUsuarioPerfilRBACNome(usuario.Usuario_ID);
 
                 return PUVM;
             }
         }
 
+        public string GetUsuarioPerfilRBACNome(int usuarioID)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                RBAC_Link_Usuario_Perfil linkUP = db.RBAC_Link_Usuario_Perfil.Where(o => o.Usuario_ID == usuarioID).FirstOrDefault();
+                RBAC_Perfil perfilRBAC = db.RBAC_Perfil.Where(o => o.Perfil_ID == linkUP.Perfil_ID).FirstOrDefault();
+                return perfilRBAC.Perfil_Nome;
+            }
+        }        
+
         public string GetUsuarioEndereco(int pessoaID)
         {
-            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 var endereco = db.Negocio_Endereco.Where(o => o.Pessoa_ID == pessoaID).FirstOrDefault();
                 var bsEnd = db.Negocio_Base_Endereco.Where(o => o.CEP.Equals(endereco.CEP)).FirstOrDefault();
@@ -219,6 +260,98 @@ namespace NimbusACAD.Identity.User
         }
 
 
+
+        #endregion
+
+        #region UPDATE
+
+        public void UpdateContaUsuario(PerfilDeUsuarioViewModel usuario)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        RBAC_Usuario u = db.RBAC_Usuario.Find(usuario.UsuarioID);
+
+                        u.Usuario_ID = usuario.UsuarioID;
+                        u.Username = usuario.Email;
+                        u.Senha_Hash = usuario.SenhaHash;
+                        u.Salt = usuario.Salt;
+                        u.Dt_Criacao = usuario.DtCriacao;
+                        u.Dt_Ultima_Modif = DateTime.Now;
+                        u.Bloqueado = usuario.Bloqueado == "Bloqueado" ? true : false;
+
+                        db.Entry(u).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        var pessoa = db.Negocio_Pessoa.Where(o => o.Pessoa_ID == usuario.PessoaID);
+                        if (pessoa.Any())
+                        {
+                            Negocio_Pessoa p = pessoa.FirstOrDefault();
+                            p.Pessoa_ID = usuario.PessoaID;
+                            p.Primeiro_Nome = usuario.PrimeiroNome;
+                            p.Sobrenome = usuario.Sobrenome;
+                            p.CPF = usuario.CPF;
+                            p.RG = usuario.RG;
+                            p.Sexo = usuario.Sexo;
+                            p.Dt_Nascimento = usuario.DtNascimento;
+                            p.Tel_Principal = usuario.TelPrincipal;
+                            p.Tel_Opcional = usuario.TelSecundario;
+                            p.Email = usuario.Email;
+                            p.Email_Confirmado = usuario.EmailConfirmado;
+                            p.Tot_Notif_NL = p.Tot_Notif_NL;
+
+                            db.Entry(p).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+
+                        dbContextTransaction.Commit();
+                    }
+                    catch
+                    {
+                        dbContextTransaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region DELETE
+
+        public void DeleteUsuario(int usuarioID)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var linkUP = db.RBAC_Link_Usuario_Perfil.Where(o => o.Usuario_ID == usuarioID);
+                        if (linkUP.Any())
+                        {
+                            db.RBAC_Link_Usuario_Perfil.Remove(linkUP.FirstOrDefault());
+                            db.SaveChanges();
+                        }
+
+                        var usuario = db.RBAC_Usuario.Where(o => o.Usuario_ID == usuarioID);
+                        if (usuario.Any())
+                        {
+                            db.RBAC_Usuario.Remove(usuario.FirstOrDefault());
+                            db.SaveChanges();
+                        }
+
+                        dbContextTransaction.Commit();
+                    }
+                    catch
+                    {
+                        dbContextTransaction.Rollback();
+                    }
+                }
+            }
+        }
 
         #endregion
     }
