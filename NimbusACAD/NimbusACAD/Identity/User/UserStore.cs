@@ -166,6 +166,22 @@ namespace NimbusACAD.Identity.User
             }
         }
 
+        public bool GetUsuarioBloqueado(string Email)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
+                if (usuario.Any())
+                {
+                    return usuario.FirstOrDefault().Bloqueado.Value;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         public OperationStatus GetUsuarioEmailVerificado(string Email)
         {
             using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
