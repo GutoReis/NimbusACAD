@@ -478,12 +478,21 @@ namespace NimbusACAD.Identity.User
                 {
                     try
                     {
-                        var linkUP = db.RBAC_Link_Usuario_Perfil.Where(o => o.Usuario_ID == usuarioID);
-                        if (linkUP.Any())
+                        foreach (RBAC_Link_Usuario_Perfil lup in db.RBAC_Link_Usuario_Perfil)
                         {
-                            db.RBAC_Link_Usuario_Perfil.Remove(linkUP.FirstOrDefault());
-                            db.SaveChanges();
+                            if (lup.Usuario_ID == usuarioID)
+                            {
+                                db.RBAC_Link_Usuario_Perfil.Remove(lup);
+                                db.SaveChanges();
+                            }
                         }
+
+                        //var linkUP = db.RBAC_Link_Usuario_Perfil.Where(o => o.Usuario_ID == usuarioID);
+                        //if (linkUP.Any())
+                        //{
+                        //    db.RBAC_Link_Usuario_Perfil.Remove(linkUP.FirstOrDefault());
+                        //    db.SaveChanges();
+                        //}
 
                         var usuario = db.RBAC_Usuario.Where(o => o.Usuario_ID == usuarioID);
                         if (usuario.Any())
