@@ -81,11 +81,7 @@ namespace NimbusACAD.Identity.User
                     }
                 }
             }
-        }      
-
-        #endregion
-
-        #region RBAC-Verifica_UsuarioInPerfil
+        }
 
         public bool IsUsuarioInPerfil(string usuarioNome, string perfilNome)
         {

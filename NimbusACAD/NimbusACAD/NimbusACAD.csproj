@@ -165,6 +165,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Identity\Email\EmailManager.cs" />
+    <Compile Include="Identity\Role\RoleStore.cs" />
     <Compile Include="Identity\Security\SecurityMethods.cs" />
     <Compile Include="Identity\User\UserStore.cs" />
     <Compile Include="Models\DB\Negocio_Base_Endereco.cs">
@@ -320,7 +321,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Identity\Role\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

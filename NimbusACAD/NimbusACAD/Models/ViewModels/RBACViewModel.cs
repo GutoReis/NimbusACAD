@@ -45,4 +45,26 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Perfil")]
         public int PerfilID { get; set; }
     }
+
+    public class ListaUsuariosPerfilViewModel
+    {
+        public int usuarioID { get; set; }
+
+        [Required]
+        [Display(Name = "Nome")]
+        public string UsuarioNome { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+    }
+
+    public class ListaPermissoesPerfilViewModel
+    {
+        public int permisssaoID { get; set; }
+
+        [Required]
+        [Display(Name = "Permissao")]
+        public string PermissaoNome { get; set; }
+    }
 }
