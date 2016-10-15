@@ -8,6 +8,8 @@ namespace NimbusACAD.Models.ViewModels
 {
     public class CriarPerfilRBACViewModel
     {
+        public int PerfilID { get; set; }
+
         [Required]
         [Display(Name = "Nome do perfil")]
         public string PerfilNm { get; set; }
@@ -19,6 +21,8 @@ namespace NimbusACAD.Models.ViewModels
 
     public class CriarPermissaoRBACViewModel
     {
+        public int PermissaoID { get; set; }
+
         [Required]
         [Display(Name = "Nome da permissão")]
         public string PermissaoNm { get; set; }
@@ -32,7 +36,7 @@ namespace NimbusACAD.Models.ViewModels
 
         [Required]
         [Display(Name = "Permissão")]
-        public virtual ICollection<int> PermissaoID { get; set; }
+        public int PermissaoID { get; set; }
     }
 
     public class VinculoPerfilUsuarioViewModel
@@ -66,5 +70,14 @@ namespace NimbusACAD.Models.ViewModels
         [Required]
         [Display(Name = "Permissao")]
         public string PermissaoNome { get; set; }
+    }
+
+    public class ListaPerfisPermissaoViewModel
+    {
+        public int perfilID { get; set; }
+
+        [Required]
+        [Display(Name = "Perfil")]
+        public string PerfilNm { get; set; }
     }
 }

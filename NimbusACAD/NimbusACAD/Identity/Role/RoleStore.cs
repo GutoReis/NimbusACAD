@@ -220,7 +220,7 @@ namespace NimbusACAD.Identity.Role
                 {
                     try
                     {
-                        RBAC_Perfil p = db.RBAC_Perfil.Where(o => o.Perfil_Nome.Equals(perfil.PerfilNm)).FirstOrDefault();
+                        RBAC_Perfil p = db.RBAC_Perfil.Where(o => o.Perfil_ID == perfil.PerfilID).FirstOrDefault();
                         p.Perfil_Nome = perfil.PerfilNm;
                         p.Descricao = perfil.Descricao;
 
