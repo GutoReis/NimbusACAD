@@ -168,6 +168,7 @@
     <Compile Include="Identity\Role\PermissionStore.cs" />
     <Compile Include="Identity\Role\RoleStore.cs" />
     <Compile Include="Identity\Security\SecurityMethods.cs" />
+    <Compile Include="Identity\Security\SignInManager.cs" />
     <Compile Include="Identity\User\UserStore.cs" />
     <Compile Include="Models\DB\Negocio_Base_Endereco.cs">
       <DependentUpon>NimbusAcadModel.tt</DependentUpon>

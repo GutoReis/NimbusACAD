@@ -178,40 +178,26 @@ namespace NimbusACAD.Identity.User
             }
         }
 
-        public OperationStatus GetUsuarioEmailVerificado(string Email)
+        public bool GetUsuarioEmailVerificado(string Email)
         {
             using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
                 if (usuario.Any())
                 {
-                    if (usuario.FirstOrDefault().Bloqueado.Value)
+                    var pessoa = db.Negocio_Pessoa.Where(o => o.Pessoa_ID == usuario.FirstOrDefault().Pessoa_ID);
+                    if (pessoa.Any())
                     {
-                        return OperationStatus.LockedOut;
+                        return pessoa.FirstOrDefault().Email_Confirmado.Value;
                     }
                     else
                     {
-                        var pessoa = db.Negocio_Pessoa.Where(o => o.Pessoa_ID == usuario.FirstOrDefault().Pessoa_ID);
-                        if (pessoa.Any())
-                        {
-                            if (pessoa.FirstOrDefault().Email_Confirmado.Value)
-                            {
-                                return OperationStatus.Success;
-                            }
-                            else
-                            {
-                                return OperationStatus.RequiresVerification;
-                            }
-                        }
-                        else
-                        {
-                            return OperationStatus.Failure;
-                        }
+                        return false;
                     }
                 }
                 else
                 {
-                    return OperationStatus.Failure;
+                    return false;
                 }
             }
         }
