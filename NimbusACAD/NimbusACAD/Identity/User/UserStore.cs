@@ -424,7 +424,7 @@ namespace NimbusACAD.Identity.User
         #endregion
 
         #region CHANGE-PASSWORD
-        public OperationStatus ChangePasswod(int usuarioID, AlterarSenhaViewModel model)
+        public OperationStatus ChangePassword(int usuarioID, AlterarSenhaViewModel model)
         {
             using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {

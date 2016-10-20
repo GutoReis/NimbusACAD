@@ -15,14 +15,14 @@ namespace NimbusACAD.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Desenvolverdores";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Assinatura()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Assinatura";
 
             return View();
         }
