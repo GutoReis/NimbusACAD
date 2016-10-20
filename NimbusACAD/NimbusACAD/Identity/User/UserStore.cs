@@ -334,6 +334,26 @@ namespace NimbusACAD.Identity.User
                 return end;
             }
         }
+
+        public AlterarEnderecoViewModel GetEndereco(int pessoaID)
+        {
+            AlterarEnderecoViewModel AEVM = new AlterarEnderecoViewModel();
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                Negocio_Endereco NE = db.Negocio_Endereco.Where(o => o.Pessoa_ID == pessoaID).FirstOrDefault();
+                AEVM.PessoaID = NE.Pessoa_ID;
+                AEVM.CEP = NE.CEP;
+                AEVM.Complemento = NE.Complemento;
+                AEVM.Numero = NE.Numero.Value;
+                AEVM.Logradouro = NE.Negocio_Base_Endereco.Logradouro;
+                AEVM.Bairro = NE.Negocio_Base_Endereco.Bairro;
+                AEVM.Cidade = NE.Negocio_Base_Endereco.Cidade;
+                AEVM.Estado = NE.Negocio_Base_Endereco.Estado;
+                AEVM.Pais = NE.Negocio_Base_Endereco.Pais;
+
+                return AEVM;
+            }
+        }
         #endregion
 
         #endregion
@@ -353,9 +373,9 @@ namespace NimbusACAD.Identity.User
 
                         u.Usuario_ID = usuario.UsuarioID;
                         u.Username = usuario.Email;
-                        u.Senha_Hash = usuario.SenhaHash;
-                        u.Salt = usuario.Salt;
-                        u.Dt_Criacao = usuario.DtCriacao;
+                        //u.Senha_Hash = usuario.SenhaHash; (Foram retirados de PerfilDeUsuarioViewModel (AccountViewModel.cs))
+                        //u.Salt = usuario.Salt;
+                        //u.Dt_Criacao = usuario.DtCriacao;
                         u.Dt_Ultima_Modif = DateTime.Now;
                         u.Bloqueado = usuario.Bloqueado == "Bloqueado" ? true : false;
 
@@ -376,7 +396,7 @@ namespace NimbusACAD.Identity.User
                             p.Tel_Principal = usuario.TelPrincipal;
                             p.Tel_Opcional = usuario.TelSecundario;
                             p.Email = usuario.Email;
-                            p.Email_Confirmado = usuario.EmailConfirmado;
+                            //p.Email_Confirmado = usuario.EmailConfirmado;
                             p.Tot_Notif_NL = p.Tot_Notif_NL;
 
                             db.Entry(p).State = EntityState.Modified;
@@ -392,6 +412,73 @@ namespace NimbusACAD.Identity.User
                 }
             }
         }
+        #endregion
+
+        #region UPDATE-ENDERECO
+
+        public void UpdateEndereco(AlterarEnderecoViewModel endereco)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var atualizarNE = db.Negocio_Endereco.Where(o => o.Pessoa_ID == endereco.PessoaID).FirstOrDefault();
+                        Negocio_Base_Endereco NBE = db.Negocio_Base_Endereco.Where(o => o.CEP == endereco.CEP).FirstOrDefault();
+                        if (NBE != null)
+                        {
+                            Negocio_Endereco NE = new Negocio_Endereco();
+                            NE.CEP = endereco.CEP;
+                            NE.Complemento = endereco.Complemento;
+                            NE.Numero = endereco.Numero;
+                            NE.Ativo = true;
+                            NE.Pessoa_ID = endereco.PessoaID;
+
+                            db.Negocio_Endereco.Add(NE);
+                            db.SaveChanges();
+
+                            atualizarNE.Ativo = false;
+                            db.Entry(atualizarNE).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            Negocio_Base_Endereco novoNBE = new Negocio_Base_Endereco();
+                            novoNBE.CEP = endereco.CEP;
+                            novoNBE.Logradouro = endereco.Logradouro;
+                            novoNBE.Bairro = endereco.Bairro;
+                            novoNBE.Cidade = endereco.Cidade;
+                            novoNBE.Estado = endereco.Estado;
+                            novoNBE.Pais = endereco.Pais;
+
+                            db.Negocio_Base_Endereco.Add(novoNBE);
+                            db.SaveChanges();
+
+                            Negocio_Endereco NE = new Negocio_Endereco();
+                            NE.CEP = endereco.CEP;
+                            NE.Complemento = endereco.Complemento;
+                            NE.Numero = endereco.Numero;
+                            NE.Ativo = true;
+                            NE.Pessoa_ID = endereco.PessoaID;
+
+                            db.Negocio_Endereco.Add(NE);
+                            db.SaveChanges();
+
+                            atualizarNE.Ativo = false;
+                            db.Entry(atualizarNE).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        dbContextTransaction.Commit();
+                    }
+                    catch
+                    {
+                        dbContextTransaction.Rollback();
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region UPDATE-PASSWORD

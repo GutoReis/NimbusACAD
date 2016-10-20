@@ -177,11 +177,6 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Email")]
         public string Email { get; set; } //Vale tanto para Negocio_Pessoa como para RBAC_Usuario
 
-
-        //Preenchido pelo sistema, não será alterado pelo usuário
-        [Display(Name = "Email confrimado")]
-        public bool EmailConfirmado { get; set; }
-
         //Preenchido pelo sistema, não será alterado pelo usuário
         [Display(Name = "Total de notificações não lidas")]
         public int TotNotifNL { get; set; }
@@ -191,23 +186,9 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Endereço completo")]
         public string EndCompleto { get; set; }
 
-
         //Infos de RBAC_Usuario
         //Preenchido pelo sistema, não será alterado pelo usuário
         public int UsuarioID { get; set; }
-
-        //Deverá ser trocada apenas na área "Alterar senha"
-        [Display(Name = "Senha criptografada")]
-        public string SenhaHash { get; set; }
-
-        //Deverá ser trocada apenas na área "Alterar senha"
-        [Display(Name = "Salt")]
-        public string Salt { get; set; }
-
-        //Preenchido pelo sistema, não será alterado pelo usuário
-        [Display(Name = "Data de criação")]
-        [DataType(DataType.Date)]
-        public DateTime DtCriacao { get; set; }
 
         //Preenchido pelo sistema, será alterado pelo sisteman na atualização dos dados
         [Display(Name = "Data da ultima modificação")]
@@ -248,9 +229,6 @@ namespace NimbusACAD.Models.ViewModels
 
     public class AlterarEnderecoViewModel
     {
-        //Preenchido pelo sistema, não será alterado pelo usuário
-        public int EnderecoID { get; set; }
-
         [Required(ErrorMessage = "*")]
         [Display(Name = "CEP")]
         public string CEP { get; set; }
@@ -260,9 +238,6 @@ namespace NimbusACAD.Models.ViewModels
 
         [Display(Name = "Número")]
         public int Numero { get; set; }
-
-        //Preenchido pelo sistema, não será alterado pelo usuário
-        public bool Ativo { get; set; }
 
         //Preenchido pelo sistema, não será alterado pelo usuário
         public int PessoaID { get; set; }
