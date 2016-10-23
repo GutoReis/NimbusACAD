@@ -80,4 +80,13 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Perfil")]
         public string PerfilNm { get; set; }
     }
+
+    public class BloquearUsuarioViewModel
+    {
+        public int usuarioID { get; set; }
+
+        [Required]
+        [Display(Name = "Bloqueado")]
+        public bool Bloqueado { get; set; }
+    }
 }

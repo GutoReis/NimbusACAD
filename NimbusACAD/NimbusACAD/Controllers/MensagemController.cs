@@ -48,16 +48,23 @@ namespace NimbusACAD.Controllers
         //POST: Mensagem/Escrever
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Escrever([Bind(Include = "Notificacao_ID, Pessoa_Emissor_ID, Pessoa_Receptor_ID, Assunto, Corpo, Lida")] Negocio_Notificacao notificacao)
+        public ActionResult Escrever([Bind(Include = "EmissorID, ReceptorID, Assunto, Corpo")] EscreverNotifacaoViewModel notificacao)
         {
             if (ModelState.IsValid)
             {
-                db.Negocio_Notificacao.Add(notificacao);
+                Negocio_Notificacao NN = new Negocio_Notificacao();
+                NN.Pessoa_Emissor_ID = notificacao.EmissorID;
+                NN.Pessoa_Receptor_ID = notificacao.ReceptorID;
+                NN.Assunto = notificacao.Assunto;
+                NN.Corpo = notificacao.Corpo;
+                NN.Lida = false;
+
+                db.Negocio_Notificacao.Add(NN);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            PopulatePessoaDropDownList(notificacao.Pessoa_Receptor_ID);
+            PopulatePessoaDropDownList(notificacao.ReceptorID);
             return View(notificacao);
         }
 
@@ -83,6 +90,7 @@ namespace NimbusACAD.Controllers
         {
             Negocio_Notificacao notificacao = db.Negocio_Notificacao.Find(id);
             db.Negocio_Notificacao.Remove(notificacao);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
