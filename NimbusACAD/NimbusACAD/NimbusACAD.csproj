@@ -166,6 +166,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MensagemController.cs" />
     <Compile Include="Controllers\RBACPerfilController.cs" />
+    <Compile Include="Controllers\RBACPermissaoController.cs" />
     <Compile Include="Controllers\RBACUsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -331,6 +332,11 @@
     <Content Include="Views\RBACPerfil\Details.cshtml" />
     <Content Include="Views\RBACPerfil\Edit.cshtml" />
     <Content Include="Views\RBACPerfil\Index.cshtml" />
+    <Content Include="Views\RBACPermissao\Create.cshtml" />
+    <Content Include="Views\RBACPermissao\Delete.cshtml" />
+    <Content Include="Views\RBACPermissao\Details.cshtml" />
+    <Content Include="Views\RBACPermissao\Edit.cshtml" />
+    <Content Include="Views\RBACPermissao\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

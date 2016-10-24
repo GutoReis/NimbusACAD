@@ -1,0 +1,26 @@
+﻿@model NimbusACAD.Models.DB.RBAC_Permissao
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RBAC_Permissao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Permissao_Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Permissao_Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Permissao_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

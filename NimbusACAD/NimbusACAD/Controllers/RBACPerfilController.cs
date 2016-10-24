@@ -8,11 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
+using NimbusACAD.Identity.Role;
 
 namespace NimbusACAD.Controllers
 {
     public class RBACPerfilController : Controller
     {
+
+        private RoleStore _roleStore = new RoleStore();
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         // GET: RBACPerfil
@@ -134,9 +137,7 @@ namespace NimbusACAD.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletarConfirmado(int id)
         {
-            RBAC_Perfil rBAC_Perfil = db.RBAC_Perfil.Find(id);
-            db.RBAC_Perfil.Remove(rBAC_Perfil);
-            db.SaveChanges();
+            _roleStore.DeletePerfil(id);
             return RedirectToAction("Index");
         }
 
