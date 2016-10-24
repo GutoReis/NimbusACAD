@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
+using NimbusACAD.Models.ViewModels;
 
 namespace NimbusACAD.Controllers
 {
@@ -33,11 +34,30 @@ namespace NimbusACAD.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             RBAC_Perfil rBAC_Perfil = db.RBAC_Perfil.Find(id);
+
             if (rBAC_Perfil == null)
             {
                 return HttpNotFound();
             }
-            return View(rBAC_Perfil);
+
+            VerPerfilViewModel VPVM = new VerPerfilViewModel();
+            VPVM.PerfilID = rBAC_Perfil.Perfil_ID;
+            VPVM.PerfilNome = rBAC_Perfil.Perfil_Nome;
+
+            List<RBAC_Permissao> tempList = new List<RBAC_Permissao>();
+            RBAC_Permissao pTemp;
+
+            foreach (var lpp in db.RBAC_Link_Perfil_Permissao)
+            {
+                if (lpp.Perfil_ID == rBAC_Perfil.Perfil_ID)
+                {
+                    pTemp = db.RBAC_Permissao.Find(lpp.Permissao_ID);
+                    tempList.Add(pTemp);
+                }
+            }
+            VPVM.Permissoes = tempList;
+
+            return View(VPVM);
         }
 
         // GET: RBACPerfil/NovoPerfilDeAcesso

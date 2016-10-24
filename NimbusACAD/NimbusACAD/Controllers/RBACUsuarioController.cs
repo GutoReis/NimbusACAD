@@ -104,10 +104,20 @@ namespace NimbusACAD.Controllers
 
         //Perfil de acesso
         //GET: RBACUsuario/NovoPerfilDeAcesso/5
-        public ActionResult NovoPerfilDeAcesso()
+        public ActionResult NovoPerfilDeAcesso(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RBAC_Usuario rBAC_Usuario = db.RBAC_Usuario.Find(id);
+            if (rBAC_Usuario == null)
+            {
+                return HttpNotFound();
+            }
+
             PopulatePerfilDropDownList();
-            return View();
+            return View(rBAC_Usuario.Usuario_ID);
         }
 
         //POST: RBACUsuario/NovoPerfilDeAcesso/5

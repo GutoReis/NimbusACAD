@@ -90,4 +90,13 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Bloqueado")]
         public bool Bloqueado { get; set; }
     }
+
+    public class VerPerfilViewModel
+    {
+        public int PerfilID { get; set; }
+
+        public string PerfilNome { get; set; }
+
+        public virtual ICollection<RBAC_Permissao> Permissoes { get; set; }
+    }
 }

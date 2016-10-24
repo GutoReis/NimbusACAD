@@ -32,6 +32,7 @@ namespace NimbusACAD.Identity.User
                 NP.Tel_Principal = pessoa.TelPrincipal;
                 NP.Tel_Opcional = pessoa.TelOpcional;
                 NP.Email = pessoa.Email;
+                NP.Tot_Notif_NL = 0;
 
                 db.Negocio_Pessoa.Add(NP);
                 db.SaveChanges();

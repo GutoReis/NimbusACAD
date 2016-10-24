@@ -14,7 +14,7 @@ namespace NimbusACAD.Controllers
     {
         public GerenciarController() { }
 
-        private UserStore _userStore;
+        private UserStore _userStore = new UserStore();
 
         //
         //GET: /Account/Index

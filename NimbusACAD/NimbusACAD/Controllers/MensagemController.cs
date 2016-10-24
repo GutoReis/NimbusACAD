@@ -24,9 +24,9 @@ namespace NimbusACAD.Controllers
         }
 
         //GET: Mensagem/Detalhes/5
-        public ActionResult Detalhes(int id)
+        public ActionResult Detalhes(int? id)
         {
-            if (id == 0)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -59,7 +59,11 @@ namespace NimbusACAD.Controllers
                 NN.Corpo = notificacao.Corpo;
                 NN.Lida = false;
 
+                Negocio_Pessoa NPReceptor = db.Negocio_Pessoa.Find(notificacao.ReceptorID);
+                NPReceptor.Tot_Notif_NL = NPReceptor.Tot_Notif_NL + 1;
+
                 db.Negocio_Notificacao.Add(NN);
+                db.Entry(NPReceptor).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -69,9 +73,9 @@ namespace NimbusACAD.Controllers
         }
 
         //GET: Mensagem/Deletar/5
-        public ActionResult Deletar(int id)
+        public ActionResult Deletar(int? id)
         {
-            if (id == 0)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
