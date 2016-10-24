@@ -165,6 +165,7 @@
     <Compile Include="Controllers\GerenciarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MensagemController.cs" />
+    <Compile Include="Controllers\RBACPerfilController.cs" />
     <Compile Include="Controllers\RBACUsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -325,6 +326,11 @@
     <Content Include="Views\Home\Assinatura.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\RBACPerfil\Create.cshtml" />
+    <Content Include="Views\RBACPerfil\Delete.cshtml" />
+    <Content Include="Views\RBACPerfil\Details.cshtml" />
+    <Content Include="Views\RBACPerfil\Edit.cshtml" />
+    <Content Include="Views\RBACPerfil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

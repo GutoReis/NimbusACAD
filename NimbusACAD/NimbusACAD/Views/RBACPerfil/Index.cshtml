@@ -1,0 +1,39 @@
+﻿@model IEnumerable<NimbusACAD.Models.DB.RBAC_Perfil>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Perfil_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Perfil_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=item.Perfil_ID }) |
+            @Html.ActionLink("Detalhes", "Detalhes", new { id=item.Perfil_ID }) |
+            @Html.ActionLink("Deletar", "Deletar", new { id=item.Perfil_ID })
+        </td>
+    </tr>
+}
+
+</table>
