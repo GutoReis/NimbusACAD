@@ -13,6 +13,10 @@ namespace NimbusACAD.Models.ViewModels
         public int CursoID { get; set; }
 
         [Required]
+        [Display(Name = "Nome Módulo")]
+        public string ModuloNome { get; set; }
+
+        [Required]
         [Display(Name = "Máximo de alunos")]
         public int MaxAlunos { get; set; }
 
@@ -28,6 +32,10 @@ namespace NimbusACAD.Models.ViewModels
         public int CursoID { get; set; }
 
         [Required]
+        [Display(Name = "Nome Módulo")]
+        public string ModuloNome { get; set; }
+
+        [Required]
         [Display(Name = "Máximo de alunos")]
         public int MaxAlunos { get; set; }
 
@@ -39,6 +47,14 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Carga horária")]
         public int CargaHoraria { get; set; }
 
-        DisciplinaViewModel DVM = new DisciplinaViewModel();
+        [Required]
+        [Display(Name = "Disciplinas")]
+        public virtual ICollection<ListaDisciplinaViewModel> disciplinas { get; set; }
+    }
+
+    public class ListaModulosViewModel
+    {
+        public int ModuloID { get; set; }
+        public string ModuloNome { get; set; }
     }
 }

@@ -68,8 +68,10 @@ namespace NimbusACAD.Models.ViewModels
     }
 
     //Curso
-    public class VerCursoViewModel
+    public class VerCursoProfessorViewModel
     {
+        public int CursoID { get; set; }
+
         [Required]
         [Display(Name = "Curso")]
         public string CursoNm { get; set; }

@@ -28,13 +28,39 @@ namespace NimbusACAD.Models.ViewModels
         [Required]
         [Display(Name = "Carga Horária")]
         public int CargaHoraria { get; set; }
+    }
 
-        //Horario
+    public class VerDisciplinaViewModel
+    {
+        public int DisciplinaID { get; set; }
+
         [Required]
-        [Display(Name = "Dia")]
-        public string DiaSemana { get; set; }
+        [Display(Name = "Modulo")]
+        public int ModuloNM { get; set; }
 
-        HorarioViewModel HVM = new HorarioViewModel();
+        [Required]
+        [Display(Name = "Nome da Disciplina")]
+        public string DisciplinaNM { get; set; }
+
+        [Required]
+        [Display(Name = "Descrição")]
+        public string Descricao { get; set; }
+
+        [Required]
+        [Display(Name = "Professor")]
+        public string ProfessorNM { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Carga Horária")]
+        public int CargaHoraria { get; set; }
+
+        [Required]
+        [Display(Name = "Horários da disciplina")]
+        public virtual ICollection<HorarioViewModel> horariosAula { get; set; }
     }
 
     public class HorarioViewModel
@@ -49,11 +75,23 @@ namespace NimbusACAD.Models.ViewModels
 
         [Required]
         [Display(Name = "Hora de Início")]
+        [DataType(DataType.Time)]
         public DateTime HoraInicio { get; set; }
 
         [Required]
         [Display(Name = "Hora de Fim")]
+        [DataType(DataType.Time)]
         public DateTime HoraFim { get; set; }
     }
 
+    public class ListaDisciplinaViewModel
+    {
+        [Required]
+        [Display(Name = "ID")]
+        public int DisciplinaID { get; set; }
+
+        [Required]
+        [Display(Name = "Disciplina")]
+        public string DisciplinaNM { get; set; }
+    }
 }

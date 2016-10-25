@@ -27,7 +27,38 @@ namespace NimbusACAD.Models.ViewModels
         [Required]
         [Display(Name = "Carga Horária")]
         public int CargaHoraria { get; set; }
+    }
 
-        VerModuloViewModel VMVM = new VerModuloViewModel();
+    public class VerCursoViewModel
+    {
+        public int CursoID { get; set; }
+
+        [Required]
+        [Display(Name = "Nome do Curso")]
+        public string CursoNm { get; set; }
+
+        [Required]
+        [Display(Name = "Descrição")]
+        public string Descricao { get; set; }
+
+        [Required]
+        [Display(Name = "Perído")]
+        public string Periodo { get; set; }
+
+        [Required]
+        [Display(Name = "Coordenador")]
+        public string CoordenadorNM { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string CoordenadorEmail { get; set; }
+
+        [Required]
+        [Display(Name = "Carga Horária")]
+        public int CargaHoraria { get; set; }
+
+        [Required]
+        [Display(Name = "Módulos")]
+        public virtual ICollection<ListaModulosViewModel> Modulos { get; set; }
     }
 }

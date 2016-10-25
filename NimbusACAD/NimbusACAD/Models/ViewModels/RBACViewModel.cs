@@ -93,10 +93,16 @@ namespace NimbusACAD.Models.ViewModels
 
     public class VerPerfilViewModel
     {
+        [Required]
+        [Display(Name = "ID")]
         public int PerfilID { get; set; }
 
+        [Required]
+        [Display(Name = "Perfil")]
         public string PerfilNome { get; set; }
 
+        [Required]
+        [Display(Name = "Permissões")]
         public virtual ICollection<RBAC_Permissao> Permissoes { get; set; }
     }
 }
