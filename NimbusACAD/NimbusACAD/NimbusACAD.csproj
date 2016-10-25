@@ -166,6 +166,7 @@
     <Compile Include="Controllers\GerenciarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MensagemController.cs" />
+    <Compile Include="Controllers\ModuloController.cs" />
     <Compile Include="Controllers\RBACPerfilController.cs" />
     <Compile Include="Controllers\RBACPermissaoController.cs" />
     <Compile Include="Controllers\RBACUsuarioController.cs" />
@@ -343,6 +344,11 @@
     <Content Include="Views\Curso\Details.cshtml" />
     <Content Include="Views\Curso\Edit.cshtml" />
     <Content Include="Views\Curso\Index.cshtml" />
+    <Content Include="Views\Modulo\Create.cshtml" />
+    <Content Include="Views\Modulo\Delete.cshtml" />
+    <Content Include="Views\Modulo\Details.cshtml" />
+    <Content Include="Views\Modulo\Edit.cshtml" />
+    <Content Include="Views\Modulo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
