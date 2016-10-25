@@ -16,10 +16,16 @@ namespace NimbusACAD.Controllers
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         // GET: Curso
-        public ActionResult Index()
+        public ViewResult Index(string searchString)
         {
-            var negocio_Curso = db.Negocio_Curso.Include(n => n.Negocio_Funcionario);
-            return View(negocio_Curso.ToList());
+            var cursos = from c in db.Negocio_Curso select c;
+            cursos = cursos.Include(n => n.Negocio_Funcionario);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                cursos = cursos.Where(o => o.Curso_Nome.ToUpper().Contains(searchString.ToUpper()));
+            }
+            //var negocio_Curso = db.Negocio_Curso.Include(n => n.Negocio_Funcionario);
+            return View(cursos.ToList());
         }
 
         // GET: Curso/Detalhes/5

@@ -162,6 +162,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\ExtendedMethods.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\DisciplinaController.cs" />
     <Compile Include="Controllers\GerenciarController.cs" />
@@ -355,6 +356,11 @@
     <Content Include="Views\Disciplina\Details.cshtml" />
     <Content Include="Views\Disciplina\Edit.cshtml" />
     <Content Include="Views\Disciplina\Index.cshtml" />
+    <Content Include="Views\Cargo\Create.cshtml" />
+    <Content Include="Views\Cargo\Delete.cshtml" />
+    <Content Include="Views\Cargo\Details.cshtml" />
+    <Content Include="Views\Cargo\Edit.cshtml" />
+    <Content Include="Views\Cargo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
