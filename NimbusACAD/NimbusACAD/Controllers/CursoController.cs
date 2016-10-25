@@ -66,7 +66,7 @@ namespace NimbusACAD.Controllers
         // GET: Curso/NovoCurso
         public ActionResult NovoCurso()
         {
-            ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID");
+            //ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID");
             PopulateFuncionarioDropDownList();
             return View();
         }

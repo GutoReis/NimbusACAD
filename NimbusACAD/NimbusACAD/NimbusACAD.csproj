@@ -163,6 +163,7 @@
     <Compile Include="Common\ExtendedMethods.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CursoController.cs" />
+    <Compile Include="Controllers\DisciplinaController.cs" />
     <Compile Include="Controllers\GerenciarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MensagemController.cs" />
@@ -349,6 +350,11 @@
     <Content Include="Views\Modulo\Details.cshtml" />
     <Content Include="Views\Modulo\Edit.cshtml" />
     <Content Include="Views\Modulo\Index.cshtml" />
+    <Content Include="Views\Disciplina\Create.cshtml" />
+    <Content Include="Views\Disciplina\Delete.cshtml" />
+    <Content Include="Views\Disciplina\Details.cshtml" />
+    <Content Include="Views\Disciplina\Edit.cshtml" />
+    <Content Include="Views\Disciplina\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

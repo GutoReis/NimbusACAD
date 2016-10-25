@@ -42,10 +42,13 @@ namespace NimbusACAD.Controllers
             foreach (var disciplina in db.Negocio_Disciplina)
             {
                 dTemp = db.Negocio_Disciplina.Find(disciplina.Disciplina_ID);
-                discVM = new ListaDisciplinaViewModel();
-                discVM.DisciplinaID = dTemp.Disciplina_ID;
-                discVM.DisciplinaNM = dTemp.Disciplina_Nome;
-                listTemp.Add(discVM);
+                if (dTemp.Modulo_ID == negocio_Modulo.Modulo_ID)
+                {
+                    discVM = new ListaDisciplinaViewModel();
+                    discVM.DisciplinaID = dTemp.Disciplina_ID;
+                    discVM.DisciplinaNM = dTemp.Disciplina_Nome;
+                    listTemp.Add(discVM);
+                }
             }
             VMVM.disciplinas = listTemp;
 
@@ -110,7 +113,7 @@ namespace NimbusACAD.Controllers
             {
                 db.Entry(negocio_Modulo).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Curso");
             }
             ViewBag.Curso_ID = new SelectList(db.Negocio_Curso, "Curso_ID", "Curso_Nome", negocio_Modulo.Curso_ID);
             return View(negocio_Modulo);
@@ -143,7 +146,7 @@ namespace NimbusACAD.Controllers
             }
             db.Negocio_Modulo.Remove(negocio_Modulo);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Curso");
         }
 
         protected override void Dispose(bool disposing)

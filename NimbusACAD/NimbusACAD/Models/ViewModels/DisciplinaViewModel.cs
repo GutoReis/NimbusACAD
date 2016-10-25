@@ -36,7 +36,7 @@ namespace NimbusACAD.Models.ViewModels
 
         [Required]
         [Display(Name = "Modulo")]
-        public int ModuloNM { get; set; }
+        public string ModuloNM { get; set; }
 
         [Required]
         [Display(Name = "Nome da Disciplina")]
@@ -60,7 +60,7 @@ namespace NimbusACAD.Models.ViewModels
 
         [Required]
         [Display(Name = "Horários da disciplina")]
-        public virtual ICollection<HorarioViewModel> horariosAula { get; set; }
+        public virtual ICollection<ListaHorarioViewModel> horariosAula { get; set; }
     }
 
     public class HorarioViewModel
@@ -82,6 +82,23 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Hora de Fim")]
         [DataType(DataType.Time)]
         public DateTime HoraFim { get; set; }
+    }
+
+    public class ListaHorarioViewModel
+    {
+        public int horarioID { get; set; }
+
+        [Required]
+        [Display(Name = "Dia da semana")]
+        public string DiaSemana { get; set; }
+
+        [Required]
+        [Display(Name = "Hora de Início")]
+        public TimeSpan HoraInicio { get; set; }
+
+        [Required]
+        [Display(Name = "Hora de Fim")]
+        public TimeSpan HoraFim { get; set; }
     }
 
     public class ListaDisciplinaViewModel
