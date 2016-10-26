@@ -56,7 +56,7 @@ namespace NimbusACAD.Controllers
             }
             VDVM.horariosAula = listTemp;
 
-            return View(negocio_Disciplina);
+            return View(VDVM);
         }
 
         // GET: Disciplina/NovaDisciplina

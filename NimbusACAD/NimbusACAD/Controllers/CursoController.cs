@@ -66,7 +66,7 @@ namespace NimbusACAD.Controllers
             }
             VCVM.Modulos = listTemp;
 
-            return View(negocio_Curso);
+            return View(VCVM);
         }
 
         // GET: Curso/NovoCurso

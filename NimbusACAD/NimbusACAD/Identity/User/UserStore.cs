@@ -15,7 +15,7 @@ namespace NimbusACAD.Identity.User
         #region CREATE
 
         //Add usuario será feito no AccountController, para enviar o email com a senha temporaria.
-        public void AddPessoa(RegistrarComumViewModel pessoa)
+        public int AddPessoa(RegistrarComumViewModel pessoa)
         {
             using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
@@ -81,6 +81,7 @@ namespace NimbusACAD.Identity.User
                         db.SaveChanges();
                     }
                 }
+                return GetPessoaIDporEmail(pessoa.Email);
             }
         }
 

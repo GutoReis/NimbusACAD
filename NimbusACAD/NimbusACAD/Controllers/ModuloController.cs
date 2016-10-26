@@ -52,7 +52,7 @@ namespace NimbusACAD.Controllers
             }
             VMVM.disciplinas = listTemp;
 
-            return View(negocio_Modulo);
+            return View(VMVM);
         }
 
         // GET: Modulo/NovoModulo
