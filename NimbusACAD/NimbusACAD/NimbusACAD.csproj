@@ -165,6 +165,7 @@
     <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\DisciplinaController.cs" />
+    <Compile Include="Controllers\DocumentoController.cs" />
     <Compile Include="Controllers\FuncionarioController.cs" />
     <Compile Include="Controllers\GerenciarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -368,6 +369,11 @@
     <Content Include="Views\Funcionario\Details.cshtml" />
     <Content Include="Views\Funcionario\Edit.cshtml" />
     <Content Include="Views\Funcionario\Index.cshtml" />
+    <Content Include="Views\Documento\Create.cshtml" />
+    <Content Include="Views\Documento\Delete.cshtml" />
+    <Content Include="Views\Documento\Details.cshtml" />
+    <Content Include="Views\Documento\Edit.cshtml" />
+    <Content Include="Views\Documento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
