@@ -41,7 +41,7 @@ namespace NimbusACAD.Controllers
             PopulatePerfilDropDownList();
             return View();
         }
-
+        
         //POST: Matricula/NovaPessoa
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -57,7 +57,7 @@ namespace NimbusACAD.Controllers
                 RU.Pessoa_ID = pID;
                 RU.Username = novaPessoa.Email;
 
-                //Gernado senha temporaria, e salt
+                //Gerando senha temporaria, e salt
                 string tempToken = SecurityMethods.GenerateTempTokenAccess();
                 string tempSalt = SecurityMethods.GenerateSalt();
                 string tempPass = SecurityMethods.HashPasswordPBKDF2(tempToken, tempSalt);

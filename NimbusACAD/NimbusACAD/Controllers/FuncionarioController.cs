@@ -9,12 +9,17 @@ using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
 using NimbusACAD.Identity.User;
+using NimbusACAD.Identity.Email;
+using NimbusACAD.Identity.Role;
+using NimbusACAD.Identity.Security;
 
 namespace NimbusACAD.Controllers
 {
     public class FuncionarioController : Controller
     {
         private UserStore _userStore = new UserStore();
+        private EmailService _emailService = new EmailService();
+        private RoleStore _roleStore = new RoleStore();
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         // GET: Funcionario
@@ -57,13 +62,114 @@ namespace NimbusACAD.Controllers
             return View(VFVM);
         }
 
+        //Registrar Pessoa -> Registrar Documentos
+        //GET: Funcionario/NovaPessoa
+        public ActionResult NovaPessoa()
+        {
+            PopulatePerfilDropDownList();
+            return View();
+        }
+
+        //POST: Funcionario/NovaPessoa
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NovaPessoa([Bind(Include = "PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, CEP, Logradouro, Complemento, Numero, Bairro, Cidade, Estado, Pais, PerfilID")]RegistrarComumViewModel novaPessoa)
+        {
+            if (ModelState.IsValid)
+            {
+                //Criando pessoa
+                int pID = -_userStore.AddPessoa(novaPessoa);
+
+                //Criando usuario
+                RBAC_Usuario RU = new RBAC_Usuario();
+                RU.Pessoa_ID = pID;
+                RU.Username = novaPessoa.Email;
+
+                //Gernado Senha tempraria e salt
+                string tempToken = SecurityMethods.GenerateTempTokenAccess();
+                string tempSalt = SecurityMethods.GenerateSalt();
+                string tempPass = SecurityMethods.HashPasswordPBKDF2(tempToken, tempSalt);
+
+                //Criando usuario
+                RU.Senha_Hash = tempToken;
+                RU.Salt = tempSalt;
+                RU.Dt_Criacao = DateTime.Now.Date;
+                RU.Dt_Ultima_Modif = DateTime.Now.Date;
+                RU.Bloqueado = false;
+
+                db.SaveChanges();
+
+                //Enviando Email
+                EmailMessage message = new EmailMessage(novaPessoa.Email, "Bem-vindo ao NimbusAcad!", "Olá, seja bem-vindo ao NimbusAcad \n Esta é sua senha: " + tempToken + "\nRecomenda-se que altere a senha para uma, com fácil memorização.");
+                _emailService.Send(message);
+
+                //Assimilando perfil de acesso
+                int uID = _userStore.GetUsuarioID(novaPessoa.Email);
+                VinculoPerfilUsuarioViewModel VPUVM = new VinculoPerfilUsuarioViewModel();
+                VPUVM.UsuarioID = uID;
+                VPUVM.PerfilID = novaPessoa.PerfilID;
+                _roleStore.AddUsuarioPerfil(VPUVM);
+
+                return RedirectToAction("RegistrarDocumento", pID);
+            }
+            PopulatePerfilDropDownList(novaPessoa.PerfilID);
+            return View(novaPessoa);
+        }
+
+        //Registrar Documentos -> Registrar Funcionario
+        //GET: Funcionario/RegistrarDocumento
+        public ActionResult RegistrarDocumento(int? pID)
+        {
+            if (pID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(pID);
+            if (pessoa == null)
+            {
+                return HttpNotFound();
+            }
+            PopulateDocumentoDropDownList();
+            return ViewBag(pessoa);
+        }
+
+        //POST: Funcionario/RegistrarDocumento
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegistrarDocumento([Bind(Include = "PessoaID, DocumentoID, DtEmissao, OrgaoEmissor, DtEmissao, Cidade, Estado, Pais")] CurriculoViewModel curriculo)
+        {
+            if (ModelState.IsValid)
+            {
+                Negocio_Curriculo NC = new Negocio_Curriculo();
+                NC.Pessoa_ID = curriculo.PessoaID;
+                NC.Documento_ID = curriculo.DocumentoID;
+                NC.Orgao_Emissor = curriculo.OrgaoEmissor;
+                NC.Dt_Emissao = curriculo.DtEmissao;
+                NC.Cidade_Emissao = curriculo.Cidade;
+                NC.Estado_Emissao = curriculo.Estado;
+                NC.Pais_Emissao = curriculo.Pais;
+
+                return RedirectToAction("NovoFuncionario", curriculo.PessoaID);
+            }
+            PopulateDocumentoDropDownList(curriculo.DocumentoID);
+            return View(curriculo);
+        }
+
         // GET: Funcionario/NovoFuncionario
-        public ActionResult NovoFuncionario()
+        public ActionResult NovoFuncionario(int? pID)
         {
             //ViewBag.Pessoa_ID = new SelectList(db.Negocio_Pessoa, "Pessoa_ID", "Primeiro_Nome");
             //ViewBag.Cargo_ID = new SelectList(db.Negocio_Tipo_Funcionario, "Tipo_Funcionario_ID", "Cargo");
+            if (pID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(pID);
+            if (pessoa == null)
+            {
+                return HttpNotFound();
+            }
             PopulateCargoDropDownList();
-
             return View();
         }
 
@@ -160,6 +266,46 @@ namespace NimbusACAD.Controllers
             base.Dispose(disposing);
         }
 
+        //GET: Funcionario/NovoDocumento
+        public ActionResult NovoDocumento(int? pID)
+        {
+            if (pID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(pID);
+            if (pessoa == null)
+            {
+                return HttpNotFound();
+            }
+            PopulateDocumentoDropDownList();
+            return View(pessoa);
+        }
+
+        //POST: Funcionario/NovoDocumento
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NovoDocumento([Bind(Include = "PessoaID, DocumentoID, OrgaoEmissor, DtEmissao, Cidade, Estado, Pais")]CurriculoViewModel curriculo)
+        {
+            if (ModelState.IsValid)
+            {
+                Negocio_Curriculo NC = new Negocio_Curriculo();
+                NC.Pessoa_ID = curriculo.PessoaID;
+                NC.Documento_ID = curriculo.DocumentoID;
+                NC.Orgao_Emissor = curriculo.OrgaoEmissor;
+                NC.Dt_Emissao = curriculo.DtEmissao;
+                NC.Cidade_Emissao = curriculo.Cidade;
+                NC.Estado_Emissao = curriculo.Estado;
+                NC.Pais_Emissao = curriculo.Pais;
+
+                db.Negocio_Curriculo.Add(NC);
+                db.SaveChanges();
+                return RedirectToAction("Detalhes", curriculo.PessoaID);
+            }
+            PopulateDocumentoDropDownList(curriculo.DocumentoID);
+            return View(curriculo);
+        }
+
         private void PopulateCargoDropDownList(object selectedCargo = null)
         {
             var cargoQuery = from c in db.Negocio_Tipo_Funcionario
@@ -167,6 +313,22 @@ namespace NimbusACAD.Controllers
                              select c;
             ViewBag.Tipo_Funcionario_ID = new SelectList(cargoQuery,
                 "Tipo_Funcionario_ID", "Cargo", selectedCargo);
+        }
+
+        private void PopulatePerfilDropDownList(object selectedPerfil = null)
+        {
+            var perfilQuery = from p in db.RBAC_Perfil
+                              orderby p.Perfil_Nome
+                              select p;
+            ViewBag.Perfil_ID = new SelectList(perfilQuery, "Perfil_ID", "Perfil_Nome", selectedPerfil);
+        }
+
+        private void PopulateDocumentoDropDownList(object selectedDocumento = null)
+        {
+            var documentoQuery = from d in db.Negocio_Documento
+                                 orderby d.Documento_Nome
+                                 select d;
+            ViewBag.Documento_ID = new SelectList(documentoQuery, "Documento_ID", "Documento_Nome", selectedDocumento);
         }
     }
 }
