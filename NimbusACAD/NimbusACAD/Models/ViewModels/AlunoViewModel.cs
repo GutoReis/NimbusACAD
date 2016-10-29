@@ -6,146 +6,219 @@ using System.Web;
 
 namespace NimbusACAD.Models.ViewModels
 {
-    public class AlunoViewModel
+    public class RegistrarAlunoViewModel
     {
-        public class RegistrarAlunoViewModel
-        {
-            [Required]
-            [Display(Name = "Aluno")]
-            public int PessoaID { get; set; }
+        [Required]
+        [Display(Name = "Aluno")]
+        public int PessoaID { get; set; }
 
-            [Required]
-            [Display(Name = "Identificador do Curso")]
-            public int Curso { get; set; }
+        [Required]
+        [Display(Name = "Curso")]
+        public int CursoID { get; set; }
 
-            [Required]
-            [Display(Name = "Ano")]
-            public int Ano { get; set; }
+        [Required]
+        [Display(Name = "Modulo")]
+        public int ModuloID { get; set; }
 
-            [Required]
-            [Display(Name = "Deve Documentação")]
-            public bool DeveDocumento { get; set; }
-        }
+        [Required]
+        [Display(Name = "Ano")]
+        public int Ano { get; set; }
 
-        public class DocumentosDeventesViewModel
-        {
-            [Required]
-            [Display(Name = "Matricula")]
-            public int Matricula { get; set; }
+        [Required]
+        [Display(Name = "Deve Documentação")]
+        public bool DeveDocumento { get; set; }
+    }
 
-            [Required]
-            [Display(Name = "Documento")]
-            public int DocumentoID { get; set; }
-        }
+    public class DocumentosDeventesViewModel
+    {
+        [Required]
+        [Display(Name = "Matricula")]
+        public int Matricula { get; set; }
+
+        [Required]
+        [Display(Name = "Documento")]
+        public int DocumentoID { get; set; }
+    }
         
-        //Fazer vinculo-dsiciplina
-        public class CriarVinculoModuloViewModel
-        {
-            [Required]
-            [Display(Name = "Modulo")]
-            public int ModuloID { get; set; }
+    public class CriarVinculoModuloViewModel
+    {
+        [Required]
+        [Display(Name = "Modulo")]
+        public int ModuloID { get; set; }
 
-            [Required]
-            [Display(Name = "Aluno")]
-            public int MatriculaID { get; set; }
+        [Required]
+        [Display(Name = "Aluno")]
+        public int MatriculaID { get; set; }
 
-            //Se está: e, curso c/ dependencia, c/ matricula trancada,
-            //em curso, reprovado, aprovado
-            [Required]
-            [Display(Name = "Status do aluno")]
-            public string StatusVinculo { get; set; }
-        }
+        //Se está: Dependencia, Matricula Trancada,
+        //Em Curso, Reprovado, Aprovado
+        [Required]
+        [Display(Name = "Status do aluno")]
+        public string StatusVinculo { get; set; }
+    }
 
-        //Ver vinculo-Modulo
-        public class VerVinculoModuloViewModel
-        {
-            [Required]
-            [Display(Name = "Modulo")]
-            public int ModuloID { get; set; }
+    public class VerVinculoModuloViewModel
+    {
+        public int VinculoID { get; set; }
 
-            [Required]
-            [Display(Name = "Status no modulo")]
-            public string StatusVinculo { get; set; }
-        }
+        [Required]
+        [Display(Name = "Modulo")]
+        public string ModuloNM { get; set; }
 
-        //Criar vinculo-disciplina
-        public class CriarVinculoDisciplinaViewModel
-        {
-            [Required]
-            [Display(Name = "Disciplina")]
-            public int DisciplinaID { get; set; }
+        [Required]
+        [Display(Name = "Status no modulo")]
+        public string StatusVinculo { get; set; }
 
-            [Required]
-            [Display(Name = "Aluno")]
-            public int MatriculaID { get; set; }
+        [Required]
+        [Display(Name = "Disciplinas")]
+        public virtual ICollection<ListaDisciplinasViewModel> disciplinas { get; set; }
+    }
 
-            [Required]
-            [Display(Name = "Numero de chamada")]
-            public int NumChamada { get; set; }
-        }
+    public class CriarVinculoDisciplinaViewModel
+    {
+        [Required]
+        [Display(Name = "Disciplina")]
+        public int DisciplinaID { get; set; }
 
-        //Ver vinculo-Disciplina
-        public class VerVinculoDisciplinaViewModel
-        {
-            [Required]
-            [Display(Name = "Disciplina")]
-            public string DisciplinaNm { get; set; }
+        [Required]
+        [Display(Name = "Aluno")]
+        public int MatriculaID { get; set; }
 
-            [Required]
-            [Display(Name = "Professor")]
-            public string Professor { get; set; }
+        [Required]
+        [Display(Name = "Numero de chamada")]
+        public int NumChamada { get; set; }
+    }
 
-            [Required]
-            [Display(Name = "Aluno")]
-            public string NmAluno { get; set; }
+    public class VerVinculoDisciplinaViewModel //DIARIO
+    {
+        [Required]
+        [Display(Name = "Disciplina")]
+        public string DisciplinaNm { get; set; }
 
-            [Required]
-            [Display(Name = "Numero de chamada")]
-            public int NumChamada { get; set; }
+        [Required]
+        [Display(Name = "Professor")]
+        public string Professor { get; set; }
 
-            [Required]
-            [Display(Name = "1ª Avalição")]
-            public float Nota1 { get; set; }
+        [Required]
+        [Display(Name = "Aluno")]
+        public string NmAluno { get; set; }
 
-            [Required]
-            [Display(Name = "2ª Avalição")]
-            public float Nota2 { get; set; }
+        [Required]
+        [Display(Name = "Numero de chamada")]
+        public int NumChamada { get; set; }
 
-            [Required]
-            [Display(Name = "Media final")]
-            public float MediaFinal { get; set; }
+        [Required]
+        [Display(Name = "1ª Avalição")]
+        public double Nota1 { get; set; }
 
-            [Required]
-            [Display(Name = "Total de aulas dadas")]
-            public int TotAulasDadas { get; set; }
+        [Required]
+        [Display(Name = "2ª Avalição")]
+        public double Nota2 { get; set; }
 
-            [Required]
-            [Display(Name = "Frequencia")]
-            public int Frequencia { get; set; }
+        [Required]
+        [Display(Name = "Media final")]
+        public double MediaFinal { get; set; }
 
-            HorarioViewModel HVM = new HorarioViewModel();
-        }
+        [Required]
+        [Display(Name = "Total de aulas dadas")]
+        public int TotAulasDadas { get; set; }
 
-        //Notas de todas as disciplinas + frequencia por disciplina
-        public class NotasViewModel
-        {
-            [Required]
-            [Display(Name = "Disciplina")]
-            public string DisciplinaNm { get; set; }
+        [Required]
+        [Display(Name = "Frequencia")]
+        public int Frequencia { get; set; }
 
-            [Required]
-            [Display(Name = "Professor")]
-            public string Professor { get; set; }
+        [Required]
+        [Display(Name = "Horarios")]
+        public virtual ICollection<ListaHorarioViewModel> horarios { get; set; }
+    }
 
-            [Display(Name = "1º Avaliação")]
-            public float Nota1 { get; set; }
+    public class NotasViewModel //DIARIO
+    {
+        [Required]
+        [Display(Name = "Disciplina")]
+        public string DisciplinaNm { get; set; }
 
-            [Display(Name = "2º Avaliação")]
-            public float Nota2 { get; set; }
+        [Required]
+        [Display(Name = "Professor")]
+        public string Professor { get; set; }
 
-            [Required]
-            [Display(Name = "Media final")]
-            public float MediaFinal { get; set; }
-        }
+        [Display(Name = "1º Avaliação")]
+        public float Nota1 { get; set; }
+
+        [Display(Name = "2º Avaliação")]
+        public float Nota2 { get; set; }
+
+        [Required]
+        [Display(Name = "Media final")]
+        public float MediaFinal { get; set; }
+    }
+
+    public class VerAlunoViewModel
+    {
+        //pID
+        public int pID { get; set; }
+        //matID
+        public int matID { get; set; }
+        //Nome
+        [Required]
+        [Display(Name = "Nome")]
+        public string Nome { get; set; }
+        //Email
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+        //Ativo
+        [Required]
+        [Display(Name = "Ativo")]
+        public string Ativo { get; set; }
+        //DeveDocumento
+        [Required]
+        [Display(Name = "Deve Documento")]
+        public string DeveDocumento { get; set; }
+        //Documentos deventes
+        [Required]
+        [Display(Name = "Documentos Deventes")]
+        public virtual ICollection<VerDocsDeventesViewModel> documentos { get; set; }
+        //CursoID
+        public int cID { get; set; }
+        //Curso
+        [Required]
+        [Display(Name = "Curso")]
+        public string Curso { get; set; }
+        //Modulos <List>
+        [Required]
+        [Display(Name = "Modulos")]
+        public virtual ICollection<ListaVinculoModuloViewModel> modulos { get; set; }
+    }
+
+    public class VerDocsDeventesViewModel
+    {
+        public int DocumentoID { get; set; }
+
+        [Required]
+        [Display(Name = "Documento")]
+        public string DocumentoNM { get; set; }
+    }
+
+    public class ListaVinculoModuloViewModel
+    {
+        public int VinculoID { get; set; }
+
+        [Required]
+        [Display(Name = "Modulo")]
+        public string ModuloNM { get; set; }
+
+        [Required]
+        [Display(Name = "Status no modulo")]
+        public string StatusVinculo { get; set; }
+    }
+
+    public class ListaDisciplinasViewModel
+    {
+        public int DisciplinaID { get; set; }
+        
+        [Required]
+        [Display(Name = "Disciplina")]
+        public string DisciplinaNM { get; set; }
     }
 }

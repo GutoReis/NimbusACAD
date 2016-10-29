@@ -87,6 +87,10 @@ namespace NimbusACAD.Models.ViewModels
         [Required]
         [Display(Name = "Pais")]
         public string Pais { get; set; }
+
+        [Required]
+        [Display(Name = "Perfil de acesso")]
+        public int PerfilID { get; set; }
     }
 
     public class CurriculoViewModel
