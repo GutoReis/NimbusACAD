@@ -169,6 +169,7 @@
     <Compile Include="Controllers\FuncionarioController.cs" />
     <Compile Include="Controllers\GerenciarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HorarioController.cs" />
     <Compile Include="Controllers\MatriculaController.cs" />
     <Compile Include="Controllers\MensagemController.cs" />
     <Compile Include="Controllers\ModuloController.cs" />
@@ -374,6 +375,11 @@
     <Content Include="Views\Documento\Details.cshtml" />
     <Content Include="Views\Documento\Edit.cshtml" />
     <Content Include="Views\Documento\Index.cshtml" />
+    <Content Include="Views\Horario\Create.cshtml" />
+    <Content Include="Views\Horario\Delete.cshtml" />
+    <Content Include="Views\Horario\Details.cshtml" />
+    <Content Include="Views\Horario\Edit.cshtml" />
+    <Content Include="Views\Horario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
