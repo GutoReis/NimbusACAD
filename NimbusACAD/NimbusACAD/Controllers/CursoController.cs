@@ -88,7 +88,8 @@ namespace NimbusACAD.Controllers
             {
                 db.Negocio_Curso.Add(negocio_Curso);
                 db.SaveChanges();
-                return RedirectToAction("NovoModulo", "Modulo");
+                int cID = db.Negocio_Curso.Where(o => o.Curso_Nome == negocio_Curso.Curso_Nome).FirstOrDefault().Curso_ID;
+                return RedirectToAction("Detalhes", "Curso", cID);
             }
 
             ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Curso.Coordenador_ID);
@@ -124,7 +125,7 @@ namespace NimbusACAD.Controllers
             {
                 db.Entry(negocio_Curso).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Detlalhes", "Curso", negocio_Curso.Curso_ID);
             }
             ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Curso.Coordenador_ID);
             PopulateFuncionarioDropDownList(negocio_Curso.Coordenador_ID);

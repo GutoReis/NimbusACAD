@@ -87,7 +87,7 @@ namespace NimbusACAD.Controllers
                 negocio_Disciplina.Tot_Aulas_Dadas = 0;
                 db.Negocio_Disciplina.Add(negocio_Disciplina);
                 db.SaveChanges();
-                return RedirectToAction("DefinirHorario", "Horario");
+                return RedirectToAction("Detalhes", "Modulo", negocio_Disciplina.Modulo_ID);
             }
 
             //ViewBag.Professor_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Disciplina.Professor_ID);
@@ -124,7 +124,7 @@ namespace NimbusACAD.Controllers
             {
                 db.Entry(negocio_Disciplina).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Curso");
+                return RedirectToAction("Detalhes", "Disciplina", negocio_Disciplina.Disciplina_ID);
             }
             ViewBag.Professor_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Disciplina.Professor_ID);
             ViewBag.Modulo_ID = new SelectList(db.Negocio_Modulo, "Modulo_ID", "Modulo_Nome", negocio_Disciplina.Modulo_ID);
@@ -154,7 +154,7 @@ namespace NimbusACAD.Controllers
             Negocio_Disciplina negocio_Disciplina = db.Negocio_Disciplina.Find(id);
             db.Negocio_Disciplina.Remove(negocio_Disciplina);
             db.SaveChanges();
-            return RedirectToAction("Index", "Curso");
+            return RedirectToAction("Detalhes", "Modulo", negocio_Disciplina.Modulo_ID);
         }
 
         protected override void Dispose(bool disposing)
