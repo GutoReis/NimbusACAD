@@ -178,6 +178,7 @@ namespace NimbusACAD.Controllers
                         disciplina = new Negocio_Vinculo_Disciplina();
                         disciplina.Disciplina_ID = d.Disciplina_ID;
                         disciplina.Matricula_ID = matID;
+                        disciplina.Frequencia = 0;
                         db.Negocio_Vinculo_Disciplina.Add(disciplina);
                         db.SaveChanges();
                     }
@@ -275,6 +276,10 @@ namespace NimbusACAD.Controllers
                         vd = new Negocio_Vinculo_Disciplina();
                         vd.Disciplina_ID = d.Disciplina_ID;
                         vd.Matricula_ID = vm.Matricula_ID;
+                        vd.Frequencia = 0;
+                        vd.Nota1 = 0;
+                        vd.Nota2 = 0;
+                        vd.Media_Final = 0;
                         db.Negocio_Vinculo_Disciplina.Add(vd);
                         db.SaveChanges();
                     }
@@ -313,6 +318,10 @@ namespace NimbusACAD.Controllers
                 novoVD.Disciplina_ID = vd.DisciplinaID;
                 novoVD.Matricula_ID = vd.MatriculaID;
                 novoVD.Num_Chamada = vd.NumChamada;
+                novoVD.Frequencia = 0;
+                novoVD.Nota1 = 0;
+                novoVD.Nota2 = 0;
+                novoVD.Media_Final = 0;
                 db.Negocio_Vinculo_Disciplina.Add(novoVD);
                 db.SaveChanges();
                 return RedirectToAction("VerAluno", vd.MatriculaID);

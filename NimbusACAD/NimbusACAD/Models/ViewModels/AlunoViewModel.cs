@@ -132,8 +132,14 @@ namespace NimbusACAD.Models.ViewModels
         public virtual ICollection<ListaHorarioViewModel> horarios { get; set; }
     }
 
-    public class NotasViewModel //DIARIO
+    public class NotasAlunoViewModel //DIARIO
     {
+        public int VinculoID { get; set; }
+
+        [Required]
+        [Display(Name = "Modulo")]
+        public string ModuloNm { get; set; }
+
         [Required]
         [Display(Name = "Disciplina")]
         public string DisciplinaNm { get; set; }
@@ -143,14 +149,52 @@ namespace NimbusACAD.Models.ViewModels
         public string Professor { get; set; }
 
         [Display(Name = "1º Avaliação")]
-        public float Nota1 { get; set; }
+        public double Nota1 { get; set; }
 
         [Display(Name = "2º Avaliação")]
-        public float Nota2 { get; set; }
+        public double Nota2 { get; set; }
 
         [Required]
         [Display(Name = "Media final")]
-        public float MediaFinal { get; set; }
+        public double MediaFinal { get; set; }
+
+        [Required]
+        [Display(Name = "Frequencia")]
+        public int Frequencia { get; set; }
+    }
+
+    public class ListaNotasDisciplinaViewModel
+    {
+        public int DisciplinaID { get; set; }
+
+        [Required]
+        [Display(Name = "Disciplina")]
+        public string DisciplinaNm { get; set; }
+
+        public virtual ICollection<NotasDisciplinaViewModel> notas { get; set; }
+    }
+
+    public class NotasDisciplinaViewModel
+    {
+        public int VinculoID { get; set; }
+
+        [Required]
+        [Display(Name = "Aluno")]
+        public string AlunoNm { get; set; }
+
+        [Display(Name = "1º Avaliação")]
+        public double Nota1 { get; set; }
+
+        [Display(Name = "2º Avaliação")]
+        public double Nota2 { get; set; }
+
+        [Required]
+        [Display(Name = "Media final")]
+        public double MediaFinal { get; set; }
+
+        [Required]
+        [Display(Name = "Frequencia")]
+        public int Frequencia { get; set; }
     }
 
     public class VerAlunoViewModel

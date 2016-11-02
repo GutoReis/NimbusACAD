@@ -30,29 +30,48 @@ namespace NimbusACAD.Models.ViewModels
         public string AulaMinistrada { get; set; }
 
         [Display(Name = "Alunos Presentes")]
-        public virtual ICollection<int> Matriculas { get; set; }
+        public virtual ICollection<ListaAlunosViewModel> Matriculas { get; set; }
+    }
+
+    public class ListaAlunosViewModel
+    {
+        public int MatriculaID { get; set; }
+
+        [Required]
+        [Display(Name = "Nome")]
+        public string NomeAluno { get; set; }
     }
 
     //Notas
-    public class LancarNotaViewModel
+    public class ListaLancarNotaViewModel
     {
+        public int DisciplinaID { get; set; }
+
         [Required]
         [Display(Name = "Disciplina")]
         public string DisciplinaNm { get; set; }
+
+        public ICollection<LancarNotaViewModel> notas { get; set; }
+    }
+
+    public class LancarNotaViewModel
+    {
+        public int MatriculaID { get; set; }
+        public int VinculoID { get; set; }
 
         [Required]
         [Display(Name = "Aluno")]
         public string AlunoNm { get; set; }
 
         [Display(Name = "1ª Avalição")]
-        public float Nota1 { get; set; }
+        public double Nota1 { get; set; }
 
         [Display(Name = "2ª Avaliação")]
-        public float Nota2 { get; set; }
+        public double Nota2 { get; set; }
     }
 
     //Disciplinas
-    public class VerDisciplinasViewModel
+    public class VerDisciplinasViewModel //DIARIO
     {
         [Required]
         [Display(Name = "Disciplina")]
@@ -64,7 +83,11 @@ namespace NimbusACAD.Models.ViewModels
 
         [Required]
         [Display(Name = "Alunos")]
-        public virtual ICollection<Negocio_Matricula_Aluno> Alunos { get; set; }
+        public virtual ICollection<ListaAlunosViewModel> Alunos { get; set; }
+
+        [Required]
+        [Display(Name = "Horário")]
+        public virtual ICollection<ListaHorarioViewModel> Horarios { get; set; }
     }
 
     //Curso
@@ -87,5 +110,12 @@ namespace NimbusACAD.Models.ViewModels
         [Required]
         [Display(Name = "Disciplinas")]
         public virtual ICollection<Negocio_Disciplina> DisciplinaNm { get; set; }
+    }
+
+    public class DisciplinasProfessorVIewModel
+    {
+        [Required]
+        [Display(Name = "Disciplinas")]
+        public virtual ICollection<ListaDisciplinaViewModel> disciplinas { get; set; }
     }
 }
