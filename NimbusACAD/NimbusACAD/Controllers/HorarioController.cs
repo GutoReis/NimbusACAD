@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 
@@ -15,6 +13,7 @@ namespace NimbusACAD.Controllers
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         // GET: Horario
+        [RBAC]
         public ActionResult Index(string searchString)
         {
             var horarios = from h in db.Negocio_Quadro_Horario select h;
@@ -28,6 +27,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Horario/DefinirHorario
+        [RBAC]
         public ActionResult DefinirHorario(int? discID)
         {
             if (discID == null)
@@ -47,6 +47,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult DefinirHorario([Bind(Include = "Quadro_Horario_ID,Disciplina_ID,Dia_Semana,Hora_Inicio,Hora_Fim")] Negocio_Quadro_Horario negocio_Quadro_Horario)
         {
@@ -62,6 +63,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Horario/Editar/5
+        [RBAC]
         public ActionResult Editar(int? id)
         {
             if (id == null)
@@ -81,6 +83,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult Editar([Bind(Include = "Quadro_Horario_ID,Disciplina_ID,Dia_Semana,Hora_Inicio,Hora_Fim")] Negocio_Quadro_Horario negocio_Quadro_Horario)
         {
@@ -95,6 +98,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Horario/Deletar/5
+        [RBAC]
         public ActionResult Deletar(int? id)
         {
             if (id == null)
@@ -111,6 +115,7 @@ namespace NimbusACAD.Controllers
 
         // POST: Horario/Deletar/5
         [HttpPost, ActionName("Deletar")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult DeletarConfirmacao(int id)
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
@@ -15,6 +14,7 @@ namespace NimbusACAD.Controllers
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         //GET: Diario/Index
+        [RBAC]
         public ActionResult Index()
         {
             var usuario = User.Identity as RBAC_Usuario;
@@ -40,6 +40,7 @@ namespace NimbusACAD.Controllers
 
         //Chamada - FrequenciaViewModel
         //GET: Diario/Chamada
+        [RBAC]
         public ActionResult Chamada(int? discID, int? profID)
         {
             if (discID == null || profID == null)
@@ -57,6 +58,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Diario/Chamada
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult Chamada([Bind(Include = "DisciplinaID, ProfessorID, DtAula, QtdeAulas, AulaMinistrada, Matriculas")]FrequenciaViewModel FVM)
         {
@@ -97,6 +99,7 @@ namespace NimbusACAD.Controllers
 
         //Lançar notas - LancarNotaViewModel
         //GET: Diario/LancarNotas
+        [RBAC]
         public ActionResult LancarNotas(int? discID, int? profID)
         {
             if (discID == null || profID == null)
@@ -134,6 +137,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Diario/LancarNotas
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult LancarNotas([Bind(Include = "DisciplinaID, DisciplinaNm, notas")]ListaLancarNotaViewModel lancamento)
         {
@@ -155,58 +159,9 @@ namespace NimbusACAD.Controllers
             return View(lancamento);
         }
 
-        //Ver disciplina (Alunos e horários) - VerDisciplinasViewModel
-        //GET: Diario/VerDisciplina
-        public ActionResult VerDisciplina(int? discID)
-        {
-            if (discID == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Negocio_Disciplina disciplina = db.Negocio_Disciplina.Find(discID);
-            if (disciplina == null)
-            {
-                return HttpNotFound();
-            }
-
-            VerDisciplinasViewModel VDVM = new VerDisciplinasViewModel();
-            VDVM.Disciplina = disciplina.Disciplina_Nome;
-            VDVM.TotAulasDadas = disciplina.Tot_Aulas_Dadas.Value;
-
-            ListaAlunosViewModel aTemp;
-            List<ListaAlunosViewModel> listTemp = new List<ListaAlunosViewModel>();
-            foreach (var vd in db.Negocio_Vinculo_Disciplina)
-            {
-                if (vd.Disciplina_ID == disciplina.Disciplina_ID)
-                {
-                    aTemp = new ListaAlunosViewModel();
-                    aTemp.MatriculaID = vd.Matricula_ID;
-                    aTemp.NomeAluno = vd.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome + " " + vd.Negocio_Matricula_Aluno.Negocio_Pessoa.Sobrenome;
-                    listTemp.Add(aTemp);
-                }
-            }
-            VDVM.Alunos = listTemp;
-
-            ListaHorarioViewModel hTemp;
-            List<ListaHorarioViewModel> listTemp2 = new List<ListaHorarioViewModel>();
-            foreach (var h in db.Negocio_Quadro_Horario)
-            {
-                if (h.Disciplina_ID == disciplina.Disciplina_ID)
-                {
-                    hTemp = new ListaHorarioViewModel();
-                    hTemp.horarioID = h.Quadro_Horario_ID;
-                    hTemp.DiaSemana = h.Dia_Semana;
-                    hTemp.HoraInicio = h.Hora_Inicio.Value;
-                    hTemp.HoraFim = h.Hora_Fim.Value;
-                    listTemp2.Add(hTemp);
-                }
-            }
-            VDVM.Horarios = listTemp2;
-            return View(VDVM);
-        }
-
         //Corrigir notas de um único aluno
         //GET: Diario/CorrigirNota
+        [RBAC]
         public ActionResult CorrigirNota(int? vdID)
         {
             if (vdID == null)
@@ -230,6 +185,7 @@ namespace NimbusACAD.Controllers
         
         //POST: Diario/CorrigirNota
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult CorrigirNota([Bind(Include = "MatriculaID, VinculoID, AlunoNm, Nota1, Nota2")]LancarNotaViewModel correcao)
         {
@@ -250,6 +206,7 @@ namespace NimbusACAD.Controllers
                 
         //Listar presenças
         //GET: Diario/ListarPresencas
+        [RBAC]
         public ViewResult ListarPresencas(DateTime data, int disccID)
         {
             var frequencia = from f in db.Negocio_Frequencia select f;
@@ -263,6 +220,7 @@ namespace NimbusACAD.Controllers
 
         //Remover presença de um único aluno
         //GET: Diario/RemoverPresenca
+        [RBAC]
         public ActionResult RemoverPresenca(int? freqID)
         {
             if (freqID == null)
@@ -278,6 +236,7 @@ namespace NimbusACAD.Controllers
         }
 
         //POST: Diario/RemoverPresenca
+        [RBAC]
         [HttpPost, ActionName("RemoverPresenca")]
         [ValidateAntiForgeryToken]
         public ActionResult RemoverPresencaConfirmacao(int freqID)
@@ -290,6 +249,7 @@ namespace NimbusACAD.Controllers
 
         //Adicionar presença para um único aluno
         //GET: Diario/AdicionarPresenca
+        [RBAC]
         public ActionResult AdicionarPresenca(int? discID, int? profID)
         {
             if (discID == null || profID == null)
@@ -307,6 +267,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Diario/AdicionarPresenca
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult AdicionarPresenca([Bind(Include = "Frequencia_ID, Disciplina_ID, Professor_ID, Dt_Aula, Qtde_Aula, Aula_Ministrada, Matricula_Presente")]Negocio_Frequencia frequencia)
         {
@@ -322,6 +283,7 @@ namespace NimbusACAD.Controllers
 
         //Ver notas de todas as disciplinas de um único aluno - VerVinculoDisciplinaViewModel
         //GET: Diario/VerNotasAluno
+        [RBAC]
         public ActionResult VerNotasAluno(int? matID)
         {
             if (matID == null)
@@ -357,6 +319,7 @@ namespace NimbusACAD.Controllers
 
         //Ver notas de todos os alunos em uma única disciplina - NotasViewModel
         //GET: Diario/VerNotasDisciplina
+        [RBAC]
         public ActionResult VerNotasDisciplina(int? discID)
         {
             if (discID == null)

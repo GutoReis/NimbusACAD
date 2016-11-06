@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using NimbusACAD.Identity.User;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
@@ -10,6 +6,7 @@ using System.Net;
 
 namespace NimbusACAD.Controllers
 {
+    [Authorize]
     public class GerenciarController : Controller
     {
         public GerenciarController() { }

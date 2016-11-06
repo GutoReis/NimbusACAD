@@ -20,6 +20,7 @@ namespace NimbusACAD.Controllers
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         // GET: RBACUsuario
+        [RBAC]
         public ViewResult Index(string searchString)
         {
             var usuariosRBAC = from u in db.RBAC_Usuario select u;
@@ -31,6 +32,7 @@ namespace NimbusACAD.Controllers
         }
 
         //GET: RBACUsuario/Detalhes/5
+        [RBAC]
         public ActionResult Detalhes(int id)
         {
             if (id == 0)
@@ -46,6 +48,7 @@ namespace NimbusACAD.Controllers
         }
 
         //GET: RBACUsuario/Bloquear/5
+        [RBAC]
         public ActionResult Bloquear(int id)
         {
             if (id == 0)
@@ -66,6 +69,7 @@ namespace NimbusACAD.Controllers
 
         //POST: RBACUsuario/Bloquear/5
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult Bloquear([Bind(Include = "usuarioID, Bloqueado")] BloquearUsuarioViewModel bloquearUsuario)
         {
@@ -79,6 +83,7 @@ namespace NimbusACAD.Controllers
         }
 
         //GET: RBACUsuario/Deletar/5
+        [RBAC]
         public ActionResult Deletar(int id)
         {
             if (id == 0)
@@ -95,6 +100,7 @@ namespace NimbusACAD.Controllers
 
         //POST: RBACUsuario/Deletar/5
         [HttpPost, ActionName("Deletar")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult DeletarConfirmacao(int id)
         {
@@ -104,6 +110,7 @@ namespace NimbusACAD.Controllers
 
         //Perfil de acesso
         //GET: RBACUsuario/NovoPerfilDeAcesso/5
+        [RBAC]
         public ActionResult NovoPerfilDeAcesso(int? id)
         {
             if (id == null)
@@ -122,6 +129,7 @@ namespace NimbusACAD.Controllers
 
         //POST: RBACUsuario/NovoPerfilDeAcesso/5
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovoPerfilDeAcesso([Bind(Include = "UsuarioID, PerfilID")] VinculoPerfilUsuarioViewModel vpuvm)
         {
@@ -135,6 +143,7 @@ namespace NimbusACAD.Controllers
         }
 
         //GET: RBACUsuario/RemoverPerfilDeAcesso/5
+        [RBAC]
         public ActionResult RemoverPerfilDeAcesso(int id)
         {
             if (id == 0)
@@ -151,6 +160,7 @@ namespace NimbusACAD.Controllers
 
         //POST: RBACUsuario/RemoverPerfilDeAcesso/5
         [HttpPost, ActionName("RemoverPerfilDeAcesso")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult RemoverPerfilDeAcessoConfirmacao(int id)
         {

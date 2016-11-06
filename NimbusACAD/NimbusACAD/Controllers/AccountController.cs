@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using NimbusACAD.Identity.Email;
-using NimbusACAD.Identity.Role;
+﻿using System.Web.Mvc;
 using NimbusACAD.Identity.Security;
 using NimbusACAD.Identity.User;
-using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
 
 namespace NimbusACAD.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         public AccountController() { }
@@ -20,7 +14,8 @@ namespace NimbusACAD.Controllers
         private SignInManager _signInManager = new SignInManager();
 
         //
-        //GET: /Account/Login
+        //GET: /Account/
+        [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -30,6 +25,7 @@ namespace NimbusACAD.Controllers
         //
         //POST: /Account/Login
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
@@ -58,6 +54,7 @@ namespace NimbusACAD.Controllers
 
         //
         //GET: /Account/ConfirmarEmail
+        [AllowAnonymous]
         public ActionResult ConfirmarEmail(string email)
         {
             if (email == null)
@@ -70,6 +67,7 @@ namespace NimbusACAD.Controllers
 
         //
         //GET: /Account/EsqueceuSenha
+        [AllowAnonymous]
         public ActionResult EsqueceuSenha()
         {
             return View();
@@ -78,6 +76,7 @@ namespace NimbusACAD.Controllers
         //
         //POST: /Account/EsqueceuSenha
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult EsqueceuSenha(EsqueceuSenhaViewModel model)
         {
@@ -98,6 +97,7 @@ namespace NimbusACAD.Controllers
 
         //
         //GET: /Account/EsqueceuSenhaConfirmacao
+        [AllowAnonymous]
         public ActionResult EsqueceuSenhaConfirmacao()
         {
             return View();

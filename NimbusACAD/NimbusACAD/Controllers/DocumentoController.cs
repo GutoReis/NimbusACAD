@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 
@@ -15,6 +13,7 @@ namespace NimbusACAD.Controllers
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         // GET: Documento
+        [RBAC]
         public ActionResult Index(string searchString)
         {
             var documentos = from d in db.Negocio_Documento select d;
@@ -26,6 +25,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Documento/Detalhes/5
+        [RBAC]
         public ActionResult Detalhes(int? id)
         {
             if (id == null)
@@ -41,6 +41,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Documento/NovoDocumento
+        [RBAC]
         public ActionResult NovoDocumento()
         {
             return View();
@@ -50,6 +51,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovoDocumento([Bind(Include = "Documento_ID,Documento_Nome")] Negocio_Documento negocio_Documento)
         {
@@ -64,6 +66,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Documento/Editar5
+        [RBAC]
         public ActionResult Editar(int? id)
         {
             if (id == null)
@@ -82,6 +85,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult Editar([Bind(Include = "Documento_ID,Documento_Nome")] Negocio_Documento negocio_Documento)
         {
@@ -95,6 +99,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Documento/Deletar/5
+        [RBAC]
         public ActionResult Deletar(int? id)
         {
             if (id == null)
@@ -111,6 +116,7 @@ namespace NimbusACAD.Controllers
 
         // POST: Documento/Deletar/5
         [HttpPost, ActionName("Deletar")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult DeletarConfirmacao(int id)
         {

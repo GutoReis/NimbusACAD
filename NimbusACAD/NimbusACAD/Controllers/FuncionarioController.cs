@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
@@ -23,6 +21,7 @@ namespace NimbusACAD.Controllers
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         // GET: Funcionario
+        [RBAC]
         public ViewResult Index(string searchString)
         {
             var funcionarios = from f in db.Negocio_Funcionario select f;
@@ -36,6 +35,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Funcionario/Detalhes/5
+        [RBAC]
         public ActionResult Detalhes(int? id)
         {
             if (id == null)
@@ -64,6 +64,7 @@ namespace NimbusACAD.Controllers
 
         //Registrar Pessoa -> Registrar Documentos
         //GET: Funcionario/NovaPessoa
+        [RBAC]
         public ActionResult NovaPessoa()
         {
             PopulatePerfilDropDownList();
@@ -72,6 +73,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Funcionario/NovaPessoa
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovaPessoa([Bind(Include = "PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, CEP, Logradouro, Complemento, Numero, Bairro, Cidade, Estado, Pais, PerfilID")]RegistrarComumViewModel novaPessoa)
         {
@@ -118,6 +120,7 @@ namespace NimbusACAD.Controllers
 
         //Registrar Documentos -> Registrar Funcionario
         //GET: Funcionario/RegistrarDocumento
+        [RBAC]
         public ActionResult RegistrarDocumento(int? pID)
         {
             if (pID == null)
@@ -135,6 +138,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Funcionario/RegistrarDocumento
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult RegistrarDocumento([Bind(Include = "PessoaID, DocumentoID, DtEmissao, OrgaoEmissor, DtEmissao, Cidade, Estado, Pais")] CurriculoViewModel curriculo)
         {
@@ -156,6 +160,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Funcionario/NovoFuncionario
+        [RBAC]
         public ActionResult NovoFuncionario(int? pID)
         {
             //ViewBag.Pessoa_ID = new SelectList(db.Negocio_Pessoa, "Pessoa_ID", "Primeiro_Nome");
@@ -177,6 +182,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovoFuncionario([Bind(Include = "PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, CEP, Logradouro, Numero, Bairro, Cidade, Estado, Pais")] RegistrarComumViewModel novaPessoa, [Bind(Include = "Funcionario_ID, Pessoa_ID, Cargo_ID")] Negocio_Funcionario funcionario)
         {
@@ -195,6 +201,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Funcionario/Editar/5
+        [RBAC]
         public ActionResult Editar(int? id)
         {
             if (id == null)
@@ -216,6 +223,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult Editar([Bind(Include = "Funcionario_ID,Pessoa_ID,Cargo_ID")] Negocio_Funcionario negocio_Funcionario)
         {
@@ -232,6 +240,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Funcionario/Deletar/5
+        [RBAC]
         public ActionResult Deletar(int? id)
         {
             if (id == null)
@@ -248,6 +257,7 @@ namespace NimbusACAD.Controllers
 
         // POST: Funcionario/Deletar/5
         [HttpPost, ActionName("Deletar")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult DeletarConfirmacao(int id)
         {
@@ -267,6 +277,7 @@ namespace NimbusACAD.Controllers
         }
 
         //GET: Funcionario/NovoDocumento
+        [RBAC]
         public ActionResult NovoDocumento(int? pID)
         {
             if (pID == null)
@@ -284,6 +295,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Funcionario/NovoDocumento
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovoDocumento([Bind(Include = "PessoaID, DocumentoID, OrgaoEmissor, DtEmissao, Cidade, Estado, Pais")]CurriculoViewModel curriculo)
         {

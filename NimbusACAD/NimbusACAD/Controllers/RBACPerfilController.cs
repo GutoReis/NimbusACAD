@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
@@ -19,6 +18,7 @@ namespace NimbusACAD.Controllers
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         // GET: RBACPerfil
+        [RBAC]
         public ActionResult Index(string searchString)
         {
             var perfisRBAC = from p in db.RBAC_Perfil select p;
@@ -30,6 +30,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: RBACPerfil/Detalhes/5
+        [RBAC]
         public ActionResult Detalhes(int? id)
         {
             if (id == null)
@@ -64,6 +65,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: RBACPerfil/NovoPerfilDeAcesso
+        [RBAC]
         public ActionResult NovoPerfilDeAcesso()
         {
             return View();
@@ -73,6 +75,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovoPerfilDeAcesso([Bind(Include = "Perfil_ID,Perfil_Nome,Descricao")] RBAC_Perfil rBAC_Perfil)
         {
@@ -87,6 +90,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: RBACPerfil/Editar/5
+        [RBAC]
         public ActionResult Editar(int? id)
         {
             if (id == null)
@@ -105,6 +109,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult Editar([Bind(Include = "Perfil_ID,Perfil_Nome,Descricao")] RBAC_Perfil rBAC_Perfil)
         {
@@ -118,6 +123,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: RBACPerfil/Deletar/5
+        [RBAC]
         public ActionResult Deletar(int? id)
         {
             if (id == null)
@@ -134,6 +140,7 @@ namespace NimbusACAD.Controllers
 
         // POST: RBACPerfil/Deletar/5
         [HttpPost, ActionName("Deletar")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult DeletarConfirmado(int id)
         {
@@ -142,6 +149,7 @@ namespace NimbusACAD.Controllers
         }
 
         //GET: RBACPerfil/VincularPermissao/5
+        [RBAC]
         public ActionResult VincularPermissao(int? id)
         {
             if (id == null)
@@ -160,6 +168,7 @@ namespace NimbusACAD.Controllers
 
         //POST: RBACPerfil/VincularPermissao/5
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult VincularPermissao([Bind(Include = "Link_ID, Usuario_ID, Perfil_ID")]RBAC_Link_Perfil_Permissao lpp)
         {
@@ -175,6 +184,7 @@ namespace NimbusACAD.Controllers
 
         //Remover permissão
         //GET: RBACPerfil/RemoverPermissao/5
+        [RBAC]
         public ActionResult RemoverPermissao(int? id)
         {
             if (id == null)
@@ -190,7 +200,8 @@ namespace NimbusACAD.Controllers
         }
 
         //POST: RBACPerfil/RemoverPermissao/5
-        [HttpPost, ActionName("RemoverPermissoa")]
+        [HttpPost, ActionName("RemoverPermissao")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult RemoverPermissaoConfirmacao(int id)
         {

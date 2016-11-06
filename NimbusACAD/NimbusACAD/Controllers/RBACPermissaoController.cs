@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Linq;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Identity.Role;
+using System;
 
 namespace NimbusACAD.Controllers
 {
@@ -16,7 +13,20 @@ namespace NimbusACAD.Controllers
         private PermissionStore _permissaoStore = new PermissionStore();
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
+        //GET: RBACPermissao
+        [RBAC]
+        public ViewResult Index(string searchString)
+        {
+            var permissoesRBAC = from p in db.RBAC_Permissao select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                permissoesRBAC = permissoesRBAC.Where(o => o.Permissao_Nome.ToUpper().Contains(searchString.ToUpper()));
+            }
+            return View(permissoesRBAC.ToList());
+        }
+
         // GET: RBACPermissao/NovaPermissao
+        [RBAC]
         public ActionResult NovaPermissao()
         {
             return View();
@@ -26,6 +36,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovaPermissao([Bind(Include = "Permissao_ID,Permissao_Nome")] RBAC_Permissao rBAC_Permissao)
         {
@@ -40,6 +51,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: RBACPermissao/Editar/5
+        [RBAC]
         public ActionResult Editar(int? id)
         {
             if (id == null)
@@ -58,6 +70,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult Editar([Bind(Include = "Permissao_ID,Permissao_Nome")] RBAC_Permissao rBAC_Permissao)
         {
@@ -71,6 +84,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: RBACPermissao/Deletar/5
+        [RBAC]
         public ActionResult Deletar(int? id)
         {
             if (id == null)
@@ -87,6 +101,7 @@ namespace NimbusACAD.Controllers
 
         // POST: RBACPermissao/Deletar/5
         [HttpPost, ActionName("Deletar")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult DeletarConfirmacao(int id)
         {

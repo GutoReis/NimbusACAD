@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
@@ -22,6 +21,7 @@ namespace NimbusACAD.Controllers
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         //GET: Matricula
+        [RBAC]
         public ViewResult Index(string searchString)
         {
             if (!String.IsNullOrEmpty(searchString))
@@ -36,6 +36,7 @@ namespace NimbusACAD.Controllers
 
         //Registrar Pessoa -> Registro de Documentos
         //GET: Matricula/NovaPessoa
+        [RBAC]
         public ActionResult NovaPessoa()
         {
             PopulatePerfilDropDownList();
@@ -44,6 +45,7 @@ namespace NimbusACAD.Controllers
         
         //POST: Matricula/NovaPessoa
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovaPessoa([Bind(Include = "PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, CEP, Logradouro, Complemento, Numero, Bairro, Cidade, Estado, Pais, PerfilID")] RegistrarComumViewModel novaPessoa)
         {
@@ -91,6 +93,7 @@ namespace NimbusACAD.Controllers
 
         //Registrar Documentos -> Registro Matricula
         //GET: Matricula/RegistrarDocumento
+        [RBAC]
         public ActionResult RegistrarDocumento(int? pID)
         {
             if (pID == null)
@@ -108,6 +111,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Matricula/RegistrarDocumento
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult RegistrarDocumento([Bind(Include = "PessoaID, DocumentoID, OrgaoEmissor, DtEmissao, Cidade, Estado, Pais")] CurriculoViewModel novoCurriculo)
         {
@@ -130,6 +134,7 @@ namespace NimbusACAD.Controllers
 
         //Registrar Matricula -> Matricula_Aluno.Deve_Documento ? Registro Doc_Devente : Index
         //GET: Matricula/NovaMatricula
+        [RBAC]
         public ActionResult NovaMatricula(int? pID)
         {
             if (pID == null)
@@ -148,6 +153,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Matricula/NovaMatricula
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovaMatricula([Bind(Include = "PessoaID, CursoID, ModuloID, Ano, DeveDocumento")] RegistrarAlunoViewModel novoAluno)
         {
@@ -195,6 +201,7 @@ namespace NimbusACAD.Controllers
         }
 
         //GET: Matricula/DeveDocumento
+        [RBAC]
         public ActionResult DeveDocumento(int? mID)
         {
             if (mID == null)
@@ -212,6 +219,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Matricula/DeveDocumento
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult DeveDocumento([Bind(Include = "Doc_Devente_ID, Documento_ID, Matricula_ID")]Negocio_Doc_Devente docDevente)
         {
@@ -227,6 +235,7 @@ namespace NimbusACAD.Controllers
 
         //Vincular à modulo (a todas as disciplinas do modulo)
         //GET: Matricula/VincularModulo
+        [RBAC]
         public ActionResult VincularModulo(int? matID)
         {
             if (matID == null)
@@ -244,6 +253,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Matricula/VincularModulo
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult VincularModulo([Bind(Include = "Vinculo_ID, Modulo_ID, Matricula_ID, Status_Vinculo")] Negocio_Vinculo_Modulo vm)
         {
@@ -292,6 +302,7 @@ namespace NimbusACAD.Controllers
 
         //Vincular à disciplina (Isolada)
         //GET: Matricula/VincularDisciplina
+        [RBAC]
         public ActionResult VincularDisciplina(int? matID)
         {
             if (matID == null)
@@ -309,6 +320,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Matricula/VincularDisciplina
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult VincularDisciplina([Bind(Include = "DisciplinaID, MatriculaID, NumChamada")] CriarVinculoDisciplinaViewModel vd)
         {
@@ -332,6 +344,7 @@ namespace NimbusACAD.Controllers
 
         //Ver Aluno
         //GET: Matricula/VerAluno
+        [RBAC]
         public ActionResult VerAluno(int? matID)
         {
             if (matID == null)
@@ -392,6 +405,7 @@ namespace NimbusACAD.Controllers
 
         //Ver vinculoModulo
         //GET: Matricula/VerVinculoModulo
+        [RBAC]
         public ActionResult VerVinculoModulo(int? vmID)
         {
             if (vmID == null)
@@ -428,6 +442,7 @@ namespace NimbusACAD.Controllers
 
         //Editar vinculo modulo
         //GET: Matricula/EditarVinculoModulo
+        [RBAC]
         public ActionResult EditarVinculoModulo(int? matID, int? modID)
         {
             if (matID == null || modID == null)
@@ -444,6 +459,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Matricula/EditarVinculoModulo
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult EditarVinculoModulo([Bind(Include = "Vinculo_ID, Modulo_ID, Matriculo_ID, Status_Vinculo")]Negocio_Vinculo_Modulo vm)
         {
@@ -458,6 +474,7 @@ namespace NimbusACAD.Controllers
 
         //Remover VinculoModulo
         //GET: Matricula/RemoverVinculoModulo
+        [RBAC]
         public ActionResult RemoverVinculoModulo(int? vmID)
         {
             if (vmID == null)
@@ -474,6 +491,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Matricula/RemoverVinculoModulo
         [HttpPost, ActionName("RemoverVinculoModulo")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult RemoverVinculoModuloConfirmacao(int vmID)
         {
@@ -485,6 +503,7 @@ namespace NimbusACAD.Controllers
 
         //Ver VinculoDisciplina
         //GET: Matricula/VerVinculoDisciplina
+        [RBAC]
         public ActionResult VerVinculoDisciplina(int? discID, int? matID)
         {
             if (discID == null || matID == null)
@@ -529,6 +548,7 @@ namespace NimbusACAD.Controllers
 
         //Remover VinculoDisciplina
         //GET: Matricula/RemoverVinculoDisciplina
+        [RBAC]
         public ActionResult RemoverVinculoDisciplina(int? discID, int? matID)
         {
             if (discID == null || matID == null)
@@ -545,6 +565,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Matricula/RemoverVinculoDisciplina
         [HttpPost, ActionName("RemoverVinculoDisciplina")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult RemoverVinculoDisciplinaConfimacao(int discID, int matID)
         {
@@ -556,6 +577,7 @@ namespace NimbusACAD.Controllers
 
         //Adicionar NovoDocumento (Remover se o doc for devente)
         //GET: Matricula/NovoDocumento
+        [RBAC]
         public ActionResult NovoDocumento(int? pID)
         {
             if (pID == null)
@@ -573,6 +595,7 @@ namespace NimbusACAD.Controllers
 
         //POST: Matricula/NovoDocumento
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovoDocumento([Bind(Include = "PessoaID, DocumentoID, OrgaoEmissor, DtEmissao, Cidade, Estado, Pais")]CurriculoViewModel curriculo)
         {

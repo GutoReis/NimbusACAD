@@ -9,11 +9,11 @@ using System.Net;
 
 namespace NimbusACAD.Controllers
 {
+    [Authorize]
     public class MensagemController : Controller
     {
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
         
-
         // GET: Mensagem
         public ActionResult Index()
         {

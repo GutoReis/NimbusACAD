@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
@@ -16,6 +15,7 @@ namespace NimbusACAD.Controllers
         private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
 
         // GET: Curso
+        [RBAC]
         public ViewResult Index(string searchString)
         {
             var cursos = from c in db.Negocio_Curso select c;
@@ -29,6 +29,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Curso/Detalhes/5
+        [RBAC]
         public ActionResult Detalhes(int? id)
         {
             if (id == null)
@@ -70,6 +71,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Curso/NovoCurso
+        [RBAC]
         public ActionResult NovoCurso()
         {
             //ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID");
@@ -81,6 +83,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult NovoCurso([Bind(Include = "Curso_ID,Curso_Nome,Descricao,Periodo,Coordenador_ID,Carga_Horaria")] Negocio_Curso negocio_Curso)
         {
@@ -98,6 +101,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Curso/Editar/5
+        [RBAC]
         public ActionResult Editar(int? id)
         {
             if (id == null)
@@ -118,6 +122,7 @@ namespace NimbusACAD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult Editar([Bind(Include = "Curso_ID,Curso_Nome,Descricao,Periodo,Coordenador_ID,Carga_Horaria")] Negocio_Curso negocio_Curso)
         {
@@ -133,6 +138,7 @@ namespace NimbusACAD.Controllers
         }
 
         // GET: Curso/Deletar/5
+        [RBAC]
         public ActionResult Deletar(int? id)
         {
             if (id == null)
@@ -149,6 +155,7 @@ namespace NimbusACAD.Controllers
 
         // POST: Curso/Deletar/5
         [HttpPost, ActionName("Deletar")]
+        [RBAC]
         [ValidateAntiForgeryToken]
         public ActionResult DeletarConfirmacao(int id)
         {
