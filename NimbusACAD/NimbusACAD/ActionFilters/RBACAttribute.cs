@@ -16,6 +16,12 @@ public class RBACAttribute : AuthorizeAttribute
             else
             {
                 string requiredPermission = String.Format("{0}-{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, filterContext.ActionDescriptor.ActionName);
+
+                if (!filterContext.HttpContext.User.HasPermission(requiredPermission))
+                {
+                    filterContext.Result = new RedirectToRouteResult(
+                                                new RouteValueDictionary { { "action", "Index" }, { "controller", "Desautorizado" } });
+                }
             }
         }
         catch (Exception ex)

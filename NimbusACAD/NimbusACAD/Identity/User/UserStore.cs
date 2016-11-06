@@ -12,6 +12,10 @@ namespace NimbusACAD.Identity.User
 {
     public class UserStore
     {
+        public UserStore() { }
+
+        public UserStore(RBAC_Usuario usuario) { }
+
         #region CREATE
 
         //Add usuario será feito no AccountController, para enviar o email com a senha temporaria.
@@ -101,6 +105,24 @@ namespace NimbusACAD.Identity.User
                     {
                         return perfilRBAC.Any();
                     }
+                }
+                return false;
+            }
+        }
+
+        public bool IsPermissaoInPerfisDeUsuario(int usuarioID, string permission)
+        {
+            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            {
+                if (usuarioID == 0)
+                {
+                    //ID do Perfil vinculado ao usuario.
+                    int perfilID = db.RBAC_Link_Usuario_Perfil.Where(o => o.Usuario_ID == usuarioID).FirstOrDefault().Perfil_ID;
+
+                    //Verdadeiro ou falso para a permissão estar vinculada ao perfil
+                    string dbPermissao = db.RBAC_Link_Perfil_Permissao.Where(o => o.Perfil_ID == perfilID).FirstOrDefault().RBAC_Permissao.Permissao_Nome;
+                    bool found = dbPermissao.Equals(permission) ? true : false;
+                    return found;
                 }
                 return false;
             }
@@ -587,5 +609,17 @@ namespace NimbusACAD.Identity.User
         }
 
         #endregion
+    }
+
+    public static class UserManager
+    {
+        static NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+
+        public static UserStore GetUsuario(int usuarioID)
+        {
+            RBAC_Usuario _usuario = db.RBAC_Usuario.Find(usuarioID);
+            UserStore _userStore = new UserStore(_usuario);
+            return _userStore;
+        }
     }
 }
