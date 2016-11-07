@@ -26,6 +26,7 @@ namespace NimbusACAD.Controllers
             }
 
             VerModuloViewModel VMVM = new VerModuloViewModel();
+            VMVM.ModuloID = negocio_Modulo.Modulo_ID;
             VMVM.CursoNM = negocio_Modulo.Negocio_Curso.Curso_Nome;
             VMVM.ModuloNome = negocio_Modulo.Modulo_Nome;
             VMVM.MaxAlunos = negocio_Modulo.Max_Alunos.Value;

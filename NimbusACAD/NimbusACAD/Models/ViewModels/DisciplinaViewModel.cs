@@ -103,7 +103,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class ListaDisciplinaViewModel
     {
-        [Required]
+        [Key]
         [Display(Name = "ID")]
         public int DisciplinaID { get; set; }
 

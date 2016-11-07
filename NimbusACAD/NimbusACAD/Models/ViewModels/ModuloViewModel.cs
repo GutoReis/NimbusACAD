@@ -27,6 +27,9 @@ namespace NimbusACAD.Models.ViewModels
 
     public class VerModuloViewModel
     {
+        [Key]
+        public int ModuloID { get; set; }
+
         [Required]
         [Display(Name = "Curso")]
         public string CursoNM { get; set; }
