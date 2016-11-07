@@ -1,0 +1,74 @@
+﻿@model NimbusACAD.Models.DB.RBAC_Usuario
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>RBAC_Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Senha_Hash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Senha_Hash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dt_Criacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dt_Criacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dt_Ultima_Modif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dt_Ultima_Modif)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bloqueado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bloqueado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Negocio_Pessoa.Primeiro_Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Negocio_Pessoa.Primeiro_Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Usuario_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

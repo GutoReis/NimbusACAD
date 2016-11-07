@@ -171,13 +171,13 @@ namespace NimbusACAD.Identity.Role
 
         #region MANAGE-USER
 
-        public void AddUsuarioPerfil(VinculoPerfilUsuarioViewModel vinculo)
+        public void AddUsuarioPerfil(RBAC_Link_Usuario_Perfil vinculo)
         {
             using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
                 RBAC_Link_Usuario_Perfil linkUP = new RBAC_Link_Usuario_Perfil();
-                linkUP.Perfil_ID = vinculo.PerfilID;
-                linkUP.Usuario_ID = vinculo.UsuarioID;
+                linkUP.Perfil_ID = vinculo.Perfil_ID;
+                linkUP.Usuario_ID = vinculo.Usuario_ID;
 
                 db.RBAC_Link_Usuario_Perfil.Add(linkUP);
                 db.SaveChanges();

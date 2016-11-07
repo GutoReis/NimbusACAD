@@ -84,6 +84,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class BloquearUsuarioViewModel
     {
+        [Key]
         public int usuarioID { get; set; }
 
         [Required]

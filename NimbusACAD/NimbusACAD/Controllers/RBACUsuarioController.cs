@@ -131,15 +131,15 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovoPerfilDeAcesso([Bind(Include = "UsuarioID, PerfilID")] VinculoPerfilUsuarioViewModel vpuvm)
+        public ActionResult NovoPerfilDeAcesso([Bind(Include = "UsuarioID, PerfilID")] RBAC_Link_Usuario_Perfil linkUP)
         {
             if (ModelState.IsValid)
             {
-                _roleStore.AddUsuarioPerfil(vpuvm);
+                _roleStore.AddUsuarioPerfil(linkUP);
                 return RedirectToAction("Index");
             }
-            PopulatePerfilDropDownList(vpuvm.PerfilID);
-            return View(vpuvm);
+            PopulatePerfilDropDownList(linkUP.Perfil_ID);
+            return View(linkUP);
         }
 
         //GET: RBACUsuario/RemoverPerfilDeAcesso/5

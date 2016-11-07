@@ -334,6 +334,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\RBACUsuario\Index.cshtml" />
+    <Content Include="Views\RBACUsuario\Detalhes.cshtml" />
+    <Content Include="Views\RBACUsuario\Bloquear.cshtml" />
+    <Content Include="Views\RBACUsuario\Deletar.cshtml" />
+    <Content Include="Views\RBACUsuario\NovoPerfilDeAcesso.cshtml" />
+    <Content Include="Views\RBACUsuario\RemoverPerfilDeAcessoConfirmacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,7 +359,6 @@
     <Folder Include="Views\Modulo\" />
     <Folder Include="Views\RBACPerfil\" />
     <Folder Include="Views\RBACPermissao\" />
-    <Folder Include="Views\RBACUsuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
