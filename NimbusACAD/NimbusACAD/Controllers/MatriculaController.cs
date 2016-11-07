@@ -600,24 +600,24 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovoDocumento([Bind(Include = "PessoaID, DocumentoID, OrgaoEmissor, DtEmissao, Cidade, Estado, Pais")]CurriculoViewModel curriculo)
+        public ActionResult NovoDocumento([Bind(Include = "PessoaID, DocumentoID, OrgaoEmissor, DtEmissao, Cidade, Estado, Pais")]Negocio_Curriculo curriculo)
         {
             if (ModelState.IsValid)
             {
                 Negocio_Curriculo NC = new Negocio_Curriculo();
-                NC.Pessoa_ID = curriculo.PessoaID;
-                NC.Documento_ID = curriculo.DocumentoID;
-                NC.Orgao_Emissor = curriculo.OrgaoEmissor;
-                NC.Dt_Emissao = curriculo.DtEmissao;
-                NC.Cidade_Emissao = curriculo.Cidade;
-                NC.Estado_Emissao = curriculo.Estado;
-                NC.Pais_Emissao = curriculo.Pais;
+                NC.Pessoa_ID = curriculo.Pessoa_ID;
+                NC.Documento_ID = curriculo.Documento_ID;
+                NC.Orgao_Emissor = curriculo.Orgao_Emissor;
+                NC.Dt_Emissao = curriculo.Dt_Emissao;
+                NC.Cidade_Emissao = curriculo.Cidade_Emissao;
+                NC.Estado_Emissao = curriculo.Estado_Emissao;
+                NC.Pais_Emissao = curriculo.Pais_Emissao;
 
                 db.Negocio_Curriculo.Add(NC);
                 db.SaveChanges();
 
-                int matID = db.Negocio_Matricula_Aluno.Where(o => o.Pessoa_ID == curriculo.PessoaID && o.Ativo == true).FirstOrDefault().Matricula_ID;
-                Negocio_Doc_Devente docDevente = db.Negocio_Doc_Devente.Where(o => o.Matricula_ID == matID && o.Documento_ID == curriculo.DocumentoID).FirstOrDefault();
+                int matID = db.Negocio_Matricula_Aluno.Where(o => o.Pessoa_ID == curriculo.Pessoa_ID && o.Ativo == true).FirstOrDefault().Matricula_ID;
+                Negocio_Doc_Devente docDevente = db.Negocio_Doc_Devente.Where(o => o.Matricula_ID == matID && o.Documento_ID == curriculo.Documento_ID).FirstOrDefault();
                 if (docDevente != null)
                 {
                     db.Negocio_Doc_Devente.Remove(docDevente);
@@ -625,7 +625,7 @@ namespace NimbusACAD.Controllers
                 }
                 return RedirectToAction("VerAluno", matID);
             }
-            PopulateDocumentosDropDownList(curriculo.DocumentoID);
+            PopulateDocumentosDropDownList(curriculo.Documento_ID);
             return View(curriculo);
         }
 
