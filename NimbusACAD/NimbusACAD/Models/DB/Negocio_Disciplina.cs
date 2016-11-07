@@ -11,7 +11,8 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Negocio_Disciplina
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +23,7 @@ namespace NimbusACAD.Models.DB
             this.Negocio_Vinculo_Disciplina = new HashSet<Negocio_Vinculo_Disciplina>();
         }
     
+        [Key]
         public int Disciplina_ID { get; set; }
         public int Modulo_ID { get; set; }
         public string Disciplina_Nome { get; set; }

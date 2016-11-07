@@ -11,9 +11,11 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Negocio_Notificacao
     {
+        [Key]
         public int Notificacao_ID { get; set; }
         public int Pessoa_Emissor_ID { get; set; }
         public int Pessoa_Receptor_ID { get; set; }

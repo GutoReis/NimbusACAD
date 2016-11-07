@@ -11,7 +11,8 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Negocio_Matricula_Aluno
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,7 @@ namespace NimbusACAD.Models.DB
             this.Negocio_Vinculo_Modulo = new HashSet<Negocio_Vinculo_Modulo>();
         }
     
+        [Key]
         public int Matricula_ID { get; set; }
         public int Pessoa_ID { get; set; }
         public int Curso_ID { get; set; }

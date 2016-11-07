@@ -11,9 +11,11 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class RBAC_Link_Perfil_Permissao
     {
+        [Key]
         public int Link_ID { get; set; }
         public int Perfil_ID { get; set; }
         public int Permissao_ID { get; set; }

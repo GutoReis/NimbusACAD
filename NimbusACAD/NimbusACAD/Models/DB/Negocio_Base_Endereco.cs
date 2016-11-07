@@ -11,7 +11,8 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Negocio_Base_Endereco
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,8 @@ namespace NimbusACAD.Models.DB
         {
             this.Negocio_Endereco = new HashSet<Negocio_Endereco>();
         }
-    
+
+        [Key]
         public string CEP { get; set; }
         public string Logradouro { get; set; }
         public string Bairro { get; set; }

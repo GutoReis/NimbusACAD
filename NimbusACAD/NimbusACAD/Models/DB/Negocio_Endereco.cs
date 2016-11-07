@@ -11,9 +11,11 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Negocio_Endereco
     {
+        [Key]
         public int Endereco_ID { get; set; }
         public string CEP { get; set; }
         public string Complemento { get; set; }
