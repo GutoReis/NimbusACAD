@@ -1,0 +1,39 @@
+﻿@model IEnumerable<NimbusACAD.Models.ViewModels.VerVinculoModuloViewModel>
+
+@{
+    ViewBag.Title = "VerVinculoModulo";
+}
+
+<h2>VerVinculoModulo</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ModuloNM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusVinculo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModuloNM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusVinculo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.VinculoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.VinculoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.VinculoID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<NimbusACAD.Models.DB.Negocio_Matricula_Aluno>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deve_Documento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Negocio_Curso.Curso_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Negocio_Pessoa.Primeiro_Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ano)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Deve_Documento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Negocio_Curso.Curso_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Negocio_Pessoa.Primeiro_Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Matricula_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Matricula_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Matricula_ID })
+        </td>
+    </tr>
+}
+
+</table>

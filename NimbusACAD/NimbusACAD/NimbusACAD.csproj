@@ -359,6 +359,20 @@
     <Content Include="Views\Mensagem\Detalhes.cshtml" />
     <Content Include="Views\Mensagem\Escrever.cshtml" />
     <Content Include="Views\Mensagem\Deletar.cshtml" />
+    <Content Include="Views\Matricula\Index.cshtml" />
+    <Content Include="Views\Matricula\NovaPessoa.cshtml" />
+    <Content Include="Views\Matricula\RegistrarDocumento.cshtml" />
+    <Content Include="Views\Matricula\NovaMatricula.cshtml" />
+    <Content Include="Views\Matricula\DeveDocumento.cshtml" />
+    <Content Include="Views\Matricula\VincularModulo.cshtml" />
+    <Content Include="Views\Matricula\VincularDisciplina.cshtml" />
+    <Content Include="Views\Matricula\VerAluno.cshtml" />
+    <Content Include="Views\Matricula\VerVinculoModulo.cshtml" />
+    <Content Include="Views\Matricula\EditarVinculoModulo.cshtml" />
+    <Content Include="Views\Matricula\RemoverVinculoModulo.cshtml" />
+    <Content Include="Views\Matricula\VerVinculoDisciplina.cshtml" />
+    <Content Include="Views\Matricula\RemoverVinculoDisciplina.cshtml" />
+    <Content Include="Views\Matricula\NovoDocumento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -373,7 +387,6 @@
     <Folder Include="Views\Gerenciar\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Horario\" />
-    <Folder Include="Views\Matricula\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

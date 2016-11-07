@@ -1,0 +1,69 @@
+﻿@model IEnumerable<NimbusACAD.Models.ViewModels.VerAlunoViewModel>
+
+@{
+    ViewBag.Title = "VerAluno";
+}
+
+<h2>VerAluno</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.pID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeveDocumento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Curso)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.pID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeveDocumento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Curso)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.matID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.matID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.matID })
+        </td>
+    </tr>
+}
+
+</table>

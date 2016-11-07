@@ -1,0 +1,75 @@
+﻿@model IEnumerable<NimbusACAD.Models.ViewModels.VerVinculoDisciplinaViewModel>
+
+@{
+    ViewBag.Title = "VerVinculoDisciplina";
+}
+
+<h2>VerVinculoDisciplina</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Professor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NmAluno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumChamada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nota1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nota2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MediaFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotAulasDadas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Frequencia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Professor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NmAluno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumChamada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nota1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nota2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MediaFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotAulasDadas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Frequencia)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DisciplinaNm }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DisciplinaNm }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DisciplinaNm })
+        </td>
+    </tr>
+}
+
+</table>
