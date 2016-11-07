@@ -373,6 +373,10 @@
     <Content Include="Views\Matricula\VerVinculoDisciplina.cshtml" />
     <Content Include="Views\Matricula\RemoverVinculoDisciplina.cshtml" />
     <Content Include="Views\Matricula\NovoDocumento.cshtml" />
+    <Content Include="Views\Horario\Index.cshtml" />
+    <Content Include="Views\Horario\DefinirHorario.cshtml" />
+    <Content Include="Views\Horario\Editar.cshtml" />
+    <Content Include="Views\Horario\Deletar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -386,7 +390,6 @@
     <Folder Include="Views\Funcionario\" />
     <Folder Include="Views\Gerenciar\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\Horario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
