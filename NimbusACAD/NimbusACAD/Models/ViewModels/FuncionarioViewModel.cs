@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NimbusACAD.Models.ViewModels
 {
@@ -15,6 +16,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class VerFuncionarioViewModel
     {
+        [Key]
         public int funcionarioID { get; set; }
         public int pessoaID { get; set; }
         public int cargoID { get; set; }
