@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,11 +9,11 @@ namespace NimbusACAD.Models.ViewModels
 {
     public class RegistrarAlunoViewModel
     {
-        [Required]
+        [Key][Column(Order = 0)]
         [Display(Name = "Aluno")]
         public int PessoaID { get; set; }
 
-        [Required]
+        [Key][Column(Order = 1)]
         [Display(Name = "Curso")]
         public int CursoID { get; set; }
 
@@ -59,6 +60,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class VerVinculoModuloViewModel
     {
+        [Key]
         public int VinculoID { get; set; }
 
         [Required]
@@ -76,11 +78,11 @@ namespace NimbusACAD.Models.ViewModels
 
     public class CriarVinculoDisciplinaViewModel
     {
-        [Required]
+        [Key][Column(Order = 0)]
         [Display(Name = "Disciplina")]
         public int DisciplinaID { get; set; }
 
-        [Required]
+        [Key][Column(Order = 1)]
         [Display(Name = "Aluno")]
         public int MatriculaID { get; set; }
 
@@ -91,7 +93,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class VerVinculoDisciplinaViewModel //DIARIO
     {
-        [Required]
+        [Key]
         [Display(Name = "Disciplina")]
         public string DisciplinaNm { get; set; }
 
@@ -202,6 +204,7 @@ namespace NimbusACAD.Models.ViewModels
         //pID
         public int pID { get; set; }
         //matID
+        [Key]
         public int matID { get; set; }
         //Nome
         [Required]
@@ -237,6 +240,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class VerDocsDeventesViewModel
     {
+        [Key]
         public int DocumentoID { get; set; }
 
         [Required]
@@ -246,6 +250,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class ListaVinculoModuloViewModel
     {
+        [Key]
         public int VinculoID { get; set; }
 
         [Required]
@@ -259,6 +264,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class ListaDisciplinasViewModel
     {
+        [Key]
         public int DisciplinaID { get; set; }
         
         [Required]

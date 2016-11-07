@@ -86,6 +86,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class ListaHorarioViewModel
     {
+        [Key]
         public int horarioID { get; set; }
 
         [Required]

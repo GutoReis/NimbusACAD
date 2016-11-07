@@ -53,5 +53,19 @@ namespace NimbusACAD.Models.DB
         public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerPerfilViewModel> VerPerfilViewModels { get; set; }
 
         public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerModuloViewModel> VerModuloViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.RegistrarComumViewModel> RegistrarComumViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.CurriculoViewModel> CurriculoViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.RegistrarAlunoViewModel> RegistrarAlunoViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.CriarVinculoDisciplinaViewModel> CriarVinculoDisciplinaViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerAlunoViewModel> VerAlunoViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerVinculoModuloViewModel> VerVinculoModuloViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerVinculoDisciplinaViewModel> VerVinculoDisciplinaViewModels { get; set; }
     }
 }

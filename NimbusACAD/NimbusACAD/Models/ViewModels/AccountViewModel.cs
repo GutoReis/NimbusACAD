@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using NimbusACAD.Models;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NimbusACAD.Models.ViewModels
 {
@@ -21,7 +22,7 @@ namespace NimbusACAD.Models.ViewModels
     public class RegistrarComumViewModel
     {
         //Infos do usuário
-        [Required]
+        [Key]
         [Display(Name = "Nome")]
         public string PrimeiroNome { get; set; }
 
@@ -95,11 +96,11 @@ namespace NimbusACAD.Models.ViewModels
 
     public class CurriculoViewModel
     {
-        [Required]
+        [Key][Column(Order = 0)]
         [Display(Name = "Usuário")]
         public int PessoaID { get; set; }
 
-        [Required]
+        [Key][Column(Order = 1)]
         [Display(Name = "Documento")]
         public int DocumentoID { get; set; }
 
