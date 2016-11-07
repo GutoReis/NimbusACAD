@@ -385,6 +385,14 @@
     <Content Include="Views\Gerenciar\AlterarSenhaConfirmacao.cshtml" />
     <Content Include="Views\Gerenciar\EditarPerfil.cshtml" />
     <Content Include="Views\Gerenciar\EditarEndereco.cshtml" />
+    <Content Include="Views\Funcionario\Index.cshtml" />
+    <Content Include="Views\Funcionario\Detalhes.cshtml" />
+    <Content Include="Views\Funcionario\NovaPessoa.cshtml" />
+    <Content Include="Views\Funcionario\RegistrarDocumento.cshtml" />
+    <Content Include="Views\Funcionario\NovoFuncionario.cshtml" />
+    <Content Include="Views\Funcionario\Editar.cshtml" />
+    <Content Include="Views\Funcionario\Deletar.cshtml" />
+    <Content Include="Views\Funcionario\NovoDocumento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -395,7 +403,6 @@
     <Folder Include="Views\Diario\" />
     <Folder Include="Views\Disciplina\" />
     <Folder Include="Views\Documento\" />
-    <Folder Include="Views\Funcionario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
