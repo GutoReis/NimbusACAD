@@ -380,6 +380,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Assinatura.cshtml" />
+    <Content Include="Views\Gerenciar\Index.cshtml" />
+    <Content Include="Views\Gerenciar\AlterarSenha.cshtml" />
+    <Content Include="Views\Gerenciar\AlterarSenhaConfirmacao.cshtml" />
+    <Content Include="Views\Gerenciar\EditarPerfil.cshtml" />
+    <Content Include="Views\Gerenciar\EditarEndereco.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -391,7 +396,6 @@
     <Folder Include="Views\Disciplina\" />
     <Folder Include="Views\Documento\" />
     <Folder Include="Views\Funcionario\" />
-    <Folder Include="Views\Gerenciar\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

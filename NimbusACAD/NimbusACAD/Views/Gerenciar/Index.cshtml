@@ -1,0 +1,117 @@
+﻿@model IEnumerable<NimbusACAD.Models.ViewModels.PerfilDeUsuarioViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PrimeiroNome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sobrenome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sexo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DtNascimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TelPrincipal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TelSecundario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotNotifNL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndCompleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DtModif)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bloqueado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Perfil)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrimeiroNome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sobrenome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CPF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sexo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DtNascimento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TelPrincipal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TelSecundario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotNotifNL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndCompleto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DtModif)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bloqueado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Perfil)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PessoaID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PessoaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PessoaID })
+        </td>
+    </tr>
+}
+
+</table>
