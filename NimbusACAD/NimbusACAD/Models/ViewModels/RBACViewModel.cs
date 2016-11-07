@@ -94,7 +94,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class VerPerfilViewModel
     {
-        [Required]
+        [Key]
         [Display(Name = "ID")]
         public int PerfilID { get; set; }
 

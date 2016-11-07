@@ -80,10 +80,13 @@ namespace NimbusACAD.Controllers
 
                 //Assimilando perfil de acesso
                 int uID = _userStore.GetUsuarioID(novaPessoa.Email);
-                VinculoPerfilUsuarioViewModel VPUVM = new VinculoPerfilUsuarioViewModel();
-                VPUVM.UsuarioID = uID;
-                VPUVM.PerfilID = novaPessoa.PerfilID;
-                _roleStore.AddUsuarioPerfil(VPUVM);
+                //VinculoPerfilUsuarioViewModel VPUVM = new VinculoPerfilUsuarioViewModel();
+                //VPUVM.UsuarioID = uID;
+                //VPUVM.PerfilID = novaPessoa.PerfilID;
+                RBAC_Link_Usuario_Perfil linkUP = new RBAC_Link_Usuario_Perfil();
+                linkUP.Usuario_ID = uID;
+                linkUP.Perfil_ID = novaPessoa.PerfilID;
+                _roleStore.AddUsuarioPerfil(linkUP);
 
                 return RedirectToAction("RegistrarDocumento", pID);
             }
