@@ -393,6 +393,11 @@
     <Content Include="Views\Funcionario\Editar.cshtml" />
     <Content Include="Views\Funcionario\Deletar.cshtml" />
     <Content Include="Views\Funcionario\NovoDocumento.cshtml" />
+    <Content Include="Views\Documento\Index.cshtml" />
+    <Content Include="Views\Documento\Detalhes.cshtml" />
+    <Content Include="Views\Documento\NovoDocumento.cshtml" />
+    <Content Include="Views\Documento\Editar.cshtml" />
+    <Content Include="Views\Documento\Deletar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -402,7 +407,6 @@
     <Folder Include="Views\Desautorizado\" />
     <Folder Include="Views\Diario\" />
     <Folder Include="Views\Disciplina\" />
-    <Folder Include="Views\Documento\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
