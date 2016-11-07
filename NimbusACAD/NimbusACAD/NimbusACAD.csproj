@@ -355,6 +355,10 @@
     <Content Include="Views\Modulo\NovoModulo.cshtml" />
     <Content Include="Views\Modulo\Editar.cshtml" />
     <Content Include="Views\Modulo\Deletar.cshtml" />
+    <Content Include="Views\Mensagem\Index.cshtml" />
+    <Content Include="Views\Mensagem\Detalhes.cshtml" />
+    <Content Include="Views\Mensagem\Escrever.cshtml" />
+    <Content Include="Views\Mensagem\Deletar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -370,7 +374,6 @@
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Horario\" />
     <Folder Include="Views\Matricula\" />
-    <Folder Include="Views\Mensagem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

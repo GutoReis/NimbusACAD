@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
@@ -48,18 +45,19 @@ namespace NimbusACAD.Controllers
         //POST: Mensagem/Escrever
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Escrever([Bind(Include = "EmissorID, ReceptorID, Assunto, Corpo")] EscreverNotifacaoViewModel notificacao)
+        public ActionResult Escrever([Bind(Include = "EmissorID, ReceptorID, Assunto, Corpo")] Negocio_Notificacao notificacao)
         {
             if (ModelState.IsValid)
             {
                 Negocio_Notificacao NN = new Negocio_Notificacao();
-                NN.Pessoa_Emissor_ID = notificacao.EmissorID;
-                NN.Pessoa_Receptor_ID = notificacao.ReceptorID;
+                
+                NN.Pessoa_Emissor_ID = notificacao.Pessoa_Emissor_ID;
+                NN.Pessoa_Receptor_ID = notificacao.Pessoa_Receptor_ID;
                 NN.Assunto = notificacao.Assunto;
                 NN.Corpo = notificacao.Corpo;
                 NN.Lida = false;
 
-                Negocio_Pessoa NPReceptor = db.Negocio_Pessoa.Find(notificacao.ReceptorID);
+                Negocio_Pessoa NPReceptor = db.Negocio_Pessoa.Find(notificacao.Pessoa_Receptor_ID);
                 NPReceptor.Tot_Notif_NL = NPReceptor.Tot_Notif_NL + 1;
 
                 db.Negocio_Notificacao.Add(NN);
@@ -68,7 +66,7 @@ namespace NimbusACAD.Controllers
                 return RedirectToAction("Index");
             }
 
-            PopulatePessoaDropDownList(notificacao.ReceptorID);
+            PopulatePessoaDropDownList(notificacao.Pessoa_Receptor_ID);
             return View(notificacao);
         }
 

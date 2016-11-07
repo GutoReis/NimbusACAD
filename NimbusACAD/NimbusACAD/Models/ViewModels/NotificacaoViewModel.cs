@@ -8,6 +8,9 @@ namespace NimbusACAD.Models.ViewModels
 {
     public class EscreverNotifacaoViewModel
     {
+        [Key]
+        public int NotificacaoID { get; set; }
+
         [Required]
         [Display(Name = "De")]
         public int EmissorID { get; set; }

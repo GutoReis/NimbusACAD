@@ -1,0 +1,57 @@
+﻿@model IEnumerable<NimbusACAD.Models.DB.Negocio_Notificacao>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Assunto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Corpo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Negocio_Pessoa.Primeiro_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Negocio_Pessoa1.Primeiro_Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assunto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Corpo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Negocio_Pessoa.Primeiro_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Negocio_Pessoa1.Primeiro_Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Notificacao_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Notificacao_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Notificacao_ID })
+        </td>
+    </tr>
+}
+
+</table>

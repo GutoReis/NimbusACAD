@@ -1,0 +1,58 @@
+﻿@model NimbusACAD.Models.DB.Negocio_Notificacao
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Negocio_Notificacao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Assunto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Assunto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Corpo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Corpo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Negocio_Pessoa.Primeiro_Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Negocio_Pessoa.Primeiro_Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Negocio_Pessoa1.Primeiro_Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Negocio_Pessoa1.Primeiro_Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Notificacao_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
