@@ -67,5 +67,11 @@ namespace NimbusACAD.Models.DB
         public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerVinculoModuloViewModel> VerVinculoModuloViewModels { get; set; }
 
         public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerVinculoDisciplinaViewModel> VerVinculoDisciplinaViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.PerfilDeUsuarioViewModel> PerfilDeUsuarioViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.AlterarSenhaViewModel> AlterarSenhaViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.AlterarEnderecoViewModel> AlterarEnderecoViewModels { get; set; }
     }
 }

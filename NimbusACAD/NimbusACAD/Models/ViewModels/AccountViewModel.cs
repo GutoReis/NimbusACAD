@@ -130,7 +130,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class AlterarSenhaViewModel
     {
-        [Required]
+        [Key]
         [Display(Name = "Nova Senha")]
         public string Senha { get; set; }
 
@@ -143,6 +143,7 @@ namespace NimbusACAD.Models.ViewModels
     {
         //Infos de Negocio_Pessoa
         //Preenchido pelo sistema, não será alterado pelo usuário
+        [Key]
         public int PessoaID { get; set; } //Vale tanto para Negocio_Pessoa como para RBAC_Usuario
 
         [Required(ErrorMessage = "*")]
@@ -234,6 +235,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class AlterarEnderecoViewModel
     {
+        [Key]
         [Required(ErrorMessage = "*")]
         [Display(Name = "CEP")]
         public string CEP { get; set; }
