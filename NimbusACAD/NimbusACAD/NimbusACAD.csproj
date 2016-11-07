@@ -340,6 +340,10 @@
     <Content Include="Views\RBACUsuario\Deletar.cshtml" />
     <Content Include="Views\RBACUsuario\NovoPerfilDeAcesso.cshtml" />
     <Content Include="Views\RBACUsuario\RemoverPerfilDeAcessoConfirmacao.cshtml" />
+    <Content Include="Views\RBACPermissao\Index.cshtml" />
+    <Content Include="Views\RBACPermissao\NovaPermissao.cshtml" />
+    <Content Include="Views\RBACPermissao\Editar.cshtml" />
+    <Content Include="Views\RBACPermissao\Deletar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -358,7 +362,6 @@
     <Folder Include="Views\Mensagem\" />
     <Folder Include="Views\Modulo\" />
     <Folder Include="Views\RBACPerfil\" />
-    <Folder Include="Views\RBACPermissao\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
