@@ -187,12 +187,10 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovoFuncionario([Bind(Include = "PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, CEP, Logradouro, Numero, Bairro, Cidade, Estado, Pais")] RegistrarComumViewModel novaPessoa, [Bind(Include = "Funcionario_ID, Pessoa_ID, Cargo_ID")] Negocio_Funcionario funcionario)
+        public ActionResult NovoFuncionario([Bind(Include = "Funcionario_ID, Pessoa_ID, Cargo_ID")] Negocio_Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {
-                int pID = _userStore.AddPessoa(novaPessoa);
-                funcionario.Pessoa_ID = pID;
                 db.Negocio_Funcionario.Add(funcionario);
                 return RedirectToAction("Index");
             }
@@ -200,7 +198,7 @@ namespace NimbusACAD.Controllers
             //ViewBag.Pessoa_ID = new SelectList(db.Negocio_Pessoa, "Pessoa_ID", "Primeiro_Nome", negocio_Funcionario.Pessoa_ID);
             //ViewBag.Cargo_ID = new SelectList(db.Negocio_Tipo_Funcionario, "Tipo_Funcionario_ID", "Cargo", negocio_Funcionario.Cargo_ID);
             PopulateCargoDropDownList(funcionario.Cargo_ID);
-            return View(novaPessoa);
+            return View(funcionario);
         }
 
         // GET: Funcionario/Editar/5
@@ -270,15 +268,6 @@ namespace NimbusACAD.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         //GET: Funcionario/NovoDocumento
         [RBAC]
         public ActionResult NovoDocumento(int? pID)
@@ -300,25 +289,34 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovoDocumento([Bind(Include = "PessoaID, DocumentoID, OrgaoEmissor, DtEmissao, Cidade, Estado, Pais")]CurriculoViewModel curriculo)
+        public ActionResult NovoDocumento([Bind(Include = "Pessoa_ID, Documento_ID, Orgao_Emissor, Dt_Emissao, Cidade_Emissao, Estado_Emissao, Pais_Emissao")]Negocio_Curriculo curriculo)
         {
             if (ModelState.IsValid)
             {
                 Negocio_Curriculo NC = new Negocio_Curriculo();
-                NC.Pessoa_ID = curriculo.PessoaID;
-                NC.Documento_ID = curriculo.DocumentoID;
-                NC.Orgao_Emissor = curriculo.OrgaoEmissor;
-                NC.Dt_Emissao = curriculo.DtEmissao;
-                NC.Cidade_Emissao = curriculo.Cidade;
-                NC.Estado_Emissao = curriculo.Estado;
-                NC.Pais_Emissao = curriculo.Pais;
+                NC.Pessoa_ID = curriculo.Pessoa_ID;
+                NC.Documento_ID = curriculo.Documento_ID;
+                NC.Orgao_Emissor = curriculo.Orgao_Emissor;
+                NC.Dt_Emissao = curriculo.Dt_Emissao;
+                NC.Cidade_Emissao = curriculo.Cidade_Emissao;
+                NC.Estado_Emissao = curriculo.Estado_Emissao;
+                NC.Pais_Emissao = curriculo.Pais_Emissao;
 
                 db.Negocio_Curriculo.Add(NC);
                 db.SaveChanges();
-                return RedirectToAction("Detalhes", curriculo.PessoaID);
+                return RedirectToAction("Detalhes", curriculo.Pessoa_ID);
             }
-            PopulateDocumentoDropDownList(curriculo.DocumentoID);
+            PopulateDocumentoDropDownList(curriculo.Documento_ID);
             return View(curriculo);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
         private void PopulateCargoDropDownList(object selectedCargo = null)

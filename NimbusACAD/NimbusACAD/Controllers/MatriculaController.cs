@@ -600,7 +600,7 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovoDocumento([Bind(Include = "PessoaID, DocumentoID, OrgaoEmissor, DtEmissao, Cidade, Estado, Pais")]Negocio_Curriculo curriculo)
+        public ActionResult NovoDocumento([Bind(Include = "Pessoa_ID, Documento_ID, Orgao_Emissor, Dt_Emissao, Cidade_Emissao, Estado_Emissao, Pais_Emissao")]Negocio_Curriculo curriculo)
         {
             if (ModelState.IsValid)
             {
