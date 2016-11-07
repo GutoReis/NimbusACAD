@@ -377,6 +377,9 @@
     <Content Include="Views\Horario\DefinirHorario.cshtml" />
     <Content Include="Views\Horario\Editar.cshtml" />
     <Content Include="Views\Horario\Deletar.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Assinatura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -389,7 +392,6 @@
     <Folder Include="Views\Documento\" />
     <Folder Include="Views\Funcionario\" />
     <Folder Include="Views\Gerenciar\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
