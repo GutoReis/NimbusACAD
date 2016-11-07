@@ -49,5 +49,7 @@ namespace NimbusACAD.Models.DB
         public virtual DbSet<RBAC_Usuario> RBAC_Usuario { get; set; }
 
         public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.BloquearUsuarioViewModel> BloquearUsuarioViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerPerfilViewModel> VerPerfilViewModels { get; set; }
     }
 }

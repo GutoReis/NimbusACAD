@@ -344,6 +344,13 @@
     <Content Include="Views\RBACPermissao\NovaPermissao.cshtml" />
     <Content Include="Views\RBACPermissao\Editar.cshtml" />
     <Content Include="Views\RBACPermissao\Deletar.cshtml" />
+    <Content Include="Views\RBACPerfil\Index.cshtml" />
+    <Content Include="Views\RBACPerfil\Detalhes.cshtml" />
+    <Content Include="Views\RBACPerfil\NovoPerfilDeAcesso.cshtml" />
+    <Content Include="Views\RBACPerfil\Editar.cshtml" />
+    <Content Include="Views\RBACPerfil\Deletar.cshtml" />
+    <Content Include="Views\RBACPerfil\VincularPermissao.cshtml" />
+    <Content Include="Views\RBACPerfil\RemoverPermissao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -361,7 +368,6 @@
     <Folder Include="Views\Matricula\" />
     <Folder Include="Views\Mensagem\" />
     <Folder Include="Views\Modulo\" />
-    <Folder Include="Views\RBACPerfil\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

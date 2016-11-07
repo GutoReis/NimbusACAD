@@ -1,0 +1,26 @@
+﻿@model NimbusACAD.Models.ViewModels.VerPerfilViewModel
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>VerPerfilViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PerfilNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerfilNome)
+        </dd>
+        @* Fazer a lista de permissoes do perfil *@
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PerfilID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
