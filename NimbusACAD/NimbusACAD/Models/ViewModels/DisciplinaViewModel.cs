@@ -32,6 +32,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class VerDisciplinaViewModel
     {
+        [Key]
         public int DisciplinaID { get; set; }
 
         [Required]
