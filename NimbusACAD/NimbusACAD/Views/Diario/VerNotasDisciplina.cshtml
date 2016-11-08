@@ -1,0 +1,33 @@
+﻿@model IEnumerable<NimbusACAD.Models.ViewModels.ListaNotasDisciplinaViewModel>
+
+@{
+    ViewBag.Title = "VerNotasDisciplina";
+}
+
+<h2>VerNotasDisciplina</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinaNm)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinaNm)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DisciplinaID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DisciplinaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DisciplinaID })
+        </td>
+    </tr>
+}
+
+</table>

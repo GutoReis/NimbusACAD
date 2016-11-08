@@ -402,6 +402,15 @@
     <Content Include="Views\Disciplina\NovaDisciplina.cshtml" />
     <Content Include="Views\Disciplina\Editar.cshtml" />
     <Content Include="Views\Disciplina\Deletar.cshtml" />
+    <Content Include="Views\Diario\Index.cshtml" />
+    <Content Include="Views\Diario\Chamada.cshtml" />
+    <Content Include="Views\Diario\LancarNotas.cshtml" />
+    <Content Include="Views\Diario\CorrigirNota.cshtml" />
+    <Content Include="Views\Diario\ListarPresencas.cshtml" />
+    <Content Include="Views\Diario\RemoverPresenca.cshtml" />
+    <Content Include="Views\Diario\AdicionarPresenca.cshtml" />
+    <Content Include="Views\Diario\VerNotasAluno.cshtml" />
+    <Content Include="Views\Diario\VerNotasDisciplina.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -409,7 +418,6 @@
     <Folder Include="Views\Cargo\" />
     <Folder Include="Views\Curso\" />
     <Folder Include="Views\Desautorizado\" />
-    <Folder Include="Views\Diario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

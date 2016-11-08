@@ -1,0 +1,63 @@
+﻿@model IEnumerable<NimbusACAD.Models.DB.Negocio_Frequencia>
+
+@{
+    ViewBag.Title = "ListarPresencas";
+}
+
+<h2>ListarPresencas</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Dt_Aula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qtde_Aula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aula_Ministrada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Negocio_Disciplina.Disciplina_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Negocio_Matricula_Aluno.Matricula_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Negocio_Funcionario.Funcionario_ID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dt_Aula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qtde_Aula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aula_Ministrada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Negocio_Disciplina.Disciplina_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Negocio_Matricula_Aluno.Matricula_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Negocio_Funcionario.Funcionario_ID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Frequencia_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Frequencia_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Frequencia_ID })
+        </td>
+    </tr>
+}
+
+</table>
