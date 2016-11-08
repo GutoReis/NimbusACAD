@@ -31,6 +31,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class VerCursoViewModel
     {
+        [Key]
         public int CursoID { get; set; }
 
         [Required]
