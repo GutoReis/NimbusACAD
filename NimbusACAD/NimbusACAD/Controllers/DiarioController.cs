@@ -285,9 +285,22 @@ namespace NimbusACAD.Controllers
         //Ver notas de todas as disciplinas de um único aluno - VerVinculoDisciplinaViewModel
         //GET: Diario/VerNotasAluno
         [RBAC]
-        public ActionResult VerNotasAluno(int? matID)
+        public ActionResult VerNotasAluno(/*int? matID*/)
         {
-            if (matID == null)
+            //if (matID == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Negocio_Matricula_Aluno aluno = db.Negocio_Matricula_Aluno.Find(matID);
+            //if (aluno == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            var usuario = User.Identity as RBAC_Usuario;
+            var matID = usuario.Negocio_Pessoa.Negocio_Matricula_Aluno.Where(o => o.Ativo == true).FirstOrDefault().Matricula_ID;
+
+            if (matID == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
