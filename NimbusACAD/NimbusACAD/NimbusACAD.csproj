@@ -411,13 +411,13 @@
     <Content Include="Views\Diario\AdicionarPresenca.cshtml" />
     <Content Include="Views\Diario\VerNotasAluno.cshtml" />
     <Content Include="Views\Diario\VerNotasDisciplina.cshtml" />
+    <Content Include="Views\Desautorizado\Erro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Cargo\" />
     <Folder Include="Views\Curso\" />
-    <Folder Include="Views\Desautorizado\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
