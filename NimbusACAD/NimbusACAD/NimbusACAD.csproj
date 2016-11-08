@@ -412,12 +412,16 @@
     <Content Include="Views\Diario\VerNotasAluno.cshtml" />
     <Content Include="Views\Diario\VerNotasDisciplina.cshtml" />
     <Content Include="Views\Desautorizado\Erro.cshtml" />
+    <Content Include="Views\Curso\Index.cshtml" />
+    <Content Include="Views\Curso\Detalhes.cshtml" />
+    <Content Include="Views\Curso\NovoCurso.cshtml" />
+    <Content Include="Views\Curso\Editar.cshtml" />
+    <Content Include="Views\Curso\Deletar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Cargo\" />
-    <Folder Include="Views\Curso\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

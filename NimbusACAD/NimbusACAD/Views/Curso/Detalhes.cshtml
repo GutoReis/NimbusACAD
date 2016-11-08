@@ -1,0 +1,66 @@
+﻿@model NimbusACAD.Models.ViewModels.VerCursoViewModel
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>VerCursoViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CursoNm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CursoNm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Periodo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Periodo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoordenadorNM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoordenadorNM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoordenadorEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoordenadorEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CargaHoraria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CargaHoraria)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CursoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
