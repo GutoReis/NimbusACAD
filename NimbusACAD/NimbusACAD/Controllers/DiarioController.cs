@@ -21,6 +21,7 @@ namespace NimbusACAD.Controllers
             int profID = usuario.Negocio_Pessoa.Negocio_Funcionario.FirstOrDefault().Funcionario_ID;
 
             DisciplinasProfessorVIewModel DPVM = new DisciplinasProfessorVIewModel();
+            DPVM.ProfessorID = profID;
             ListaDisciplinaViewModel discVM;
             List<ListaDisciplinaViewModel> discList = new List<ListaDisciplinaViewModel>();
             foreach (var d in db.Negocio_Disciplina)
@@ -296,6 +297,9 @@ namespace NimbusACAD.Controllers
                 return HttpNotFound();
             }
 
+            ListarNotasAlunoViewModel LNAVM = new ListarNotasAlunoViewModel();
+            LNAVM.MatriculaID = aluno.Matricula_ID;
+
             List<NotasAlunoViewModel> lista = new List<NotasAlunoViewModel>();
             NotasAlunoViewModel nTemp;
             foreach (var vd in db.Negocio_Vinculo_Disciplina)
@@ -314,7 +318,9 @@ namespace NimbusACAD.Controllers
                     lista.Add(nTemp);
                 }
             }
-            return View(lista);
+            LNAVM.notas = lista;
+
+            return View(LNAVM);
         }
 
         //Ver notas de todos os alunos em uma única disciplina - NotasViewModel
