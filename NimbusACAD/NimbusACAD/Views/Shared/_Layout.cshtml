@@ -31,8 +31,76 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.HasPermission("Institucional"))
+                        {
+                            <li class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Institucional
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @if (User.HasPermission("Curso-Index")){<li>@Html.ActionLink("Curso", "Index", "Curso")</li>}
+                                    @if (User.HasPermission("Horario-Index")) {<li>@Html.ActionLink("Horario", "Index", "Horario")</li>}
+                                    @if (User.HasPermission("Matricula-Index")) {<li>@Html.ActionLink("Matricula", "Index", "Matricula")</li>}
+                                    @if (User.HasPermission("Diario-Index")) {<li>@Html.ActionLink("Diario", "Index", "Diario")</li>}
+                                </ul>
+                            </li>
+                        }
+
+                        if (User.HasPermission("Administrativo"))
+                        {
+                            <li class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Administrativo
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @if (User.HasPermission("Cargo-Index")){<li>@Html.ActionLink("Cargo", "Index", "Cargo")</li>}
+                                    @if (User.HasPermission("Documento-Index")){<li>@Html.ActionLink("Documentos", "Index", "Documento")</li>}
+                                    @if (User.HasPermission("Funcionario-Index")){<li>@Html.ActionLink("Funcionarios", "Index", "Funcionario")</li>}
+                                    @if (User.HasPermission("GerenciarSistema"))
+                                    {
+                                        <li class="dropdown">
+                                            Gerenciar Sistema
+                                            <span class="caret"></span>
+                                            <ul class="dropdown-menu">
+                                                @if (User.HasPermission("RBACPerfil-Index")) {<li>@Html.ActionLink("Perfis de Acesso", "Index", "RBACPerfil")</li>}
+                                                @if (User.HasPermission("RBACPermissao-Index")) {<li>@Html.ActionLink("Permissões", "Index", "RBACPermissao")</li>}
+                                                @if (User.HasPermission("RBACUsuario-Index")) {<li>@Html.ActionLink("Usuários", "Index", "RBACUsuario")</li>}
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        <li class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Gerenciar
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Mensagens", "Index", "Mensagem")</li>
+                                <li>@Html.ActionLink("Gerenciar", "Index", "Gerenciar")</li>
+                                <li>@Html.ActionLink("LogOut", "LogOff", "Account")</li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Entrar
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                                <li>@Html.ActionLink("Assinatura", "Assinatura", "Home")</li>
+                            </ul>
+                        </li>                        
+                    }
                 </ul>
             </div>
         </div>
