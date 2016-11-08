@@ -422,10 +422,13 @@
     <Content Include="Views\Cargo\NovoCargo.cshtml" />
     <Content Include="Views\Cargo\Editar.cshtml" />
     <Content Include="Views\Cargo\Deletar.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ConfirmarEmail.cshtml" />
+    <Content Include="Views\Account\EsqueceuSenha.cshtml" />
+    <Content Include="Views\Account\EsqueceuSenhaConfirmacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
