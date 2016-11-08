@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using NimbusACAD.Models.DB;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NimbusACAD.Models.ViewModels
 {
     //Frequencia --Automaticamente adicionar o valor de aulas a "Tot_Aulas_dadas" em Negocio_Disciplina
     public class FrequenciaViewModel
     {
-        [Required]
+        [Key][Column(Order = 0)]
         [Display(Name = "Disciplina")]
         public int DisciplinaID { get; set; }
 
-        [Required]
+        [Key][Column(Order = 1)]
         [Display(Name = "Professor")]
         public int ProfessorID { get; set; }
 
@@ -45,6 +46,7 @@ namespace NimbusACAD.Models.ViewModels
     //Notas
     public class ListaLancarNotaViewModel
     {
+        [Key]
         public int DisciplinaID { get; set; }
 
         [Required]
@@ -56,8 +58,10 @@ namespace NimbusACAD.Models.ViewModels
 
     public class LancarNotaViewModel
     {
-        public int MatriculaID { get; set; }
+        [Key]
         public int VinculoID { get; set; }
+
+        public int MatriculaID { get; set; }
 
         [Required]
         [Display(Name = "Aluno")]
@@ -114,6 +118,9 @@ namespace NimbusACAD.Models.ViewModels
 
     public class DisciplinasProfessorVIewModel
     {
+        [Key]
+        public int ProfessorID { get; set; }
+
         [Required]
         [Display(Name = "Disciplinas")]
         public virtual ICollection<ListaDisciplinaViewModel> disciplinas { get; set; }

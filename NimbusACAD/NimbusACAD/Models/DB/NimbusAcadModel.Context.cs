@@ -75,5 +75,9 @@ namespace NimbusACAD.Models.DB
         public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.AlterarEnderecoViewModel> AlterarEnderecoViewModels { get; set; }
 
         public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerFuncionarioViewModel> VerFuncionarioViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.ListarNotasAlunoViewModel> ListarNotasAlunoViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.ListaNotasDisciplinaViewModel> ListaNotasDisciplinaViewModels { get; set; }
     }
 }

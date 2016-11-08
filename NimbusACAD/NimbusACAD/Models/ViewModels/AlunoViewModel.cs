@@ -133,9 +133,18 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Horarios")]
         public virtual ICollection<ListaHorarioViewModel> horarios { get; set; }
     }
+    
+    public class ListarNotasAlunoViewModel
+    {
+        [Key]
+        public int MatriculaID { get; set; }
+
+        public virtual ICollection<NotasAlunoViewModel> notas { get; set; }
+    }
 
     public class NotasAlunoViewModel //DIARIO
     {
+        [Key]
         public int VinculoID { get; set; }
 
         [Required]
@@ -167,6 +176,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class ListaNotasDisciplinaViewModel
     {
+        [Key]
         public int DisciplinaID { get; set; }
 
         [Required]
@@ -178,6 +188,7 @@ namespace NimbusACAD.Models.ViewModels
 
     public class NotasDisciplinaViewModel
     {
+        [Key]
         public int VinculoID { get; set; }
 
         [Required]
