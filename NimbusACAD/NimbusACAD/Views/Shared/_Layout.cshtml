@@ -34,7 +34,7 @@
                     <li>@Html.ActionLink("Sobre", "About", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if (User.HasPermission("Institucional"))
+                        if (User.HasPermission("Institucional-menu"))
                         {
                             <li class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -44,13 +44,35 @@
                                 <ul class="dropdown-menu">
                                     @if (User.HasPermission("Curso-Index")){<li>@Html.ActionLink("Curso", "Index", "Curso")</li>}
                                     @if (User.HasPermission("Horario-Index")) {<li>@Html.ActionLink("Horario", "Index", "Horario")</li>}
-                                    @if (User.HasPermission("Matricula-Index")) {<li>@Html.ActionLink("Matricula", "Index", "Matricula")</li>}
-                                    @if (User.HasPermission("Diario-Index")) {<li>@Html.ActionLink("Diario", "Index", "Diario")</li>}
+                                    @if (User.HasPermission("Matricula-menu"))
+                                    {
+                                        <li class="dropdown">
+                                            Matricula
+                                            <span class="caret"></span>
+                                            <ul class="dropdown-menu">
+                                                @if (User.HasPermission("Matricula-Buscar")){<li>@Html.ActionLink("Buscar", "Index", "Matricula")</li>}
+                                                @if (User.HasPermission("Matricula-Criar")){<li>@Html.ActionLink("Matricular", "NovaPessoa", "Matricula")</li>}
+                                            </ul>
+                                        </li>
+                                    }
+                                    @if (User.HasPermission("Diario-menu"))
+                                    {
+                                        <li class="dropdown">
+                                            Diário de classe
+                                            <span class="caret"></span>
+                                            <ul class="dropdown-menu">
+                                                @if (User.HasPermission("Diario-Index")){<li>@Html.ActionLink("Diário de classe", "Index", "Diario")</li>}
+                                                @if (User.HasPermission("Diario-ListarPresenca")){<li>@Html.ActionLink("Listar Presenças", "ListarPresencas", "Diario")</li>}
+                                                @if (User.HasPermission("Diario-VerNotasAluno")){<li>@Html.ActionLink("Ver notas por aluno", "VerNotasAluno", "Diario")</li>}
+                                                @if (User.HasPermission("Diario-VerNotasDisciplinas")){<li>@Html.ActionLink("Ver notas por disciplina", "VerNotasDisciplina", "Diario")</li>}
+                                            </ul>
+                                        </li>
+                                    }
                                 </ul>
                             </li>
                         }
 
-                        if (User.HasPermission("Administrativo"))
+                        if (User.HasPermission("Administrativo-menu"))
                         {
                             <li class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -60,8 +82,18 @@
                                 <ul class="dropdown-menu">
                                     @if (User.HasPermission("Cargo-Index")){<li>@Html.ActionLink("Cargo", "Index", "Cargo")</li>}
                                     @if (User.HasPermission("Documento-Index")){<li>@Html.ActionLink("Documentos", "Index", "Documento")</li>}
-                                    @if (User.HasPermission("Funcionario-Index")){<li>@Html.ActionLink("Funcionarios", "Index", "Funcionario")</li>}
-                                    @if (User.HasPermission("GerenciarSistema"))
+                                    @if (User.HasPermission("Funcionario-menu"))
+                                    {
+                                        <li class="dropdown">
+                                            Funcionário
+                                            <span class="caret"></span>
+                                            <ul class="dropdown-menu">
+                                                @if (User.HasPermission("Funcionario-Index")){<li>@Html.ActionLink("Funcionarios", "Index", "Funcionario")</li>}
+                                                @if (User.HasPermission("Funcionario-Criar")){<li>@Html.ActionLink("Cadastrar", "NovaPessoa", "Funcionario")</li>}
+                                            </ul>
+                                        </li>
+                                    }
+                                    @if (User.HasPermission("GerenciarSistema-menu"))
                                     {
                                         <li class="dropdown">
                                             Gerenciar Sistema
