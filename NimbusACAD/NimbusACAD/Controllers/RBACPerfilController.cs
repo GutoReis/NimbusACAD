@@ -185,13 +185,13 @@ namespace NimbusACAD.Controllers
         //Remover permissão
         //GET: RBACPerfil/RemoverPermissao/5
         [RBAC]
-        public ActionResult RemoverPermissao(int? id)
+        public ActionResult RemoverPermissao(int? pfid, int? pmid)
         {
-            if (id == null)
+            if (pfid == null || pmid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RBAC_Link_Perfil_Permissao lpp = db.RBAC_Link_Perfil_Permissao.Where(o => o.Perfil_ID == id).FirstOrDefault();
+            RBAC_Link_Perfil_Permissao lpp = db.RBAC_Link_Perfil_Permissao.Where(o => o.Perfil_ID == pfid && o.Permissao_ID == pmid).FirstOrDefault();
             if (lpp == null)
             {
                 return HttpNotFound();
