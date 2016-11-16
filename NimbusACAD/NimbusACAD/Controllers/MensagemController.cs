@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
-using NimbusACAD.Models.ViewModels;
 using System.Net;
 
 namespace NimbusACAD.Controllers
@@ -51,7 +50,7 @@ namespace NimbusACAD.Controllers
             {
                 Negocio_Notificacao NN = new Negocio_Notificacao();
                 
-                NN.Pessoa_Emissor_ID = notificacao.Pessoa_Emissor_ID;
+                NN.Pessoa_Emissor_ID = GetPessoaId();
                 NN.Pessoa_Receptor_ID = notificacao.Pessoa_Receptor_ID;
                 NN.Assunto = notificacao.Assunto;
                 NN.Corpo = notificacao.Corpo;
@@ -113,7 +112,7 @@ namespace NimbusACAD.Controllers
             var pessoaQuery = from c in db.Negocio_Pessoa
                               orderby c.Primeiro_Nome
                               select c;
-            ViewBag.Pessoa_ID = new SelectList(pessoaQuery,
+            ViewBag.Pessoas = new SelectList(pessoaQuery,
                 "Pessoa_ID", "Primeiro_Nome" + "Sobrenome", selectedPessoa);
         }
     }
