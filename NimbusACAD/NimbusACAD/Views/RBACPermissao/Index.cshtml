@@ -4,10 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nova permissao", "NovaPermissao")
 </p>
 <table class="table">
     <tr>
@@ -23,9 +21,8 @@
             @Html.DisplayFor(modelItem => item.Permissao_Nome)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Permissao_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Permissao_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Permissao_ID })
+            @Html.ActionLink("Editar", "Editar", new { id=item.Permissao_ID }) |
+            @Html.ActionLink("Deletar", "Deletar", new { id=item.Permissao_ID })
         </td>
     </tr>
 }
