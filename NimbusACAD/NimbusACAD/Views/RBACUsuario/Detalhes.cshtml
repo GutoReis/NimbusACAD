@@ -7,68 +7,46 @@
 <h2>Detalhes</h2>
 
 <div>
-    <h4>RBAC_Usuario</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Username)</dt>
+        <dd>@Html.DisplayFor(model => model.Username)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Negocio_Pessoa.Primeiro_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Negocio_Pessoa.Primeiro_Nome)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Senha_Hash)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Negocio_Pessoa.Sobrenome)</dt>
+        <dd>@Html.DisplayFor(model => model.Negocio_Pessoa.Sobrenome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Senha_Hash)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Dt_Criacao)</dt>
+        <dd>@Html.DisplayFor(model => model.Dt_Criacao)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Salt)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Dt_Ultima_Modif)</dt>
+        <dd>@Html.DisplayFor(model => model.Dt_Ultima_Modif)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Salt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Dt_Criacao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Dt_Criacao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Dt_Ultima_Modif)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Dt_Ultima_Modif)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Bloqueado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bloqueado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Negocio_Pessoa.Primeiro_Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Negocio_Pessoa.Primeiro_Nome)
-        </dd>
-
+        <dt>@Html.DisplayNameFor(model => model.Bloqueado)</dt>
+        <dd>@Html.DisplayFor(model => model.Bloqueado)</dd>
     </dl>
 </div>
+
+<p>Perfis de acesso</p>
+<table class="table">
+    @foreach(var item in Model.RBAC_Link_Usuario_Perfil)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.RBAC_Perfil.Perfil_Nome)</td>
+            <td>@Html.ActionLink("Remover perfil de acesso", "RemoverPerfilDeAcesso", new { id = item.Link_ID })</td>
+        </tr>
+    }
+</table>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Usuario_ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Adicionar perfil de acesso", "NovoPerfilDeAcesso", new { id = Model.Usuario_ID }) | 
+    @Html.ActionLink("Bloquear", "Bloquear", new { id = Model.Usuario_ID }) | 
+    @Html.ActionLink("Deletar", "Deletar", new { id = Model.Usuario_ID}) | 
+    @Html.ActionLink("Voltar", "Index")
 </p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

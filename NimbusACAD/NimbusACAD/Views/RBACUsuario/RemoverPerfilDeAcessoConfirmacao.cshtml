@@ -1,39 +1,20 @@
 ﻿@model NimbusACAD.Models.DB.RBAC_Link_Usuario_Perfil
 
 @{
-    ViewBag.Title = "RemoverPerfilDeAcessoConfirmacao";
+    ViewBag.Title = "RemoverPerfilDeAcesso";
 }
 
-<h2>RemoverPerfilDeAcessoConfirmacao</h2>
+<h2>Remover Perfil De Acesso</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem certeza de que desejar desvincular o usuário deste perfil?</h3>
 <div>
-    <h4>RBAC_Link_Usuario_Perfil</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Link_ID)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.RBAC_Perfil.Perfil_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.RBAC_Perfil.Perfil_Nome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Link_ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RBAC_Perfil.Perfil_Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RBAC_Perfil.Perfil_Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RBAC_Usuario.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RBAC_Usuario.Username)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.RBAC_Usuario.Username)</dt>
+        <dd>@Html.DisplayFor(model => model.RBAC_Usuario.Username)</dd>
 
     </dl>
 
@@ -41,8 +22,12 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Desvincular perfil" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Detalhes", new { id = Model.Usuario_ID })
         </div>
     }
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
