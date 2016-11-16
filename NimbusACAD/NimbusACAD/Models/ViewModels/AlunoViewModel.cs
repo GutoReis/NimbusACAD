@@ -63,6 +63,8 @@ namespace NimbusACAD.Models.ViewModels
         [Key]
         public int VinculoID { get; set; }
 
+        public int MatID { get; set; }
+
         [Required]
         [Display(Name = "Modulo")]
         public string ModuloNM { get; set; }
@@ -96,6 +98,9 @@ namespace NimbusACAD.Models.ViewModels
         [Key]
         [Display(Name = "Disciplina")]
         public string DisciplinaNm { get; set; }
+
+        public int MatriculaID { get; set; }
+        public int VinculoID { get; set; }
 
         [Required]
         [Display(Name = "Professor")]

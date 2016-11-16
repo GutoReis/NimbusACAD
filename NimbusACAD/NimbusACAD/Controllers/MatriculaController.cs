@@ -423,6 +423,7 @@ namespace NimbusACAD.Controllers
 
             VerVinculoModuloViewModel VVMVM = new VerVinculoModuloViewModel();
             VVMVM.VinculoID = vinculo.Vinculo_ID;
+            VVMVM.MatID = vinculo.Matricula_ID;
             VVMVM.ModuloNM = vinculo.Negocio_Modulo.Modulo_Nome;
             VVMVM.StatusVinculo = vinculo.Status_Vinculo;
             
@@ -446,13 +447,13 @@ namespace NimbusACAD.Controllers
         //Editar vinculo modulo
         //GET: Matricula/EditarVinculoModulo
         [RBAC]
-        public ActionResult EditarVinculoModulo(int? matID, int? modID)
+        public ActionResult EditarVinculoModulo(int? vmID)
         {
-            if (matID == null || modID == null)
+            if (vmID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Vinculo_Modulo vm = db.Negocio_Vinculo_Modulo.Where(o => o.Matricula_ID == matID && o.Modulo_ID == modID).FirstOrDefault();
+            Negocio_Vinculo_Modulo vm = db.Negocio_Vinculo_Modulo.Find(vmID);
             if (vm == null)
             {
                 return HttpNotFound();
@@ -529,6 +530,8 @@ namespace NimbusACAD.Controllers
             VVDVM.MediaFinal = vinculo.Media_Final.Value;
             VVDVM.TotAulasDadas = vinculo.Negocio_Disciplina.Tot_Aulas_Dadas.Value;
             VVDVM.Frequencia = vinculo.Frequencia.Value;
+            VVDVM.VinculoID = vinculo.Vinculo_ID;
+            VVDVM.MatriculaID = vinculo.Matricula_ID;
 
             ListaHorarioViewModel hTemp;
             List<ListaHorarioViewModel> listTemp = new List<ListaHorarioViewModel>();
@@ -552,13 +555,13 @@ namespace NimbusACAD.Controllers
         //Remover VinculoDisciplina
         //GET: Matricula/RemoverVinculoDisciplina
         [RBAC]
-        public ActionResult RemoverVinculoDisciplina(int? discID, int? matID)
+        public ActionResult RemoverVinculoDisciplina(int? vdID)
         {
-            if (discID == null || matID == null)
+            if (vdID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Vinculo_Disciplina vinculo = db.Negocio_Vinculo_Disciplina.Where(o => o.Disciplina_ID == discID && o.Matricula_ID == matID).FirstOrDefault();
+            Negocio_Vinculo_Disciplina vinculo = db.Negocio_Vinculo_Disciplina.Find(vdID);
             if (vinculo == null)
             {
                 return HttpNotFound();
@@ -643,7 +646,7 @@ namespace NimbusACAD.Controllers
             var cursoQuery = from c in db.Negocio_Curso
                              orderby c.Curso_Nome
                              select c;
-            ViewBag.Curso_ID = new SelectList(cursoQuery,
+            ViewBag.Cursos = new SelectList(cursoQuery,
                 "Curso_ID", "Curso_Nome", selectedCurso);
             return cursoQuery.FirstOrDefault().Curso_ID;
         }
@@ -657,7 +660,7 @@ namespace NimbusACAD.Controllers
                               where m.Curso_ID == cursoMatriculaQuery.FirstOrDefault()
                               orderby m.Modulo_Nome
                               select m;
-            ViewBag.Modulo_ID = new SelectList(moduloQuery, "Modulo_ID", "Modulo_Nome", selectedModulo);
+            ViewBag.Modulos = new SelectList(moduloQuery, "Modulo_ID", "Modulo_Nome", selectedModulo);
         }
 
         private void PopulateModuloMatriculaDropDownList(int cID, object selectedModulo = null)
@@ -678,7 +681,7 @@ namespace NimbusACAD.Controllers
                                   where d.Negocio_Modulo.Curso_ID == cursoMatriculaQuery.FirstOrDefault()
                                   orderby d.Disciplina_Nome
                                   select d;
-            ViewBag.Disciplina_ID = new SelectList(disciplinaQuery, "Disciplina_ID", "Disciplina_Nome", selectedDisciplina);
+            ViewBag.Disciplinas = new SelectList(disciplinaQuery, "Disciplina_ID", "Disciplina_Nome", selectedDisciplina);
         }
 
         private void PopulateDocumentosDropDownList(object selectedDocumento = null)
@@ -686,7 +689,7 @@ namespace NimbusACAD.Controllers
             var documentoQuery = from d in db.Negocio_Documento
                                  orderby d.Documento_Nome
                                  select d;
-            ViewBag.Documento_ID = new SelectList(documentoQuery, "Documento_ID", "Documento_Nome", selectedDocumento);
+            ViewBag.Documentos = new SelectList(documentoQuery, "Documento_ID", "Documento_Nome", selectedDocumento);
         }
 
         private void PopulatePerfilDropDownList(object selectedPerfil = null)
@@ -694,7 +697,7 @@ namespace NimbusACAD.Controllers
             var perfilQuery = from p in db.RBAC_Perfil
                               orderby p.Perfil_Nome
                               select p;
-            ViewBag.Perfil_ID = new SelectList(perfilQuery, "Perfil_ID", "Perfil_Nome", selectedPerfil);
+            ViewBag.Perfis = new SelectList(perfilQuery, "Perfil_ID", "Perfil_Nome", selectedPerfil);
         }
     }
 }
