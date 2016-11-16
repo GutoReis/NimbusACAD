@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo Perfil", "NovoPerfilDeAcesso")
 </p>
 <table class="table">
     <tr>
@@ -29,11 +29,13 @@
             @Html.DisplayFor(modelItem => item.Descricao)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Perfil_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Perfil_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Perfil_ID })
+            @Html.ActionLink("Detalhes", "Detalhes", new { id=item.Perfil_ID })
         </td>
     </tr>
 }
 
 </table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

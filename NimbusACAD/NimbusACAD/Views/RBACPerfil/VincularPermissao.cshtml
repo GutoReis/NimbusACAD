@@ -4,7 +4,7 @@
     ViewBag.Title = "VincularPermissao";
 }
 
-<h2>VincularPermissao</h2>
+<h2>Vincular Permissao</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,13 +12,12 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RBAC_Link_Perfil_Permissao</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Perfil_ID, "Perfil_ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Perfil_ID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DisplayFor(model => model.Perfil_ID)
                 @Html.ValidationMessageFor(model => model.Perfil_ID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,14 +32,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Vincular" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar", "Detalhes", new { id = Model.Perfil_ID })
 </div>
 
 @section Scripts {

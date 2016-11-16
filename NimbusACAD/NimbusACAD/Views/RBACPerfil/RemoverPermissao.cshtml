@@ -4,36 +4,17 @@
     ViewBag.Title = "RemoverPermissao";
 }
 
-<h2>RemoverPermissao</h2>
+<h2>Remover Permissao</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Você tem certeza de que deseja desvincular essa permissão, esta operação não poderá ser desfeita?</h3>
 <div>
-    <h4>RBAC_Link_Perfil_Permissao</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Link_ID)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.RBAC_Perfil.Perfil_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.RBAC_Perfil.Perfil_Nome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Link_ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RBAC_Perfil.Perfil_Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RBAC_Perfil.Perfil_Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RBAC_Permissao.Permissao_Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RBAC_Permissao.Permissao_Nome)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.RBAC_Permissao.Permissao_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.RBAC_Permissao.Permissao_Nome)</dd>
 
     </dl>
 
@@ -41,8 +22,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Deletar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Detalhes", new { id = Model.Perfil_ID })
         </div>
     }
 </div>

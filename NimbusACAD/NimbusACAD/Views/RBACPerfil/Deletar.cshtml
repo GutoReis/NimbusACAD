@@ -6,35 +6,27 @@
 
 <h2>Deletar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Você tem certeza de que deseja deletar essa perfil, esta operação não podera ser desfeita?</h3>
 <div>
-    <h4>RBAC_Perfil</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Perfil_Nome)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Perfil_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Perfil_Nome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Perfil_Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-
+        <dt>@Html.DisplayNameFor(model => model.Descricao)</dt>
+        <dd>@Html.DisplayFor(model => model.Descricao)</dd>
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Deletar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Detalhes", new { id = Model.Perfil_ID })
         </div>
     }
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
