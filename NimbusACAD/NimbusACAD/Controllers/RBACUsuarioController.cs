@@ -150,7 +150,7 @@ namespace NimbusACAD.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RBAC_Link_Usuario_Perfil lup = db.RBAC_Link_Usuario_Perfil.Where(o => o.Usuario_ID == id).FirstOrDefault();
+            RBAC_Link_Usuario_Perfil lup = db.RBAC_Link_Usuario_Perfil.Find(id);
             if (lup == null)
             {
                 return HttpNotFound();
