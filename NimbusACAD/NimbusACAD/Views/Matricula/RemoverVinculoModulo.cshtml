@@ -6,42 +6,18 @@
 
 <h2>RemoverVinculoModulo</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Você tem certeza de que deseja remover este vínculo, esta operação não poderá ser desfeita?</h3>
 <div>
-    <h4>Negocio_Vinculo_Modulo</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Vinculo_ID)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Negocio_Modulo.Modulo_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Negocio_Modulo.Modulo_Nome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Vinculo_ID)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status_Vinculo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status_Vinculo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Negocio_Matricula_Aluno.Matricula_ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Negocio_Matricula_Aluno.Matricula_ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Negocio_Modulo.Modulo_Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Negocio_Modulo.Modulo_Nome)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Status_Vinculo)</dt>
+        <dd>@Html.DisplayFor(model => model.Status_Vinculo)</dd>
 
     </dl>
 
@@ -49,8 +25,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Remover" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "VerVinculoModulo", new { id = Model.Vinculo_ID })
         </div>
     }
 </div>

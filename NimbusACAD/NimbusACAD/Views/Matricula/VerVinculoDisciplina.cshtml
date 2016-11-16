@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NimbusACAD.Models.ViewModels.VerVinculoDisciplinaViewModel>
+﻿@model NimbusACAD.Models.ViewModels.VerVinculoDisciplinaViewModel
 
 @{
     ViewBag.Title = "VerVinculoDisciplina";
@@ -6,70 +6,58 @@
 
 <h2>VerVinculoDisciplina</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.DisciplinaNm)</dt>
+        <dd>@Html.DisplayFor(model => model.DisciplinaNm)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Professor)</dt>
+        <dd>@Html.DisplayFor(model => model.Professor)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.NmAluno)</dt>
+        <dd>@Html.DisplayFor(model => model.NmAluno)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.TotAulasDadas)</dt>
+        <dd>@Html.DisplayFor(model => model.TotAulasDadas)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Frequencia)</dt>
+        <dd>@Html.DisplayFor(model => model.Frequencia)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Nota1)</dt>
+        <dd>@Html.DisplayFor(model => model.Nota1)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Nota2)</dt>
+        <dd>@Html.DisplayFor(model => model.Nota2)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.MediaFinal)</dt>
+        <dd>@Html.DisplayFor(model => model.MediaFinal)</dd>
+    </dl>
+</div>
+
+<p>Horários dessa disciplina</p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Professor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NmAluno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumChamada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nota1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nota2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MediaFinal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotAulasDadas)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Frequencia)
-        </th>
-        <th></th>
+        <th>Dia</th>
+        <th>Inicio</th>
+        <th>Fim</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Professor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NmAluno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumChamada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nota1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nota2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MediaFinal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotAulasDadas)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Frequencia)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DisciplinaNm }) |
-            @Html.ActionLink("Details", "Details", new { id=item.DisciplinaNm }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DisciplinaNm })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model.horarios)
+    {
+        <tr>
+            <th>@Html.DisplayFor(modelItem => item.DiaSemana)</th>
+            <th>@Html.DisplayFor(modelItem => item.HoraInicio)</th>
+            <th>@Html.DisplayFor(modelItem => item.HoraFim)</th>
+        </tr>
+    }
 </table>
+
+<p>
+    @Html.ActionLink("Remover vinculo", "RemoverVinculoDisciplina", new { id = Model.VinculoID}) | 
+    @Html.ActionLink("Voltar", "VerAluno", new { id = Model.MatriculaID})
+</p>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
