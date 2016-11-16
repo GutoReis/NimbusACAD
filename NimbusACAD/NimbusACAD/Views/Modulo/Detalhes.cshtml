@@ -7,52 +7,43 @@
 <h2>Detalhes</h2>
 
 <div>
-    <h4>VerModuloViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CursoNM)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.CursoNM)</dt>
+        <dd>@Html.DisplayFor(model => model.CursoNM)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CursoNM)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.ModuloNome)</dt>
+        <dd>@Html.DisplayFor(model => model.ModuloNome)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ModuloNome)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.MaxAlunos)</dt>
+        <dd>@Html.DisplayFor(model => model.MaxAlunos)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ModuloNome)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.TotAlunos)</dt>
+        <dd>@Html.DisplayFor(model => model.TotAlunos)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxAlunos)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaxAlunos)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TotAlunos)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotAlunos)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CargaHoraria)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CargaHoraria)
-        </dd>
-
+        <dt>@Html.DisplayNameFor(model => model.CargaHoraria)</dt>
+        <dd>@Html.DisplayFor(model => model.CargaHoraria)</dd>
     </dl>
 </div>
+
+<p>Disciplinas</p>
+<p>@Html.ActionLink("Nova disciplina", "NovaDisciplina", "Disciplina", new { id = Model.ModuloID })</p>
+<div>
+    <table class="table">
+        @foreach (var item in Model.disciplinas)
+        {
+            <tr>@Html.DisplayFor(modelItem => item.DisciplinaNM)</tr>
+            <tr>@Html.ActionLink("Detalhes", "Detalhes", "Disciplina", new { id = item.DisciplinaID })</tr>
+        }
+    </table>
+</div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ModuloID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Editar", new { id = Model.ModuloID }) | 
+    @Html.ActionLink("Deletar", "Deletar", new { id = Model.ModuloID}) | 
+    @Html.ActionLink("Voltar para o curso", "Detalhes", "Curso", new { id = Model.CursoID })
 </p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
