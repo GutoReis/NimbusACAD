@@ -11,8 +11,7 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Negocio_Documento
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +21,6 @@ namespace NimbusACAD.Models.DB
             this.Negocio_Doc_Devente = new HashSet<Negocio_Doc_Devente>();
         }
     
-        [Key]
         public int Documento_ID { get; set; }
         public string Documento_Nome { get; set; }
     

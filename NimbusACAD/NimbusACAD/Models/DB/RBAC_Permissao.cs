@@ -11,8 +11,7 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class RBAC_Permissao
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +20,6 @@ namespace NimbusACAD.Models.DB
             this.RBAC_Link_Perfil_Permissao = new HashSet<RBAC_Link_Perfil_Permissao>();
         }
     
-        [Key]
         public int Permissao_ID { get; set; }
         public string Permissao_Nome { get; set; }
     

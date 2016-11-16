@@ -11,11 +11,9 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Negocio_Quadro_Horario
     {
-        [Key]
         public int Quadro_Horario_ID { get; set; }
         public int Disciplina_ID { get; set; }
         public string Dia_Semana { get; set; }

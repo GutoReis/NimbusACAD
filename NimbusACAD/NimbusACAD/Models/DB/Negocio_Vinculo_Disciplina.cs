@@ -11,11 +11,9 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Negocio_Vinculo_Disciplina
     {
-        [Key]
         public int Vinculo_ID { get; set; }
         public int Disciplina_ID { get; set; }
         public int Matricula_ID { get; set; }

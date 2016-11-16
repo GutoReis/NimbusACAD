@@ -47,37 +47,5 @@ namespace NimbusACAD.Models.DB
         public virtual DbSet<RBAC_Perfil> RBAC_Perfil { get; set; }
         public virtual DbSet<RBAC_Permissao> RBAC_Permissao { get; set; }
         public virtual DbSet<RBAC_Usuario> RBAC_Usuario { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.BloquearUsuarioViewModel> BloquearUsuarioViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerPerfilViewModel> VerPerfilViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerModuloViewModel> VerModuloViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.RegistrarComumViewModel> RegistrarComumViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.CurriculoViewModel> CurriculoViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.RegistrarAlunoViewModel> RegistrarAlunoViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.CriarVinculoDisciplinaViewModel> CriarVinculoDisciplinaViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerAlunoViewModel> VerAlunoViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerVinculoModuloViewModel> VerVinculoModuloViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerVinculoDisciplinaViewModel> VerVinculoDisciplinaViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.PerfilDeUsuarioViewModel> PerfilDeUsuarioViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.AlterarSenhaViewModel> AlterarSenhaViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.AlterarEnderecoViewModel> AlterarEnderecoViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.VerFuncionarioViewModel> VerFuncionarioViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.ListarNotasAlunoViewModel> ListarNotasAlunoViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<NimbusACAD.Models.ViewModels.ListaNotasDisciplinaViewModel> ListaNotasDisciplinaViewModels { get; set; }
     }
 }

@@ -11,8 +11,7 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Negocio_Pessoa
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,7 +26,6 @@ namespace NimbusACAD.Models.DB
             this.RBAC_Usuario = new HashSet<RBAC_Usuario>();
         }
     
-        [Key]
         public int Pessoa_ID { get; set; }
         public string Primeiro_Nome { get; set; }
         public string Sobrenome { get; set; }

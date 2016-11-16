@@ -11,8 +11,7 @@ namespace NimbusACAD.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Negocio_Tipo_Funcionario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +20,6 @@ namespace NimbusACAD.Models.DB
             this.Negocio_Funcionario = new HashSet<Negocio_Funcionario>();
         }
     
-        [Key]
         public int Tipo_Funcionario_ID { get; set; }
         public string Cargo { get; set; }
         public string Descricao { get; set; }
