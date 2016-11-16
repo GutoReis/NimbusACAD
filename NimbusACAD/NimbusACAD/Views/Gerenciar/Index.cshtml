@@ -1,117 +1,63 @@
-﻿@model IEnumerable<NimbusACAD.Models.ViewModels.PerfilDeUsuarioViewModel>
+﻿@model NimbusACAD.Models.ViewModels.PerfilDeUsuarioViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div>
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.PrimeiroNome)</dt>
+        <dd>@Html.DisplayFor(model => model.PrimeiroNome)</dd>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PrimeiroNome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sobrenome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CPF)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RG)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sexo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DtNascimento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TelPrincipal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TelSecundario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotNotifNL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndCompleto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UsuarioID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DtModif)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bloqueado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Perfil)
-        </th>
-        <th></th>
-    </tr>
+        <dt>@Html.DisplayNameFor(model => model.Sobrenome)</dt>
+        <dd>@Html.DisplayFor(model => model.Sobrenome)</dd>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrimeiroNome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sobrenome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CPF)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RG)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sexo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DtNascimento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TelPrincipal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TelSecundario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotNotifNL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndCompleto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsuarioID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DtModif)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bloqueado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Perfil)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PessoaID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PessoaID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PessoaID })
-        </td>
-    </tr>
+        <dt>@Html.DisplayNameFor(model => model.CPF)</dt>
+        <dd>@Html.DisplayFor(model => model.CPF)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.RG)</dt>
+        <dd>@Html.DisplayFor(model => model.RG)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Sexo)</dt>
+        <dd>@Html.DisplayFor(model => model.Sexo)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.DtNascimento)</dt>
+        <dd>@Html.DisplayFor(model => model.DtNascimento)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.TelPrincipal)</dt>
+        <dd>@Html.DisplayFor(model => model.TelPrincipal)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.TelSecundario)</dt>
+        <dd>@Html.DisplayFor(model => model.TelSecundario)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.EndCompleto)</dt>
+        <dd>@Html.DisplayFor(model => model.EndCompleto)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+        <dd>@Html.DisplayFor(model => model.Email)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.DtModif)</dt>
+        <dd>@Html.DisplayFor(model => model.DtModif)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.TotNotifNL)</dt>
+        <dd>@Html.DisplayFor(model => model.TotNotifNL)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Bloqueado)</dt>
+        <dd>@Html.DisplayFor(model => model.Bloqueado)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Perfil)</dt>
+        <dd>@Html.DisplayFor(model => model.Perfil)</dd>
+    </dl>
+</div>
+
+<div>
+    <p>
+        @Html.ActionLink("Alterar Senha", "AlterarSenha") |
+        @Html.ActionLink("Editar Perfil", "EditarPerfil", new { email = Model.Email }) |
+        @Html.ActionLink("Editar Endereço", "EditarEndereco", new { id = Model.PessoaID })
+    </p>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
-
-</table>
