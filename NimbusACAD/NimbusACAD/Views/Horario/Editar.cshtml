@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Negocio_Quadro_Horario</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Quadro_Horario_ID)
@@ -28,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Dia_Semana, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Dia_Semana, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Dia_Semana, new SelectList("Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Dia_Semana, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,15 +50,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
