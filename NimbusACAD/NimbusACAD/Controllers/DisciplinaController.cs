@@ -92,7 +92,7 @@ namespace NimbusACAD.Controllers
             }
 
             //ViewBag.Professor_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Disciplina.Professor_ID);
-            ViewBag.Modulo_ID = new SelectList(db.Negocio_Modulo, "Modulo_ID", "Modulo_Nome", negocio_Disciplina.Modulo_ID);
+            //ViewBag.Modulo_ID = new SelectList(db.Negocio_Modulo, "Modulo_ID", "Modulo_Nome", negocio_Disciplina.Modulo_ID);
             PopulateFuncionarioDropDown(negocio_Disciplina.Professor_ID);
             return View(negocio_Disciplina);
         }
@@ -176,7 +176,7 @@ namespace NimbusACAD.Controllers
             var funcionarioQuery = from f in db.Negocio_Funcionario
                                    orderby f.Negocio_Pessoa.Primeiro_Nome
                                    select f;
-            ViewBag.Funcionario_ID = new SelectList(funcionarioQuery,
+            ViewBag.Funcionarios = new SelectList(funcionarioQuery,
                 "Funcionario_ID", "Negocio_Pessoa.Primeiro_Nome" + " " + "Negocio_Pessoa.Sobrenome", selectedFuncionario);
         }
     }
