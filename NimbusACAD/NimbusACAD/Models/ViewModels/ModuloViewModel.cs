@@ -30,7 +30,7 @@ namespace NimbusACAD.Models.ViewModels
         [Key]
         public int ModuloID { get; set; }
 
-        public int CursoID { get; set}
+        public int CursoID { get; set; }
 
         [Required]
         [Display(Name = "Curso")]
