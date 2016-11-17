@@ -7,60 +7,50 @@
 <h2>Detalhes</h2>
 
 <div>
-    <h4>VerDisciplinaViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ModuloNM)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.ModuloNM)</dt>
+        <dd>@Html.DisplayFor(model => model.ModuloNM)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ModuloNM)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.DisciplinaNM)</dt>
+        <dd>@Html.DisplayFor(model => model.DisciplinaNM)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DisciplinaNM)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Descricao)</dt>
+        <dd>@Html.DisplayFor(model => model.Descricao)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DisciplinaNM)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.ProfessorNM)</dt>
+        <dd>@Html.DisplayFor(model => model.ProfessorNM)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+        <dd>@Html.DisplayFor(model => model.Email)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProfessorNM)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProfessorNM)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CargaHoraria)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CargaHoraria)
-        </dd>
-
+        <dt>@Html.DisplayNameFor(model => model.CargaHoraria)</dt>
+        <dd>@Html.DisplayFor(model => model.CargaHoraria)</dd>
     </dl>
 </div>
+
+<p>Horários da disciplina</p>
+<p>@Html.ActionLink("Definir novo horário", "DefinirHorario", "Horario", new { id = Model.DisciplinaID })</p>
+<table class="table">
+    <tr>
+        <td>Dia</td>
+        <td>Inicio</td>
+        <td>Fim</td>
+        <td></td>
+    </tr>
+
+    @foreach (var item in Model.horariosAula)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.DiaSemana)</td>
+            <td>@Html.DisplayFor(modelItem => item.HoraInicio)</td>
+            <td>@Html.DisplayFor(modelItem => item.HoraFim)</td> | 
+            <td>@Html.ActionLink("Detalhes", "Detalhes", "Horario", new { id = item.horarioID })</td>
+        </tr>
+    }
+</table>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.DisciplinaID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Editar", new { id = Model.DisciplinaID }) |
+    @Html.ActionLink("Deletar", "Deletar", new { id = Model.DisciplinaID})
 </p>
