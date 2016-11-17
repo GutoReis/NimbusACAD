@@ -7,28 +7,20 @@
 <h2>Detalhes</h2>
 
 <div>
-    <h4>Negocio_Tipo_Funcionario</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Cargo)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Cargo)</dt>
+        <dd>@Html.DisplayFor(model => model.Cargo)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cargo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-
+        <dt>@Html.DisplayNameFor(model => model.Descricao)</dt>
+        <dd>@Html.DisplayFor(model => model.Descricao)</dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Tipo_Funcionario_ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Editar", new { id = Model.Tipo_Funcionario_ID}) | 
+    @Html.ActionLink("Deletar", "Deletar", new { id = Model.Tipo_Funcionario_ID })
 </p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
