@@ -324,7 +324,7 @@ namespace NimbusACAD.Controllers
             var cargoQuery = from c in db.Negocio_Tipo_Funcionario
                              orderby c.Cargo
                              select c;
-            ViewBag.Tipo_Funcionario_ID = new SelectList(cargoQuery,
+            ViewBag.Cargos = new SelectList(cargoQuery,
                 "Tipo_Funcionario_ID", "Cargo", selectedCargo);
         }
 
@@ -333,7 +333,7 @@ namespace NimbusACAD.Controllers
             var perfilQuery = from p in db.RBAC_Perfil
                               orderby p.Perfil_Nome
                               select p;
-            ViewBag.Perfil_ID = new SelectList(perfilQuery, "Perfil_ID", "Perfil_Nome", selectedPerfil);
+            ViewBag.Perfils = new SelectList(perfilQuery, "Perfil_ID", "Perfil_Nome", selectedPerfil);
         }
 
         private void PopulateDocumentoDropDownList(object selectedDocumento = null)
@@ -341,7 +341,7 @@ namespace NimbusACAD.Controllers
             var documentoQuery = from d in db.Negocio_Documento
                                  orderby d.Documento_Nome
                                  select d;
-            ViewBag.Documento_ID = new SelectList(documentoQuery, "Documento_ID", "Documento_Nome", selectedDocumento);
+            ViewBag.Documentos = new SelectList(documentoQuery, "Documento_ID", "Documento_Nome", selectedDocumento);
         }
     }
 }
