@@ -6,67 +6,34 @@
 
 <h2>RemoverPresenca</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem certeza de que deseja remover esta frequencia de aluno, esta operação não poderá ser desfeita?</h3>
 <div>
-    <h4>Negocio_Frequencia</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Dt_Aula)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Negocio_Disciplina.Disciplina_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Negocio_Disciplina.Disciplina_Nome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Dt_Aula)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Negocio_Funcionario.Negocio_Pessoa.Primeiro_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Negocio_Funcionario.Negocio_Pessoa.Primeiro_Nome)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Qtde_Aula)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Qtde_Aula)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Dt_Aula)</dt>
+        <dd>@Html.DisplayFor(model => model.Dt_Aula)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Aula_Ministrada)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Qtde_Aula)</dt>
+        <dd>@Html.DisplayFor(model => model.Qtde_Aula)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Aula_Ministrada)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Negocio_Disciplina.Disciplina_Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Negocio_Disciplina.Disciplina_Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Negocio_Matricula_Aluno.Matricula_ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Negocio_Matricula_Aluno.Matricula_ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Negocio_Funcionario.Funcionario_ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Negocio_Funcionario.Funcionario_ID)
-        </dd>
-
+        <dt>@Html.DisplayNameFor(model => model.Aula_Ministrada)</dt>
+        <dd>@Html.DisplayFor(model => model.Aula_Ministrada)</dd>
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Deletar" class="btn btn-default" /> |
         </div>
     }
 </div>

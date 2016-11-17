@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NimbusACAD.Models.ViewModels.ListaNotasDisciplinaViewModel>
+﻿@model NimbusACAD.Models.ViewModels.ListaNotasDisciplinaViewModel
 
 @{
     ViewBag.Title = "VerNotasDisciplina";
@@ -6,28 +6,38 @@
 
 <h2>VerNotasDisciplina</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div>
+    <dl class="dl-horizontal">
+        <dt>Disciplina</dt>
+        <dd>@Html.DisplayFor(model => model.DisciplinaNm)</dd>
+    </dl>
+</div>
+
+<p>Rendimento dos Alunos</p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DisciplinaNm)
-        </th>
-        <th></th>
+        <td>Aluno</td>
+        <td>Nota 1</td>
+        <td>Nota 2</td>
+        <td>Media Final</td>
+        <td>Frequencia</td>
+        <td></td>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DisciplinaNm)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DisciplinaID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.DisciplinaID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DisciplinaID })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model.notas)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.AlunoNm)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nota1)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nota2)</td>
+            <td>@Html.DisplayFor(modelItem => item.MediaFinal)</td>
+            <td>@Html.DisplayFor(modelItem => item.Frequencia)</td>
+            <td>@Html.ActionLink("Corrigir nota", "CorrigirNota", new { id = item.VinculoID })</td>
+        </tr>
+    }
 </table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

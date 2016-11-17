@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NimbusACAD.Models.ViewModels.ListarNotasAlunoViewModel>
+﻿@model NimbusACAD.Models.ViewModels.ListarNotasAlunoViewModel
 
 @{
     ViewBag.Title = "VerNotasAluno";
@@ -6,22 +6,27 @@
 
 <h2>VerNotasAluno</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
-        <th></th>
+        <td>Modulo</td>
+        <td>Disciplina</td>
+        <td>Professor</td>
+        <td>Nota 1</td>
+        <td>Nota 2</td>
+        <td>Media Final</td>
+        <td>Frequencia</td>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MatriculaID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MatriculaID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MatriculaID })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model.notas)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.ModuloNm)</td>
+            <td>@Html.DisplayFor(modelItem => item.DisciplinaNm)</td>
+            <td>@Html.DisplayFor(modelItem => item.Professor)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nota1)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nota2)</td>
+            <td>@Html.DisplayFor(modelItem => item.MediaFinal)</td>
+            <td>@Html.DisplayFor(modelItem => item.Frequencia)</td>s
+        </tr>
+    }
 </table>

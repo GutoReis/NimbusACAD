@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NimbusACAD.Models.ViewModels.DisciplinasProfessorVIewModel>
+﻿@model NimbusACAD.Models.ViewModels.DisciplinasProfessorVIewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,22 +6,22 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
-        <th></th>
+        <td>Disciplinas</td>
+        <td></td>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProfessorID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProfessorID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProfessorID })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model.disciplinas)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.DisciplinaNM)</td> | 
+            <td>@Html.ActionLink("Chamada", "Chamada", new { discID = item.DisciplinaID, profID = Model.ProfessorID })</td> | 
+            <td>@Html.ActionLink("Lançar Notas", "LancarNotas", new { discID = item.DisciplinaID, profID = Model.ProfessorID })</td>| 
+            <td>@Html.ActionLink("Ver Notas", "VerNotasDisciplina", new { discID = item.DisciplinaID })</td>
+        </tr>
+    }
 </table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
