@@ -10,73 +10,29 @@
     <h4>VerFuncionarioViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.pessoaID)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.FuncionarioNM)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncionarioNM)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.pessoaID)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+        <dd>@Html.DisplayFor(model => model.Email)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.cargoID)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.TelefonePrincipal)</dt>
+        <dd>@Html.DisplayFor(model => model.TelefonePrincipal)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.cargoID)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.TelefoneSecundario)</dt>
+        <dd>@Html.DisplayFor(model => model.TelefoneSecundario)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FuncionarioNM)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Endereco)</dt>
+        <dd>@Html.DisplayFor(model => model.Endereco)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FuncionarioNM)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TelefonePrincipal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TelefonePrincipal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TelefoneSecundario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TelefoneSecundario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Endereco)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Endereco)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cargo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cargo)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Cargo)</dt>
+        <dd>@Html.DisplayFor(model => model.Cargo)</dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.funcionarioID }) |
+    @Html.ActionLink("Editar", "Editar", new { id = Model.funcionarioID }) | 
+    @Html.ActionLink("Deletar", "Deletar", new { id = Model.funcionarioID}) | 
+    @Html.ActionLink("Novo Documento", "NovoDocumento", new { id = Model.pessoaID}) | 
     @Html.ActionLink("Back to List", "Index")
 </p>

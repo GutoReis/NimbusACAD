@@ -6,26 +6,15 @@
 
 <h2>Deletar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Você tem certeza de que deseja remover este funcionário, esta operação não poderá ser desfeita?</h3>
 <div>
-    <h4>Negocio_Funcionario</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Negocio_Pessoa.Primeiro_Nome)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Negocio_Pessoa.Primeiro_Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Negocio_Pessoa.Primeiro_Nome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Negocio_Pessoa.Primeiro_Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Negocio_Tipo_Funcionario.Cargo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Negocio_Tipo_Funcionario.Cargo)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Negocio_Tipo_Funcionario.Cargo)</dt>
+        <dd>@Html.DisplayFor(model => model.Negocio_Tipo_Funcionario.Cargo)</dd>
 
     </dl>
 
@@ -33,8 +22,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Deletar" class="btn btn-default" />
         </div>
     }
 </div>
