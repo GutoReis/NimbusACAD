@@ -249,6 +249,7 @@ namespace NimbusACAD.Controllers
         }
 
         //Adicionar presença para um único aluno
+        //ARUMAR ESSA PARTE, NÂO IMPORTAR DISCIPLINA OU PROFESSOR POR PARAMETRO, CARREGAR NORMAL!!!!!!!!!!!!!!!!!!!!!!!!!
         //GET: Diario/AdicionarPresenca
         [RBAC]
         public ActionResult AdicionarPresenca(int? discID, int? profID)
