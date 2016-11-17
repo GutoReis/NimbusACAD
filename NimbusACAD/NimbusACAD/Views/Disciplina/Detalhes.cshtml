@@ -54,3 +54,7 @@
     @Html.ActionLink("Editar", "Editar", new { id = Model.DisciplinaID }) |
     @Html.ActionLink("Deletar", "Deletar", new { id = Model.DisciplinaID})
 </p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
