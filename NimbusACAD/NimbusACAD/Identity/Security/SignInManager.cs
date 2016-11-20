@@ -15,6 +15,15 @@ namespace NimbusACAD.Identity.Security
 
         public OperationStatus PasswordSignIn(string username, string password)
         {
+            if (username.Equals("Admin"))
+            {
+                string passDB = US.GetUsuarioSenha(username);
+                if (passDB.Equals(password))
+                {
+                    return OperationStatus.Success;
+                }
+            }
+
             bool exist = US.GetEmailUsernameExist(username);
             if (exist)
             {
