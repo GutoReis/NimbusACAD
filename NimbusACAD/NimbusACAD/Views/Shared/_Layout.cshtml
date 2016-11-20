@@ -34,7 +34,8 @@
                     <li>@Html.ActionLink("Sobre", "About", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if (User.HasPermission("Institucional-menu"))
+                        if (User.HasPermission("Curso-Index") || User.HasPermission("Horario-Index") || User.HasPermission("Matricula-Buscar") || User.HasPermission("Matricula-Criar")
+                            User.HasPermission("Diario-Index") || User.HasPermission("Diario-ListarPresenca") || User.HasPermission("Diario-VerNotasAluno") || User.HasPermission("Diario-VerNotasDisciplinas"))
                         {
                             <li class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -44,22 +45,26 @@
                                 <ul class="dropdown-menu">
                                     @if (User.HasPermission("Curso-Index")){<li>@Html.ActionLink("Curso", "Index", "Curso")</li>}
                                     @if (User.HasPermission("Horario-Index")) {<li>@Html.ActionLink("Horario", "Index", "Horario")</li>}
-                                    @if (User.HasPermission("Matricula-menu"))
+                                    @if (User.HasPermission("Matricula-Buscar") || User.HasPermission("Matricula-Criar"))
                                     {
                                         <li class="dropdown">
-                                            Matricula
-                                            <span class="caret"></span>
+                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                                Matricula
+                                                <span class="caret"></span>
+                                            </button>
                                             <ul class="dropdown-menu">
                                                 @if (User.HasPermission("Matricula-Buscar")){<li>@Html.ActionLink("Buscar", "Index", "Matricula")</li>}
                                                 @if (User.HasPermission("Matricula-Criar")){<li>@Html.ActionLink("Matricular", "NovaPessoa", "Matricula")</li>}
                                             </ul>
                                         </li>
                                     }
-                                    @if (User.HasPermission("Diario-menu"))
+                                    @if (User.HasPermission("Diario-Index") || User.HasPermission("Diario-ListarPresenca") || User.HasPermission("Diario-VerNotasAluno") || User.HasPermission("Diario-VerNotasDisciplinas"))
                                     {
                                         <li class="dropdown">
-                                            Diário de classe
-                                            <span class="caret"></span>
+                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                                Diário de classe
+                                                <span class="caret"></span>
+                                            </button>
                                             <ul class="dropdown-menu">
                                                 @if (User.HasPermission("Diario-Index")){<li>@Html.ActionLink("Diário de classe", "Index", "Diario")</li>}
                                                 @if (User.HasPermission("Diario-ListarPresenca")){<li>@Html.ActionLink("Listar Presenças", "ListarPresencas", "Diario")</li>}
@@ -72,7 +77,8 @@
                             </li>
                         }
 
-                        if (User.HasPermission("Administrativo-menu"))
+                        if (User.HasPermission("Cargo-Index") || User.HasPermission("Documento-Index") || User.HasPermission("Funcionario-Index") || User.HasPermission("Funcionario-Criar") ||
+                            User.HasPermission("RBACPerfil-Index") || User.HasPermission("RBACPermissao-Index") || User.HasPermission("RBACUsuario-Index"))
                         {
                             <li class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -82,22 +88,26 @@
                                 <ul class="dropdown-menu">
                                     @if (User.HasPermission("Cargo-Index")){<li>@Html.ActionLink("Cargo", "Index", "Cargo")</li>}
                                     @if (User.HasPermission("Documento-Index")){<li>@Html.ActionLink("Documentos", "Index", "Documento")</li>}
-                                    @if (User.HasPermission("Funcionario-menu"))
+                                    @if (User.HasPermission("Funcionario-Index") || User.HasPermission("Funcionario-Criar"))
                                     {
                                         <li class="dropdown">
-                                            Funcionário
-                                            <span class="caret"></span>
+                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                                Funcionário
+                                                <span class="caret"></span>
+                                            </button>
                                             <ul class="dropdown-menu">
                                                 @if (User.HasPermission("Funcionario-Index")){<li>@Html.ActionLink("Funcionarios", "Index", "Funcionario")</li>}
                                                 @if (User.HasPermission("Funcionario-Criar")){<li>@Html.ActionLink("Cadastrar", "NovaPessoa", "Funcionario")</li>}
                                             </ul>
                                         </li>
                                     }
-                                    @if (User.HasPermission("GerenciarSistema-menu"))
+                                    @if (User.HasPermission("RBACPerfil-Index") || User.HasPermission("RBACPermissao-Index") || User.HasPermission("RBACUsuario-Index"))
                                     {
                                         <li class="dropdown">
-                                            Gerenciar Sistema
-                                            <span class="caret"></span>
+                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                                Gerenciar Sistema
+                                                <span class="caret"></span>
+                                            </button>
                                             <ul class="dropdown-menu">
                                                 @if (User.HasPermission("RBACPerfil-Index")) {<li>@Html.ActionLink("Perfis de Acesso", "Index", "RBACPerfil")</li>}
                                                 @if (User.HasPermission("RBACPermissao-Index")) {<li>@Html.ActionLink("Permissões", "Index", "RBACPermissao")</li>}
