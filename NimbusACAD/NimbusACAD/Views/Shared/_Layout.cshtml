@@ -34,7 +34,7 @@
                     <li>@Html.ActionLink("Sobre", "About", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if (User.HasPermission("Curso-Index") || User.HasPermission("Horario-Index") || User.HasPermission("Matricula-Buscar") || User.HasPermission("Matricula-Criar")
+                        if (User.HasPermission("Curso-Index") || User.HasPermission("Horario-Index") || User.HasPermission("Matricula-Buscar") || User.HasPermission("Matricula-Criar") || 
                             User.HasPermission("Diario-Index") || User.HasPermission("Diario-ListarPresenca") || User.HasPermission("Diario-VerNotasAluno") || User.HasPermission("Diario-VerNotasDisciplinas"))
                         {
                             <li class="dropdown">
@@ -126,7 +126,7 @@
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Mensagens", "Index", "Mensagem")</li>
                                 <li>@Html.ActionLink("Gerenciar", "Index", "Gerenciar")</li>
-                                <li>@Html.ActionLink("LogOut", "LogOff", "Account")</li>
+                                <li>@Html.ActionLink("Sair", "LogOff", "Account")</li>
                             </ul>
                         </li>
                     }
