@@ -114,14 +114,12 @@ namespace NimbusACAD.Identity.User
         {
             using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
-                if (usuarioID == 0)
+                if (usuarioID != 0)
                 {
-                    //ID do Perfil vinculado ao usuario.
                     int perfilID = db.RBAC_Link_Usuario_Perfil.Where(o => o.Usuario_ID == usuarioID).FirstOrDefault().Perfil_ID;
 
-                    //Verdadeiro ou falso para a permissão estar vinculada ao perfil
-                    string dbPermissao = db.RBAC_Link_Perfil_Permissao.Where(o => o.Perfil_ID == perfilID).FirstOrDefault().RBAC_Permissao.Permissao_Nome;
-                    bool found = dbPermissao.Equals(permission) ? true : false;
+                    var _permissao = db.RBAC_Link_Perfil_Permissao.Where(o => o.Perfil_ID == perfilID & o.RBAC_Permissao.Permissao_Nome.Equals(permission)).FirstOrDefault();
+                    bool found = _permissao != null ? true : false;
                     return found;
                 }
                 return false;
@@ -313,22 +311,42 @@ namespace NimbusACAD.Identity.User
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(nomeUsuario)).FirstOrDefault();
 
-                PUVM.UsuarioID = usuario.Usuario_ID;
-                PUVM.PessoaID = usuario.Pessoa_ID.Value;
-                PUVM.Email = usuario.Username;
-                PUVM.PrimeiroNome = usuario.Negocio_Pessoa.Primeiro_Nome;
-                PUVM.Sobrenome = usuario.Negocio_Pessoa.Sobrenome;
-                PUVM.CPF = usuario.Negocio_Pessoa.CPF;
-                PUVM.RG = usuario.Negocio_Pessoa.RG;
-                PUVM.Sexo = usuario.Negocio_Pessoa.Sexo;
-                PUVM.DtNascimento = usuario.Negocio_Pessoa.Dt_Nascimento.Value;
-                PUVM.TelPrincipal = usuario.Negocio_Pessoa.Tel_Principal;
-                PUVM.TelSecundario = usuario.Negocio_Pessoa.Tel_Opcional;
-                PUVM.EndCompleto = GetUsuarioEndereco(usuario.Pessoa_ID.Value);
-                PUVM.DtModif = usuario.Dt_Ultima_Modif.Value;
-                PUVM.Bloqueado = usuario.Bloqueado.Value ? "Bloqueado" : "Desbloqueado";
-                PUVM.Perfil = GetUsuarioPerfilRBACNome(usuario.Usuario_ID);
-
+                if (nomeUsuario.Equals("Admin"))
+                {
+                    PUVM.UsuarioID = usuario.Usuario_ID;
+                    PUVM.PessoaID = 0;
+                    PUVM.Email = "Sem Email";
+                    PUVM.PrimeiroNome = "Nome de Usuario" + nomeUsuario;
+                    PUVM.Sobrenome = "Sem sobrenome";
+                    PUVM.CPF = "Sem CPF";
+                    PUVM.RG = "Sem RG";
+                    PUVM.Sexo = "Sem Sexo";
+                    PUVM.DtNascimento = DateTime.Now;
+                    PUVM.TelPrincipal = "Sem Tel Principal";
+                    PUVM.TelSecundario = "Sem Tel Secundario";
+                    PUVM.EndCompleto = "Sem Endereço";
+                    PUVM.DtModif = DateTime.Now;
+                    PUVM.Bloqueado = "Desbloqueado";
+                    PUVM.Perfil = GetUsuarioPerfilRBACNome(usuario.Usuario_ID) + usuario.RBAC_Link_Usuario_Perfil.FirstOrDefault().RBAC_Perfil.RBAC_Link_Perfil_Permissao.FirstOrDefault().RBAC_Permissao.Permissao_Nome;
+                }
+                else
+                {
+                    PUVM.UsuarioID = usuario.Usuario_ID;
+                    PUVM.PessoaID = usuario.Pessoa_ID.Value;
+                    PUVM.Email = usuario.Username;
+                    PUVM.PrimeiroNome = usuario.Negocio_Pessoa.Primeiro_Nome;
+                    PUVM.Sobrenome = usuario.Negocio_Pessoa.Sobrenome;
+                    PUVM.CPF = usuario.Negocio_Pessoa.CPF;
+                    PUVM.RG = usuario.Negocio_Pessoa.RG;
+                    PUVM.Sexo = usuario.Negocio_Pessoa.Sexo;
+                    PUVM.DtNascimento = usuario.Negocio_Pessoa.Dt_Nascimento.Value;
+                    PUVM.TelPrincipal = usuario.Negocio_Pessoa.Tel_Principal;
+                    PUVM.TelSecundario = usuario.Negocio_Pessoa.Tel_Opcional;
+                    PUVM.EndCompleto = GetUsuarioEndereco(usuario.Pessoa_ID.Value);
+                    PUVM.DtModif = usuario.Dt_Ultima_Modif.Value;
+                    PUVM.Bloqueado = usuario.Bloqueado.Value ? "Bloqueado" : "Desbloqueado";
+                    PUVM.Perfil = GetUsuarioPerfilRBACNome(usuario.Usuario_ID);
+                }
                 return PUVM;
             }
         }
@@ -620,6 +638,12 @@ namespace NimbusACAD.Identity.User
             RBAC_Usuario _usuario = db.RBAC_Usuario.Find(usuarioID);
             UserStore _userStore = new UserStore(_usuario);
             return _userStore;
+        }
+
+        public static RBAC_Usuario usuario(string username)
+        {
+            RBAC_Usuario _usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(username)).FirstOrDefault();
+            return _usuario;
         }
     }
 }

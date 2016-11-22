@@ -22,8 +22,9 @@ namespace NimbusACAD.Controllers
                 message == ManageMassageId.Error ? "Ocorreu um erro." :
                 "";
 
-            var RU = User.Identity as RBAC_Usuario;
-            var username = RU.Username;
+            //var RU = User.Identity as RBAC_Usuario;
+            //string username = RU.Username;
+            var username = User.Identity.Name;
             var usuario = _userStore.GetPerfilUsuario(username);
 
             var model = new PerfilDeUsuarioViewModel()

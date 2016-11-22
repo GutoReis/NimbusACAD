@@ -2,6 +2,7 @@
 using NimbusACAD.Models.DB;
 using System;
 using System.Configuration;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Web.Mvc;
@@ -81,30 +82,15 @@ public static class ExtendedMethods
         {
             if (_principal != null && _principal.Identity.IsAuthenticated)
             {
-                var ci = _principal.Identity as ClaimsIdentity;
-                string _userID = ci != null ? ci.FindFirstValue(ClaimTypes.NameIdentifier) : null;
-                if (!string.IsNullOrEmpty(_userID))
-                {
-                    UserStore _authenticatedUser = UserManager.GetUsuario(int.Parse(_userID));
-                    _retVal = _authenticatedUser.IsPermissaoInPerfisDeUsuario(int.Parse(_userID), _requiredPermission);                    
-                }
-            }
-        }
-        catch (Exception)
-        {
-        }
-        return _retVal;
-    }
+                NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+                string username = _principal.Identity.Name;
+                int _userID = db.RBAC_Usuario.Where(o => o.Username.Equals(username)).FirstOrDefault().Usuario_ID;
 
-    public static string FindFirstValue(this ClaimsIdentity identity, string claimType)
-    {
-        string _retVal = string.Empty;
-        try
-        {
-            if (identity != null)
-            {
-                var claim = identity.FindFirst(claimType);
-                _retVal = claim != null ? claim.Value : null;
+                if (_userID != 0)
+                {
+                    UserStore _authenticatedUser = UserManager.GetUsuario(_userID);
+                    _retVal = _authenticatedUser.IsPermissaoInPerfisDeUsuario(_userID, _requiredPermission);
+                }
             }
         }
         catch (Exception)

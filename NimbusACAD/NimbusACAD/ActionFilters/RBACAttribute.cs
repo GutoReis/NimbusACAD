@@ -20,7 +20,7 @@ public class RBACAttribute : AuthorizeAttribute
                 if (!filterContext.HttpContext.User.HasPermission(requiredPermission))
                 {
                     filterContext.Result = new RedirectToRouteResult(
-                                                new RouteValueDictionary { { "action", "Index" }, { "controller", "Desautorizado" } });
+                                                new RouteValueDictionary { { "action", "Erro" }, { "controller", "Desautorizado" } });
                 }
             }
         }
