@@ -45,7 +45,7 @@
                                 <ul class="dropdown-menu">
                                     @if (User.HasPermission("Curso-Index")){<li>@Html.ActionLink("Curso", "Index", "Curso")</li>}
                                     @if (User.HasPermission("Horario-Index")) {<li>@Html.ActionLink("Horario", "Index", "Horario")</li>}
-                                    @if (User.HasPermission("Matricula-Buscar") || User.HasPermission("Matricula-Criar"))
+                                    @if (User.HasPermission("Matricula-Index") || User.HasPermission("Matricula-NovaPessoa"))
                                     {
                                         <li class="dropdown">
                                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -53,8 +53,8 @@
                                                 <span class="caret"></span>
                                             </button>
                                             <ul class="dropdown-menu">
-                                                @if (User.HasPermission("Matricula-Buscar")){<li>@Html.ActionLink("Buscar", "Index", "Matricula")</li>}
-                                                @if (User.HasPermission("Matricula-Criar")){<li>@Html.ActionLink("Matricular", "NovaPessoa", "Matricula")</li>}
+                                                @if (User.HasPermission("Matricula-Index")){<li>@Html.ActionLink("Buscar", "Index", "Matricula")</li>}
+                                                @if (User.HasPermission("Matricula-NovaPessoa")){<li>@Html.ActionLink("Matricular", "NovaPessoa", "Matricula")</li>}
                                             </ul>
                                         </li>
                                     }
@@ -88,7 +88,7 @@
                                 <ul class="dropdown-menu">
                                     @if (User.HasPermission("Cargo-Index")){<li>@Html.ActionLink("Cargo", "Index", "Cargo")</li>}
                                     @if (User.HasPermission("Documento-Index")){<li>@Html.ActionLink("Documentos", "Index", "Documento")</li>}
-                                    @if (User.HasPermission("Funcionario-Index") || User.HasPermission("Funcionario-Criar"))
+                                    @if (User.HasPermission("Funcionario-Index") || User.HasPermission("Funcionario-NovaPessoa"))
                                     {
                                         <li class="dropdown">
                                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -97,7 +97,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 @if (User.HasPermission("Funcionario-Index")){<li>@Html.ActionLink("Funcionarios", "Index", "Funcionario")</li>}
-                                                @if (User.HasPermission("Funcionario-Criar")){<li>@Html.ActionLink("Cadastrar", "NovaPessoa", "Funcionario")</li>}
+                                                @if (User.HasPermission("Funcionario-NovaPessoa")){<li>@Html.ActionLink("Cadastrar", "NovaPessoa", "Funcionario")</li>}
                                             </ul>
                                         </li>
                                     }
