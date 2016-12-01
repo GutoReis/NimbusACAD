@@ -19,8 +19,10 @@
 <table class="table">
     @foreach(var item in Model.Permissoes)
     {
-        <tr>@Html.DisplayFor(modelItem => item.Permissao_Nome)</tr>
-        <tr>@Html.ActionLink("Remover permissao", "RemoverPermissao", new { pfid = Model.PerfilID, pmid = item.Permissao_ID })</tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Permissao_Nome)</td>
+            <td>@Html.ActionLink("Remover permissao", "RemoverPermissao", new { pfid = Model.PerfilID, pmid = item.Permissao_ID })</td>
+        </tr>
     }
 </table>
 

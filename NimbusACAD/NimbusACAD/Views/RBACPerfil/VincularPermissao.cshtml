@@ -1,4 +1,4 @@
-﻿@model NimbusACAD.Models.DB.RBAC_Link_Perfil_Permissao
+﻿@model NimbusACAD.Models.ViewModels.VinculoPerfilPermissaoViewModel
 
 @{
     ViewBag.Title = "VincularPermissao";
@@ -15,18 +15,19 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Perfil_ID, "Perfil_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PerfilID, "PerfilID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.HiddenFor(model => model.PerfilID)
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.Perfil_ID)
-                @Html.ValidationMessageFor(model => model.Perfil_ID, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.PerfilID)
+                @Html.ValidationMessageFor(model => model.PerfilID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Permissao_ID, "Permissao_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PermissaoID, "Permissao", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Permissao_ID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Permissao_ID, "", new { @class = "text-danger" })
+                @Html.DropDownList("PermissaoID", ViewBag.Permissoes as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PermissaoID, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -39,7 +40,7 @@
 }
 
 <div>
-    @Html.ActionLink("Voltar", "Detalhes", new { id = Model.Perfil_ID })
+    @Html.ActionLink("Voltar", "Detalhes", new { id = Model.PerfilID })
 </div>
 
 @section Scripts {

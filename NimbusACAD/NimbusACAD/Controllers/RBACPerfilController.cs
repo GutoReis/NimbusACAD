@@ -161,25 +161,30 @@ namespace NimbusACAD.Controllers
             {
                 return HttpNotFound();
             }
+            VinculoPerfilPermissaoViewModel VPPVM = new VinculoPerfilPermissaoViewModel();
+            VPPVM.PerfilID = rBAC_Perfil.Perfil_ID;
 
             PopulatePermissaoDropDownList();
-            return View(rBAC_Perfil.Perfil_ID);
+            return View(VPPVM);
         }
 
         //POST: RBACPerfil/VincularPermissao/5
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult VincularPermissao([Bind(Include = "Link_ID, Usuario_ID, Perfil_ID")]RBAC_Link_Perfil_Permissao lpp)
+        public ActionResult VincularPermissao([Bind(Include = "PerfilID, PermissaoID")]VinculoPerfilPermissaoViewModel VPPVM)
         {
             if (ModelState.IsValid)
             {
+                RBAC_Link_Perfil_Permissao lpp = new RBAC_Link_Perfil_Permissao();
+                lpp.Perfil_ID = VPPVM.PerfilID;
+                lpp.Permissao_ID = VPPVM.PermissaoID;
                 db.RBAC_Link_Perfil_Permissao.Add(lpp);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Detalhes", new { id = VPPVM.PerfilID });
             }
-            PopulatePermissaoDropDownList(lpp);
-            return View(lpp);
+            PopulatePermissaoDropDownList(VPPVM.PermissaoID);
+            return View(VPPVM);
         }
 
         //Remover permissão
@@ -203,12 +208,12 @@ namespace NimbusACAD.Controllers
         [HttpPost, ActionName("RemoverPermissao")]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult RemoverPermissaoConfirmacao(int id)
+        public ActionResult RemoverPermissaoConfirmacao(int pfid, int pmid)
         {
-            RBAC_Link_Perfil_Permissao lpp = db.RBAC_Link_Perfil_Permissao.Where(o => o.Perfil_ID == id).FirstOrDefault();
+            RBAC_Link_Perfil_Permissao lpp = db.RBAC_Link_Perfil_Permissao.Where(o => o.Perfil_ID == pfid && o.Permissao_ID == pmid).FirstOrDefault();
             db.RBAC_Link_Perfil_Permissao.Remove(lpp);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Detalhes", new { id = pfid });
         }
 
         protected override void Dispose(bool disposing)
@@ -225,7 +230,7 @@ namespace NimbusACAD.Controllers
             var permissaoQuery = from p in db.RBAC_Permissao
                                  orderby p.Permissao_Nome
                                  select p;
-            ViewBag.Permissao_ID = new SelectList(permissaoQuery,
+            ViewBag.Permissoes = new SelectList(permissaoQuery,
                 "Permissao_ID", "Permissao_Nome", selectedPermissao);
         }
     }

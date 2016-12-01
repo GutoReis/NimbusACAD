@@ -31,12 +31,8 @@ namespace NimbusACAD.Models.ViewModels
 
     public class VinculoPerfilPermissaoViewModel
     {
-        [Required]
-        [Display(Name = "Perfil")]
         public int PerfilID { get; set; }
-
-        [Required]
-        [Display(Name = "Permissão")]
+        
         public int PermissaoID { get; set; }
     }
 
