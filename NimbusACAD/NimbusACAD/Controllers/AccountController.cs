@@ -39,7 +39,7 @@ namespace NimbusACAD.Controllers
             switch (result)
             {
                 case OperationStatus.Success:
-                    FormsAuthentication.SetAuthCookie(model.Username, true);
+                    //FormsAuthentication.SetAuthCookie(model.Username, true);
                     return RedirectToLocal(returnUrl);
                 case OperationStatus.RequiresVerification:
                     ModelState.AddModelError("", "Email não confirmado, por favor confirme o email para continuar o login.");

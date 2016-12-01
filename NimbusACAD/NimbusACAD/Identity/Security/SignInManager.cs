@@ -15,50 +15,67 @@ namespace NimbusACAD.Identity.Security
 
         public OperationStatus PasswordSignIn(string username, string password)
         {
-            if (username.Equals("Admin"))
-            {
-                string passDB = US.GetUsuarioSenha(username);
-                if (passDB.Equals(password))
+            OperationStatus oStatus = OperationStatus.Failure;
+            //if (username.Equals("Admin"))
+            //{
+            //    string passDB = US.GetUsuarioSenha(username);
+            //    if (passDB.Equals(password))
+            //    {
+            //        FormsAuthentication.SetAuthCookie(username, true);
+            //        oStatus = OperationStatus.Success;
+            //    }
+            //}
+            //else
+            //{
+                bool exist = US.GetEmailUsernameExist(username);
+                if (exist)
                 {
-                    return OperationStatus.Success;
-                }
-            }
-
-            bool exist = US.GetEmailUsernameExist(username);
-            if (exist)
-            {
-                string passDB = US.GetUsuarioSenha(username);
-                string salt = US.GetUsuarioSalt(username);
-                string access = SecurityMethods.HashPasswordPBKDF2(password, salt);
-
-                if (access.Equals(passDB))
-                {
-                    if (US.GetUsuarioEmailVerificado(username))
+                    if (username.ToUpper().Equals("ADMIN"))
                     {
-                        if (US.GetUsuarioBloqueado(username))
+                        string passDB = US.GetUsuarioSenha(username);
+                        if (passDB.Equals(password))
                         {
-                            return OperationStatus.LockedOut;
-                        }
-                        else
-                        {
-                            FormsAuthentication.SetAuthCookie(username, false);
-                            return OperationStatus.Success;
+                            FormsAuthentication.SetAuthCookie(username, true);
+                            oStatus = OperationStatus.Success;
                         }
                     }
                     else
                     {
-                        return OperationStatus.RequiresVerification;
+                        string passDB = US.GetUsuarioSenha(username);
+                        string salt = US.GetUsuarioSalt(username);
+                        string access = SecurityMethods.HashPasswordPBKDF2(password, salt);
+
+                        if (access.Equals(passDB))
+                        {
+                            if (US.GetUsuarioEmailVerificado(username))
+                            {
+                                if (US.GetUsuarioBloqueado(username))
+                                {
+                                    oStatus = OperationStatus.LockedOut;
+                                }
+                                else
+                                {
+                                    FormsAuthentication.SetAuthCookie(username, true);
+                                    oStatus = OperationStatus.Success;
+                                }
+                            }
+                            else
+                            {
+                                oStatus = OperationStatus.RequiresVerification;
+                            }
+                        }
+                        else
+                        {
+                            oStatus = OperationStatus.Failure;
+                        }
                     }
                 }
                 else
                 {
-                    return OperationStatus.Failure;
+                    oStatus = OperationStatus.Failure;
                 }
-            }
-            else
-            {
-                return OperationStatus.Failure;
-            }
+            //}
+            return oStatus;
         }
 
         #endregion
