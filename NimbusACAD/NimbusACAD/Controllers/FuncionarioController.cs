@@ -42,7 +42,7 @@ namespace NimbusACAD.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Funcionario negocio_Funcionario = db.Negocio_Funcionario.Find(id);
+            Negocio_Funcionario negocio_Funcionario = db.Negocio_Funcionario.Where(o => o.Pessoa_ID == id).FirstOrDefault();
             if (negocio_Funcionario == null)
             {
                 return HttpNotFound();
@@ -80,7 +80,7 @@ namespace NimbusACAD.Controllers
             if (ModelState.IsValid)
             {
                 //Criando pessoa
-                int pID = -_userStore.AddPessoa(novaPessoa);
+                int pID = _userStore.AddPessoa(novaPessoa);
 
                 //Criando usuario
                 RBAC_Usuario RU = new RBAC_Usuario();
@@ -99,6 +99,7 @@ namespace NimbusACAD.Controllers
                 RU.Dt_Ultima_Modif = DateTime.Now.Date;
                 RU.Bloqueado = false;
 
+                db.RBAC_Usuario.Add(RU);
                 db.SaveChanges();
 
                 //Enviando Email
@@ -115,7 +116,7 @@ namespace NimbusACAD.Controllers
                 linkUP.Perfil_ID = novaPessoa.PerfilID;
                 _roleStore.AddUsuarioPerfil(linkUP);
 
-                return RedirectToAction("RegistrarDocumento", pID);
+                return RedirectToAction("RegistrarDocumento", "Funcionario", new { id = pID });
             }
             PopulatePerfilDropDownList(novaPessoa.PerfilID);
             return View(novaPessoa);
@@ -124,19 +125,21 @@ namespace NimbusACAD.Controllers
         //Registrar Documentos -> Registrar Funcionario
         //GET: Funcionario/RegistrarDocumento
         [RBAC]
-        public ActionResult RegistrarDocumento(int? pID)
+        public ActionResult RegistrarDocumento(int? id)
         {
-            if (pID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(pID);
+            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(id);
             if (pessoa == null)
             {
                 return HttpNotFound();
             }
+            CurriculoViewModel CVM = new CurriculoViewModel();
+            CVM.PessoaID = pessoa.Pessoa_ID;
             PopulateDocumentoDropDownList();
-            return ViewBag(pessoa);
+            return View(CVM);
         }
 
         //POST: Funcionario/RegistrarDocumento
@@ -156,7 +159,10 @@ namespace NimbusACAD.Controllers
                 NC.Estado_Emissao = curriculo.Estado;
                 NC.Pais_Emissao = curriculo.Pais;
 
-                return RedirectToAction("NovoFuncionario", curriculo.PessoaID);
+                db.Negocio_Curriculo.Add(NC);
+                db.SaveChanges();
+
+                return RedirectToAction("NovoFuncionario", new { id = curriculo.PessoaID });
             }
             PopulateDocumentoDropDownList(curriculo.DocumentoID);
             return View(curriculo);
@@ -164,21 +170,23 @@ namespace NimbusACAD.Controllers
 
         // GET: Funcionario/NovoFuncionario
         [RBAC]
-        public ActionResult NovoFuncionario(int? pID)
+        public ActionResult NovoFuncionario(int? id)
         {
             //ViewBag.Pessoa_ID = new SelectList(db.Negocio_Pessoa, "Pessoa_ID", "Primeiro_Nome");
             //ViewBag.Cargo_ID = new SelectList(db.Negocio_Tipo_Funcionario, "Tipo_Funcionario_ID", "Cargo");
-            if (pID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(pID);
+            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(id);
             if (pessoa == null)
             {
                 return HttpNotFound();
             }
+            Negocio_Funcionario func = new Negocio_Funcionario();
+            func.Pessoa_ID = pessoa.Pessoa_ID;
             PopulateCargoDropDownList();
-            return View();
+            return View(func);
         }
 
         // POST: Funcionario/NovoFuncionario
@@ -192,6 +200,7 @@ namespace NimbusACAD.Controllers
             if (ModelState.IsValid)
             {
                 db.Negocio_Funcionario.Add(funcionario);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -270,19 +279,21 @@ namespace NimbusACAD.Controllers
 
         //GET: Funcionario/NovoDocumento
         [RBAC]
-        public ActionResult NovoDocumento(int? pID)
+        public ActionResult NovoDocumento(int? id)
         {
-            if (pID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(pID);
+            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(id);
             if (pessoa == null)
             {
                 return HttpNotFound();
             }
+            Negocio_Curriculo NC = new Negocio_Curriculo();
+            NC.Pessoa_ID = pessoa.Pessoa_ID;
             PopulateDocumentoDropDownList();
-            return View(pessoa);
+            return View(NC);
         }
 
         //POST: Funcionario/NovoDocumento
@@ -304,7 +315,7 @@ namespace NimbusACAD.Controllers
 
                 db.Negocio_Curriculo.Add(NC);
                 db.SaveChanges();
-                return RedirectToAction("Detalhes", curriculo.Pessoa_ID);
+                return RedirectToAction("Detalhes", new { id = NC.Pessoa_ID });
             }
             PopulateDocumentoDropDownList(curriculo.Documento_ID);
             return View(curriculo);
@@ -333,7 +344,7 @@ namespace NimbusACAD.Controllers
             var perfilQuery = from p in db.RBAC_Perfil
                               orderby p.Perfil_Nome
                               select p;
-            ViewBag.Perfils = new SelectList(perfilQuery, "Perfil_ID", "Perfil_Nome", selectedPerfil);
+            ViewBag.Perfis = new SelectList(perfilQuery, "Perfil_ID", "Perfil_Nome", selectedPerfil);
         }
 
         private void PopulateDocumentoDropDownList(object selectedDocumento = null)

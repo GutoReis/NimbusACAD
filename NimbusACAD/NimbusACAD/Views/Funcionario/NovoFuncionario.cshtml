@@ -14,13 +14,15 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        @Html.HiddenFor(model => model.Pessoa_ID)
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Pessoa_ID, "Pessoa_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.HiddenFor(model => model.Pessoa_ID)
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.Negocio_Pessoa.Primeiro_Nome)
+                @Html.DisplayFor(model => model.Pessoa_ID)
                 @Html.ValidationMessageFor(model => model.Pessoa_ID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Cargo_ID, "Cargo_ID", htmlAttributes: new { @class = "control-label col-md-2" })

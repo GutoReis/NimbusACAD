@@ -36,13 +36,14 @@ namespace NimbusACAD.Identity.User
                 NP.Tel_Principal = pessoa.TelPrincipal;
                 NP.Tel_Opcional = pessoa.TelOpcional;
                 NP.Email = pessoa.Email;
+                NP.Email_Confirmado = true;
                 NP.Tot_Notif_NL = 0;
 
                 db.Negocio_Pessoa.Add(NP);
                 db.SaveChanges();
 
                 //Endereço --> Verificar se já existe endereço no CEP informado
-                var endereco = db.Negocio_Base_Endereco.Where(o => o.CEP.Equals(pessoa.CEP));
+                var endereco = db.Negocio_Base_Endereco.Where(o => o.CEP.Equals(pessoa.CEP)).FirstOrDefault();
                 if (endereco == null)
                 {
                     //Negocio_Base_Endereco
@@ -135,13 +136,14 @@ namespace NimbusACAD.Identity.User
         {
             using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
             {
-                var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
-                if (usuario.Any())
-                {
-                    return usuario.FirstOrDefault().Usuario_ID;
-                }
+                var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email)).FirstOrDefault().Usuario_ID;
+                //if (usuario.Any())
+                //{
+                //    return usuario.FirstOrDefault().Usuario_ID;
+                //}
+                return usuario;
             }
-            return 0;
+            //return 0;
         }
 
         public bool GetEmailUsernameExist(string Email)
