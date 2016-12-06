@@ -16,11 +16,11 @@ namespace NimbusACAD.Models.DB
     {
         public int Frequencia_ID { get; set; }
         public int Disciplina_ID { get; set; }
-        public int Professor_ID { get; set; }
+        public int Funcionario_ID { get; set; }
         public Nullable<System.DateTime> Dt_Aula { get; set; }
         public Nullable<int> Qtde_Aula { get; set; }
         public string Aula_Ministrada { get; set; }
-        public int Matricula_Presente { get; set; }
+        public int Matricula_ID { get; set; }
     
         public virtual Negocio_Disciplina Negocio_Disciplina { get; set; }
         public virtual Negocio_Matricula_Aluno Negocio_Matricula_Aluno { get; set; }

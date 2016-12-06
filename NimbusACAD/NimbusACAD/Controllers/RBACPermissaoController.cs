@@ -11,7 +11,7 @@ namespace NimbusACAD.Controllers
     public class RBACPermissaoController : Controller
     {
         private PermissionStore _permissaoStore = new PermissionStore();
-        private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+        private NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
 
         //GET: RBACPermissao
         [RBAC]

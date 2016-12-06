@@ -15,7 +15,7 @@ namespace NimbusACAD.Controllers
     {
 
         private RoleStore _roleStore = new RoleStore();
-        private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+        private NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
 
         // GET: RBACPerfil
         [RBAC]

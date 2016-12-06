@@ -3,7 +3,6 @@ using NimbusACAD.Models.DB;
 using System;
 using System.Configuration;
 using System.Linq;
-using System.Security.Claims;
 using System.Security.Principal;
 using System.Web.Mvc;
 
@@ -82,7 +81,7 @@ public static class ExtendedMethods
         {
             if (_principal != null && _principal.Identity.IsAuthenticated)
             {
-                NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+                NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
                 string username = _principal.Identity.Name;
                 int _userID = db.RBAC_Usuario.Where(o => o.Username.Equals(username)).FirstOrDefault().Usuario_ID;
 

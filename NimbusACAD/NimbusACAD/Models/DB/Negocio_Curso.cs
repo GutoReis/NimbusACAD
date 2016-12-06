@@ -25,7 +25,7 @@ namespace NimbusACAD.Models.DB
         public string Curso_Nome { get; set; }
         public string Descricao { get; set; }
         public string Periodo { get; set; }
-        public int Coordenador_ID { get; set; }
+        public int Funcionario_ID { get; set; }
         public Nullable<int> Carga_Horaria { get; set; }
     
         public virtual Negocio_Funcionario Negocio_Funcionario { get; set; }

@@ -24,7 +24,7 @@ namespace NimbusACAD.Models.DB
     
         public int Funcionario_ID { get; set; }
         public int Pessoa_ID { get; set; }
-        public int Cargo_ID { get; set; }
+        public int Tipo_Funcionario_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Negocio_Curso> Negocio_Curso { get; set; }

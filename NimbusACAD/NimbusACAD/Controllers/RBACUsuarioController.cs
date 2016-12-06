@@ -17,7 +17,7 @@ namespace NimbusACAD.Controllers
         private UserStore _userStore = new UserStore();
         private RoleStore _roleStore = new RoleStore();
 
-        private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+        private NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
 
         // GET: RBACUsuario
         [RBAC]
@@ -75,9 +75,11 @@ namespace NimbusACAD.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(bloquearUsuario).State = EntityState.Modified;
+                RBAC_Usuario RU = db.RBAC_Usuario.Find(bloquearUsuario.usuarioID);
+                RU.Bloqueado = bloquearUsuario.Bloqueado;
+                db.Entry(RU).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Detalhes", new { id = bloquearUsuario.usuarioID });
             }
             return View(bloquearUsuario);
         }
@@ -123,20 +125,23 @@ namespace NimbusACAD.Controllers
                 return HttpNotFound();
             }
 
+            RBAC_Link_Usuario_Perfil linkUP = new RBAC_Link_Usuario_Perfil();
+            linkUP.Usuario_ID = rBAC_Usuario.Usuario_ID;
+
             PopulatePerfilDropDownList();
-            return View(rBAC_Usuario.Usuario_ID);
+            return View(linkUP);
         }
 
         //POST: RBACUsuario/NovoPerfilDeAcesso/5
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovoPerfilDeAcesso([Bind(Include = "UsuarioID, PerfilID")] RBAC_Link_Usuario_Perfil linkUP)
+        public ActionResult NovoPerfilDeAcesso([Bind(Include = "Link_ID, Usuario_ID, Perfil_ID")] RBAC_Link_Usuario_Perfil linkUP)
         {
             if (ModelState.IsValid)
             {
                 _roleStore.AddUsuarioPerfil(linkUP);
-                return RedirectToAction("Index");
+                return RedirectToAction("Detalhes", new { id = linkUP.Usuario_ID });
             }
             PopulatePerfilDropDownList(linkUP.Perfil_ID);
             return View(linkUP);
@@ -150,7 +155,7 @@ namespace NimbusACAD.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RBAC_Link_Usuario_Perfil lup = db.RBAC_Link_Usuario_Perfil.Find(id);
+            RBAC_Link_Usuario_Perfil lup = db.RBAC_Link_Usuario_Perfil.Where(o => o.Link_ID == id).FirstOrDefault();
             if (lup == null)
             {
                 return HttpNotFound();
@@ -164,9 +169,9 @@ namespace NimbusACAD.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RemoverPerfilDeAcessoConfirmacao(int id)
         {
-            RBAC_Link_Usuario_Perfil lup = db.RBAC_Link_Usuario_Perfil.Where(o => o.Usuario_ID == id).FirstOrDefault();
+            RBAC_Link_Usuario_Perfil lup = db.RBAC_Link_Usuario_Perfil.Where(o => o.Link_ID == id).FirstOrDefault();
             _roleStore.RemoveUsuarioPerfil(lup.Usuario_ID, lup.Perfil_ID);
-            return RedirectToAction("Index");
+            return RedirectToAction("Detalhes", new { id = lup.Usuario_ID });
         }
 
         protected override void Dispose(bool disposing)

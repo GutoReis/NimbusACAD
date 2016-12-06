@@ -12,7 +12,7 @@ namespace NimbusACAD.Controllers
 {
     public class CursoController : Controller
     {
-        private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+        private NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
 
         // GET: Curso
         [RBAC]
@@ -85,18 +85,18 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovoCurso([Bind(Include = "Curso_ID,Curso_Nome,Descricao,Periodo,Coordenador_ID,Carga_Horaria")] Negocio_Curso negocio_Curso)
+        public ActionResult NovoCurso([Bind(Include = "Curso_ID,Curso_Nome,Descricao,Periodo,Funcionario_ID,Carga_Horaria")] Negocio_Curso negocio_Curso)
         {
             if (ModelState.IsValid)
             {
                 db.Negocio_Curso.Add(negocio_Curso);
                 db.SaveChanges();
                 int cID = db.Negocio_Curso.Where(o => o.Curso_Nome == negocio_Curso.Curso_Nome).FirstOrDefault().Curso_ID;
-                return RedirectToAction("Detalhes", "Curso", cID);
+                return RedirectToAction("Detalhes", "Curso", new { id = cID });
             }
 
-            ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Curso.Coordenador_ID);
-            PopulateFuncionarioDropDownList(negocio_Curso.Coordenador_ID);
+            //ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Curso.Coordenador_ID);
+            PopulateFuncionarioDropDownList(negocio_Curso.Funcionario_ID);
             return View(negocio_Curso);
         }
 
@@ -113,7 +113,7 @@ namespace NimbusACAD.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Curso.Coordenador_ID);
+            //ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Curso.Coordenador_ID);
             PopulateFuncionarioDropDownList();
             return View(negocio_Curso);
         }
@@ -124,16 +124,16 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Curso_ID,Curso_Nome,Descricao,Periodo,Coordenador_ID,Carga_Horaria")] Negocio_Curso negocio_Curso)
+        public ActionResult Editar([Bind(Include = "Curso_ID,Curso_Nome,Descricao,Periodo,Funcionario_ID,Carga_Horaria")] Negocio_Curso negocio_Curso)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(negocio_Curso).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Detlalhes", "Curso", negocio_Curso.Curso_ID);
+                return RedirectToAction("Detlalhes", "Curso", new { id = negocio_Curso.Curso_ID });
             }
-            ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Curso.Coordenador_ID);
-            PopulateFuncionarioDropDownList(negocio_Curso.Coordenador_ID);
+            //ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Curso.Coordenador_ID);
+            PopulateFuncionarioDropDownList(negocio_Curso.Funcionario_ID);
             return View(negocio_Curso);
         }
 
@@ -183,8 +183,8 @@ namespace NimbusACAD.Controllers
             var funcionarioQuery = from f in db.Negocio_Funcionario
                                    orderby f.Negocio_Pessoa.Primeiro_Nome
                                    select f;
-            ViewBag.Funcionario_ID = new SelectList(funcionarioQuery,
-                "Funcionario_ID", "Negocio_Pessoa.Primeiro_Nome" + " " + "Negocio_Pessoa.Sobrenome", selectedFuncionario);
+            ViewBag.Funcionarios = new SelectList(funcionarioQuery,
+                "Funcionario_ID", "Negocio_Pessoa.Primeiro_Nome", selectedFuncionario);
         }
     }
 }

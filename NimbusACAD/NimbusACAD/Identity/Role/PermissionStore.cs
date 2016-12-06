@@ -13,7 +13,7 @@ namespace NimbusACAD.Identity.Role
 
         public void AddPermission(CriarPermissaoRBACViewModel permissao)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 RBAC_Permissao rbacPermissao = new RBAC_Permissao();
                 rbacPermissao.Permissao_Nome = permissao.PermissaoNm;
@@ -29,7 +29,7 @@ namespace NimbusACAD.Identity.Role
 
         public int GetPermissaoID(string nmPermissao)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var permissao = db.RBAC_Permissao.Where(o => o.Permissao_Nome.Equals(nmPermissao));
                 if (permissao.Any())
@@ -45,7 +45,7 @@ namespace NimbusACAD.Identity.Role
 
         public string GetPermissaoNome(int id)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var permissao = db.RBAC_Permissao.Where(o => o.Permissao_ID == id);
                 if (permissao.Any())
@@ -61,7 +61,7 @@ namespace NimbusACAD.Identity.Role
 
         public List<ListaPerfisPermissaoViewModel> GetPerfisDePermissao(string nmPermissao)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 List<ListaPerfisPermissaoViewModel> perfis = new List<ListaPerfisPermissaoViewModel>();
                 ListaPerfisPermissaoViewModel LPPVM;
@@ -90,7 +90,7 @@ namespace NimbusACAD.Identity.Role
 
         public void AddPermissaoPerfil(VinculoPerfilPermissaoViewModel vinculo)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 RBAC_Link_Perfil_Permissao linkPP = new RBAC_Link_Perfil_Permissao();
                 linkPP.Perfil_ID = vinculo.PerfilID;
@@ -103,7 +103,7 @@ namespace NimbusACAD.Identity.Role
         
         public void RemovePermissaoPerfil(int pmID, int pfID)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 using (var dbContextTransaction = db.Database.BeginTransaction())
                 {
@@ -131,7 +131,7 @@ namespace NimbusACAD.Identity.Role
 
         public void UpdatePermissao(CriarPermissaoRBACViewModel permissao)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 using (var dbContextTransaction = db.Database.BeginTransaction())
                 {
@@ -159,7 +159,7 @@ namespace NimbusACAD.Identity.Role
 
         public void DeletePermissao(int permissaoID)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 using (var dbContextTransaction = db.Database.BeginTransaction())
                 {

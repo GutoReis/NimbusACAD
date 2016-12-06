@@ -11,7 +11,7 @@ namespace NimbusACAD.Controllers
 {
     public class DisciplinaController : Controller
     {
-        private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();        
+        private NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();        
 
         // GET: Disciplina/Detalhes/5
         [RBAC]
@@ -60,19 +60,26 @@ namespace NimbusACAD.Controllers
 
         // GET: Disciplina/NovaDisciplina
         [RBAC]
-        public ActionResult NovaDisciplina(int? mID)
+        public ActionResult NovaDisciplina(int? id)
         {
             //ViewBag.Professor_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID");
             //ViewBag.Modulo_ID = new SelectList(db.Negocio_Modulo, "Modulo_ID", "Modulo_Nome");
 
-            if (mID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.Modulo_ID = mID;
+            //ViewBag.Modulo_ID = id;
+            Negocio_Modulo NM = db.Negocio_Modulo.Find(id);
+            if (NM == null)
+            {
+                return HttpNotFound();
+            }
+            Negocio_Disciplina ND = new Negocio_Disciplina();
+            ND.Modulo_ID = NM.Modulo_ID;
             PopulateFuncionarioDropDown();
 
-            return View();
+            return View(ND);
         }
 
         // POST: Disciplina/NovaDisciplina
@@ -81,19 +88,19 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovaDisciplina([Bind(Include = "Disciplina_ID,Modulo_ID,Disciplina_Nome,Descricao,Professor_ID,Tot_Aulas_Dadas,Carga_Horaria")] Negocio_Disciplina negocio_Disciplina)
+        public ActionResult NovaDisciplina([Bind(Include = "Disciplina_ID,Modulo_ID,Disciplina_Nome,Descricao,Funcionario_ID,Tot_Aulas_Dadas,Carga_Horaria")] Negocio_Disciplina negocio_Disciplina)
         {
             if (ModelState.IsValid)
             {
                 negocio_Disciplina.Tot_Aulas_Dadas = 0;
                 db.Negocio_Disciplina.Add(negocio_Disciplina);
                 db.SaveChanges();
-                return RedirectToAction("Detalhes", "Modulo", negocio_Disciplina.Modulo_ID);
+                return RedirectToAction("Detalhes", "Modulo", new { id = negocio_Disciplina.Modulo_ID });
             }
 
             //ViewBag.Professor_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Disciplina.Professor_ID);
             //ViewBag.Modulo_ID = new SelectList(db.Negocio_Modulo, "Modulo_ID", "Modulo_Nome", negocio_Disciplina.Modulo_ID);
-            PopulateFuncionarioDropDown(negocio_Disciplina.Professor_ID);
+            PopulateFuncionarioDropDown(negocio_Disciplina.Funcionario_ID);
             return View(negocio_Disciplina);
         }
 
@@ -110,8 +117,9 @@ namespace NimbusACAD.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Professor_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Disciplina.Professor_ID);
-            ViewBag.Modulo_ID = new SelectList(db.Negocio_Modulo, "Modulo_ID", "Modulo_Nome", negocio_Disciplina.Modulo_ID);
+            //ViewBag.Professor_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Disciplina.Professor_ID);
+            //ViewBag.Modulo_ID = new SelectList(db.Negocio_Modulo, "Modulo_ID", "Modulo_Nome", negocio_Disciplina.Modulo_ID);
+            PopulateFuncionarioDropDown();
             return View(negocio_Disciplina);
         }
 
@@ -121,16 +129,17 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Disciplina_ID,Modulo_ID,Disciplina_Nome,Descricao,Professor_ID,Tot_Aulas_Dadas,Carga_Horaria")] Negocio_Disciplina negocio_Disciplina)
+        public ActionResult Editar([Bind(Include = "Disciplina_ID,Modulo_ID,Disciplina_Nome,Descricao,Funcionario_ID,Tot_Aulas_Dadas,Carga_Horaria")] Negocio_Disciplina negocio_Disciplina)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(negocio_Disciplina).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Detalhes", "Disciplina", negocio_Disciplina.Disciplina_ID);
+                return RedirectToAction("Detalhes", "Disciplina", new { id = negocio_Disciplina.Disciplina_ID });
             }
-            ViewBag.Professor_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Disciplina.Professor_ID);
-            ViewBag.Modulo_ID = new SelectList(db.Negocio_Modulo, "Modulo_ID", "Modulo_Nome", negocio_Disciplina.Modulo_ID);
+            //ViewBag.Professor_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Disciplina.Professor_ID);
+            //ViewBag.Modulo_ID = new SelectList(db.Negocio_Modulo, "Modulo_ID", "Modulo_Nome", negocio_Disciplina.Modulo_ID);
+            PopulateFuncionarioDropDown(negocio_Disciplina.Funcionario_ID);
             return View(negocio_Disciplina);
         }
 
@@ -159,7 +168,7 @@ namespace NimbusACAD.Controllers
             Negocio_Disciplina negocio_Disciplina = db.Negocio_Disciplina.Find(id);
             db.Negocio_Disciplina.Remove(negocio_Disciplina);
             db.SaveChanges();
-            return RedirectToAction("Detalhes", "Modulo", negocio_Disciplina.Modulo_ID);
+            return RedirectToAction("Detalhes", "Modulo", new { id = negocio_Disciplina.Modulo_ID });
         }
 
         protected override void Dispose(bool disposing)
@@ -177,7 +186,7 @@ namespace NimbusACAD.Controllers
                                    orderby f.Negocio_Pessoa.Primeiro_Nome
                                    select f;
             ViewBag.Funcionarios = new SelectList(funcionarioQuery,
-                "Funcionario_ID", "Negocio_Pessoa.Primeiro_Nome" + " " + "Negocio_Pessoa.Sobrenome", selectedFuncionario);
+                "Funcionario_ID", "Negocio_Pessoa.Primeiro_Nome", selectedFuncionario);
         }
     }
 }

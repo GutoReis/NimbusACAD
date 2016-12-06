@@ -82,16 +82,16 @@ namespace NimbusACAD.Identity.Security
 
         #region CONFIRM-EMAIL
 
-        public void SendEmail(string _userName, string _subject, string _body)
+        public async void SendEmail(string _userName, string _subject, string _body)
         {
             EmailMessage message = new EmailMessage(_userName, _subject, _body);
             EmailService service = new EmailService();
-            service.Send(message);
+            await service.Send(message);
         }
 
         public bool ConfirmEmail(string email)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var pessoa = db.Negocio_Pessoa.Where(o => o.Email.Equals(email)).FirstOrDefault();
                 if (!pessoa.Email_Confirmado.Value)

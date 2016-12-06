@@ -21,7 +21,7 @@ namespace NimbusACAD.Identity.User
         //Add usuario será feito no AccountController, para enviar o email com a senha temporaria.
         public int AddPessoa(RegistrarComumViewModel pessoa)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 Negocio_Pessoa NP = new Negocio_Pessoa();
                 Negocio_Endereco NE = new Negocio_Endereco();
@@ -92,7 +92,7 @@ namespace NimbusACAD.Identity.User
 
         public bool IsUsuarioInPerfil(string usuarioNome, string perfilNome)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 RBAC_Usuario usuario = db.RBAC_Usuario.Where(o => o.Username.ToLower().Equals(usuarioNome))?.FirstOrDefault();
                 if (usuario != null)
@@ -113,7 +113,7 @@ namespace NimbusACAD.Identity.User
 
         public bool IsPermissaoInPerfisDeUsuario(int usuarioID, string permission)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 if (usuarioID != 0)
                 {
@@ -134,7 +134,7 @@ namespace NimbusACAD.Identity.User
         #region GET-RBAC_Usuario
         public int GetUsuarioID(string Email)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email)).FirstOrDefault().Usuario_ID;
                 //if (usuario.Any())
@@ -148,7 +148,7 @@ namespace NimbusACAD.Identity.User
 
         public bool GetEmailUsernameExist(string Email)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 return db.RBAC_Usuario.Where(o => o.Username.Equals(Email)).Any();
             }
@@ -156,7 +156,7 @@ namespace NimbusACAD.Identity.User
 
         public string GetUsuarioSenha(string Email)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
                 if (usuario.Any())
@@ -172,7 +172,7 @@ namespace NimbusACAD.Identity.User
 
         public string GetUsuarioSalt(string Email)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
                 if (usuario.Any())
@@ -188,7 +188,7 @@ namespace NimbusACAD.Identity.User
 
         public bool GetUsuarioBloqueado(string Email)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
                 if (usuario.Any())
@@ -204,7 +204,7 @@ namespace NimbusACAD.Identity.User
 
         public bool GetUsuarioEmailVerificado(string Email)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(Email));
                 if (usuario.Any())
@@ -228,7 +228,7 @@ namespace NimbusACAD.Identity.User
 
         public string GetEmailUsernameByNome(string nmCompleto)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 int pessoaID = GetPessoaIDporNome(nmCompleto);
                 var usuario = db.RBAC_Usuario.Where(o => o.Pessoa_ID == pessoaID);
@@ -247,7 +247,7 @@ namespace NimbusACAD.Identity.User
         #region GET-Negocio_Pessoa
         public int GetPessoaIDporEmail(string Email)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var pessoa = db.Negocio_Pessoa.Where(o => o.Email.Equals(Email));
                 if (pessoa.Any())
@@ -260,7 +260,7 @@ namespace NimbusACAD.Identity.User
 
         public int GetPessoaIDporNome(string nmCompleto)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var pessoa = db.Negocio_Pessoa.Where(o => (o.Primeiro_Nome + o.Sobrenome).Equals(nmCompleto));
                 if (pessoa.Any())
@@ -276,7 +276,7 @@ namespace NimbusACAD.Identity.User
         public List<ListaPerfisViewModel> GetAllPerfilUsuario()
         {
             List<ListaPerfisViewModel> perfis = new List<ListaPerfisViewModel>();
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 ListaPerfisViewModel LPVM;
                 var pessoas = db.Negocio_Pessoa.ToList();
@@ -309,7 +309,7 @@ namespace NimbusACAD.Identity.User
         {
             PerfilDeUsuarioViewModel PUVM = new PerfilDeUsuarioViewModel();
 
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(nomeUsuario)).FirstOrDefault();
 
@@ -357,7 +357,7 @@ namespace NimbusACAD.Identity.User
         #region GET-Auxiliares
         public string GetUsuarioPerfilRBACNome(int usuarioID)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 RBAC_Link_Usuario_Perfil linkUP = db.RBAC_Link_Usuario_Perfil.Where(o => o.Usuario_ID == usuarioID).FirstOrDefault();
                 RBAC_Perfil perfilRBAC = db.RBAC_Perfil.Where(o => o.Perfil_ID == linkUP.Perfil_ID).FirstOrDefault();
@@ -367,7 +367,7 @@ namespace NimbusACAD.Identity.User
 
         public string GetUsuarioEndereco(int pessoaID)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var endereco = db.Negocio_Endereco.Where(o => o.Pessoa_ID == pessoaID).FirstOrDefault();
                 var bsEnd = db.Negocio_Base_Endereco.Where(o => o.CEP.Equals(endereco.CEP)).FirstOrDefault();
@@ -382,7 +382,7 @@ namespace NimbusACAD.Identity.User
         public AlterarEnderecoViewModel GetEndereco(int pessoaID)
         {
             AlterarEnderecoViewModel AEVM = new AlterarEnderecoViewModel();
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 Negocio_Endereco NE = db.Negocio_Endereco.Where(o => o.Pessoa_ID == pessoaID).FirstOrDefault();
                 AEVM.PessoaID = NE.Pessoa_ID;
@@ -407,7 +407,7 @@ namespace NimbusACAD.Identity.User
         #region UPDATE-Usuario
         public void UpdateContaUsuario(PerfilDeUsuarioViewModel usuario)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 using (var dbContextTransaction = db.Database.BeginTransaction())
                 {
@@ -462,7 +462,7 @@ namespace NimbusACAD.Identity.User
 
         public void UpdateEndereco(AlterarEnderecoViewModel endereco)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 using (var dbContextTransaction = db.Database.BeginTransaction())
                 {
@@ -530,7 +530,7 @@ namespace NimbusACAD.Identity.User
         #region FORGOT-PASSWORD
         public string ForgotPassword(int usuarioID)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var usuario = db.RBAC_Usuario.Find(usuarioID);
                 if(usuario != null)
@@ -557,7 +557,7 @@ namespace NimbusACAD.Identity.User
         #region CHANGE-PASSWORD
         public OperationStatus ChangePassword(int usuarioID, AlterarSenhaViewModel model)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var usuario = db.RBAC_Usuario.Find(usuarioID);
                 if (usuario != null)
@@ -589,7 +589,7 @@ namespace NimbusACAD.Identity.User
 
         public void DeleteUsuario(int usuarioID)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 using (var dbContextTransaction = db.Database.BeginTransaction())
                 {
@@ -633,7 +633,7 @@ namespace NimbusACAD.Identity.User
 
     public static class UserManager
     {
-        static NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+        static NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
 
         public static UserStore GetUsuario(int usuarioID)
         {

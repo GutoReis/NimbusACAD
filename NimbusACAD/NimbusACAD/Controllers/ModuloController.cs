@@ -9,7 +9,7 @@ namespace NimbusACAD.Controllers
 {
     public class ModuloController : Controller
     {
-        private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+        private NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
 
         // GET: Modulo/Detalhes/5
         [RBAC]
@@ -63,8 +63,15 @@ namespace NimbusACAD.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.Curso_ID = id;
-            return View();
+            Negocio_Curso NC = db.Negocio_Curso.Find(id);
+            if (NC == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.Curso_ID = id;
+            Negocio_Modulo NM = new Negocio_Modulo();
+            NM.Curso_ID = NC.Curso_ID;
+            return View(NM);
         }
 
         // POST: Modulo/NovoModulo
@@ -80,10 +87,10 @@ namespace NimbusACAD.Controllers
                 negocio_Modulo.Tot_Inscritos = 0;
                 db.Negocio_Modulo.Add(negocio_Modulo);
                 db.SaveChanges();
-                return RedirectToAction("Detalhes", "Curso", negocio_Modulo.Curso_ID);
+                return RedirectToAction("Detalhes", "Curso", new { id = negocio_Modulo.Curso_ID });
             }
 
-            ViewBag.Curso_ID = new SelectList(db.Negocio_Curso, "Curso_ID", "Curso_Nome", negocio_Modulo.Curso_ID);
+            //ViewBag.Curso_ID = new SelectList(db.Negocio_Curso, "Curso_ID", "Curso_Nome", negocio_Modulo.Curso_ID);
             return View(negocio_Modulo);
         }
 
@@ -100,7 +107,7 @@ namespace NimbusACAD.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Curso_ID = new SelectList(db.Negocio_Curso, "Curso_ID", "Curso_Nome", negocio_Modulo.Curso_ID);
+           // ViewBag.Curso_ID = new SelectList(db.Negocio_Curso, "Curso_ID", "Curso_Nome", negocio_Modulo.Curso_ID);
             return View(negocio_Modulo);
         }
 
@@ -116,9 +123,9 @@ namespace NimbusACAD.Controllers
             {
                 db.Entry(negocio_Modulo).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Detalhes", "Modulo", negocio_Modulo.Modulo_ID);
+                return RedirectToAction("Detalhes", "Modulo", new { id = negocio_Modulo.Modulo_ID });
             }
-            ViewBag.Curso_ID = new SelectList(db.Negocio_Curso, "Curso_ID", "Curso_Nome", negocio_Modulo.Curso_ID);
+            //ViewBag.Curso_ID = new SelectList(db.Negocio_Curso, "Curso_ID", "Curso_Nome", negocio_Modulo.Curso_ID);
             return View(negocio_Modulo);
         }
 
@@ -151,7 +158,7 @@ namespace NimbusACAD.Controllers
             }
             db.Negocio_Modulo.Remove(negocio_Modulo);
             db.SaveChanges();
-            return RedirectToAction("Detalhes", "Curso", negocio_Modulo.Curso_ID);
+            return RedirectToAction("Detalhes", "Curso", new { id = negocio_Modulo.Curso_ID });
         }
 
         protected override void Dispose(bool disposing)

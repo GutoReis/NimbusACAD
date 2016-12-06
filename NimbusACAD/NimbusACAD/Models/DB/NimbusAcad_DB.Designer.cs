@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Guto\Documents\Projetos\NimbusACAD\CodigoFonte\NimbusACAD\NimbusACAD\NimbusACAD\Models\DB\NimbusAcadModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Guto\Documents\Projetos\NimbusACAD\CodigoFonte\NimbusACAD\NimbusACAD\NimbusACAD\Models\DB\NimbusAcad_DB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

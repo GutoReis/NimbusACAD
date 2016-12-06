@@ -11,7 +11,7 @@ namespace NimbusACAD.Controllers
 {
     public class DiarioController : Controller
     {
-        private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+        private NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
 
         //GET: Diario/Index
         [RBAC]
@@ -26,7 +26,7 @@ namespace NimbusACAD.Controllers
             List<ListaDisciplinaViewModel> discList = new List<ListaDisciplinaViewModel>();
             foreach (var d in db.Negocio_Disciplina)
             {
-                if (d.Professor_ID == profID)
+                if (d.Funcionario_ID == profID)
                 {
                     discVM = new ListaDisciplinaViewModel();
                     discVM.DisciplinaID = d.Disciplina_ID;
@@ -48,7 +48,7 @@ namespace NimbusACAD.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Disciplina disciplina = db.Negocio_Disciplina.Where(o => o.Disciplina_ID == discID && o.Professor_ID == profID).FirstOrDefault();
+            Negocio_Disciplina disciplina = db.Negocio_Disciplina.Where(o => o.Disciplina_ID == discID && o.Funcionario_ID == profID).FirstOrDefault();
             if (disciplina == null)
             {
                 return HttpNotFound();
@@ -77,11 +77,11 @@ namespace NimbusACAD.Controllers
                     //Salvando frequencia
                     frequencia = new Negocio_Frequencia();
                     frequencia.Disciplina_ID = FVM.DisciplinaID;
-                    frequencia.Professor_ID = FVM.ProfessorID;
+                    frequencia.Funcionario_ID = FVM.ProfessorID;
                     frequencia.Dt_Aula = FVM.DtAula;
                     frequencia.Qtde_Aula = FVM.QtdeAulas;
                     frequencia.Aula_Ministrada = FVM.AulaMinistrada;
-                    frequencia.Matricula_Presente = al.MatriculaID;
+                    frequencia.Matricula_ID = al.MatriculaID;
                     db.Negocio_Frequencia.Add(frequencia);
                     db.SaveChanges();
 
@@ -107,7 +107,7 @@ namespace NimbusACAD.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Disciplina d = db.Negocio_Disciplina.Where(o => o.Disciplina_ID == discID && o.Professor_ID == profID).FirstOrDefault();
+            Negocio_Disciplina d = db.Negocio_Disciplina.Where(o => o.Disciplina_ID == discID && o.Funcionario_ID == profID).FirstOrDefault();
             if (d == null)
             {
                 return HttpNotFound();
@@ -258,7 +258,7 @@ namespace NimbusACAD.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Disciplina disciplina = db.Negocio_Disciplina.Where(o => o.Disciplina_ID == discID && o.Professor_ID == profID).FirstOrDefault();
+            Negocio_Disciplina disciplina = db.Negocio_Disciplina.Where(o => o.Disciplina_ID == discID && o.Funcionario_ID == profID).FirstOrDefault();
             if (disciplina == null)
             {
                 return HttpNotFound();
@@ -271,7 +271,7 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult AdicionarPresenca([Bind(Include = "Frequencia_ID, Disciplina_ID, Professor_ID, Dt_Aula, Qtde_Aula, Aula_Ministrada, Matricula_Presente")]Negocio_Frequencia frequencia)
+        public ActionResult AdicionarPresenca([Bind(Include = "Frequencia_ID, Disciplina_ID, Funcionario_ID, Dt_Aula, Qtde_Aula, Aula_Ministrada, Matricula_ID")]Negocio_Frequencia frequencia)
         {
             if (ModelState.IsValid)
             {
@@ -279,7 +279,7 @@ namespace NimbusACAD.Controllers
                 db.SaveChanges();
                 return RedirectToAction("VerNotasDisciplina", frequencia.Disciplina_ID);
             }
-            PopulateMatriculasDropDown(frequencia.Disciplina_ID, frequencia.Matricula_Presente);
+            PopulateMatriculasDropDown(frequencia.Disciplina_ID, frequencia.Matricula_ID);
             return View(frequencia);
         }
 

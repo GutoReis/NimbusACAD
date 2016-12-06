@@ -26,7 +26,7 @@ namespace NimbusACAD.Models.DB
         public int Modulo_ID { get; set; }
         public string Disciplina_Nome { get; set; }
         public string Descricao { get; set; }
-        public int Professor_ID { get; set; }
+        public int Funcionario_ID { get; set; }
         public Nullable<int> Tot_Aulas_Dadas { get; set; }
         public Nullable<int> Carga_Horaria { get; set; }
     

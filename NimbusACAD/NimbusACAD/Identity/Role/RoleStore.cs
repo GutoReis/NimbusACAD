@@ -14,7 +14,7 @@ namespace NimbusACAD.Identity.Role
 
         public void AddRole(CriarPerfilRBACViewModel perfil)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 RBAC_Perfil rbacPerfil = new RBAC_Perfil();
                 rbacPerfil.Perfil_Nome = perfil.PerfilNm;
@@ -27,7 +27,7 @@ namespace NimbusACAD.Identity.Role
 
         public bool IsPermissaoEmPerfil(string nmPerfil, string nmPermissao)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 RBAC_Permissao permissao = db.RBAC_Permissao.Where(o => o.Permissao_Nome.ToLower().Equals(nmPermissao)).FirstOrDefault();
                 if (permissao != null)
@@ -52,7 +52,7 @@ namespace NimbusACAD.Identity.Role
 
         public int GetPerfilID(string nmPerfil)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var perfil = db.RBAC_Perfil.Where(o => o.Perfil_Nome.Equals(nmPerfil));
                 if (perfil.Any())
@@ -68,7 +68,7 @@ namespace NimbusACAD.Identity.Role
 
         public string GetPerfilNome(int id)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var perfil = db.RBAC_Perfil.Where(o => o.Perfil_ID == id);
                 if (perfil.Any())
@@ -84,7 +84,7 @@ namespace NimbusACAD.Identity.Role
 
         public string GetPerfilDescricao(int id)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var perfil = db.RBAC_Perfil.Where(o => o.Perfil_ID == id);
                 if (perfil.Any())
@@ -100,7 +100,7 @@ namespace NimbusACAD.Identity.Role
 
         public string GetPerfilDescricao(string nmPerfil)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 var perfil = db.RBAC_Perfil.Where(o => o.Perfil_Nome.Equals(nmPerfil));
                 if (perfil.Any())
@@ -116,7 +116,7 @@ namespace NimbusACAD.Identity.Role
 
         public List<ListaUsuariosPerfilViewModel> GetUsuariosDePerfil(string nmPerfil)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 List<ListaUsuariosPerfilViewModel> usuarios = new List<ListaUsuariosPerfilViewModel>();
                 ListaUsuariosPerfilViewModel LUPVM;
@@ -144,7 +144,7 @@ namespace NimbusACAD.Identity.Role
 
         public List<ListaPermissoesPerfilViewModel> GetPermicoesDoPerfil(string nmPerfil)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 List<ListaPermissoesPerfilViewModel> permissoes = new List<ListaPermissoesPerfilViewModel>();
                 ListaPermissoesPerfilViewModel LPPVM;
@@ -173,7 +173,7 @@ namespace NimbusACAD.Identity.Role
 
         public void AddUsuarioPerfil(RBAC_Link_Usuario_Perfil vinculo)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 RBAC_Link_Usuario_Perfil linkUP = new RBAC_Link_Usuario_Perfil();
                 linkUP.Perfil_ID = vinculo.Perfil_ID;
@@ -186,7 +186,7 @@ namespace NimbusACAD.Identity.Role
 
         public void RemoveUsuarioPerfil(int uID, int pID)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 using (var dbContextTransaction = db.Database.BeginTransaction())
                 {
@@ -214,7 +214,7 @@ namespace NimbusACAD.Identity.Role
 
         public void UpdatePerfil(CriarPerfilRBACViewModel perfil)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 using (var dbContextTransaction = db.Database.BeginTransaction())
                 {
@@ -243,7 +243,7 @@ namespace NimbusACAD.Identity.Role
 
         public void DeletePerfil(int perfilID)
         {
-            using (NimbusAcad_DBEntities db = new NimbusAcad_DBEntities())
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
                 using (var dbContextTransaction = db.Database.BeginTransaction())
                 {

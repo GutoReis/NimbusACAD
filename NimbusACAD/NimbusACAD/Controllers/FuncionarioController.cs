@@ -18,7 +18,7 @@ namespace NimbusACAD.Controllers
         private UserStore _userStore = new UserStore();
         private EmailService _emailService = new EmailService();
         private RoleStore _roleStore = new RoleStore();
-        private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+        private NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
 
         // GET: Funcionario
         [RBAC]
@@ -51,7 +51,7 @@ namespace NimbusACAD.Controllers
             VerFuncionarioViewModel VFVM = new VerFuncionarioViewModel();
             VFVM.funcionarioID = negocio_Funcionario.Funcionario_ID;
             VFVM.pessoaID = negocio_Funcionario.Pessoa_ID;
-            VFVM.cargoID = negocio_Funcionario.Cargo_ID;
+            VFVM.cargoID = negocio_Funcionario.Tipo_Funcionario_ID;
             VFVM.FuncionarioNM = negocio_Funcionario.Negocio_Pessoa.Primeiro_Nome + " " + negocio_Funcionario.Negocio_Pessoa.Sobrenome;
             VFVM.Email = negocio_Funcionario.Negocio_Pessoa.Email;
             VFVM.TelefonePrincipal = negocio_Funcionario.Negocio_Pessoa.Tel_Principal;
@@ -75,7 +75,7 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovaPessoa([Bind(Include = "PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, CEP, Logradouro, Complemento, Numero, Bairro, Cidade, Estado, Pais, PerfilID")]RegistrarComumViewModel novaPessoa)
+        public async System.Threading.Tasks.Task<ActionResult> NovaPessoa([Bind(Include = "PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, CEP, Logradouro, Complemento, Numero, Bairro, Cidade, Estado, Pais, PerfilID")]RegistrarComumViewModel novaPessoa)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace NimbusACAD.Controllers
                 string tempPass = SecurityMethods.HashPasswordPBKDF2(tempToken, tempSalt);
 
                 //Criando usuario
-                RU.Senha_Hash = tempToken;
+                RU.Senha_Hash = tempPass;
                 RU.Salt = tempSalt;
                 RU.Dt_Criacao = DateTime.Now.Date;
                 RU.Dt_Ultima_Modif = DateTime.Now.Date;
@@ -103,8 +103,8 @@ namespace NimbusACAD.Controllers
                 db.SaveChanges();
 
                 //Enviando Email
-                EmailMessage message = new EmailMessage(novaPessoa.Email, "Bem-vindo ao NimbusAcad!", "Olá, seja bem-vindo ao NimbusAcad \n Esta é sua senha: " + tempToken + "\nRecomenda-se que altere a senha para uma, com fácil memorização.");
-                _emailService.Send(message);
+                EmailMessage message = new EmailMessage("guto.reisdelima@gmail.com", "Bem-vindo ao NimbusAcad!", "Olá, seja bem-vindo ao NimbusAcad \n Esta é sua senha: " + tempToken + "\nRecomenda-se que altere a senha para uma, com fácil memorização.");
+                await _emailService.Send(message);
 
                 //Assimilando perfil de acesso
                 int uID = _userStore.GetUsuarioID(novaPessoa.Email);
@@ -195,7 +195,7 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovoFuncionario([Bind(Include = "Funcionario_ID, Pessoa_ID, Cargo_ID")] Negocio_Funcionario funcionario)
+        public ActionResult NovoFuncionario([Bind(Include = "Funcionario_ID, Pessoa_ID, Tipo_Funcionario_ID")] Negocio_Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {
@@ -206,7 +206,7 @@ namespace NimbusACAD.Controllers
 
             //ViewBag.Pessoa_ID = new SelectList(db.Negocio_Pessoa, "Pessoa_ID", "Primeiro_Nome", negocio_Funcionario.Pessoa_ID);
             //ViewBag.Cargo_ID = new SelectList(db.Negocio_Tipo_Funcionario, "Tipo_Funcionario_ID", "Cargo", negocio_Funcionario.Cargo_ID);
-            PopulateCargoDropDownList(funcionario.Cargo_ID);
+            PopulateCargoDropDownList(funcionario.Tipo_Funcionario_ID);
             return View(funcionario);
         }
 
@@ -235,7 +235,7 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Funcionario_ID,Pessoa_ID,Cargo_ID")] Negocio_Funcionario negocio_Funcionario)
+        public ActionResult Editar([Bind(Include = "Funcionario_ID,Pessoa_ID,Tipo_Funcionario_ID")] Negocio_Funcionario negocio_Funcionario)
         {
             if (ModelState.IsValid)
             {
@@ -245,7 +245,7 @@ namespace NimbusACAD.Controllers
             }
             //ViewBag.Pessoa_ID = new SelectList(db.Negocio_Pessoa, "Pessoa_ID", "Primeiro_Nome", negocio_Funcionario.Pessoa_ID);
             //ViewBag.Cargo_ID = new SelectList(db.Negocio_Tipo_Funcionario, "Tipo_Funcionario_ID", "Cargo", negocio_Funcionario.Cargo_ID);
-            PopulateCargoDropDownList(negocio_Funcionario.Cargo_ID);
+            PopulateCargoDropDownList(negocio_Funcionario.Tipo_Funcionario_ID);
             return View(negocio_Funcionario);
         }
 

@@ -10,7 +10,7 @@ namespace NimbusACAD.Controllers
 {
     public class DocumentoController : Controller
     {
-        private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+        private NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
 
         // GET: Documento
         [RBAC]

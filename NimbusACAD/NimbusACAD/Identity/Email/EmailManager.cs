@@ -47,10 +47,10 @@ namespace NimbusACAD.Identity.Email
             this.m_IsSmtpNetworkDeliveryMethodEnabled = ExtendedMethods.GetConfigSettingAsBool(cKey_SmtpNetworkDeliveryMethodEnabled);
         }
 
-        public void Send(EmailMessage message)
+        public async Task Send(EmailMessage message)
         {
             Send2MailAccount(message);
-            return;
+            //return;
 
             //Configure Email Client
             SmtpClient client = new SmtpClient(this.m_Server);
@@ -75,11 +75,11 @@ namespace NimbusACAD.Identity.Email
             //Send:
             if (mail != null)
             {
-                client.SendMailAsync(mail);
+                await client.SendMailAsync(mail);
             }
             else
             {
-                Task.FromResult(0);
+                await Task.FromResult(0);
             }
         }
 

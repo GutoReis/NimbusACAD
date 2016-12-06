@@ -8,7 +8,7 @@ namespace NimbusACAD.Controllers
     [Authorize]
     public class MensagemController : Controller
     {
-        private NimbusAcad_DBEntities db = new NimbusAcad_DBEntities();
+        private NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
         
         // GET: Mensagem
         public ActionResult Index()

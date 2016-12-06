@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NimbusAcad_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="NimbusAcad_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Negocio_Base_Endereco">
           <Key>
             <PropertyRef Name="CEP" />
@@ -37,7 +37,7 @@
           <Property Name="Curso_Nome" Type="nvarchar" MaxLength="30" />
           <Property Name="Descricao" Type="nvarchar(max)" />
           <Property Name="Periodo" Type="nvarchar" MaxLength="20" />
-          <Property Name="Coordenador_ID" Type="int" Nullable="false" />
+          <Property Name="Funcionario_ID" Type="int" Nullable="false" />
           <Property Name="Carga_Horaria" Type="int" />
         </EntityType>
         <EntityType Name="Negocio_Disciplina">
@@ -48,14 +48,13 @@
           <Property Name="Modulo_ID" Type="int" Nullable="false" />
           <Property Name="Disciplina_Nome" Type="nvarchar" MaxLength="30" />
           <Property Name="Descricao" Type="nvarchar(max)" />
-          <Property Name="Professor_ID" Type="int" Nullable="false" />
+          <Property Name="Funcionario_ID" Type="int" Nullable="false" />
           <Property Name="Tot_Aulas_Dadas" Type="int" />
           <Property Name="Carga_Horaria" Type="int" />
         </EntityType>
         <EntityType Name="Negocio_Doc_Devente">
           <Key>
-            <PropertyRef Name="Documento_ID" />
-            <PropertyRef Name="Matricula_ID" />
+            <PropertyRef Name="Doc_Devente_ID" />
           </Key>
           <Property Name="Doc_Devente_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Documento_ID" Type="int" Nullable="false" />
@@ -66,7 +65,7 @@
             <PropertyRef Name="Documento_ID" />
           </Key>
           <Property Name="Documento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Documento_Nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Documento_Nome" Type="nvarchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <EntityType Name="Negocio_Endereco">
           <Key>
@@ -85,11 +84,11 @@
           </Key>
           <Property Name="Frequencia_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Disciplina_ID" Type="int" Nullable="false" />
-          <Property Name="Professor_ID" Type="int" Nullable="false" />
+          <Property Name="Funcionario_ID" Type="int" Nullable="false" />
           <Property Name="Dt_Aula" Type="date" />
           <Property Name="Qtde_Aula" Type="int" />
           <Property Name="Aula_Ministrada" Type="nvarchar(max)" />
-          <Property Name="Matricula_Presente" Type="int" Nullable="false" />
+          <Property Name="Matricula_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Negocio_Funcionario">
           <Key>
@@ -97,7 +96,7 @@
           </Key>
           <Property Name="Funcionario_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Pessoa_ID" Type="int" Nullable="false" />
-          <Property Name="Cargo_ID" Type="int" Nullable="false" />
+          <Property Name="Tipo_Funcionario_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Negocio_Matricula_Aluno">
           <Key>
@@ -169,8 +168,7 @@
         </EntityType>
         <EntityType Name="Negocio_Vinculo_Disciplina">
           <Key>
-            <PropertyRef Name="Disciplina_ID" />
-            <PropertyRef Name="Matricula_ID" />
+            <PropertyRef Name="Vinculo_ID" />
           </Key>
           <Property Name="Vinculo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Disciplina_ID" Type="int" Nullable="false" />
@@ -183,8 +181,7 @@
         </EntityType>
         <EntityType Name="Negocio_Vinculo_Modulo">
           <Key>
-            <PropertyRef Name="Modulo_ID" />
-            <PropertyRef Name="Matricula_ID" />
+            <PropertyRef Name="Vinculo_ID" />
           </Key>
           <Property Name="Vinculo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Modulo_ID" Type="int" Nullable="false" />
@@ -193,8 +190,7 @@
         </EntityType>
         <EntityType Name="RBAC_Link_Perfil_Permissao">
           <Key>
-            <PropertyRef Name="Perfil_ID" />
-            <PropertyRef Name="Permissao_ID" />
+            <PropertyRef Name="Link_ID" />
           </Key>
           <Property Name="Link_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Perfil_ID" Type="int" Nullable="false" />
@@ -202,8 +198,7 @@
         </EntityType>
         <EntityType Name="RBAC_Link_Usuario_Perfil">
           <Key>
-            <PropertyRef Name="Usuario_ID" />
-            <PropertyRef Name="Perfil_ID" />
+            <PropertyRef Name="Link_ID" />
           </Key>
           <Property Name="Link_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Usuario_ID" Type="int" Nullable="false" />
@@ -222,7 +217,7 @@
             <PropertyRef Name="Permissao_ID" />
           </Key>
           <Property Name="Permissao_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Permissao_Nome" Type="nvarchar" MaxLength="30" />
+          <Property Name="Permissao_Nome" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="RBAC_Usuario">
           <Key>
@@ -269,7 +264,7 @@
               <PropertyRef Name="Funcionario_ID" />
             </Principal>
             <Dependent Role="Negocio_Curso">
-              <PropertyRef Name="Coordenador_ID" />
+              <PropertyRef Name="Funcionario_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -281,7 +276,7 @@
               <PropertyRef Name="Funcionario_ID" />
             </Principal>
             <Dependent Role="Negocio_Disciplina">
-              <PropertyRef Name="Professor_ID" />
+              <PropertyRef Name="Funcionario_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -357,7 +352,7 @@
               <PropertyRef Name="Matricula_ID" />
             </Principal>
             <Dependent Role="Negocio_Frequencia">
-              <PropertyRef Name="Matricula_Presente" />
+              <PropertyRef Name="Matricula_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -381,7 +376,7 @@
               <PropertyRef Name="Funcionario_ID" />
             </Principal>
             <Dependent Role="Negocio_Frequencia">
-              <PropertyRef Name="Professor_ID" />
+              <PropertyRef Name="Funcionario_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -405,7 +400,7 @@
               <PropertyRef Name="Tipo_Funcionario_ID" />
             </Principal>
             <Dependent Role="Negocio_Funcionario">
-              <PropertyRef Name="Cargo_ID" />
+              <PropertyRef Name="Tipo_Funcionario_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -769,7 +764,7 @@
           <Property Name="Curso_Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Periodo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Coordenador_ID" Type="Int32" Nullable="false" />
+          <Property Name="Funcionario_ID" Type="Int32" Nullable="false" />
           <Property Name="Carga_Horaria" Type="Int32" />
           <NavigationProperty Name="Negocio_Funcionario" Relationship="Self.FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID" FromRole="Negocio_Curso" ToRole="Negocio_Funcionario" />
           <NavigationProperty Name="Negocio_Matricula_Aluno" Relationship="Self.FK_dbo_Negocio_Matricula_Aluno_dbo_Negocio_Curso_Curso_ID" FromRole="Negocio_Curso" ToRole="Negocio_Matricula_Aluno" />
@@ -783,7 +778,7 @@
           <Property Name="Modulo_ID" Type="Int32" Nullable="false" />
           <Property Name="Disciplina_Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Professor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Funcionario_ID" Type="Int32" Nullable="false" />
           <Property Name="Tot_Aulas_Dadas" Type="Int32" />
           <Property Name="Carga_Horaria" Type="Int32" />
           <NavigationProperty Name="Negocio_Funcionario" Relationship="Self.FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID" FromRole="Negocio_Disciplina" ToRole="Negocio_Funcionario" />
@@ -794,8 +789,7 @@
         </EntityType>
         <EntityType Name="Negocio_Doc_Devente">
           <Key>
-            <PropertyRef Name="Documento_ID" />
-            <PropertyRef Name="Matricula_ID" />
+            <PropertyRef Name="Doc_Devente_ID" />
           </Key>
           <Property Name="Doc_Devente_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Documento_ID" Type="Int32" Nullable="false" />
@@ -808,7 +802,7 @@
             <PropertyRef Name="Documento_ID" />
           </Key>
           <Property Name="Documento_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Documento_Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Documento_Nome" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Negocio_Curriculo" Relationship="Self.FK_dbo_Negocio_Curriculo_dbo_Negocio_Documento_Documento_ID" FromRole="Negocio_Documento" ToRole="Negocio_Curriculo" />
           <NavigationProperty Name="Negocio_Doc_Devente" Relationship="Self.FK_dbo_Negocio_Doc_Devente_dbo_Negocio_Documento_Documento_ID" FromRole="Negocio_Documento" ToRole="Negocio_Doc_Devente" />
         </EntityType>
@@ -831,11 +825,11 @@
           </Key>
           <Property Name="Frequencia_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Disciplina_ID" Type="Int32" Nullable="false" />
-          <Property Name="Professor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Funcionario_ID" Type="Int32" Nullable="false" />
           <Property Name="Dt_Aula" Type="DateTime" Precision="0" />
           <Property Name="Qtde_Aula" Type="Int32" />
           <Property Name="Aula_Ministrada" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Matricula_Presente" Type="Int32" Nullable="false" />
+          <Property Name="Matricula_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Negocio_Disciplina" Relationship="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Disciplina_Disciplina_ID" FromRole="Negocio_Frequencia" ToRole="Negocio_Disciplina" />
           <NavigationProperty Name="Negocio_Matricula_Aluno" Relationship="Self.FK_dbo_Negocio_Frequencia_dbo_Matricula_Aluno_Matricula_ID" FromRole="Negocio_Frequencia" ToRole="Negocio_Matricula_Aluno" />
           <NavigationProperty Name="Negocio_Funcionario" Relationship="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID" FromRole="Negocio_Frequencia" ToRole="Negocio_Funcionario" />
@@ -846,7 +840,7 @@
           </Key>
           <Property Name="Funcionario_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Pessoa_ID" Type="Int32" Nullable="false" />
-          <Property Name="Cargo_ID" Type="Int32" Nullable="false" />
+          <Property Name="Tipo_Funcionario_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Negocio_Curso" Relationship="Self.FK_dbo_Negocio_Curso_dbo_Negocio_Funcionario_Coordenador_ID" FromRole="Negocio_Funcionario" ToRole="Negocio_Curso" />
           <NavigationProperty Name="Negocio_Disciplina" Relationship="Self.FK_dbo_Negocio_Disciplina_dbo_Negocio_Funcionario_Professor_ID" FromRole="Negocio_Funcionario" ToRole="Negocio_Disciplina" />
           <NavigationProperty Name="Negocio_Frequencia" Relationship="Self.FK_dbo_Negocio_Frequencia_dbo_Negocio_Funcionario_Professor_ID" FromRole="Negocio_Funcionario" ToRole="Negocio_Frequencia" />
@@ -943,8 +937,7 @@
         </EntityType>
         <EntityType Name="Negocio_Vinculo_Disciplina">
           <Key>
-            <PropertyRef Name="Disciplina_ID" />
-            <PropertyRef Name="Matricula_ID" />
+            <PropertyRef Name="Vinculo_ID" />
           </Key>
           <Property Name="Vinculo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Disciplina_ID" Type="Int32" Nullable="false" />
@@ -959,8 +952,7 @@
         </EntityType>
         <EntityType Name="Negocio_Vinculo_Modulo">
           <Key>
-            <PropertyRef Name="Modulo_ID" />
-            <PropertyRef Name="Matricula_ID" />
+            <PropertyRef Name="Vinculo_ID" />
           </Key>
           <Property Name="Vinculo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Modulo_ID" Type="Int32" Nullable="false" />
@@ -971,8 +963,7 @@
         </EntityType>
         <EntityType Name="RBAC_Link_Perfil_Permissao">
           <Key>
-            <PropertyRef Name="Perfil_ID" />
-            <PropertyRef Name="Permissao_ID" />
+            <PropertyRef Name="Link_ID" />
           </Key>
           <Property Name="Link_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Perfil_ID" Type="Int32" Nullable="false" />
@@ -982,8 +973,7 @@
         </EntityType>
         <EntityType Name="RBAC_Link_Usuario_Perfil">
           <Key>
-            <PropertyRef Name="Usuario_ID" />
-            <PropertyRef Name="Perfil_ID" />
+            <PropertyRef Name="Link_ID" />
           </Key>
           <Property Name="Link_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Usuario_ID" Type="Int32" Nullable="false" />
@@ -1006,7 +996,7 @@
             <PropertyRef Name="Permissao_ID" />
           </Key>
           <Property Name="Permissao_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Permissao_Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Permissao_Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RBAC_Link_Perfil_Permissao" Relationship="Self.FK_dbo_RBAC_Link_Perfil_Permissao_dbo_RBAC_Permissao_Permissaro_ID" FromRole="RBAC_Permissao" ToRole="RBAC_Link_Perfil_Permissao" />
         </EntityType>
         <EntityType Name="RBAC_Usuario">
@@ -1070,7 +1060,7 @@
               <PropertyRef Name="Funcionario_ID" />
             </Principal>
             <Dependent Role="Negocio_Curso">
-              <PropertyRef Name="Coordenador_ID" />
+              <PropertyRef Name="Funcionario_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1106,7 +1096,7 @@
               <PropertyRef Name="Funcionario_ID" />
             </Principal>
             <Dependent Role="Negocio_Disciplina">
-              <PropertyRef Name="Professor_ID" />
+              <PropertyRef Name="Funcionario_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1204,7 +1194,7 @@
               <PropertyRef Name="Matricula_ID" />
             </Principal>
             <Dependent Role="Negocio_Frequencia">
-              <PropertyRef Name="Matricula_Presente" />
+              <PropertyRef Name="Matricula_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1216,7 +1206,7 @@
               <PropertyRef Name="Funcionario_ID" />
             </Principal>
             <Dependent Role="Negocio_Frequencia">
-              <PropertyRef Name="Professor_ID" />
+              <PropertyRef Name="Funcionario_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1240,7 +1230,7 @@
               <PropertyRef Name="Tipo_Funcionario_ID" />
             </Principal>
             <Dependent Role="Negocio_Funcionario">
-              <PropertyRef Name="Cargo_ID" />
+              <PropertyRef Name="Tipo_Funcionario_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1376,7 +1366,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="NimbusAcad_DBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="NimbusAcad_DB_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Negocio_Base_Endereco" EntityType="Self.Negocio_Base_Endereco" />
           <EntitySet Name="Negocio_Curriculo" EntityType="Self.Negocio_Curriculo" />
           <EntitySet Name="Negocio_Curso" EntityType="Self.Negocio_Curso" />
@@ -1521,7 +1511,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="NimbusAcad_DBModelStoreContainer" CdmEntityContainer="NimbusAcad_DBEntities">
+        <EntityContainerMapping StorageEntityContainer="NimbusAcad_DBModelStoreContainer" CdmEntityContainer="NimbusAcad_DB_Entities">
           <EntitySetMapping Name="Negocio_Base_Endereco">
             <EntityTypeMapping TypeName="NimbusAcad_DBModel.Negocio_Base_Endereco">
               <MappingFragment StoreEntitySet="Negocio_Base_Endereco">
@@ -1555,7 +1545,7 @@
                 <ScalarProperty Name="Curso_Nome" ColumnName="Curso_Nome" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-                <ScalarProperty Name="Coordenador_ID" ColumnName="Coordenador_ID" />
+                <ScalarProperty Name="Funcionario_ID" ColumnName="Funcionario_ID" />
                 <ScalarProperty Name="Carga_Horaria" ColumnName="Carga_Horaria" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1567,7 +1557,7 @@
                 <ScalarProperty Name="Modulo_ID" ColumnName="Modulo_ID" />
                 <ScalarProperty Name="Disciplina_Nome" ColumnName="Disciplina_Nome" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="Professor_ID" ColumnName="Professor_ID" />
+                <ScalarProperty Name="Funcionario_ID" ColumnName="Funcionario_ID" />
                 <ScalarProperty Name="Tot_Aulas_Dadas" ColumnName="Tot_Aulas_Dadas" />
                 <ScalarProperty Name="Carga_Horaria" ColumnName="Carga_Horaria" />
               </MappingFragment>
@@ -1607,11 +1597,11 @@
               <MappingFragment StoreEntitySet="Negocio_Frequencia">
                 <ScalarProperty Name="Frequencia_ID" ColumnName="Frequencia_ID" />
                 <ScalarProperty Name="Disciplina_ID" ColumnName="Disciplina_ID" />
-                <ScalarProperty Name="Professor_ID" ColumnName="Professor_ID" />
+                <ScalarProperty Name="Funcionario_ID" ColumnName="Funcionario_ID" />
                 <ScalarProperty Name="Dt_Aula" ColumnName="Dt_Aula" />
                 <ScalarProperty Name="Qtde_Aula" ColumnName="Qtde_Aula" />
                 <ScalarProperty Name="Aula_Ministrada" ColumnName="Aula_Ministrada" />
-                <ScalarProperty Name="Matricula_Presente" ColumnName="Matricula_Presente" />
+                <ScalarProperty Name="Matricula_ID" ColumnName="Matricula_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1620,7 +1610,7 @@
               <MappingFragment StoreEntitySet="Negocio_Funcionario">
                 <ScalarProperty Name="Funcionario_ID" ColumnName="Funcionario_ID" />
                 <ScalarProperty Name="Pessoa_ID" ColumnName="Pessoa_ID" />
-                <ScalarProperty Name="Cargo_ID" ColumnName="Cargo_ID" />
+                <ScalarProperty Name="Tipo_Funcionario_ID" ColumnName="Tipo_Funcionario_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

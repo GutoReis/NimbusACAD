@@ -15,13 +15,14 @@
         <h4>RBAC_Link_Usuario_Perfil</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        @Html.HiddenFor(model => model.Usuario_ID)
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Usuario_ID, "Usuario_ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Usuario_ID)
                 @Html.ValidationMessageFor(model => model.Usuario_ID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Perfil_ID, "Perfil_ID", htmlAttributes: new { @class = "control-label col-md-2" })

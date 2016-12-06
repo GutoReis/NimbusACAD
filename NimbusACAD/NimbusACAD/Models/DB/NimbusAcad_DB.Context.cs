@@ -13,10 +13,10 @@ namespace NimbusACAD.Models.DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class NimbusAcad_DBEntities : DbContext
+    public partial class NimbusAcad_DB_Entities : DbContext
     {
-        public NimbusAcad_DBEntities()
-            : base("name=NimbusAcad_DBEntities")
+        public NimbusAcad_DB_Entities()
+            : base("name=NimbusAcad_DB_Entities")
         {
         }
     
