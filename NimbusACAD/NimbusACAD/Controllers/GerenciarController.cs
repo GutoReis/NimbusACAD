@@ -3,6 +3,8 @@ using NimbusACAD.Identity.User;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
 using System.Net;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace NimbusACAD.Controllers
 {
@@ -61,25 +63,28 @@ namespace NimbusACAD.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AlterarSenha(AlterarSenhaViewModel model)
         {
-            if (!ModelState.IsValid)
+            using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
-                return View(model);
-            }
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
 
-            var RU = User.Identity as RBAC_Usuario;
-            string userEmail = RU.Username;
-            if (userEmail == null)
-            {
-                return RedirectToAction("AlterarSenhaConfirmacao", "Account");
-            }
+                string userEmail = User.Identity.Name;
+                RBAC_Usuario RU = db.RBAC_Usuario.Where(o => o.Username.Equals(userEmail)).FirstOrDefault();
+                if (RU == null)
+                {
+                    return RedirectToAction("AlterarSenhaConfirmacao", "Gerenciar");
+                }
 
-            var result = _userStore.ChangePassword(RU.Usuario_ID, model);
-            if (result.Equals(OperationStatus.Success))
-            {
-                return RedirectToAction("AlterarSenhaConfirmacao", "Account");
+                var result = _userStore.ChangePassword(RU.Usuario_ID, model);
+                if (result.Equals(OperationStatus.Success))
+                {
+                    return RedirectToAction("AlterarSenhaConfirmacao", "Gerenciar");
+                }
+                AddErrors(result);
+                return View();
             }
-            AddErrors(result);
-            return View();
         }
 
         //
@@ -128,12 +133,12 @@ namespace NimbusACAD.Controllers
         //POST: /Account/EditarPerfil/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarPerfil([Bind(Include = "PessoaID, PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, EndCompleto, UsuarioID, DtModif, Bloqueado, Perfil")]
+        public async Task<ActionResult> EditarPerfil([Bind(Include = "PessoaID, PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, EndCompleto, UsuarioID, DtModif, Bloqueado, Perfil")]
                 PerfilDeUsuarioViewModel perfilUsuario)
         {
             if (ModelState.IsValid)
             {
-                _userStore.UpdateContaUsuario(perfilUsuario);
+                await _userStore.UpdateContaUsuario(perfilUsuario);
                 return RedirectToAction("Index");
             }
             ModelState.AddModelError("", "Algo deu errado.");
@@ -142,14 +147,14 @@ namespace NimbusACAD.Controllers
 
         //
         //GET: /Account/EditarEndereco/1
-        public ActionResult EditarEndereco(int pessoaID)
+        public ActionResult EditarEndereco(int id)
         {
-            if (pessoaID == 0)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var endereco = _userStore.GetEndereco(pessoaID);
+            var endereco = _userStore.GetEndereco(id);
             if (endereco == null)
             {
                 return HttpNotFound();
@@ -173,11 +178,11 @@ namespace NimbusACAD.Controllers
         //POST: /Account/EditarEndereco/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarEndereco([Bind(Include = "CEP, Complemento, Numero, PessoaID, Logradouro, Bairro, Cidade, Estado, Pais")] AlterarEnderecoViewModel endereco)
+        public async Task<ActionResult> EditarEndereco([Bind(Include = "CEP, Complemento, Numero, PessoaID, Logradouro, Bairro, Cidade, Estado, Pais")] AlterarEnderecoViewModel endereco)
         {
             if (ModelState.IsValid)
             {
-                _userStore.UpdateEndereco(endereco);
+                await _userStore.UpdateEndereco(endereco);
                 return RedirectToAction("Index");
             }
 

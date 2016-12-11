@@ -7,6 +7,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 
 namespace NimbusACAD.Identity.User
 {
@@ -36,7 +37,7 @@ namespace NimbusACAD.Identity.User
                 NP.Tel_Principal = pessoa.TelPrincipal;
                 NP.Tel_Opcional = pessoa.TelOpcional;
                 NP.Email = pessoa.Email;
-                NP.Email_Confirmado = true;
+                NP.Email_Confirmado = false;
                 NP.Tot_Notif_NL = 0;
 
                 db.Negocio_Pessoa.Add(NP);
@@ -311,7 +312,7 @@ namespace NimbusACAD.Identity.User
 
             using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
-                var usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(nomeUsuario)).FirstOrDefault();
+                RBAC_Usuario usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(nomeUsuario)).FirstOrDefault();
 
                 if (nomeUsuario.Equals("Admin"))
                 {
@@ -333,18 +334,20 @@ namespace NimbusACAD.Identity.User
                 }
                 else
                 {
+                    Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(usuario.Pessoa_ID);
+
                     PUVM.UsuarioID = usuario.Usuario_ID;
-                    PUVM.PessoaID = usuario.Pessoa_ID.Value;
-                    PUVM.Email = usuario.Username;
-                    PUVM.PrimeiroNome = usuario.Negocio_Pessoa.Primeiro_Nome;
-                    PUVM.Sobrenome = usuario.Negocio_Pessoa.Sobrenome;
-                    PUVM.CPF = usuario.Negocio_Pessoa.CPF;
-                    PUVM.RG = usuario.Negocio_Pessoa.RG;
-                    PUVM.Sexo = usuario.Negocio_Pessoa.Sexo;
-                    PUVM.DtNascimento = usuario.Negocio_Pessoa.Dt_Nascimento.Value;
-                    PUVM.TelPrincipal = usuario.Negocio_Pessoa.Tel_Principal;
-                    PUVM.TelSecundario = usuario.Negocio_Pessoa.Tel_Opcional;
-                    PUVM.EndCompleto = GetUsuarioEndereco(usuario.Pessoa_ID.Value);
+                    PUVM.PessoaID = pessoa.Pessoa_ID;
+                    PUVM.Email = pessoa.Email;
+                    PUVM.PrimeiroNome = pessoa.Primeiro_Nome;
+                    PUVM.Sobrenome = pessoa.Sobrenome;
+                    PUVM.CPF = pessoa.CPF;
+                    PUVM.RG = pessoa.RG;
+                    PUVM.Sexo = pessoa.Sexo;
+                    PUVM.DtNascimento = pessoa.Dt_Nascimento.Value;
+                    PUVM.TelPrincipal = pessoa.Tel_Principal;
+                    PUVM.TelSecundario = pessoa.Tel_Opcional;
+                    PUVM.EndCompleto = GetUsuarioEndereco(pessoa.Pessoa_ID);
                     PUVM.DtModif = usuario.Dt_Ultima_Modif.Value;
                     PUVM.Bloqueado = usuario.Bloqueado.Value ? "Bloqueado" : "Desbloqueado";
                     PUVM.Perfil = GetUsuarioPerfilRBACNome(usuario.Usuario_ID);
@@ -369,7 +372,7 @@ namespace NimbusACAD.Identity.User
         {
             using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
-                var endereco = db.Negocio_Endereco.Where(o => o.Pessoa_ID == pessoaID).FirstOrDefault();
+                var endereco = db.Negocio_Endereco.Where(o => o.Pessoa_ID == pessoaID && o.Ativo == true).FirstOrDefault();
                 var bsEnd = db.Negocio_Base_Endereco.Where(o => o.CEP.Equals(endereco.CEP)).FirstOrDefault();
                 string end = endereco.CEP + "\n" +
                              bsEnd.Logradouro + ", " + endereco.Numero.ToString() + ", " + endereco.Complemento + " - " + bsEnd.Bairro + "\n" +
@@ -384,7 +387,7 @@ namespace NimbusACAD.Identity.User
             AlterarEnderecoViewModel AEVM = new AlterarEnderecoViewModel();
             using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
-                Negocio_Endereco NE = db.Negocio_Endereco.Where(o => o.Pessoa_ID == pessoaID).FirstOrDefault();
+                Negocio_Endereco NE = db.Negocio_Endereco.Where(o => o.Pessoa_ID == pessoaID && o.Ativo == true).FirstOrDefault();
                 AEVM.PessoaID = NE.Pessoa_ID;
                 AEVM.CEP = NE.CEP;
                 AEVM.Complemento = NE.Complemento;
@@ -405,7 +408,7 @@ namespace NimbusACAD.Identity.User
         #region UPDATE
 
         #region UPDATE-Usuario
-        public void UpdateContaUsuario(PerfilDeUsuarioViewModel usuario)
+        public async Task UpdateContaUsuario(PerfilDeUsuarioViewModel usuario)
         {
             using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
@@ -424,27 +427,27 @@ namespace NimbusACAD.Identity.User
                         u.Bloqueado = usuario.Bloqueado == "Bloqueado" ? true : false;
 
                         db.Entry(u).State = EntityState.Modified;
-                        db.SaveChanges();
+                        await db.SaveChangesAsync();
 
-                        var pessoa = db.Negocio_Pessoa.Where(o => o.Pessoa_ID == usuario.PessoaID);
-                        if (pessoa.Any())
+                        var pessoa = db.Negocio_Pessoa.Where(o => o.Pessoa_ID == usuario.PessoaID).FirstOrDefault(); ;
+                        if (pessoa != null)
                         {
-                            Negocio_Pessoa p = pessoa.FirstOrDefault();
-                            p.Pessoa_ID = usuario.PessoaID;
-                            p.Primeiro_Nome = usuario.PrimeiroNome;
-                            p.Sobrenome = usuario.Sobrenome;
-                            p.CPF = usuario.CPF;
-                            p.RG = usuario.RG;
-                            p.Sexo = usuario.Sexo;
-                            p.Dt_Nascimento = usuario.DtNascimento;
-                            p.Tel_Principal = usuario.TelPrincipal;
-                            p.Tel_Opcional = usuario.TelSecundario;
-                            p.Email = usuario.Email;
+                            //Negocio_Pessoa p = pessoa.FirstOrDefault();
+                            //pessoa.Pessoa_ID = usuario.PessoaID;
+                            pessoa.Primeiro_Nome = usuario.PrimeiroNome;
+                            pessoa.Sobrenome = usuario.Sobrenome;
+                            pessoa.CPF = usuario.CPF;
+                            pessoa.RG = usuario.RG;
+                            pessoa.Sexo = usuario.Sexo;
+                            pessoa.Dt_Nascimento = usuario.DtNascimento;
+                            pessoa.Tel_Principal = usuario.TelPrincipal;
+                            pessoa.Tel_Opcional = usuario.TelSecundario;
+                            pessoa.Email = usuario.Email;
                             //p.Email_Confirmado = usuario.EmailConfirmado;
-                            p.Tot_Notif_NL = p.Tot_Notif_NL;
+                            //pessoa.Tot_Notif_NL = pessoa.Tot_Notif_NL;
 
-                            db.Entry(p).State = EntityState.Modified;
-                            db.SaveChanges();
+                            db.Entry(pessoa).State = EntityState.Modified;
+                            await db.SaveChangesAsync();
                         }
 
                         dbContextTransaction.Commit();
@@ -460,7 +463,7 @@ namespace NimbusACAD.Identity.User
 
         #region UPDATE-ENDERECO
 
-        public void UpdateEndereco(AlterarEnderecoViewModel endereco)
+        public async Task UpdateEndereco(AlterarEnderecoViewModel endereco)
         {
             using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
@@ -468,7 +471,7 @@ namespace NimbusACAD.Identity.User
                 {
                     try
                     {
-                        var atualizarNE = db.Negocio_Endereco.Where(o => o.Pessoa_ID == endereco.PessoaID).FirstOrDefault();
+                        Negocio_Endereco atualizarNE = db.Negocio_Endereco.Where(o => o.Pessoa_ID == endereco.PessoaID && o.Ativo == true).FirstOrDefault();
                         Negocio_Base_Endereco NBE = db.Negocio_Base_Endereco.Where(o => o.CEP == endereco.CEP).FirstOrDefault();
                         if (NBE != null)
                         {
@@ -480,11 +483,11 @@ namespace NimbusACAD.Identity.User
                             NE.Pessoa_ID = endereco.PessoaID;
 
                             db.Negocio_Endereco.Add(NE);
-                            db.SaveChanges();
+                            await db.SaveChangesAsync();
 
                             atualizarNE.Ativo = false;
                             db.Entry(atualizarNE).State = EntityState.Modified;
-                            db.SaveChanges();
+                            await db.SaveChangesAsync();
                         }
                         else
                         {
@@ -497,7 +500,7 @@ namespace NimbusACAD.Identity.User
                             novoNBE.Pais = endereco.Pais;
 
                             db.Negocio_Base_Endereco.Add(novoNBE);
-                            db.SaveChanges();
+                            await db.SaveChangesAsync();
 
                             Negocio_Endereco NE = new Negocio_Endereco();
                             NE.CEP = endereco.CEP;
@@ -507,11 +510,11 @@ namespace NimbusACAD.Identity.User
                             NE.Pessoa_ID = endereco.PessoaID;
 
                             db.Negocio_Endereco.Add(NE);
-                            db.SaveChanges();
+                            await db.SaveChangesAsync();
 
                             atualizarNE.Ativo = false;
                             db.Entry(atualizarNE).State = EntityState.Modified;
-                            db.SaveChanges();
+                            await db.SaveChangesAsync();
                         }
                         dbContextTransaction.Commit();
                     }

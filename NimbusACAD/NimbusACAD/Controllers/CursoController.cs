@@ -7,6 +7,7 @@ using System.Net;
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
+using System.Threading.Tasks;
 
 namespace NimbusACAD.Controllers
 {
@@ -130,7 +131,7 @@ namespace NimbusACAD.Controllers
             {
                 db.Entry(negocio_Curso).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Detlalhes", "Curso", new { id = negocio_Curso.Curso_ID });
+                return RedirectToAction("Detalhes", "Curso", new { id = negocio_Curso.Curso_ID });
             }
             //ViewBag.Coordenador_ID = new SelectList(db.Negocio_Funcionario, "Funcionario_ID", "Funcionario_ID", negocio_Curso.Coordenador_ID);
             PopulateFuncionarioDropDownList(negocio_Curso.Funcionario_ID);
@@ -157,16 +158,19 @@ namespace NimbusACAD.Controllers
         [HttpPost, ActionName("Deletar")]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult DeletarConfirmacao(int id)
+        public async Task<ActionResult> DeletarConfirmacao(int id)
         {
-            Negocio_Curso negocio_Curso = db.Negocio_Curso.Find(id);
-            if (negocio_Curso.Negocio_Modulo != null || negocio_Curso.Negocio_Matricula_Aluno != null)
+            Negocio_Curso NC = db.Negocio_Curso.Find(id);
+            if (NC.Negocio_Modulo == null || NC.Negocio_Matricula_Aluno == null)
             {
                 return RedirectToAction("Error");
             }
-            db.Negocio_Curso.Remove(negocio_Curso);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            else
+            {
+                db.Negocio_Curso.Remove(NC);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -136,6 +136,7 @@ namespace NimbusACAD.Models.ViewModels
 
         [Required]
         [Display(Name = "Confirmar Senha")]
+        [Compare("Senha")]
         public string ConfirmarSenha { get; set; }
     }
 

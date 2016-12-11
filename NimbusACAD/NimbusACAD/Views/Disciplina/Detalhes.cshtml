@@ -30,7 +30,7 @@
 </div>
 
 <p>Horários da disciplina</p>
-<p>@Html.ActionLink("Definir novo horário", "DefinirHorario", "Horario", new { id = Model.DisciplinaID })</p>
+<p>@Html.ActionLink("Definir novo horário", "DefinirHorario", "Horario", new { id = Model.DisciplinaID }, null)</p>
 <table class="table">
     <tr>
         <td>Dia</td>
@@ -44,15 +44,16 @@
         <tr>
             <td>@Html.DisplayFor(modelItem => item.DiaSemana)</td>
             <td>@Html.DisplayFor(modelItem => item.HoraInicio)</td>
-            <td>@Html.DisplayFor(modelItem => item.HoraFim)</td> | 
-            <td>@Html.ActionLink("Detalhes", "Detalhes", "Horario", new { id = item.horarioID })</td>
+            <td>@Html.DisplayFor(modelItem => item.HoraFim) |
+                @Html.ActionLink("Editar", "Editar", "Horario", new { id = item.horarioID }, null) | @Html.ActionLink("Deletar", "Deletar", "Horario", new { id = item.horarioID }, null)</td>
         </tr>
     }
 </table>
 
 <p>
-    @Html.ActionLink("Editar", "Editar", new { id = Model.DisciplinaID }) |
-    @Html.ActionLink("Deletar", "Deletar", new { id = Model.DisciplinaID})
+    @Html.ActionLink("Editar", "Editar", new { id = Model.DisciplinaID }) | 
+    @Html.ActionLink("Deletar", "Deletar", new { id = Model.DisciplinaID}) | 
+    @Html.ActionLink("Voltar para o Modulo", "Detalhes", "Modulo", new { id = Model.ModuloID}, null)
 </p>
 
 @section Scripts {

@@ -29,6 +29,7 @@ namespace NimbusACAD.Controllers
 
             VerDisciplinaViewModel VDVM = new VerDisciplinaViewModel();
             VDVM.DisciplinaID = negocio_Disciplina.Disciplina_ID;
+            VDVM.ModuloID = negocio_Disciplina.Modulo_ID;
             VDVM.ModuloNM = negocio_Disciplina.Negocio_Modulo.Modulo_Nome;
             VDVM.DisciplinaNM = negocio_Disciplina.Disciplina_Nome;
             VDVM.Descricao = negocio_Disciplina.Descricao;

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using NimbusACAD.Models.DB;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace NimbusACAD.Controllers
 {
@@ -13,7 +14,9 @@ namespace NimbusACAD.Controllers
         // GET: Mensagem
         public ActionResult Index()
         {
-            int pID = GetPessoaId();
+            //int pID = GetPessoaId();
+            var nome = User.Identity.Name;
+            int pID = db.RBAC_Usuario.Where(o => o.Username.Equals(nome)).FirstOrDefault().Pessoa_ID.Value;
 
             var msgs = db.Negocio_Notificacao.Where(o => o.Pessoa_Receptor_ID == pID);
             return View(msgs.ToList());
@@ -37,31 +40,42 @@ namespace NimbusACAD.Controllers
         //GET: Mensagem/Escrever
         public ActionResult Escrever()
         {
+            Negocio_Notificacao NN = new Negocio_Notificacao();
+
+            var nome = User.Identity.Name;
+            int pID = db.RBAC_Usuario.Where(o => o.Username.Equals(nome)).FirstOrDefault().Pessoa_ID.Value;
+
+            NN.Pessoa_Emissor_ID = pID;
+            NN.Lida = false;
+
             PopulatePessoaDropDownList();
-            return View();
+            return View(NN);
         }
 
         //POST: Mensagem/Escrever
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Escrever([Bind(Include = "EmissorID, ReceptorID, Assunto, Corpo")] Negocio_Notificacao notificacao)
+        public async Task<ActionResult> Escrever([Bind(Include = "Notificacao_ID, Pessoa_Emissor_ID, Pessoa_Receptor_ID, Assunto, Corpo, Lida")] Negocio_Notificacao notificacao)
         {
             if (ModelState.IsValid)
             {
                 Negocio_Notificacao NN = new Negocio_Notificacao();
-                
-                NN.Pessoa_Emissor_ID = GetPessoaId();
+
+                //var nome = User.Identity.Name;
+                //int pID = db.RBAC_Usuario.Where(o => o.Username.Equals(nome)).FirstOrDefault().Pessoa_ID.Value;
+
+                NN.Pessoa_Emissor_ID = notificacao.Pessoa_Emissor_ID; /*GetPessoaId();*/
                 NN.Pessoa_Receptor_ID = notificacao.Pessoa_Receptor_ID;
                 NN.Assunto = notificacao.Assunto;
                 NN.Corpo = notificacao.Corpo;
-                NN.Lida = false;
+                NN.Lida = notificacao.Lida;
 
                 Negocio_Pessoa NPReceptor = db.Negocio_Pessoa.Find(notificacao.Pessoa_Receptor_ID);
-                NPReceptor.Tot_Notif_NL = NPReceptor.Tot_Notif_NL + 1;
+                NPReceptor.Tot_Notif_NL = NPReceptor.Tot_Notif_NL.Value + 1;
 
                 db.Negocio_Notificacao.Add(NN);
                 db.Entry(NPReceptor).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -113,7 +127,7 @@ namespace NimbusACAD.Controllers
                               orderby c.Primeiro_Nome
                               select c;
             ViewBag.Pessoas = new SelectList(pessoaQuery,
-                "Pessoa_ID", "Primeiro_Nome" + "Sobrenome", selectedPessoa);
+                "Pessoa_ID", "Primeiro_Nome", selectedPessoa);
         }
     }
 }

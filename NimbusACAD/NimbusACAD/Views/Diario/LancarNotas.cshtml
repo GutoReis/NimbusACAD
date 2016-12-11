@@ -13,6 +13,8 @@
     
     <div class="form-horizontal">
         <hr />
+        @Html.HiddenFor(model => model.DisciplinaID)
+        @Html.HiddenFor(model => model.DisciplinaNm)
         <p>@Html.DisplayFor(model => model.DisciplinaNm)</p>
 
         <table class="table">
@@ -22,16 +24,29 @@
                 <td>Nota 2</td>
                 <td>Media Final</td>
             </tr>
-            @foreach (var item in Model.notas)
+            @*@foreach (var item in Model.notas.ToList())*@
+            @for (int i = 0; i < Model.notas.Count(); i++)
             {
-                <tr>@Html.DisplayFor(modelItem => item.AlunoNm)</tr>
-                <tr>
+                //<tr>@Html.DisplayFor(modelItem => item.AlunoNm)</tr>
+                @*<tr>
                     @Html.EditorFor(modelItem => item.Nota1, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(modelItem => item.Nota1, "", new { @class = "text-danger" })
                 </tr>
                 <tr>
                     @Html.EditorFor(modelItem => item.Nota2, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(modelItem => item.Nota2, "", new { @class = "text-danger" })
+                </tr>*@
+                @Html.HiddenFor(model => model.notas[i].MatriculaID)
+                @Html.HiddenFor(model => model.notas[i].AlunoNm)
+                @Html.HiddenFor(model => model.notas[i].VinculoID)
+                @Html.DisplayFor(model => model.notas[i].AlunoNm)
+                <tr>
+                    @Html.EditorFor(model => model.notas[i].Nota1, new { htmlAttributes = new { @class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.notas[i].Nota1, "", new { @class = "text-danger"})
+                </tr>
+                <tr>
+                    @Html.EditorFor(model => model.notas[i].Nota2, new { htmlAttributes = new { @class = "form-control" }})
+                    @Html.ValidationMessageFor(model => model.notas[i].Nota2, "", new { @class = "text-danger"})
                 </tr>
             }
         </table>

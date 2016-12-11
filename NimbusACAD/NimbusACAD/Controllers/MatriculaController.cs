@@ -10,6 +10,7 @@ using NimbusACAD.Identity.Email;
 using NimbusACAD.Identity.Role;
 using System.Data.Entity;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace NimbusACAD.Controllers
 {
@@ -24,14 +25,13 @@ namespace NimbusACAD.Controllers
         [RBAC]
         public ViewResult Index(string searchString)
         {
+            var matriculas = from m in db.Negocio_Matricula_Aluno select m;
+            matriculas = matriculas.Include(o => o.Negocio_Pessoa);
             if (!String.IsNullOrEmpty(searchString))
             {
-                var matriculas = from m in db.Negocio_Matricula_Aluno select m;
-                matriculas = matriculas.Include(o => o.Negocio_Pessoa);
                 matriculas = matriculas.Where(o => o.Negocio_Pessoa.Primeiro_Nome.ToUpper().Contains(searchString.ToUpper()));
-                return View(matriculas.ToList());
             }
-            return View();
+            return View(matriculas.ToList());
         }
 
         //Registrar Pessoa -> Registro de Documentos
@@ -47,7 +47,7 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovaPessoa([Bind(Include = "PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, CEP, Logradouro, Complemento, Numero, Bairro, Cidade, Estado, Pais, PerfilID")] RegistrarComumViewModel novaPessoa)
+        public async Task<ActionResult> NovaPessoa([Bind(Include = "PrimeiroNome, Sobrenome, CPF, RG, Sexo, DtNascimento, TelPrincipal, TelOpcional, Email, CEP, Logradouro, Complemento, Numero, Bairro, Cidade, Estado, Pais, PerfilID")] RegistrarComumViewModel novaPessoa)
         {
             if (ModelState.IsValid)
             {
@@ -74,9 +74,14 @@ namespace NimbusACAD.Controllers
                 db.RBAC_Usuario.Add(RU);
                 db.SaveChanges();
 
-                //Enviando Email
+                //Enviando Email de senha gerada
                 EmailMessage message = new EmailMessage(novaPessoa.Email, "Bem-vindo ao NimbusAcad!", "Olá, seja bem-vindo ao NimbusAcad \n Esta é sua senha: " + tempToken + "\nRecomenda-se que altere a senha para uma, com fácil memorização.");
-                _emailService.Send(message);
+                await _emailService.Send(message);
+
+                //Enviando Email de confirmação de email
+                var callbackUrl = Url.Action("ConfirmarEmail", "Account", new { novaPessoa.Email }, null);
+                EmailMessage confirmacao = new EmailMessage(novaPessoa.Email, "Confirmar email", "Por favor, confirme seu email clicando neste link: <a href=\"" + callbackUrl + "\">Confirmar</a>");
+                await _emailService.Send(confirmacao);
 
                 //Assimilando perfil de acesso
                 int uID = _userStore.GetUsuarioID(novaPessoa.Email);
@@ -88,7 +93,7 @@ namespace NimbusACAD.Controllers
                 linkUP.Perfil_ID = novaPessoa.PerfilID;
                 _roleStore.AddUsuarioPerfil(linkUP);
 
-                return RedirectToAction("RegistrarDocumento", pID);
+                return RedirectToAction("RegistrarDocumento", "Matricula", new { id = pID });
             }
             PopulatePerfilDropDownList(novaPessoa.PerfilID);
             return View(novaPessoa);
@@ -97,19 +102,21 @@ namespace NimbusACAD.Controllers
         //Registrar Documentos -> Registro Matricula
         //GET: Matricula/RegistrarDocumento
         [RBAC]
-        public ActionResult RegistrarDocumento(int? pID)
+        public ActionResult RegistrarDocumento(int? id)
         {
-            if (pID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Pessoa negocio_Pessoa = db.Negocio_Pessoa.Find(pID);
+            Negocio_Pessoa negocio_Pessoa = db.Negocio_Pessoa.Find(id);
             if (negocio_Pessoa == null)
             {
                 return HttpNotFound();
             }
+            CurriculoViewModel CVM = new CurriculoViewModel();
+            CVM.PessoaID = negocio_Pessoa.Pessoa_ID;
             PopulateDocumentosDropDownList();
-            return View(negocio_Pessoa);
+            return View(CVM);
         }
 
         //POST: Matricula/RegistrarDocumento
@@ -128,8 +135,10 @@ namespace NimbusACAD.Controllers
                 curriculo.Cidade_Emissao = novoCurriculo.Cidade;
                 curriculo.Estado_Emissao = novoCurriculo.Estado;
                 curriculo.Pais_Emissao = novoCurriculo.Pais;
+                db.Negocio_Curriculo.Add(curriculo);
+                db.SaveChanges();
 
-                return RedirectToAction("NovaMatricula", novoCurriculo.PessoaID);
+                return RedirectToAction("NovaMatricula", "Matricula", new { id = novoCurriculo.PessoaID });
             }
             PopulateDocumentosDropDownList(novoCurriculo.DocumentoID);
             return View(novoCurriculo);
@@ -138,27 +147,31 @@ namespace NimbusACAD.Controllers
         //Registrar Matricula -> Matricula_Aluno.Deve_Documento ? Registro Doc_Devente : Index
         //GET: Matricula/NovaMatricula
         [RBAC]
-        public ActionResult NovaMatricula(int? pID)
+        public ActionResult NovaMatricula(int? id)
         {
-            if (pID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Pessoa negocio_Pessoa = db.Negocio_Pessoa.Find(pID);
+            Negocio_Pessoa negocio_Pessoa = db.Negocio_Pessoa.Find(id);
             if (negocio_Pessoa == null)
             {
                 return HttpNotFound();
             }
-            int cID = PopulateCursoDropDownList();
-            PopulateModuloDropDownList(cID);
-            return View(negocio_Pessoa);
+            RegistrarAlunoViewModel RAVM = new RegistrarAlunoViewModel();
+            RAVM.PessoaID = negocio_Pessoa.Pessoa_ID;
+            ViewBag.CursosList = db.Negocio_Curso;
+            PopulateCursoDropDownList();
+            //PopulateModuloDropDownList(cID);
+            //PopulateModuloMatriculaDropDownList(cID);
+            return View(RAVM);
         }
 
         //POST: Matricula/NovaMatricula
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult NovaMatricula([Bind(Include = "PessoaID, CursoID, ModuloID, Ano, DeveDocumento")] RegistrarAlunoViewModel novoAluno)
+        public async Task<ActionResult> NovaMatricula([Bind(Include = "PessoaID, CursoID, Ano, DeveDocumento")] RegistrarAlunoViewModel novoAluno)
         {
             if (ModelState.IsValid)
             {
@@ -169,55 +182,128 @@ namespace NimbusACAD.Controllers
                 mat.Ativo = true;
                 mat.Deve_Documento = novoAluno.DeveDocumento;
                 db.Negocio_Matricula_Aluno.Add(mat);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
-                int matID = db.Negocio_Matricula_Aluno.Where(o => o.Pessoa_ID == novoAluno.PessoaID && o.Curso_ID == novoAluno.CursoID).FirstOrDefault().Matricula_ID;
-                Negocio_Vinculo_Modulo modulo = new Negocio_Vinculo_Modulo();
-                modulo.Modulo_ID = novoAluno.ModuloID;
-                modulo.Matricula_ID = matID;
-                modulo.Status_Vinculo = "Em Curso";
-                db.Negocio_Vinculo_Modulo.Add(modulo);
-                db.SaveChanges();
+                //int matID = db.Negocio_Matricula_Aluno.Where(o => o.Pessoa_ID == novoAluno.PessoaID && o.Curso_ID == novoAluno.CursoID).FirstOrDefault().Matricula_ID;
+                //Negocio_Vinculo_Modulo modulo = new Negocio_Vinculo_Modulo();
+                //modulo.Modulo_ID = novoAluno.ModuloID;
+                //modulo.Matricula_ID = matID;
+                //modulo.Status_Vinculo = "Em Curso";
+                //db.Negocio_Vinculo_Modulo.Add(modulo);
+                //await db.SaveChangesAsync();
+
+                //Negocio_Vinculo_Disciplina disciplina;
+                //foreach (var d in db.Negocio_Disciplina.ToList())
+                //{
+                //    if (d.Modulo_ID == novoAluno.ModuloID)
+                //    {
+                //        disciplina = new Negocio_Vinculo_Disciplina();
+                //        disciplina.Disciplina_ID = d.Disciplina_ID;
+                //        disciplina.Matricula_ID = matID;
+                //        disciplina.Frequencia = 0;
+                //        disciplina.Num_Chamada = 0;
+                //        disciplina.Nota1 = 0;
+                //        disciplina.Nota2 = 0;
+                //        disciplina.Media_Final = 0;
+                //        db.Negocio_Vinculo_Disciplina.Add(disciplina);
+                //        await db.SaveChangesAsync();
+                //    }
+                //}
+                //if (mat.Deve_Documento.Value)
+                //{
+                //    return RedirectToAction("DeveDocumento", "Matricula", new { id = matID });
+                //}
+                //return RedirectToAction("Index");
+                return RedirectToAction("VincularMatModulo", "Matricula", new { id = mat.Matricula_ID });
+            }
+            PopulateCursoDropDownList(novoAluno.CursoID);
+            //PopulateModuloDropDownList(novoAluno.ModuloID);
+            return View(novoAluno);
+        }
+
+        //GET: Matricula/VincularMatModulo
+        [RBAC]
+        public ActionResult VincularMatModulo(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Negocio_Matricula_Aluno aluno = db.Negocio_Matricula_Aluno.Find(id);
+            if (aluno == null)
+            {
+                return HttpNotFound();
+            }
+            //Negocio_Vinculo_Modulo NVM = new Negocio_Vinculo_Modulo();
+            //NVM.Matricula_ID = aluno.Matricula_ID;
+            CriarVinculoModuloViewModel CVMVM = new CriarVinculoModuloViewModel();
+            CVMVM.MatriculaID = aluno.Matricula_ID;
+            PopulateModuloMatriculaDropDownList(aluno.Curso_ID);
+
+            return View(CVMVM);
+        }
+
+        //POST: Matricula/VincularMatModulo
+        [HttpPost]
+        [RBAC]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> VincularMatModulo([Bind(Include = "ModuloID, MatriculaID, StatusVinculo")]CriarVinculoModuloViewModel CVMVM)
+        {
+            if (ModelState.IsValid)
+            {
+                Negocio_Vinculo_Modulo NVM = new Negocio_Vinculo_Modulo();
+                NVM.Matricula_ID = CVMVM.MatriculaID;
+                NVM.Modulo_ID = CVMVM.ModuloID;
+                NVM.Status_Vinculo = CVMVM.StatusVinculo;
+                db.Negocio_Vinculo_Modulo.Add(NVM);
+                await db.SaveChangesAsync();
 
                 Negocio_Vinculo_Disciplina disciplina;
-                foreach (var d in db.Negocio_Disciplina)
+                foreach (var d in db.Negocio_Disciplina.ToList())
                 {
-                    if (d.Modulo_ID == novoAluno.ModuloID)
+                    if (d.Modulo_ID == CVMVM.ModuloID)
                     {
                         disciplina = new Negocio_Vinculo_Disciplina();
                         disciplina.Disciplina_ID = d.Disciplina_ID;
-                        disciplina.Matricula_ID = matID;
+                        disciplina.Matricula_ID = CVMVM.MatriculaID;
                         disciplina.Frequencia = 0;
+                        disciplina.Num_Chamada = 0;
+                        disciplina.Nota1 = 0;
+                        disciplina.Nota2 = 0;
+                        disciplina.Media_Final = 0;
                         db.Negocio_Vinculo_Disciplina.Add(disciplina);
-                        db.SaveChanges();
+                        await db.SaveChangesAsync();
                     }
                 }
-                if (mat.Deve_Documento.Value)
+                bool DeveDoc = db.Negocio_Matricula_Aluno.Find(CVMVM.MatriculaID).Deve_Documento.Value;
+                if (DeveDoc)
                 {
-                    return RedirectToAction("DeveDocumento", matID);
+                    return RedirectToAction("DeveDocumento", "Matricula", new { id = CVMVM.MatriculaID });
                 }
                 return RedirectToAction("Index");
             }
-            PopulateCursoDropDownList(novoAluno.CursoID);
-            PopulateModuloDropDownList(novoAluno.ModuloID);
-            return View(novoAluno);
+            int cursoID = db.Negocio_Matricula_Aluno.Find(CVMVM.MatriculaID).Curso_ID;
+            PopulateModuloMatriculaDropDownList(cursoID, CVMVM.ModuloID);
+            return View(CVMVM);
         }
 
         //GET: Matricula/DeveDocumento
         [RBAC]
-        public ActionResult DeveDocumento(int? mID)
+        public ActionResult DeveDocumento(int? id)
         {
-            if (mID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Matricula_Aluno mat = db.Negocio_Matricula_Aluno.Find(mID);
+            Negocio_Matricula_Aluno mat = db.Negocio_Matricula_Aluno.Find(id);
             if (mat == null)
             {
                 return HttpNotFound();
             }
+            Negocio_Doc_Devente NDD = new Negocio_Doc_Devente();
+            NDD.Matricula_ID = mat.Matricula_ID;
             PopulateDocumentosDropDownList();
-            return View(mat);
+            return View(NDD);
         }
 
         //POST: Matricula/DeveDocumento
@@ -239,26 +325,28 @@ namespace NimbusACAD.Controllers
         //Vincular à modulo (a todas as disciplinas do modulo)
         //GET: Matricula/VincularModulo
         [RBAC]
-        public ActionResult VincularModulo(int? matID)
+        public ActionResult VincularModulo(int? id)
         {
-            if (matID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Matricula_Aluno aluno = db.Negocio_Matricula_Aluno.Find(matID);
+            Negocio_Matricula_Aluno aluno = db.Negocio_Matricula_Aluno.Find(id);
             if (aluno == null)
             {
                 return HttpNotFound();
             }
+            Negocio_Vinculo_Modulo NVM = new Negocio_Vinculo_Modulo();
+            NVM.Matricula_ID = aluno.Matricula_ID;
             PopulateModuloDropDownList(aluno.Matricula_ID);
-            return View(aluno);
+            return View(NVM);
         }
 
         //POST: Matricula/VincularModulo
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult VincularModulo([Bind(Include = "Vinculo_ID, Modulo_ID, Matricula_ID, Status_Vinculo")] Negocio_Vinculo_Modulo vm)
+        public async Task<ActionResult> VincularModulo([Bind(Include = "Vinculo_ID, Modulo_ID, Matricula_ID, Status_Vinculo")] Negocio_Vinculo_Modulo vm)
         {
             if (ModelState.IsValid)
             {
@@ -277,12 +365,12 @@ namespace NimbusACAD.Controllers
                 {
                     return RedirectToAction("Error");
                 }
-                vm.Status_Vinculo = "Em Curso";
+                //vm.Status_Vinculo = "Em Curso";
                 db.Negocio_Vinculo_Modulo.Add(vm);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
                 Negocio_Vinculo_Disciplina vd;
-                foreach (var d in db.Negocio_Disciplina)
+                foreach (var d in db.Negocio_Disciplina.ToList())
                 {
                     if (d.Modulo_ID == vm.Modulo_ID)
                     {
@@ -294,31 +382,33 @@ namespace NimbusACAD.Controllers
                         vd.Nota2 = 0;
                         vd.Media_Final = 0;
                         db.Negocio_Vinculo_Disciplina.Add(vd);
-                        db.SaveChanges();
+                        await db.SaveChangesAsync();
                     }
                 }
-                return RedirectToAction("VerAluno", vm.Matricula_ID);
+                return RedirectToAction("VerAluno", new { id = vm.Matricula_ID });
             }
             PopulateModuloDropDownList(vm.Matricula_ID, vm.Modulo_ID);
             return View(vm);
-        }        
+        }
 
         //Vincular à disciplina (Isolada)
         //GET: Matricula/VincularDisciplina
         [RBAC]
-        public ActionResult VincularDisciplina(int? matID)
+        public ActionResult VincularDisciplina(int? id)
         {
-            if (matID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Matricula_Aluno aluno = db.Negocio_Matricula_Aluno.Find(matID);
+            Negocio_Matricula_Aluno aluno = db.Negocio_Matricula_Aluno.Find(id);
             if (aluno == null)
             {
                 return HttpNotFound();
             }
+            CriarVinculoDisciplinaViewModel CVDVM = new CriarVinculoDisciplinaViewModel();
+            CVDVM.MatriculaID = aluno.Matricula_ID;
             PopulateDisciplinaDropDownList(aluno.Matricula_ID);
-            return View(aluno);
+            return View(CVDVM);
         }
 
         //POST: Matricula/VincularDisciplina
@@ -332,14 +422,14 @@ namespace NimbusACAD.Controllers
                 Negocio_Vinculo_Disciplina novoVD = new Negocio_Vinculo_Disciplina();
                 novoVD.Disciplina_ID = vd.DisciplinaID;
                 novoVD.Matricula_ID = vd.MatriculaID;
-                novoVD.Num_Chamada = vd.NumChamada;
+                novoVD.Num_Chamada = 0;
                 novoVD.Frequencia = 0;
                 novoVD.Nota1 = 0;
                 novoVD.Nota2 = 0;
                 novoVD.Media_Final = 0;
                 db.Negocio_Vinculo_Disciplina.Add(novoVD);
                 db.SaveChanges();
-                return RedirectToAction("VerAluno", vd.MatriculaID);
+                return RedirectToAction("VerAluno", new { id = vd.MatriculaID });
             }
             PopulateDisciplinaDropDownList(vd.MatriculaID, vd.DisciplinaID);
             return View(vd);
@@ -348,13 +438,13 @@ namespace NimbusACAD.Controllers
         //Ver Aluno
         //GET: Matricula/VerAluno
         [RBAC]
-        public ActionResult VerAluno(int? matID)
+        public ActionResult VerAluno(int? id)
         {
-            if (matID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Matricula_Aluno aluno = db.Negocio_Matricula_Aluno.Find(matID);
+            Negocio_Matricula_Aluno aluno = db.Negocio_Matricula_Aluno.Find(id);
             if (aluno == null)
             {
                 return HttpNotFound();
@@ -409,13 +499,13 @@ namespace NimbusACAD.Controllers
         //Ver vinculoModulo
         //GET: Matricula/VerVinculoModulo
         [RBAC]
-        public ActionResult VerVinculoModulo(int? vmID)
+        public ActionResult VerVinculoModulo(int? id)
         {
-            if (vmID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Vinculo_Modulo vinculo = db.Negocio_Vinculo_Modulo.Find(vmID);
+            Negocio_Vinculo_Modulo vinculo = db.Negocio_Vinculo_Modulo.Find(id);
             if (vinculo == null)
             {
                 return HttpNotFound();
@@ -447,13 +537,13 @@ namespace NimbusACAD.Controllers
         //Editar vinculo modulo
         //GET: Matricula/EditarVinculoModulo
         [RBAC]
-        public ActionResult EditarVinculoModulo(int? vmID)
+        public ActionResult EditarVinculoModulo(int? id)
         {
-            if (vmID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Vinculo_Modulo vm = db.Negocio_Vinculo_Modulo.Find(vmID);
+            Negocio_Vinculo_Modulo vm = db.Negocio_Vinculo_Modulo.Find(id);
             if (vm == null)
             {
                 return HttpNotFound();
@@ -465,27 +555,45 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarVinculoModulo([Bind(Include = "Vinculo_ID, Modulo_ID, Matriculo_ID, Status_Vinculo")]Negocio_Vinculo_Modulo vm)
+        public ActionResult EditarVinculoModulo([Bind(Include = "Vinculo_ID, Modulo_ID, Matricula_ID, Status_Vinculo")]Negocio_Vinculo_Modulo vm)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(vm).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("VerAluno", vm.Matricula_ID);
+                if (ModelState.IsValid)
+                {
+                    db.Entry(vm).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("VerAluno", new { id = vm.Matricula_ID });
+                }
+                return View(vm);
             }
-            return View(vm);
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
         }
 
         //Remover VinculoModulo
         //GET: Matricula/RemoverVinculoModulo
         [RBAC]
-        public ActionResult RemoverVinculoModulo(int? vmID)
+        public ActionResult RemoverVinculoModulo(int? id)
         {
-            if (vmID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Vinculo_Modulo vinculo = db.Negocio_Vinculo_Modulo.Find(vmID);
+            Negocio_Vinculo_Modulo vinculo = db.Negocio_Vinculo_Modulo.Find(id);
             if (vinculo == null)
             {
                 return HttpNotFound();
@@ -497,12 +605,12 @@ namespace NimbusACAD.Controllers
         [HttpPost, ActionName("RemoverVinculoModulo")]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult RemoverVinculoModuloConfirmacao(int vmID)
+        public ActionResult RemoverVinculoModuloConfirmacao(int id)
         {
-            Negocio_Vinculo_Modulo vinculo = db.Negocio_Vinculo_Modulo.Find(vmID);
+            Negocio_Vinculo_Modulo vinculo = db.Negocio_Vinculo_Modulo.Find(id);
             db.Negocio_Vinculo_Modulo.Remove(vinculo);
             db.SaveChanges();
-            return RedirectToAction("VerAluno", vinculo.Matricula_ID);
+            return RedirectToAction("VerAluno", new { id = vinculo.Matricula_ID });
         }
 
         //Ver VinculoDisciplina
@@ -555,13 +663,13 @@ namespace NimbusACAD.Controllers
         //Remover VinculoDisciplina
         //GET: Matricula/RemoverVinculoDisciplina
         [RBAC]
-        public ActionResult RemoverVinculoDisciplina(int? vdID)
+        public ActionResult RemoverVinculoDisciplina(int? id)
         {
-            if (vdID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Vinculo_Disciplina vinculo = db.Negocio_Vinculo_Disciplina.Find(vdID);
+            Negocio_Vinculo_Disciplina vinculo = db.Negocio_Vinculo_Disciplina.Find(id);
             if (vinculo == null)
             {
                 return HttpNotFound();
@@ -573,30 +681,32 @@ namespace NimbusACAD.Controllers
         [HttpPost, ActionName("RemoverVinculoDisciplina")]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult RemoverVinculoDisciplinaConfimacao(int discID, int matID)
+        public ActionResult RemoverVinculoDisciplinaConfimacao(int id)
         {
-            Negocio_Vinculo_Disciplina vinculo = db.Negocio_Vinculo_Disciplina.Where(o => o.Disciplina_ID == discID && o.Matricula_ID == matID).FirstOrDefault();
+            Negocio_Vinculo_Disciplina vinculo = db.Negocio_Vinculo_Disciplina.Find(id);
             db.Negocio_Vinculo_Disciplina.Remove(vinculo);
             db.SaveChanges();
-            return RedirectToAction("VerAluno", matID);
+            return RedirectToAction("VerAluno", new { id = vinculo.Matricula_ID });
         }
 
         //Adicionar NovoDocumento (Remover se o doc for devente)
         //GET: Matricula/NovoDocumento
         [RBAC]
-        public ActionResult NovoDocumento(int? pID)
+        public ActionResult NovoDocumento(int? id)
         {
-            if (pID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(pID);
+            Negocio_Pessoa pessoa = db.Negocio_Pessoa.Find(id);
             if (pessoa == null)
             {
                 return HttpNotFound();
             }
+            Negocio_Curriculo NC = new Negocio_Curriculo();
+            NC.Pessoa_ID = pessoa.Pessoa_ID;
             PopulateDocumentosDropDownList();
-            return View(pessoa);
+            return View(NC);
         }
 
         //POST: Matricula/NovoDocumento
@@ -619,14 +729,17 @@ namespace NimbusACAD.Controllers
                 db.Negocio_Curriculo.Add(NC);
                 db.SaveChanges();
 
-                int matID = db.Negocio_Matricula_Aluno.Where(o => o.Pessoa_ID == curriculo.Pessoa_ID && o.Ativo == true).FirstOrDefault().Matricula_ID;
+                var aluno = db.Negocio_Matricula_Aluno.Where(o => o.Pessoa_ID == curriculo.Pessoa_ID && o.Ativo == true).FirstOrDefault();
+                int matID = aluno.Matricula_ID;
                 Negocio_Doc_Devente docDevente = db.Negocio_Doc_Devente.Where(o => o.Matricula_ID == matID && o.Documento_ID == curriculo.Documento_ID).FirstOrDefault();
                 if (docDevente != null)
                 {
                     db.Negocio_Doc_Devente.Remove(docDevente);
+                    aluno.Deve_Documento = false;
+                    db.Entry(aluno).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                return RedirectToAction("VerAluno", matID);
+                return RedirectToAction("VerAluno", new { id = matID });
             }
             PopulateDocumentosDropDownList(curriculo.Documento_ID);
             return View(curriculo);
@@ -641,14 +754,14 @@ namespace NimbusACAD.Controllers
             base.Dispose(disposing);
         }
 
-        private int PopulateCursoDropDownList(object selectedCurso = null)
+        private void PopulateCursoDropDownList(object selectedCurso = null)
         {
             var cursoQuery = from c in db.Negocio_Curso
                              orderby c.Curso_Nome
                              select c;
             ViewBag.Cursos = new SelectList(cursoQuery,
                 "Curso_ID", "Curso_Nome", selectedCurso);
-            return cursoQuery.FirstOrDefault().Curso_ID;
+            //return cursoQuery.FirstOrDefault().Curso_ID;
         }
 
         private void PopulateModuloDropDownList(int mID, object selectedModulo = null)
@@ -669,7 +782,7 @@ namespace NimbusACAD.Controllers
                               where m.Curso_ID == cID
                               orderby m.Modulo_Nome
                               select m;
-            ViewBag.Modulo_ID = new SelectList(moduloQuery, "Modulo_ID", "Modulo_Nome", selectedModulo);
+            ViewBag.Modulos = new SelectList(moduloQuery, "Modulo_ID", "Modulo_Nome", selectedModulo);
         }
 
         private void PopulateDisciplinaDropDownList(int mID, object selectedDisciplina = null)

@@ -152,7 +152,7 @@ namespace NimbusACAD.Controllers
         public ActionResult DeletarConfirmacao(int id)
         {
             Negocio_Modulo negocio_Modulo = db.Negocio_Modulo.Find(id);
-            if (negocio_Modulo.Negocio_Disciplina != null || negocio_Modulo.Negocio_Vinculo_Modulo != null)
+            if (negocio_Modulo.Negocio_Disciplina == null || negocio_Modulo.Negocio_Vinculo_Modulo == null)
             {
                 return RedirectToAction("Error");
             }

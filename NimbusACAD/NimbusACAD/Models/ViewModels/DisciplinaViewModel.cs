@@ -35,6 +35,8 @@ namespace NimbusACAD.Models.ViewModels
         [Key]
         public int DisciplinaID { get; set; }
 
+        public int ModuloID { get; set; }
+
         [Required]
         [Display(Name = "Modulo")]
         public string ModuloNM { get; set; }

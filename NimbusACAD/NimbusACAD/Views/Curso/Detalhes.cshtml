@@ -30,20 +30,20 @@
 </div>
 
 <p>Módulos</p>
-<p>@Html.ActionLink("Novo Módulo", "NovoModulo", "Modulo", new { id = Model.CursoID })</p>
+<p>@Html.ActionLink("Novo Módulo", "NovoModulo", "Modulo", new { id = Model.CursoID }, null)</p>
 <table class="table">
     @foreach (var item in Model.Modulos)
     {
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.ModuloNome)</td> | 
-            <td>@Html.ActionLink("Detalhes", "Detalhes", "Modulo", new { id = item.ModuloID })</td>
+            <td>@Html.DisplayFor(modelItem => item.ModuloNome) | @Html.ActionLink("Detalhes", "Detalhes", "Modulo", new { id = item.ModuloID }, null)</td>
         </tr>
     }
 </table>
 
 <p>
-    @Html.ActionLink("Editar", "Editar", new { id = Model.CursoID }) |
-    @Html.ActionLink("Deletar", "Deletar", new { id = Model.CursoID})
+    @Html.ActionLink("Editar", "Editar", new { id = Model.CursoID }) | 
+    @Html.ActionLink("Deletar", "Deletar", new { id = Model.CursoID}) | 
+    @Html.ActionLink("Voltar", "Index")
 </p>
 
 @section Scripts {

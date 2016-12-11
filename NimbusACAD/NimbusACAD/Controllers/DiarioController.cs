@@ -6,6 +6,7 @@ using NimbusACAD.Models.DB;
 using NimbusACAD.Models.ViewModels;
 using System.Net;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace NimbusACAD.Controllers
 {
@@ -17,7 +18,8 @@ namespace NimbusACAD.Controllers
         [RBAC]
         public ActionResult Index()
         {
-            var usuario = User.Identity as RBAC_Usuario;
+            var name = User.Identity.Name;
+            RBAC_Usuario usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(name)).FirstOrDefault();
             int profID = usuario.Negocio_Pessoa.Negocio_Funcionario.FirstOrDefault().Funcionario_ID;
 
             DisciplinasProfessorVIewModel DPVM = new DisciplinasProfessorVIewModel();
@@ -53,26 +55,36 @@ namespace NimbusACAD.Controllers
             {
                 return HttpNotFound();
             }
-            PopulateMatriculasList(disciplina);
-            return View(disciplina);
+            FrequenciaViewModel FVM = new FrequenciaViewModel();
+            FVM.ProfessorID = disciplina.Funcionario_ID;
+            FVM.DisciplinaID = disciplina.Disciplina_ID;
+            FVM.MatriculasPresentes = disciplina.Negocio_Vinculo_Disciplina.Select(o => o.Matricula_ID);
+            ICollection<ListaAlunosViewModel> mats = PopulateMatriculasList(disciplina);
+            FVM.Matriculas = mats.Select(o => new SelectListItem
+            {
+                Value = o.MatriculaID.ToString(),
+                Text = o.NomeAluno,
+            }).ToList();
+            return View(FVM);
         }
 
         //POST: Diario/Chamada
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult Chamada([Bind(Include = "DisciplinaID, ProfessorID, DtAula, QtdeAulas, AulaMinistrada, Matriculas")]FrequenciaViewModel FVM)
+        public async Task<ActionResult> Chamada([Bind(Include = "DisciplinaID, ProfessorID, DtAula, QtdeAulas, AulaMinistrada, Matriculas, MatriculasPresentes")]FrequenciaViewModel FVM)
         {
             if (ModelState.IsValid)
             {
                 //Adicionando a Qtde de aulas dadas, ao Total Aulas Dadas
                 Negocio_Disciplina disciplina = db.Negocio_Disciplina.Find(FVM.DisciplinaID);
-                disciplina.Tot_Aulas_Dadas = disciplina.Tot_Aulas_Dadas + FVM.QtdeAulas;
+                int totAula = disciplina.Tot_Aulas_Dadas.Value;
+                disciplina.Tot_Aulas_Dadas = totAula + FVM.QtdeAulas;
                 db.Entry(disciplina).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
                 Negocio_Frequencia frequencia;
-                foreach (var al in FVM.Matriculas)
+                foreach (var al in FVM.MatriculasPresentes.ToList())
                 {
                     //Salvando frequencia
                     frequencia = new Negocio_Frequencia();
@@ -81,15 +93,15 @@ namespace NimbusACAD.Controllers
                     frequencia.Dt_Aula = FVM.DtAula;
                     frequencia.Qtde_Aula = FVM.QtdeAulas;
                     frequencia.Aula_Ministrada = FVM.AulaMinistrada;
-                    frequencia.Matricula_ID = al.MatriculaID;
+                    frequencia.Matricula_ID = al;
                     db.Negocio_Frequencia.Add(frequencia);
-                    db.SaveChanges();
+                    await db.SaveChangesAsync();
 
                     //Atualizando a frequencia do aluno
-                    Negocio_Vinculo_Disciplina vd = db.Negocio_Vinculo_Disciplina.Where(o => o.Disciplina_ID == FVM.DisciplinaID && o.Matricula_ID == al.MatriculaID).FirstOrDefault();
+                    Negocio_Vinculo_Disciplina vd = db.Negocio_Vinculo_Disciplina.Where(o => o.Disciplina_ID == FVM.DisciplinaID && o.Matricula_ID == al).FirstOrDefault();
                     vd.Frequencia = vd.Frequencia + frequencia.Qtde_Aula;
                     db.Entry(vd).State = EntityState.Modified;
-                    db.SaveChanges();
+                    await db.SaveChangesAsync();
                 }
                 return RedirectToAction("Index");
             }
@@ -140,7 +152,7 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [RBAC]
         [ValidateAntiForgeryToken]
-        public ActionResult LancarNotas([Bind(Include = "DisciplinaID, DisciplinaNm, notas")]ListaLancarNotaViewModel lancamento)
+        public async Task<ActionResult> LancarNotas([Bind(Include = "DisciplinaID, DisciplinaNm, notas")]ListaLancarNotaViewModel lancamento)
         {
             if (ModelState.IsValid)
             {
@@ -152,7 +164,7 @@ namespace NimbusACAD.Controllers
                     vinculo.Nota2 = lancamento.notas.Where(o => o.MatriculaID == vinculo.Matricula_ID).FirstOrDefault().Nota2;
                     vinculo.Media_Final = (lancamento.notas.Where(o => o.MatriculaID == vinculo.Matricula_ID).FirstOrDefault().Nota1 + lancamento.notas.Where(o => o.MatriculaID == vinculo.Matricula_ID).FirstOrDefault().Nota2) / 2;
                     db.Entry(vinculo).State = EntityState.Modified;
-                    db.SaveChanges();
+                    await db.SaveChangesAsync();
                 }
 
                 return RedirectToAction("Index");
@@ -163,13 +175,13 @@ namespace NimbusACAD.Controllers
         //Corrigir notas de um único aluno
         //GET: Diario/CorrigirNota
         [RBAC]
-        public ActionResult CorrigirNota(int? vdID)
+        public ActionResult CorrigirNota(int? id)
         {
-            if (vdID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Vinculo_Disciplina vinculo = db.Negocio_Vinculo_Disciplina.Find(vdID);
+            Negocio_Vinculo_Disciplina vinculo = db.Negocio_Vinculo_Disciplina.Find(id);
             if (vinculo == null)
             {
                 return HttpNotFound();
@@ -199,7 +211,7 @@ namespace NimbusACAD.Controllers
                 db.Entry(vinculo).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("VerNotasDisciplina", vinculo.Disciplina_ID);
+                return RedirectToAction("VerNotasDisciplina", new { discID = vinculo.Disciplina_ID });
             }
 
             return View(correcao);
@@ -208,27 +220,28 @@ namespace NimbusACAD.Controllers
         //Listar presenças
         //GET: Diario/ListarPresencas
         [RBAC]
-        public ViewResult ListarPresencas(DateTime data, int disccID)
+        public ViewResult ListarPresencas(/*DateTime? data, int? disccID*/)
         {
-            var frequencia = from f in db.Negocio_Frequencia select f;
-            if (data != null && disccID != 0)
-            {
-                frequencia = frequencia.Where(o => o.Dt_Aula == data.Date && o.Disciplina_ID == disccID);
-                return View(frequencia.ToList());
-            }
-            return View();            
+            //var frequencia = from f in db.Negocio_Frequencia select f;
+            //if (data != null && disccID != 0)
+            //{
+            //    frequencia = frequencia.Where(o => o.Dt_Aula == data.Value.Date && o.Disciplina_ID == disccID);
+            //    return View(frequencia.ToList());
+            //}
+            var freq = from f in db.Negocio_Frequencia select f;
+            return View(freq.ToList());
         }
 
         //Remover presença de um único aluno
         //GET: Diario/RemoverPresenca
         [RBAC]
-        public ActionResult RemoverPresenca(int? freqID)
+        public ActionResult RemoverPresenca(int? id)
         {
-            if (freqID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Frequencia frequencia = db.Negocio_Frequencia.Find(freqID);
+            Negocio_Frequencia frequencia = db.Negocio_Frequencia.Find(id);
             if (frequencia == null)
             {
                 return HttpNotFound();
@@ -240,47 +253,12 @@ namespace NimbusACAD.Controllers
         [RBAC]
         [HttpPost, ActionName("RemoverPresenca")]
         [ValidateAntiForgeryToken]
-        public ActionResult RemoverPresencaConfirmacao(int freqID)
+        public ActionResult RemoverPresencaConfirmacao(int id)
         {
-            Negocio_Frequencia frequencia = db.Negocio_Frequencia.Find(freqID);
+            Negocio_Frequencia frequencia = db.Negocio_Frequencia.Find(id);
             db.Negocio_Frequencia.Remove(frequencia);
             db.SaveChanges();
             return RedirectToAction("ListarPresencas");
-        }
-
-        //Adicionar presença para um único aluno
-        //ARUMAR ESSA PARTE, NÂO IMPORTAR DISCIPLINA OU PROFESSOR POR PARAMETRO, CARREGAR NORMAL!!!!!!!!!!!!!!!!!!!!!!!!!
-        //GET: Diario/AdicionarPresenca
-        [RBAC]
-        public ActionResult AdicionarPresenca(int? discID, int? profID)
-        {
-            if (discID == null || profID == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Negocio_Disciplina disciplina = db.Negocio_Disciplina.Where(o => o.Disciplina_ID == discID && o.Funcionario_ID == profID).FirstOrDefault();
-            if (disciplina == null)
-            {
-                return HttpNotFound();
-            }
-            PopulateMatriculasDropDown(disciplina.Disciplina_ID);
-            return View(disciplina);
-        }
-
-        //POST: Diario/AdicionarPresenca
-        [HttpPost]
-        [RBAC]
-        [ValidateAntiForgeryToken]
-        public ActionResult AdicionarPresenca([Bind(Include = "Frequencia_ID, Disciplina_ID, Funcionario_ID, Dt_Aula, Qtde_Aula, Aula_Ministrada, Matricula_ID")]Negocio_Frequencia frequencia)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Negocio_Frequencia.Add(frequencia);
-                db.SaveChanges();
-                return RedirectToAction("VerNotasDisciplina", frequencia.Disciplina_ID);
-            }
-            PopulateMatriculasDropDown(frequencia.Disciplina_ID, frequencia.Matricula_ID);
-            return View(frequencia);
         }
 
         //Ver notas de todas as disciplinas de um único aluno - VerVinculoDisciplinaViewModel
@@ -298,7 +276,8 @@ namespace NimbusACAD.Controllers
             //    return HttpNotFound();
             //}
 
-            var usuario = User.Identity as RBAC_Usuario;
+            var name = User.Identity.Name;
+            RBAC_Usuario usuario = db.RBAC_Usuario.Where(o => o.Username.Equals(name)).FirstOrDefault();
             var matID = usuario.Negocio_Pessoa.Negocio_Matricula_Aluno.Where(o => o.Ativo == true).FirstOrDefault().Matricula_ID;
 
             if (matID == 0)
@@ -385,23 +364,27 @@ namespace NimbusACAD.Controllers
             base.Dispose(disposing);
         }
 
-        private void PopulateMatriculasList(Negocio_Disciplina disciplina)
+        private ICollection<ListaAlunosViewModel> PopulateMatriculasList(Negocio_Disciplina disciplina)
         {
             //var allAlunos = db.Negocio_Vinculo_Disciplina.Where(o => o.Disciplina_ID == disciplina.Disciplina_ID).FirstOrDefault().Negocio_Matricula_Aluno;
             var allVinculos = db.Negocio_Vinculo_Disciplina;
             var vm = new List<ListaAlunosViewModel>();
-            foreach (var al in allVinculos)
+            foreach (var al in allVinculos.ToList())
             {
                 if (al.Disciplina_ID == disciplina.Disciplina_ID)
                 {
+                    string PN = al.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome;
+                    string SN = al.Negocio_Matricula_Aluno.Negocio_Pessoa.Sobrenome;
+                    string nome = PN + " " + SN;
                     vm.Add(new ListaAlunosViewModel
                     {
                         MatriculaID = al.Matricula_ID,
-                        NomeAluno = al.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome + " " + al.Negocio_Matricula_Aluno.Negocio_Pessoa.Sobrenome
+                        NomeAluno = nome
                     });
                 }
             }
-            ViewBag.Matriculas = vm;
+            //ViewBag.Matriculas = vm;
+            return vm;
         }
 
         private void PopulateMatriculasDropDown(int discID, object selectedMatricula = null)
@@ -410,7 +393,7 @@ namespace NimbusACAD.Controllers
                                  where m.Disciplina_ID == discID
                                  orderby m.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome
                                  select m;
-            ViewBag.Matriculas = new SelectList(matriculaQuery, "Matricula_ID", "Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome" + " " + "Negocio_Matricula_Aluno.Negocio_Pessoa.Sobrenome", selectedMatricula);
+            ViewBag.Matriculas = new SelectList(matriculaQuery, "Matricula_ID", "Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome", selectedMatricula);
         }
     }
 }

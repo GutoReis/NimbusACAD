@@ -17,9 +17,9 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Curso")]
         public int CursoID { get; set; }
 
-        [Required]
-        [Display(Name = "Modulo")]
-        public int ModuloID { get; set; }
+        //[Required]
+        //[Display(Name = "Modulo")]
+        //public int ModuloID { get; set; }
 
         [Required]
         [Display(Name = "Ano")]

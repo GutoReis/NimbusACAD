@@ -14,26 +14,37 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Matricula_ID)
         <div class="form-group">
             @Html.LabelFor(model => model.Modulo_ID, "Modulo_ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Modulo_ID, ViewBag.Modulos as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("Modulo_ID", ViewBag.Modulos as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Modulo_ID, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Matricula_ID, "Matricula_ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome);
                 @Html.ValidationMessageFor(model => model.Matricula_ID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Status_Vinculo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Status_Vinculo, new { htmlAttributes = new { @class = "form-control" } })
+                @{var listItem = new List<SelectListItem>
+                    {
+                      new SelectListItem { Text = "Em Curso", Value = "Em Curso" },
+                      new SelectListItem { Text = "Dependencia", Value = "Dependencia" },
+                      new SelectListItem { Text = "Matricula trancada", Value = "Matricula trancada" },
+                      new SelectListItem { Text = "Reprovado", Value = "Reprovado" },
+                      new SelectListItem { Text = "Aprovado", Value = "Aprovado" }
+                    };
+                }
+                @Html.DropDownList("Status_Vinculo", new SelectList(listItem, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.Status_Vinculo, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.Status_Vinculo, "", new { @class = "text-danger" })
             </div>
         </div>

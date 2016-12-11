@@ -102,9 +102,14 @@ namespace NimbusACAD.Controllers
                 db.RBAC_Usuario.Add(RU);
                 db.SaveChanges();
 
-                //Enviando Email
-                EmailMessage message = new EmailMessage("guto.reisdelima@gmail.com", "Bem-vindo ao NimbusAcad!", "Olá, seja bem-vindo ao NimbusAcad \n Esta é sua senha: " + tempToken + "\nRecomenda-se que altere a senha para uma, com fácil memorização.");
+                //Enviando Email da senha
+                EmailMessage message = new EmailMessage(novaPessoa.Email, "Bem-vindo ao NimbusAcad!", "Olá, seja bem-vindo ao NimbusAcad \n Esta é sua senha: " + tempToken + "\nRecomenda-se que altere a senha para uma, com fácil memorização.");
                 await _emailService.Send(message);
+
+                //Enviando Email de confirmação de email
+                var callbackUrl = Url.Action("ConfirmarEmail", "Account", new { novaPessoa.Email }, null);
+                EmailMessage confirmacao = new EmailMessage(novaPessoa.Email, "Confirmar email", "Por favor, confirme seu email clicando neste link: <a href=\"" + callbackUrl + "\">Confirmar</a>");
+                await _emailService.Send(confirmacao);
 
                 //Assimilando perfil de acesso
                 int uID = _userStore.GetUsuarioID(novaPessoa.Email);

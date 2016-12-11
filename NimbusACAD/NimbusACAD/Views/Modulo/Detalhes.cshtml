@@ -27,13 +27,15 @@
 </div>
 
 <p>Disciplinas</p>
-<p>@Html.ActionLink("Nova disciplina", "NovaDisciplina", "Disciplina", new { id = Model.ModuloID })</p>
+<p>@Html.ActionLink("Nova disciplina", "NovaDisciplina", "Disciplina", new { id = Model.ModuloID }, null)</p>
 <div>
     <table class="table">
         @foreach (var item in Model.disciplinas)
         {
-            <tr>@Html.DisplayFor(modelItem => item.DisciplinaNM)</tr>
-            <tr>@Html.ActionLink("Detalhes", "Detalhes", "Disciplina", new { id = item.DisciplinaID })</tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.DisciplinaNM)</td>
+                <td>@Html.ActionLink("Detalhes", "Detalhes", "Disciplina", new { id = item.DisciplinaID }, null)</td>
+            </tr>
         }
     </table>
 </div>
@@ -41,7 +43,7 @@
 <p>
     @Html.ActionLink("Editar", "Editar", new { id = Model.ModuloID }) | 
     @Html.ActionLink("Deletar", "Deletar", new { id = Model.ModuloID}) | 
-    @Html.ActionLink("Voltar para o curso", "Detalhes", "Curso", new { id = Model.CursoID })
+    @Html.ActionLink("Voltar para o curso", "Detalhes", "Curso", new { id = Model.CursoID }, null)
 </p>
 
 @section Scripts {

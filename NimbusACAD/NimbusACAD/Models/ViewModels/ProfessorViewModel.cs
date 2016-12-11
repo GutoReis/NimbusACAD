@@ -9,11 +9,10 @@ namespace NimbusACAD.Models.ViewModels
     //Frequencia --Automaticamente adicionar o valor de aulas a "Tot_Aulas_dadas" em Negocio_Disciplina
     public class FrequenciaViewModel
     {
-        [Key][Column(Order = 0)]
+        [Key]
         [Display(Name = "Disciplina")]
         public int DisciplinaID { get; set; }
 
-        [Key][Column(Order = 1)]
         [Display(Name = "Professor")]
         public int ProfessorID { get; set; }
 
@@ -31,7 +30,9 @@ namespace NimbusACAD.Models.ViewModels
         public string AulaMinistrada { get; set; }
 
         [Display(Name = "Alunos Presentes")]
-        public virtual ICollection<ListaAlunosViewModel> Matriculas { get; set; }
+        public virtual List<System.Web.Mvc.SelectListItem> Matriculas { get; set; }
+
+        public virtual IEnumerable<int> MatriculasPresentes { get; set; }
     }
 
     public class ListaAlunosViewModel
@@ -53,7 +54,7 @@ namespace NimbusACAD.Models.ViewModels
         [Display(Name = "Disciplina")]
         public string DisciplinaNm { get; set; }
 
-        public ICollection<LancarNotaViewModel> notas { get; set; }
+        public List<LancarNotaViewModel> notas { get; set; }
     }
 
     public class LancarNotaViewModel

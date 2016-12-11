@@ -28,19 +28,21 @@ namespace NimbusACAD.Controllers
 
         // GET: Horario/DefinirHorario
         [RBAC]
-        public ActionResult DefinirHorario(int? discID)
+        public ActionResult DefinirHorario(int? id)
         {
-            if (discID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Negocio_Disciplina disciplina = db.Negocio_Disciplina.Find(discID);
+            Negocio_Disciplina disciplina = db.Negocio_Disciplina.Find(id);
             if (disciplina == null)
             {
                 return HttpNotFound();
             }
+            Negocio_Quadro_Horario NQH = new Negocio_Quadro_Horario();
+            NQH.Disciplina_ID = disciplina.Disciplina_ID;
             //ViewBag.Disciplina_ID = new SelectList(db.Negocio_Disciplina, "Disciplina_ID", "Disciplina_Nome");
-            return View(disciplina);
+            return View(NQH);
         }
 
         // POST: Horario/DefinirHorario
@@ -55,7 +57,7 @@ namespace NimbusACAD.Controllers
             {
                 db.Negocio_Quadro_Horario.Add(negocio_Quadro_Horario);
                 db.SaveChanges();
-                return RedirectToAction("Detalhes", "Disciplina", negocio_Quadro_Horario.Disciplina_ID);
+                return RedirectToAction("Detalhes", "Disciplina", new { id = negocio_Quadro_Horario.Disciplina_ID });
             }
 
             ViewBag.Disciplina_ID = new SelectList(db.Negocio_Disciplina, "Disciplina_ID", "Disciplina_Nome", negocio_Quadro_Horario.Disciplina_ID);
@@ -91,7 +93,7 @@ namespace NimbusACAD.Controllers
             {
                 db.Entry(negocio_Quadro_Horario).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Detalhes", "Disciplina", negocio_Quadro_Horario.Disciplina_ID);
+                return RedirectToAction("Detalhes", "Disciplina", new { id = negocio_Quadro_Horario.Disciplina_ID });
             }
             ViewBag.Disciplina_ID = new SelectList(db.Negocio_Disciplina, "Disciplina_ID", "Disciplina_Nome", negocio_Quadro_Horario.Disciplina_ID);
             return View(negocio_Quadro_Horario);
@@ -122,7 +124,7 @@ namespace NimbusACAD.Controllers
             Negocio_Quadro_Horario negocio_Quadro_Horario = db.Negocio_Quadro_Horario.Find(id);
             db.Negocio_Quadro_Horario.Remove(negocio_Quadro_Horario);
             db.SaveChanges();
-            return RedirectToAction("Detalhes", "Disciplina", negocio_Quadro_Horario.Disciplina_ID);
+            return RedirectToAction("Detalhes", "Disciplina", new { id = negocio_Quadro_Horario.Disciplina_ID });
         }
 
         protected override void Dispose(bool disposing)

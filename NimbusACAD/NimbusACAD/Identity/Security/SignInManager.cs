@@ -93,11 +93,12 @@ namespace NimbusACAD.Identity.Security
         {
             using (NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities())
             {
-                var pessoa = db.Negocio_Pessoa.Where(o => o.Email.Equals(email)).FirstOrDefault();
+                Negocio_Pessoa pessoa = db.Negocio_Pessoa.Where(o => o.Email.Equals(email)).FirstOrDefault();
                 if (!pessoa.Email_Confirmado.Value)
                 {
                     pessoa.Email_Confirmado = true;
                     db.Entry(pessoa).State = EntityState.Modified;
+                    db.SaveChanges();
                     return true;
                 }
                 else
