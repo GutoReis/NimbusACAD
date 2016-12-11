@@ -98,5 +98,28 @@ public static class ExtendedMethods
         return _retVal;
     }
 
+    public static string TotNotificacao(this IPrincipal _principal)
+    {
+        int TNFL = 0;
+        try
+        {
+            if (_principal != null && _principal.Identity.IsAuthenticated)
+            {
+                NimbusAcad_DB_Entities db = new NimbusAcad_DB_Entities();
+                string username = _principal.Identity.Name;
+                int pID = db.RBAC_Usuario.Where(o => o.Username.Equals(username)).FirstOrDefault().Pessoa_ID.Value;
+
+                if (pID != 0)
+                {
+                    TNFL = db.Negocio_Pessoa.Find(pID).Tot_Notif_NL.Value;
+                }
+            }
+        }
+        catch
+        {
+        }
+        return TNFL.ToString();
+    }
+
     #endregion
 }

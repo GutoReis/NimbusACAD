@@ -34,6 +34,11 @@ namespace NimbusACAD.Controllers
             {
                 return HttpNotFound();
             }
+            Negocio_Pessoa NP = db.Negocio_Pessoa.Find(notificacao.Pessoa_Receptor_ID);
+            NP.Tot_Notif_NL = NP.Tot_Notif_NL - 1;
+            db.Entry(NP).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
             return View(notificacao);
         }
 
@@ -101,11 +106,12 @@ namespace NimbusACAD.Controllers
         //POST: Mensagem/Deletar/5
         [HttpPost, ActionName("Deletar")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeletarConfirmacao(int id)
+        public async Task<ActionResult> DeletarConfirmacao(int id)
         {
             Negocio_Notificacao notificacao = db.Negocio_Notificacao.Find(id);
             db.Negocio_Notificacao.Remove(notificacao);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
 
