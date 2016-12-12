@@ -1,0 +1,905 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Documentação Nimbus Acad	</title>
+<link rel="alternate" type="application/rss+xml" title="frittt.com" href="feed/index.html">
+<link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+        type="text/css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/prettify.css">
+</head>
+<body>
+<div>
+	<img style="width:15%; margin-top:15px; padding-left:40%;" src="img/Logo.png">
+</div>
+<div class="wrapper">
+<nav>
+  	<div class="pull-left">
+    	<h1><a href="javascript:"><img style="width:8%; margin-top:-1px;" src="img/Logo2.png" alt="Nimbus Acad Logo" /> <span>Documentação Nimbus Acad</span></a></h1>
+    </div>
+    
+    <div class="pull-right">
+    	<a href="NimbusAcad_TCC-ADS.pdf" target="_blank" class="btn btn-download"><img src="img/download.png" width="25" alt="Download Free Documentation Template" /> Baixar PDF</a>
+    </div>
+
+</nav>
+<header>
+  <div class="container">
+    <h2 class="lone-header">Web App para Gerenciamento de Recursos Acadêmicos</h2>
+  </div>
+</header>
+<section>
+  <div class="container">
+    <ul class="docs-nav">
+	  <li><a href="#resumo"><strong>Resumo</strong></a></li>
+      <li><a href="#introducao"><strong>Introdução</strong></a></li>
+      <li><a href="#objetivo" class="cc-active">Objetivo</a></li>
+      <li><a href="#objespec" class="cc-active">Objetivo Especifico</a></li>
+      <li><a href="#organizacao" class="cc-active">Organização</a></li>
+      <li class="separator"></li>
+      <li><a href="#revb" ><strong>Revisão Bibliográfica</strong></a></li>
+      <li><a href="#erp" class="cc-active">ERP</a></li>
+      <li><a href="#aspnetmvc" class="cc-active">ASP.NET MVC</a></li>
+      <li><a href="#aspnet" class="cc-active">ASP.NET</a></li>
+      <li><a href="#mvc" class="cc-active">MVC</a></li>
+      <li><a href="#bancodados" class="cc-active">Banco de Dados</a></li>
+      <li><a href="#cloudcomp" class="cc-active">Cloud Computing</a></li>
+      <li><a href="#azure" class="cc-active">Microsoft Azure</a></li>
+	  <li><a href="#bootstrap" class="cc-active">Bootstrap</a></li>
+	  <li><a href="#appservice" class="cc-active">App Service</a></li>
+	  <li class="separator"></li>
+      <li><a href="#procmet"><strong>Procedimentos Metodológicos</strong></a></li>
+	  <li><a href="#visaogeral" class="cc-active">Visão Geral</a></li>
+	  <li><a href="#analisereq" class="cc-active">Análise de Requisitos</a></li>
+	  <li><a href="#reqfunc" class="cc-active">Requisitos Funcionais</a></li>
+	  <li><a href="#reqnfunc" class="cc-active">Requisitos Não-Funcionais</a></li>
+	  <li><a href="#casodeuso" class="cc-active">Diagrama de Caso de Uso</a></li>
+	  <li><a href="#detcasodeuso" class="cc-active">Detalhamento do Caso de Uso</a></li>
+	  <li><a href="#bancodedados" class="cc-active">Banco de Dados</a></li>
+	  <li><a href="#detbancodados" class="cc-active">Detalhamento do Banco de Dados</a></li>
+	  <li><a href="#seguranca" class="cc-active">Segurança</a></li>
+	  <li><a href="#autentificacao" class="cc-active">Autentificção</a></li>
+	  <li><a href="#permacesso" class="cc-active">Controle de Permissões de Acesso</a></li>
+	  <li><a href="#resultinter" class="cc-active">Resultados e Apresentação da Interface do Sistema</a></li>
+	  <li><a href="#login" class="cc-active">Login</a></li>
+	  <li><a href="#indice" class="cc-active">Indice</a></li>
+	  <li><a href="#criar" class="cc-active">Criar</a></li>
+	  <li><a href="#detalhes" class="cc-active">Detalhes</a></li>
+	  <li><a href="#editar" class="cc-active">Editar</a></li>
+	  <li><a href="#deletar" class="cc-active">Deletar</a></li>
+	  <li class="separator"></li>
+      <li><a href="#gestcust"><strong>Gestão de Custos do Projeto</strong></a></li>
+	  <li><a href="#procgest" class="cc-active">Processos de Gerenciamento dos Custos</a></li>
+	  <li><a href="#gestcustoscc" class="cc-active">Gestão dos Custos para Implementação do Sistema em Cloud Coumputing</a></li>
+	  <li><a href="#procgestcust" class="cc-active">Processos da gestão de custos</a></li>
+	  <li><a href="#plano" class="cc-active">Plano de Gerenciamento dos Custos</a></li>
+	  <li><a href="#estimativa" class="cc-active">Estimativa de Custos</a></li>
+	  <li><a href="#orçamento" class="cc-active">Determinar o Orçamento</a></li>
+	  <li><a href="#controlar" class="cc-active">Controlar os Custos</a></li>
+	  <li class="separator"></li>
+      <li><a href="#final"><strong>Considerações Finais e Recomendações</strong></a></li>
+	  <li><a href="#referencia" class="cc-active">Referências</a></li>
+	  <li><a href="#glossario" class="cc-active">Glossário</a></li>
+    </ul>
+    <div class="docs-content">
+	  <h2 id="resumo">Resumo</h3>
+	  <p>Partindo de uma análise de um ambiente institucional sem sistema adequadamente informatizado, e conciliando a devida necessidade de informatização com a necessidade de desenvolvimento de um sistema de gerenciamento acadêmico mais moderno e melhor preparado para o mercado atual, foi idealizado o Nimbus Acad. E para isso, foi realizado um estudo de recursos e planejamento baseado em sistemas de ERP (Planejamento dos Recursos da Empresa), no qual muitas empresas de diversos setores já vem implementando este tipo de sistema, permitindo a otimização do fluxo de informação e interação dentro da organização, juntamente com a análise e desenvolvimento da modelagem do banco de dados em SQL Database, as funções do sistema em C#, e a aplicação que foi modelada em ASP.NET MVC. Buscando simplificar o desenvolvimento do sistema ao seguir a arquitetura de desenvolvimento MVC, usada para aplicação web de forma inovadora, onde a sua estruturação de desenvolvimento se categorizam em três partes da aplicação, sendo elas: Modelos, onde se concentra os objetos que agem sobre os atributos das tabelas do banco de dados; Exibição, em que é desenvolvida toda a parte de estética e interface para com o usuário do sistema; Controladores, onde é desenvolvida toda a mecânica do sistema, mantendo nesta parte todas as funções do sistema e também relacionando as três camadas, unindo-as no sistema completo. E por fim, é associado o projeto em uma nova expectativa, onde o próximo passo é desenhado para um avanço baseado em uma estrutura Multi-Inquilino conjunta com o MVC, permitindo abranger no mesmo sistema, uma gama maior de instituições e implementando o sistema totalmente interativo entre instituições distintas que utilizam do sistema Nimbus Acad.</p>
+      <h2 id="introducao">Introdução</h2>
+	  <p>Este projeto foi idealizado pelos integrantes do grupo, que tiveram experi&ecirc;ncia como estagi&aacute;rios de suporte t&eacute;cnico na ETEC Dona Escol&aacute;stica Rosa.</p>
+<p>Em sua administra&ccedil;&atilde;o, a ETEC Dona Escol&aacute;stica Rosa conta hoje com aproximadamente 40 computadores e outros equipamentos pertinentes ao trabalho e mais de 60 funcion&aacute;rios, incluindo professores e prestadores de servi&ccedil;o terceirizado. A institui&ccedil;&atilde;o conta tamb&eacute;m, em sua estrutura f&iacute;sica, quatro laborat&oacute;rios de inform&aacute;tica com vinte desktops cada e mais 07 (sete) desktops dispon&iacute;veis aos alunos e 02 (dois) notebooks dispon&iacute;veis aos professores fora do hor&aacute;rio de aula na biblioteca.</p>
+<p>Apesar de a escola ter evolu&iacute;do e terem bons equipamentos de rotina administrativa e acad&ecirc;mica, o cen&aacute;rio administrativo, por outro lado, n&atilde;o evoluiu tanto assim: existem muitos processos que s&atilde;o realizados manualmente, tais como matr&iacute;culas e rematr&iacute;culas, fichas diversas de preenchimento manual etc.</p>
+<p>A rede de computadores &eacute; administrada por um servidor de 01 (um) terabyte que roda o sistema operacional Windows server 2003 (desatualizado) e um switch central gerenci&aacute;vel; Todo o controle da institui&ccedil;&atilde;o &eacute; feito atrav&eacute;s de arquivos b&aacute;sicos do Windows (pacote office); A internet utilizada &eacute; uma banda larga de 60 (sessenta) megabytes distribu&iacute;da a todos os equipamentos da escola e uma internet fornecida pelo governo (Intragov) de 08 (oito) megabytes utilizada somente por funcion&aacute;rios espec&iacute;ficos.</p>
+<p>Diante deste cen&aacute;rio, o trabalho &eacute; focado na rede l&oacute;gica da escola onde foram identificados os seguintes problemas:</p>
+<ol>
+<li>Acesso prec&aacute;rio ao servidor: N&atilde;o h&aacute; controle de restri&ccedil;&atilde;o de acesso, pois o login gerenciado pelo servidor &eacute; problem&aacute;tico. Onde o usu&aacute;rio de um setor tem acesso a arquivos/diret&oacute;rios de quaisquer setores.</li>
+<li>Interface n&atilde;o amig&aacute;vel: O servidor possui interface Windows Server 2003, sendo assim, visualmente ultrapassado, e confuso para os usu&aacute;rios, que em sua maioria n&atilde;o se adaptam facilmente aos recursos do sistema.</li>
+<li>Limita&ccedil;&atilde;o de acesso: O acesso ao servidor &eacute; restrito aos usu&aacute;rios apenas dentro das depend&ecirc;ncias da institui&ccedil;&atilde;o, atrasando assim, a din&acirc;mica de controle e troca de informa&ccedil;&otilde;es acad&ecirc;micas</li>
+<li>Seguran&ccedil;a de acesso: Mesmo o acesso sendo feito dentro da institui&ccedil;&atilde;o, a aplica&ccedil;&atilde;o de servidor atual n&atilde;o disponibiliza uma boa seguran&ccedil;a de acesso, uma vez que os usu&aacute;rios n&atilde;o s&atilde;o identificados dentro do servidor.</li>
+<li>Servidor Local: Com um sistema de servidor desatualizado, a institui&ccedil;&atilde;o, mantem um servidor local ligado 24 horas por dia. O que poderia ser evitado e economizado com um sistema mais atual trabalhando em nuvem.</li>
+</ol>
+<p>A partir dos problemas descritos, foi idealizado um sistema ERP (Enterprise Resource Planning - Planejamento dos recursos da empresa) que integra dados e processos da organiza&ccedil;&atilde;o em um s&oacute; sistema. Alunos, professores e funcion&aacute;rios ir&atilde;o interagir por uma interface em comum.</p>
+<p>Detalhadamente, os problemas acima descritos ser&atilde;o sanados da seguinte forma, por fun&ccedil;&otilde;es:</p>
+<ol>
+<li>Gest&atilde;o do Sistema:</li>
+</ol>
+<ul>
+<li>Usu&aacute;rios com as permiss&otilde;es para gerenciamento de sistema poder&atilde;o:
+<ul>
+<li>Definir as regras (permiss&otilde;es de acesso) no sistema;</li>
+<li>Vincular as permiss&otilde;es a perfis de acesso;</li>
+<li>Bloquear/Desbloquear usu&aacute;rios do sistema;</li>
+<li>Cadastrar ou remover funcion&aacute;rios;</li>
+<li>Cadastrar, ver, editar ou remover cargos da institui&ccedil;&atilde;o;</li>
+<li>Cadastrar, ver, editar ou remover tipos de documentos a serem utilizados ou expedidos pela institui&ccedil;&atilde;o;</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>Institucional:</li>
+</ol>
+<ul>
+<li>Usu&aacute;rios com permiss&otilde;es de n&iacute;vel institucional poder&atilde;o:
+<ul>
+<li>Cadastrar, ver, editar ou remover cursos, disciplinas, m&oacute;dulos, dependendo das suas permiss&otilde;es;</li>
+<li>Definir hor&aacute;rio das disciplinas;</li>
+<li>Cadastrar ou remover matr&iacute;culas de novos alunos;</li>
+<li>Realizar opera&ccedil;&otilde;es como: Atribuir notas, atribuir presen&ccedil;as para alunos, visualizar as notas de um aluno ou de todos os alunos em uma disciplina, tudo depender&aacute; das permiss&otilde;es de cada usu&aacute;rio;</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>Geral:</li>
+</ol>
+<ul>
+<li>Todos os usu&aacute;rios poder&atilde;o alterar suas informa&ccedil;&otilde;es cadastrais;</li>
+<li>Os usu&aacute;rios poder&atilde;o enviar mensagens para outros usu&aacute;rios, poder&atilde;o ver e remover mensagens que tenham sido direcionadas a ele;</li>
+</ul>
+<p>Assim propiciando um ambiente mais confi&aacute;vel, integrado, din&acirc;mico, que possa facilitar o trabalho dos funcion&aacute;rios da institui&ccedil;&atilde;o e torna-los mais transparentes.</p>
+      <h3 id="objetivo">Objetivo</h3>
+	  <p>Desenvolver um sistema que far&aacute; toda a gest&atilde;o acad&ecirc;mica de uma institui&ccedil;&atilde;o de ensino e a intera&ccedil;&atilde;o/comunica&ccedil;&atilde;o entre todos os departamentos da escola (secretaria, coordena&ccedil;&atilde;o, e coordena&ccedil;&atilde;o pedag&oacute;gica &ndash; que inclui professores e alunos). O sistema foi previamente denominado como <em>Nimbus Acad, Nimbus do latim &ldquo;Nuvem&rdquo; e Acad do Ingl&ecirc;s &ldquo;Academic&rdquo;.</em></p>
+      <h3 id="objespec">Objetivo Especifico</h3>
+	  <p>Os objetivos espec&iacute;ficos para o desenvolvimento deste projeto s&atilde;o:</p>
+<ol>
+<li>A partir do levantamento das necessidades, identificar quais os aspectos acad&ecirc;micos e administrativos ser&atilde;o levados em conta no desenvolvimento de um sistema de gerenciamento acad&ecirc;mico.</li>
+<li>Desenvolver um sistema para corrigir os problemas encontrados na pesquisa de campo em escola t&eacute;cnica estadual, utilizando como arquitetura de desenvolvimento o sistema MVC.</li>
+</ol>
+<p>Apresentar o sistema para controle educacional utilizando as ferramentas SQL Database para banco de dados, App Service para armazenar o sistema, ambos sendo disponibilizados em plataforma de Cloud Computing.</p>
+      <h3 id="organizacao">Organização</h3>
+	  <p>No segundo cap&iacute;tulo ser&atilde;o descritas as ferramentas utilizadas para o desenvolvimento do sistema.</p>
+<p>O terceiro cap&iacute;tulo ir&aacute; elucidar sobre como as ferramentas funcionam e como foram usadas na pr&aacute;tica para o desenvolvimento do sistema Nimbus Acad.</p>
+<p>Em seguida, apresentam-se-&atilde;o as refer&ecirc;ncias utilizadas no desenvolvimento deste projeto e o gloss&aacute;rio.</p>
+	  <h2 id="revb">Revisão Bibliográfica<h2>
+	  <h3></h3><p>Para a constru&ccedil;&atilde;o deste sistema ser&atilde;o utilizados os conceitos de Enterprise Resource Planning (ERP), plataforma ASP.NET MVC, plataforma Bootstrap, banco de dados SQL Database, servidor de aplica&ccedil;&atilde;o App Service, e Cloud Computing.</p>
+      <h3 id="erp">ENTERPRISE RESOURCE PLANNING ERP</h3>
+	  <p>O ERP vem do ingl&ecirc;s (Enterprise Resource Planning, ou Planejamento dos Recursos da Empresa) e representa uma s&eacute;rie de atividades (m&oacute;dulos) gerenciadas por um software ou por pessoas, que ajudam na gest&atilde;o de processos dentro de uma empresa, portanto, ERP &eacute; um Sistema de Gest&atilde;o Corporativa.</p>
+<p>Um pacote de software integrado, que pode contribuir na simplifica&ccedil;&atilde;o das atividades &eacute; o Planejamento de Recursos Empresariais (ERP &ndash; Enterprise Resource Planning), composto por um conjunto de m&oacute;dulos funcionais padr&atilde;o, que podem ser adaptados &agrave;s necessidades espec&iacute;ficas de cada organiza&ccedil;&atilde;o, com o objetivo de suportar a maioria das suas opera&ccedil;&otilde;es (ALVES; MATOS, 2011).</p>
+<p>Uma importante meta do ERP &eacute; facilitar o fluxo de informa&ccedil;&otilde;es de uma organiza&ccedil;&atilde;o para otimizar a tomada de decis&otilde;es dentro da empresa. Um sistema de ERP ajuda de maneira eficaz as corpora&ccedil;&otilde;es a atingirem esta meta, coletando e organizando informa&ccedil;&otilde;es em diferentes n&iacute;veis, oferecendo em tempo real indicadores de performance que ajudam na gest&atilde;o.</p>
+      <h3 id="aspnetmvc">ASP.NET MVC</h3>
+	  <p>Neste sistema ser&atilde;o utilizados: a plataforma ASP.NET, o .NET Framework e ASP.NET MVC. E apesar da similaridade entre os nomes, possuem fun&ccedil;&otilde;es distintas que ser&atilde;o descritas a seguir.</p>
+      <h3 id="aspnet">ASP.NET</h3>
+	  <p>O ASP.NET &eacute; a plataforma da Microsoft para o desenvolvimento de aplica&ccedil;&otilde;es Web, que permite criar p&aacute;ginas din&acirc;micas atrav&eacute;s de uma linguagem de programa&ccedil;&atilde;o baseado no Framework .NET, que pode ser escrita em v&aacute;rias linguagens, como C#, F# e Visual Basic .NET.</p>
+<p>Esta plataforma &eacute; uma tecnologia de scripting com o servidor, que permite colocar em uma p&aacute;gina web, scripts que ser&atilde;o executados no servidor. As aplica&ccedil;&otilde;es Web ASP.NET necessitam do Framework .NET e do servidor IIS para executar na plataforma Windows.</p>
+      <h3 id="mvc">MVC</h3>
+	  <p>MVC significa &ldquo;MODEL&rdquo; &ldquo;VIEW&rdquo; &ldquo;CONTROLLER&rdquo;. E o ASP.NET MVC &eacute; uma arquitetura usada para desenvolver aplica&ccedil;&otilde;es web em ASP.NET, diferente ao desenvolvimento web tradicional, onde a sua estrutura de desenvolvimento melhor organizada.</p>
+<p>MVC &eacute; a plataforma da Microsoft para projetar e construir aplica&ccedil;&otilde;es web, e tamb&eacute;m &eacute; um padr&atilde;o de design arquitet&ocirc;nico. Como um padr&atilde;o de design, MVC e seus padr&otilde;es variantes t&ecirc;m sido em torno de algum tempo, mas o quadro ainda &eacute; relativamente novo, dando-lhe a vantagem de ter aprendido a partir de estruturas anteriores. Se voc&ecirc; estiver familiarizado com outros frameworks de desenvolvimento web, ent&atilde;o voc&ecirc; pode rastrear o hist&oacute;rico de recursos-chave e ver como os problemas comuns s&atilde;o evitados. Por enquanto, esteja ciente de que o MVC incorpora li&ccedil;&otilde;es aprendidas de muitos sistemas e n&atilde;o &eacute; em si mesmo "uma coisa". (HARRISON et al, 2015, p.9)</p>
+<p>A estrutura MVC inclui os seguintes componentes:</p>
+<ol>
+<li>Modelos: Camadas que permitem a manipula&ccedil;&atilde;o dos dados (leitura, escrita e valida&ccedil;&atilde;o). S&atilde;o as partes que implementam a l&oacute;gica para o dom&iacute;nio de dados do aplicativo.</li>
+<li>Exibi&ccedil;&otilde;es: Camada que implementam os componentes que exibem a interface do usu&aacute;rio (IU) do aplicativo.Normalmente, esta IU &eacute; criada a partir dos dados do modelo.</li>
+<li>Controladores: Camada que lida com a interface do usu&aacute;rio e o dom&iacute;nio de dados, selecionando uma exibi&ccedil;&atilde;o de renderiza&ccedil;&atilde;o que mostra essa IU e requisitando ou enviando dados para a camada de modelos manipular.&nbsp;</li>
+</ol>
+<p>Em conjunto com a ferramenta MVC &eacute; utilizada a Entity Framework, ferramenta de acesso a dados desenvolvida pela Microsoft.</p>
+<p>Atualmente existem tr&ecirc;s modelos de desenvolvimento com o Entity Framework:</p>
+<ol>
+<li>Database First &ndash; Gera a camada de modelo a partir de um banco de dados j&aacute; existente.</li>
+<li>Model First &ndash; Define um modelo conceitual a partir do banco de dados e do c&oacute;digo que foram gerados.</li>
+<li>Code First - inicia o desenvolvimento pela camada de model gerando o banco de dados a partir desta camada, conhecido tamb&eacute;m como Design Dirigido por Dom&iacute;nio (Domain-Driven Design &ndash; DDD).</li>
+</ol>
+<p>Neste projeto &eacute; utilizado o Entity Framework Database First, pois ser&aacute; desenvolvido primeiro o banco de dados.</p>
+      <h3 id="bancodados">Banco de Dados</h3>
+	  <p>SQL Database &eacute; um servi&ccedil;o de banco de dados em ambiente Cloud Computing. Baseado no mecanismo Microsoft SQL Server, o SQL Database oferece desempenho previs&iacute;vel, escalabilidade sem tempo de inatividade, continuidade de neg&oacute;cios e prote&ccedil;&atilde;o de dados - tudo com administra&ccedil;&atilde;o quase zero. Como ele &eacute; baseado no mecanismo do SQL Server, o SQL Database suporta ferramentas, bibliotecas e APIs existentes do SQL Server, o que facilita o movimento e a extens&atilde;o &agrave; nuvem.</p>
+      <h3 id="cloudcomp">Cloud Computing</h3>
+	  <p>Computa&ccedil;&atilde;o em nuvem define-se pela utiliza&ccedil;&atilde;o da mem&oacute;ria, da capacidade de armazenamento e c&aacute;lculo de computadores e servidores, compartilhados e interligados por meio da internet, seguindo o princ&iacute;pio da computa&ccedil;&atilde;o em grade.</p>
+<p>Cloud Computing refere-se tanto &agrave;s aplica&ccedil;&otilde;es fornecidas como servi&ccedil;os pela Internet, Hardwares e sistemas de softwares em Datacenters que prov&ecirc;m os servi&ccedil;os. Estes servi&ccedil;os t&ecirc;m sido referidos como Software-as-a-Service (SaaS). (ARMBRUST et al., 2010, p.50)</p>
+      <h3 id="azure">Microsoft Azure</h3>
+	  <p>O Microsoft Azure &eacute; um ambiente preparado pela Microsoft para suporte de servi&ccedil;os de nuvem, com uma vasta cole&ccedil;&atilde;o de recursos, sendo eles, armazenamento, web, an&aacute;lise, computa&ccedil;&atilde;o, servi&ccedil;os moveis e banco de dados.</p>
+<p>A uni&atilde;o de diversos recursos em uma &uacute;nica ferramenta de ambiente de desenvolvimento, aumenta a produtividade na &aacute;rea de TI, j&aacute; que, em um mesmo ambiente, o desenvolvedor pode realizar, se n&atilde;o todas, a maioria das configura&ccedil;&otilde;es, testes e contar com suporte para uma gama grande e diversificada de op&ccedil;&otilde;es de desenvolvimento.</p>
+	  <h3 id="bootstrap">Bootstrap</h3>
+	  <p>O Bootstrap &eacute; um framework, criado por Mark Otto e Jacob Thornton, ambos engenheiros do Twitter, e tem como objetivo tornar mais f&aacute;cil o desenvolvimento de interface (front-end) para p&aacute;ginas web. Ele disponibiliza padr&otilde;es para os elementos HTML mais usados, al&eacute;m de elementos personalizados com o uso de elementos e classes CSS padr&otilde;es.</p>
+<p>Al&eacute;m disso, o Bootstrap tamb&eacute;m tem como objetivo o aux&iacute;lio no desenvolvimento responsivo, em que adapta seus projetos web com um simples c&oacute;digo, para celulares, tablets e tamb&eacute;m para desktops com uma atrav&eacute;s de media queries CSS,&nbsp;que &eacute; a utiliza&ccedil;&atilde;o de Media Types com uma ou mais express&otilde;es que&nbsp;define para que tipo de media um certo c&oacute;digo CSS &eacute; direcionado, envolvendo caracter&iacute;sticas de uma m&eacute;dia para definir formata&ccedil;&otilde;es para diversos dispositivos</p>
+	  <h3 id="appservice">App Service</h3>
+	  <p>O App Service (Servi&ccedil;o de Aplicativo) &eacute; uma ferramenta do Microsoft Azure, que disponibiliza uma plataforma de servi&ccedil;o de hospedagem e implementa&ccedil;&atilde;o de aplica&ccedil;&atilde;o em web e para dispositivos moveis de qualquer plataforma.</p>
+<p>O App Service permite que aplicativos em desenvolvimento sejam integrados em plataformas de servi&ccedil;o, conecte-se com aplicativos locais e automatiza os processos de neg&oacute;cio.</p>
+<p>Os aplicativos executados pelo App Service Microsoft Azure s&atilde;o processados em VMs (maquinas virtuais) gerenciadas, e limitadas conforme o plano assinado pelo servi&ccedil;o.</p>
+	  <h2 id="procmet">Procedimentos Metodológicos</h2>
+	  <h3></h3><p class="Estilo1">Neste cap&iacute;tulo ser&aacute; abordado todo o detalhamento referente aos procedimentos metodol&oacute;gicos do sistema, tomando como base um planejamento inicial, desde a an&aacute;lise dos requisitos, at&eacute; a finaliza&ccedil;&atilde;o com a apresenta&ccedil;&atilde;o dos resultados de desempenho do sistema e sua interface. Incluindo tamb&eacute;m, o caso de uso e o detalhamento dos m&oacute;dulos do sistema, a modelagem do banco de e seu respectivo detalhamento, e tamb&eacute;m a descri&ccedil;&atilde;o dos m&eacute;todos, e como foi realizado a fun&ccedil;&atilde;o de autentica&ccedil;&atilde;o dos usu&aacute;rios, colaborando com a seguran&ccedil;a de todo o sistema.</p>
+	  <h3 id="visaogeral">Visão Geral</h3>
+	  <p class="Estilo1">O Nimbus Acad &eacute; um sistema planejado e desenvolvido em ASP.NET MVC, com intuito de agilizar e auxiliar o gerenciamento e a troca de informa&ccedil;&otilde;es dentro de uma institui&ccedil;&atilde;o acad&ecirc;mica que possui o sistema implementado e em funcionamento. Inspirado em sistemas de tecnologia ERP, o Nimbus Acad busca abranger todos os setores de uma institui&ccedil;&atilde;o informatizando sua intera&ccedil;&atilde;o entre os mais diversos setores como alunos, professores, coordenadores e administra&ccedil;&atilde;o acad&ecirc;mica, otimizando a comunica&ccedil;&atilde;o, e tamb&eacute;m permitindo uma adapta&ccedil;&atilde;o das regras de sua funcionalidade, tornando assim o sistema f&aacute;cil adapt&aacute;vel ao ambiente j&aacute; estabelecido pela institui&ccedil;&atilde;o.</p>
+	  <h3 id="analisereq">Análise de Requisitos</h3>
+	  <p class="Estilo1">Na Engenharia de Software, a an&aacute;lise de requisitos abrange as tarefas que lidam com a investiga&ccedil;&atilde;o, a defini&ccedil;&atilde;o e o escopo de novos sistemas ou altera&ccedil;&otilde;es do mesmo.</p>
+	  <h3 id="reqfunc">Requisitos Funcionais</h3>
+	  <p>Requisito funcional define uma fun&ccedil;&atilde;o de um sistema de software. &Eacute; apresentado a seguir, os requisitos analisados para o desenvolvimento deste projeto:</p>
+<ol>
+<li>Cadastrar novo setor: O sistema permitir&aacute; o cadastramento de novos setores acad&ecirc;micos (Ex.: Coordena&ccedil;&atilde;o Pedag&oacute;gica) e vincul&aacute;-los a uma s&eacute;rie de permiss&otilde;es de acesso dentro do sistema. Apenas usu&aacute;rios com as devidas permiss&otilde;es poder&atilde;o executar tal a&ccedil;&atilde;o;</li>
+<li>Cadastrar novo usu&aacute;rio: Usu&aacute;rios com as devidas permiss&otilde;es poder&atilde;o cadastrar novos usu&aacute;rios, n&atilde;o podendo haver dois usu&aacute;rios repetidos, e ser&atilde;o vinculados &agrave; um ou mais setores acad&ecirc;micos;</li>
+<li>Alterar dados dos usu&aacute;rios: Os usu&aacute;rios poder&atilde;o alterar seus dados cadastrais, apenas usu&aacute;rios com os devidos privil&eacute;gios poder&atilde;o bloquear/desbloquear um usu&aacute;rio;</li>
+<li>Manipular tabelas: Os usu&aacute;rios poder&atilde;o criar, atualizar, ler e deletar dados de tabelas, por&eacute;m ser&atilde;o apenas as tabelas relacionadas ao setor ao qual o usu&aacute;rio est&aacute; vinculado.</li>
+</ol>
+<p class="Estilo1">A partir deste levantamento, torna poss&iacute;vel o desenvolvimento do diagrama de caso de uso, das tabelas do banco de dados e do sistema.</p>
+	  <h3 id="reqnfunc">Requisitos Não-Funcionais</h3>
+	  <p>Os requisitos n&atilde;o-funcionais est&atilde;o relacionados ao uso da aplica&ccedil;&atilde;o em termos de desempenho, usabilidade, confiabilidade, seguran&ccedil;a, disponibilidade, manuten&ccedil;&atilde;o e tecnologias envolvidas. N&atilde;o &eacute; preciso o cliente ter ci&ecirc;ncia sobre eles, pois s&atilde;o caracter&iacute;sticas m&iacute;nimas para o desenvolvimento de um software de qualidade, ficando a cargo do desenvolvedor optar por atender esses requisitos ou n&atilde;o. O requisitos n&atilde;o-funcionais para este projeto s&atilde;o:</p>
+<ol>
+<li>Requisitos de Processo:</li>
+</ol>
+<ul>
+<li>O sistema ser&aacute; desenvolvido com a plataforma ASP.NET MVC para que todas as funcionalidades anteriormente descritas sejam atendidas. Para o sistema gerenciador de banco de dados ser&aacute; utilizado o SQL Database;</li>
+<li>A partir da etapa inicial do projeto, ser&aacute; constru&iacute;do um documento descrevendo as defini&ccedil;&otilde;es do sistema, bem como suas funcionalidades e intera&ccedil;&otilde;es com os usu&aacute;rios, e os estudos do caso de uso, juntamente com a modelagem do banco de dados;</li>
+</ul>
+<ol>
+<li>Requisitos de Seguran&ccedil;a:</li>
+</ol>
+<ul>
+<li>Com o uso de login, os usu&aacute;rios ter&atilde;o restri&ccedil;&otilde;es no acesso aos conte&uacute;dos e ferramentas do sistema;</li>
+<li>As senhas ser&atilde;o criptografadas usando a Criptografia PBKDF-2 (Password-Based Key Derivation Function 2);</li>
+</ul>
+<ol>
+<li>Requisitos de Usabilidade:
+<ul>
+<li>Ser&aacute; desenvolvido uma interface amig&aacute;vel aos usu&aacute;rios, de forma intuitiva e objetiva, facilitando o uso do sistema;</li>
+</ul>
+</li>
+</ol>
+<p>Ter&aacute; ferramentas pr&aacute;ticas, espec&iacute;ficas para cada usu&aacute;rio, para facilitar a experi&ecirc;ncia do usu&aacute;rio.</p>
+	  <h3 id="casodeuso">Diagrama de Caso de Uso</h3>
+	  <p>O Diagrama de Caso de Uso tem o objetivo de auxiliar a comunica&ccedil;&atilde;o entre os analistas e o cliente. Um diagrama de Caso de Uso descreve um cen&aacute;rio que mostra as funcionalidades do sistema do ponto de vista do usu&aacute;rio, o cliente deve ver no diagrama de Caso de Uso, as principais funcionalidades do sistema.</p>
+<p>Com base na an&aacute;lise de requisitos e no objetivo geral do projeto foi elaborado o seguinte caso de uso:</p>
+<div class="centered"><img src="img/figura1.png"/></div>
+	  <h3 id="detcasodeuso">Detalhamento do Caso de Uso</h3>
+	  <p>O detalhamento do caso de uso auxilia no entendimento do diagrama de caso uso. Aqui est&atilde;o descritos qual m&oacute;dulo do sistema os servi&ccedil;os (fun&ccedil;&otilde;es) do sistema est&atilde;o relacionados, bem como quem age diretamente nos servi&ccedil;os e m&oacute;dulos, e qual a finalidade do m&oacute;dulo.</p>
+<p><strong>M&oacute;dulo: Autentica&ccedil;&atilde;o</strong></p>
+<p>Servi&ccedil;os: Efetuar login, Confirmar e-mail cadastrado.</p>
+<p>Perfil (Atores): Usu&aacute;rio n&atilde;o autenticado.</p>
+<p>Finalidade: Identifica&ccedil;&atilde;o e autoriza&ccedil;&atilde;o de um usu&aacute;rio para acesso ao sistema</p>
+<p>Vis&atilde;o Geral: Esse m&oacute;dulo possui a finalidade de garantir o acesso de um usu&aacute;rio ao sistema, bem como confirmar o e-mail de cadastro, possibilitando maior seguran&ccedil;a no login.</p>
+<p><strong>M&oacute;dulo: Autentica&ccedil;&atilde;o</strong></p>
+<p>Servi&ccedil;os: Autenticar usu&aacute;rio, Negar acesso, Autorizar acesso, Assimilar permiss&otilde;es.</p>
+<p>Perfil (Atores): Sistema.</p>
+<p>Finalidade: Autentica&ccedil;&atilde;o de um usu&aacute;rio ao sistema e defini&ccedil;&atilde;o de n&iacute;vel de acesso.</p>
+<p>Vis&atilde;o Geral: Esse m&oacute;dulo visa autenticar as informa&ccedil;&otilde;es informadas pelo usu&aacute;rio, a fim de autorizar ou negar seu acesso ao sistema, bem como definir as permiss&otilde;es de acesso aos diferentes m&oacute;dulos do sistema.</p>
+<p><strong>M&oacute;dulo: Administrativo</strong></p>
+<p>Servi&ccedil;os: Criar curso, Criar m&oacute;dulo, Criar Disciplina, Definir hor&aacute;rio, Ver documento, Criar documento, Editar/Remover documento, Ver lista de funcion&aacute;rios, Cadastrar funcion&aacute;rio, Criar cargo, Editar/Remover cargo.</p>
+<p>Perfil (Atores): Usu&aacute;rio autenticado com permiss&atilde;o de n&iacute;vel Administrativo ou Full.</p>
+<p>Finalidade: Gerenciamento do setor administrativo da institui&ccedil;&atilde;o a partir do sistema.</p>
+<p>Vis&atilde;o geral: Esse m&oacute;dulo permite ao usu&aacute;rio fazer gest&atilde;o dos setores da institui&ccedil;&atilde;o a partir do n&iacute;vel administrativo, gerenciando funcion&aacute;rios, cursos, m&oacute;dulos e disciplinas, bem como os cargos dos funcion&aacute;rios e os documentos pertinentes &agrave; institui&ccedil;&atilde;o, cada servi&ccedil;o requer uma permiss&atilde;o espec&iacute;fica, mas que seja de n&iacute;vel administrativo.</p>
+<p><strong>M&oacute;dulo: Institucional</strong></p>
+<p>Servi&ccedil;os: Ver informa&ccedil;&otilde;es de curso, Ver informa&ccedil;&otilde;es de m&oacute;dulo, Ver informa&ccedil;&otilde;es de disciplina, Editar/Remover curso, Editar/Remover m&oacute;dulo, Editar/Remover disciplina, Realizar chamada, Atribuir notas aos alunos, Atribuir presen&ccedil;a &uacute;nica, Ver notas aluno, Ver notas disciplina, Corrigir nota, Remover presen&ccedil;a, Matricular aluno, Buscar aluno, Listar presen&ccedil;a.</p>
+<p>Perfil (Atores): Usu&aacute;rio Autenticado com permiss&otilde;es de n&iacute;vel Institucional ou Full.</p>
+<p>Finalidade: Gerenciamento do setor acad&ecirc;mico da institui&ccedil;&atilde;o a partir do sistema.</p>
+<p>Vis&atilde;o Geral: Esse m&oacute;dulo possibilita ao usu&aacute;rio realizar a gest&atilde;o dos recursos acad&ecirc;micos e dos alunos da institui&ccedil;&atilde;o atrav&eacute;s do sistema, cada servi&ccedil;o requer uma permiss&atilde;o espec&iacute;fica, mas que seja de n&iacute;vel institucional.</p>
+<p><strong>M&oacute;dulo: Gerenciamento do Sistema</strong></p>
+<p>Servi&ccedil;os: Criar perfil de acesso, Ver lista de perfis de acesso, Editar/Remover perfil de acesso, Ver lista de usu&aacute;rios, Remover usu&aacute;rio, Bloquear/Desbloquear usu&aacute;rio, Vincular perfil ao usu&aacute;rio, Criar permiss&atilde;o, Ver lista de permiss&otilde;es, Editar/Remover permiss&atilde;o, Vincular permiss&atilde;o ao perfil.</p>
+<p>Perfil (Atores): Usu&aacute;rio Autenticado com permiss&otilde;es de n&iacute;vel de Gerenciamento de sistema ou Full.</p>
+<p>Finalidade: Gerenciamento dos diferentes n&iacute;veis de acesso e dos usu&aacute;rios do sistema.</p>
+<p>Vis&atilde;o Geral: A partir deste m&oacute;dulo, &eacute; poss&iacute;vel gerenciar os perfis de acesso para cada m&oacute;dulo e servi&ccedil;o do sistema, facilitando a gest&atilde;o e o controle dos usu&aacute;rios no sistema.</p>
+<p><strong>M&oacute;dulo: Geral</strong></p>
+<p>Servi&ccedil;os: Escrever mensagem, Ver mensagem, Remover mensagem, Editar informa&ccedil;&otilde;es cadastrais.</p>
+<p>Perfil (Atores): Usu&aacute;rio Autenticado.</p>
+<p>Finalidade: Envio, recebimento e descarte de mensagens e edi&ccedil;&atilde;o de informa&ccedil;&otilde;es cadastrais.</p>
+<p>Vis&atilde;o Geral: Este m&oacute;dulo requer apenas que o usu&aacute;rio esteja autenticado no sistema, aqui, &eacute; capaz de enviar mensagens a outros usu&aacute;rios do sistema, receber mensagens de outros usu&aacute;rios, e remover mensagens j&aacute; lidas, &eacute; poss&iacute;vel tamb&eacute;m alterar informa&ccedil;&otilde;es cadastrais referentes ao pr&oacute;prio usu&aacute;rio.</p>
+	  <h3 id="bancodedados">Banco de Dados</h3>
+	  <p class="Estilo1">A modelagem de um banco de dados &eacute; uma etapa essencial para o bom planejamento de um projeto, tendo em vista que a sua melhor estrutura&ccedil;&atilde;o auxiliar&aacute; da maneira mais otimizada poss&iacute;vel todas as consultas e registros das fun&ccedil;&otilde;es do sistema.</p>
+<p class="Estilo1">A partir do caso de uso pode-se planejar uma modelagem do banco de dados para facilitar o manuseio das informa&ccedil;&otilde;es necess&aacute;rias para o sistema inteiro.</p>
+	  <div class="centered"><img src="img/figura2.png"/></div>
+	  <h3 id="detbancodados">Detalhamento do Banco de Dados</h3>
+	  <p class="Estilo1">O detalhamento do banco de dados possibilita um melhor entendimento das tabelas que comp&otilde;em o banco de dados do sistema. Aqui est&atilde;o descritas as tabelas e quais a suas funcionalidades dentro do sistema.</p>
+	  <table>
+<tbody>
+<tr>
+<td width="390">
+<img style="margin:15%" src="img/figura3.png"/>
+</td>
+<td width="390">
+<p><strong>&nbsp;</strong></p>
+<p><strong>RBAC_Usuario: </strong>Tabela Principal de seguran&ccedil;a que abriga todos os usu&aacute;rios do sistema.</p>
+</td>
+</tr>
+<tr>
+<td width="390">
+<img style="margin:15%" src="img/figura4.png"/>
+</td>
+<td width="390">
+<p><strong>RBAC_Link_Usuario_Perfil: </strong>Tabela de seguran&ccedil;a que faz o relacionamento entre as tabelas RBAC_Usuario e RBAC_Perfil.</p>
+</td>
+</tr>
+<tr>
+<td width="390">
+<img style="margin:15%" src="img/figura5.png"/>
+</td>
+<td width="390">
+<p><strong>RBAC_Perfil: </strong>Tabela de seguran&ccedil;a abrange as especifica&ccedil;&otilde;es sobre os tipos de perfil.</p>
+</td>
+</tr>
+<tr>
+<td width="390">
+<img style="margin:15%" src="img/figura6.png"/>
+</td>
+<td width="390">
+<p><strong>RBAC_Link_Perfil_Permissao: </strong>Tabela de seguran&ccedil;a que faz o relacionamento entre a tabela RBAC_Perfil e RBAC_Permissao.</p>
+</td>
+</tr>
+<tr>
+<td width="390">
+<img style="margin:15%" src="img/figura7.png"/>
+</td>
+<td width="390">
+<p><strong>RBAC_Permissao: </strong>Tabela de seguran&ccedil;a que abrange as permiss&otilde;es de acesso ao servi&ccedil;o do sistema.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura8.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Pessoa: </strong>Tabela que armazena as informa&ccedil;&otilde;es necess&aacute;rias para o cadastro e armazenamento de uma pessoa.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura9.png"/>
+<td width="390">
+<p><strong>Negocio_Endereco: </strong>Tabela que armazena as informa&ccedil;&otilde;es necess&aacute;rias de endere&ccedil;o de uma pessoa.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura10.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Base_Endereco: </strong>Tabela que abrange todos os endere&ccedil;os j&aacute; cadastrados no sistema anteriormente, com objetivo de evitar a despadroniza&ccedil;&atilde;o de endere&ccedil;os iguais. (Ex.: &ldquo;Pra&ccedil;a da S&eacute;&rdquo; e &ldquo;Pr&ccedil; da S&eacute;&rdquo;)</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura11.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Notificacao: </strong>Tabela que armazena as informa&ccedil;&otilde;es sobre notifica&ccedil;&otilde;es, fazendo a rela&ccedil;&atilde;o entre usu&aacute;rio emissor e usu&aacute;rio receptor.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura12.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Curriculo: </strong>Tabela que armazena as informa&ccedil;&otilde;es referentes aos curr&iacute;culos do usu&aacute;rio do sistema.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura13.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Documento: </strong>Tabela que armazena os tipos de documentos utilizados pelo sistema.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura14.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Doc_Devente: </strong>Tabela que armazena os documentos necess&aacute;rios para o sistema que est&atilde;o pendentes, relacionando-os ao usu&aacute;rio devedor.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura15.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Matricula_Aluno: </strong>Tabela que mantem as informa&ccedil;&otilde;es referente ao matricula do aluno (Matricula, Curso, Ano).</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura16.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Curso: </strong>Tabela Quem mantem as informa&ccedil;&otilde;es de especifica&ccedil;&atilde;o dos cursos (Nome, Descri&ccedil;&atilde;o, Coordenador).</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura17.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Modulo: </strong>Tabela que armazenas as informa&ccedil;&otilde;es sobre a turma matriculada em determinado curso.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura18.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Disciplina: </strong>Tabela que mantem as informa&ccedil;&otilde;es sobre determinada disciplina cadastrada no sistema.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura19.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Frequencia: </strong>Tabela que armazena as informa&ccedil;&otilde;es referente a frequ&ecirc;ncia do aluno em uma aula especifica.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura20.png"/></td>
+<td width="390">
+<p><strong>Negocio_Quadro_Horario: </strong>Tabela que mantem as rela&ccedil;&otilde;es de hor&aacute;rios, disciplinas e curso de uma aula cadastrada no sistema.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura21.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Vinculo_Modulo:</strong> Tabela que faz a rela&ccedil;&atilde;o de alunos ao modulo pertencente.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura22.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Vinculo_Disciplina:</strong> Tabela que faz o armazenamento do detalhamento sobre o andamento do aluno em seu curso (Notas, Media Final, Frequ&ecirc;ncia).</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura23.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Tipo_Funcionario: </strong>Tabela que armazena as informa&ccedil;&otilde;es referente a descri&ccedil;&atilde;o dos cargos cadastrados no sistema.</p>
+</td>
+</tr>
+<tr>
+<td width="375">
+<img style="margin:15%" src="img/figura24.png"/>
+</td>
+<td width="390">
+<p><strong>Negocio_Funcionario: </strong>Tabela que faz rela&ccedil;&atilde;o do funcion&aacute;rio com o seu cargo.</p>
+</td>
+</tr>
+</tbody>
+</table>
+	  <h3 id="seguranca">Segurança</h3>
+	  <p>Para manter a integridade do sistema, &eacute; utilizado no sistema dois n&iacute;veis de seguran&ccedil;a: a autentica&ccedil;&atilde;o de usu&aacute;rios e o controle de permiss&otilde;es de acesso.</p>
+	  <h3 id="autentificacao">Autentificção</h3>
+	  <p>Para seguran&ccedil;a dos usu&aacute;rios, &eacute; utilizada uma senha para autentica&ccedil;&atilde;o do mesmo. Sendo assim, t&ecirc;m-se a necessidade de garantir a prote&ccedil;&atilde;o dessa senha, para que &ldquo;terceiros&rdquo; e invasores n&atilde;o tenham acesso a ela, essa prote&ccedil;&atilde;o se d&aacute; por meio de uma criptografia de hash<a href="#_ftn1" name="_ftnref1">[1]</a>, utilizando como algoritmo o PBKDF-2 (Password-Based Key Derivation Function 2). O algoritmo utiliza a senha, um salt para adicionar entropia a senha, e um n&uacute;mero de intera&ccedil;&otilde;es. O n&uacute;mero de intera&ccedil;&otilde;es repete a encripta&ccedil;&atilde;o de hash sobre a senha m&uacute;ltiplas vezes para produzir uma chave derivada para a&nbsp;senha, e esta, por sua vez ser&aacute; armazenada no banco de dados, bem como o salt utilizado.</p>
+	  <h3 id="permacesso">Controle de Permissões de Acesso
+	  <h3></h3><p>Para garantir a integridade de informa&ccedil;&otilde;es, n&atilde;o permitindo que um professor tenha acesso a funcionalidades do sistema que seriam de &aacute;rea administrativa da institui&ccedil;&atilde;o, por exemplo, o sistema foi desenvolvido com base no conceito de controle de acesso baseado em pap&eacute;is (RBAC &ndash; Role Based Access Control). Este tipo de controle permite que sejam definidas as permiss&otilde;es de acesso a um usu&aacute;rio com base nos pap&eacute;is exercidos por ele no sistema.</p>
+<p class="Estilo1">No Nimbus Acad, este controle &eacute; realizado via banco de dados, uma vez que as permiss&otilde;es s&atilde;o armazenadas em uma tabela no banco de dados e vinculadas aos pap&eacute;is, e os pap&eacute;is, tamb&eacute;m armazenados em tabela no banco de dados, s&atilde;o vinculadas aos usu&aacute;rios, possibilitando o controle do acesso.</p>
+	  <h3 id="resultinter">Resultados e Apresentação da Interface do Sistema</h3>
+	  <p>A interface do sistema &eacute; o que facilita a intera&ccedil;&atilde;o do usu&aacute;rio com as funcionalidades do sistema. Sendo assim, foi desenvolvido uma interface amig&aacute;vel e totalmente intuitiva, onde o usu&aacute;rio ter&aacute; apenas as informa&ccedil;&otilde;es necess&aacute;rias e para o que deseja fazer no sistema. Cada parte da interface do sistema &eacute; chamado de tela.</p>
+<p>Aqui &eacute; apresentado a tela de login, que &eacute; a &ldquo;porta de entrada&rdquo; do usu&aacute;rio para o sistema, em seguida s&atilde;o apresentadas as telas de &ldquo;&Iacute;ndice&rdquo;, &ldquo;Criar&rdquo;, &ldquo;Detalhar&rdquo;, &ldquo;Editar&rdquo; e &ldquo;Deletar&rdquo;.</p>
+<p class="Estilo1">Apesar das telas mostradas interagirem com apenas algumas das tabelas do banco de dados e fun&ccedil;&otilde;es do sistema, elas s&atilde;o &ldquo;gen&eacute;ricas&rdquo;, pois todas as fun&ccedil;&otilde;es do sistema seguem o conceito de CRUD (Create-Read-Update-Delete &ndash; Criar-Ler-Atualizar-Deletar) de um banco de dados, e as fun&ccedil;&otilde;es de GET e POST, que buscam e atualizam, respectivamente, informa&ccedil;&otilde;es em um banco de dados</p>
+	  <h3 id="login">Login</h3>
+	  <p>A primeira etapa do usu&aacute;rio no sistema &eacute; o login, onde &eacute; gerada requisi&ccedil;&atilde;o de GET para o sistema, o qual devolve um formul&aacute;rio a ser preenchido pelo usu&aacute;rio ainda n&atilde;o autenticado.</p>
+<p>Ap&oacute;s o formul&aacute;rio ser apresentado, o usu&aacute;rio dever&aacute; preencher o seu nome de usu&aacute;rio e sua senha. Caso tenha esquecido a senha, basta clicar sobre &ldquo;Esqueceu senha?&rdquo;, e ser&aacute; redirecionado para a p&aacute;gina de requisi&ccedil;&atilde;o de altera&ccedil;&atilde;o de senha. Informado o nome de usu&aacute;rio e senha, ao clicar em &ldquo;Log in&rdquo;, ser&aacute; gerado uma requisi&ccedil;&atilde;o de POST, atrav&eacute;s dos dados informados. O sistema busca no banco de dados na tabela RBAC_Usuario se existe um usu&aacute;rio com o nome informado, se existe, &eacute; verificado se o usu&aacute;rio deve confirmar o e-mail de cadastro. Caso tenha que confirmar, o sistema retorna uma mensagem informando o usu&aacute;rio de que ele deve confirmar o e-mail de cadastro, com o e-mail confirmado. &Eacute; feita a autentica&ccedil;&atilde;o da senha informada.</p>
+<p>Atrav&eacute;s da criptografia da senha utilizando como salt o valor que est&aacute; salvo no usu&aacute;rio no banco de dados, &eacute; feito a compara&ccedil;&atilde;o desta senha criptografada, tal compara&ccedil;&atilde;o realizado pela fun&ccedil;&atilde;o PasswordSignIn() da classe SignInManager. Retornado o valor da autentica&ccedil;&atilde;o (&ldquo;Success&rdquo;), o acesso &eacute; autorizado, retornado &ldquo;Failure&rdquo;, o acesso &eacute; negado.</p>
+<div style="text-align:center"><img src="img/figura25.png"/></div>
+	  <h3 id="indice">Indice</h3>
+	  <p>Com o usu&aacute;rio autenticado, &eacute; poss&iacute;vel acessar os recursos do sistema para executar opera&ccedil;&otilde;es com as tabelas do banco de dados. Assim como nas demais p&aacute;ginas de &ldquo;&Iacute;ndice&rdquo;, a p&aacute;gina /Curso/Index faz apenas uma requisi&ccedil;&atilde;o GET, n&atilde;o h&aacute; POST, pois esta faz apenas consultas no banco de dados. O sistema retorna da requisi&ccedil;&atilde;o todos os dados vindos da tabela de Negocio_Curso solicitados para apresentar na tela em forma de tabela, sendo poss&iacute;vel, a partir desta p&aacute;gina, criar um novo curso, ou redirecionar para uma p&aacute;gina com mais detalhes de um curso j&aacute; existente.</p>
+	  <div style="text-align:center"><img src="img/figura26.png"/></div>
+	  <h3 id="criar">Criar</h3>
+	  <p class="Estilo1">A partir do &ldquo;&Iacute;ndice&rdquo;, o usu&aacute;rio poder&aacute; realizar uma opera&ccedil;&atilde;o de inser&ccedil;&atilde;o no banco de dados, esta opera&ccedil;&atilde;o &eacute; conhecida como &ldquo;Criar&rdquo;. Assim como nas demais p&aacute;ginas de inser&ccedil;&atilde;o, a p&aacute;gina de Nova Permiss&atilde;o (/RBACPermissao/NovaPermissao) faz uma requisi&ccedil;&atilde;o GET para carregar o formul&aacute;rio a ser preenchido pelo usu&aacute;rio.</p>
+<p>Com os campos preenchidos, ao clicar em &ldquo;Salvar&rdquo; &eacute; gerada a requisi&ccedil;&atilde;o POST, esta fun&ccedil;&atilde;o ir&aacute; armazenar no banco de dados na tabela RBAC_Permissao os dados informados nos campos do formul&aacute;rio.</p>
+<div style="text-align:center"><img src="img/figura27.png"/></div>
+	  <h3 id="detalhes">Detalhes</h3>
+	  <p>Atrav&eacute;s do &ldquo;&Iacute;ndice&rdquo;, o usu&aacute;rio tamb&eacute;m poder&aacute; ver mais informa&ccedil;&otilde;es sobre um objeto no banco de dados (um curso, uma disciplina, uma permiss&atilde;o, etc). Sendo assim, as p&aacute;ginas denominadas &ldquo;Detalhes&rdquo;, realizam apenas a requisi&ccedil;&atilde;o GET, pois n&atilde;o realiza nenhuma altera&ccedil;&atilde;o no bando de dados. Na p&aacute;gina de Detalhes de um usu&aacute;rio (/RBACUsuario/Detalhes/1), &eacute; gerado a requisi&ccedil;&atilde;o (GET) que buscar&aacute; no bando de dados, na tabela de RBAC_Usuario, atrav&eacute;s do ID informado na p&aacute;gina de &ldquo;Index&rdquo;, retornando as informa&ccedil;&otilde;es que dever&atilde;o ser apresentadas na p&aacute;gina.</p>
+	  <div style="text-align:center"><img src="img/figura28.png"/></div>
+	  <h3 id="editar">Editar</h3>
+	  <p>Pela da p&aacute;gina de &ldquo;Detalhes&rdquo;, pode-se editar um objeto na tabela. As requisi&ccedil;&otilde;es de GET e POST de &ldquo;Editar&rdquo;, ocorrem assim como em &ldquo;Criar&rdquo;, ou seja, a requisi&ccedil;&atilde;o GET ir&aacute; buscar no banco as informa&ccedil;&otilde;es a serem apresentadas na tela, e tamb&eacute;m os valores destes campos, deixando o formul&aacute;rio j&aacute; preenchido. A p&aacute;gina de &ldquo;Editar&rdquo; de Permiss&atilde;o exemplifica como acontece essa opera&ccedil;&atilde;o.</p>
+<p>Nas requisi&ccedil;&otilde;es POST, o sistema far&aacute; um comparativo de todos os valores dos campos do formul&aacute;rio, salvando no banco de dados apenas os valores que foram alterados, e realizando uma opera&ccedil;&atilde;o de atualiza&ccedil;&atilde;o no banco de dados na tabela referente ao que foi alterado, neste caso, ser&aacute; na tabela de RBAC_Permissao. Esta opera&ccedil;&atilde;o de atualiza&ccedil;&atilde;o &eacute; diferente da opera&ccedil;&atilde;o de inser&ccedil;&atilde;o do m&eacute;todo &ldquo;Criar&rdquo;. </p>
+<div style="text-align:center"><img src="img/figura29.png"/></div>
+	  <h3 id="deletar">Deletar</h3>
+	  <p class="Estilo1">Outra opera&ccedil;&atilde;o que pode ser realizada a partir da p&aacute;gina de &ldquo;Detalhes&rdquo; &eacute; a opera&ccedil;&atilde;o de &ldquo;Deletar&rdquo;. Ao carregar a p&aacute;gina, &eacute; gerada uma requisi&ccedil;&atilde;o de GET, que carrega as informa&ccedil;&otilde;es do objeto a serem removidas de uma tabela. E s&atilde;o apresentadas para que o usu&aacute;rio possa conferir se realmente deseja realizar esta opera&ccedil;&atilde;o. A partir da p&aacute;gina &ldquo;Deletar&rdquo; de Permiss&atilde;o, &eacute; poss&iacute;vel visualizar como esta opera&ccedil;&atilde;o ocorre, sendo a primeira etapa a de apresenta&ccedil;&atilde;o dos atributos do objeto a ser removido.</p>
+<p>Verificada as informa&ccedil;&otilde;es, o usu&aacute;rio clica no bot&atilde;o &ldquo;Deletar&rdquo;. A partir desse bot&atilde;o &eacute; gerado a requisi&ccedil;&atilde;o POST. Esta fun&ccedil;&atilde;o ir&aacute; buscar o objeto no banco de dados na tabela de RBAC_Permissao (tabela usada por esta p&aacute;gina) e ir&aacute; remover da tabela o objeto com o mesmo ID do objeto apresentado anteriormente, e ent&atilde;o &eacute; executada a opera&ccedil;&atilde;o de remo&ccedil;&atilde;o no banco de dados.</p>
+<div style="text-align:center"><img src="img/figura30.png"/></div>
+	  <h2 id="gestcust">Gestão de Custos do Projeto</h2>
+	  <h3></h3><p>Um importante componente da produtividade de TI &eacute; a Gest&atilde;o de Custos de TI, cujo objetivo &eacute; tirar m&eacute;tricas para reduzir os custos e produzir em maior ou igual qualidade.</p>
+<p>Dar a devida visibilidade desses custos pode aumentar o foco nos investimentos do projeto, para que, gerem resultados favor&aacute;veis sobre o sistema.</p>
+<p class="Estilo1">Neste cap&iacute;tulo, a &aacute;rea de custos em TI ser&aacute; amplamente tratada quanto a escolha de um recurso referente ao servidor Cloud Computing escolhido.</p>
+	  <h3 id="procgest">Processos de Gerenciamento dos Custos</h3>
+	  <p>Os processos da gest&atilde;o de custo utilizados no projeto foram realizados com base nos processos descritos pelo PMBOK. Esses m&eacute;todos auxiliam em muito o gerenciamento dos custos, baseado no escopo definido atrav&eacute;s deles. S&atilde;o eles:</p>
+<ol style="list-style-type: lower-alpha;">
+<li>Plano de gerenciamento de custos
+<ol>
+<p>O processo de estabelecer as pol&iacute;ticas, os procedimentos e a documenta&ccedil;&atilde;o necess&aacute;rios para o planejamento gerenciamento, despesas, e controle dos custos do projeto. O principal benef&iacute;cio deste processo &eacute; o fornecimento de orienta&ccedil;&atilde;o e instru&ccedil;&otilde;es sobre como os custos do projeto ser&atilde;o gerenciados ao longo do projeto.</p>
+</ol>
+</li>
+<li>Estimativas de custos
+<ol>
+<p>O processo de desenvolvimento de uma an&aacute;lise dos recursos monet&aacute;rios necess&aacute;rios para executar as atividades do projeto. O principal benef&iacute;cio deste processo &eacute; a defini&ccedil;&atilde;o dos custos exigidos para concluir os trabalhos do projeto.</p>
+<p>As estimativas de custos devem ser refinadas durante o curso do projeto para refletir detalhes adicionais conforme se tornarem dispon&iacute;veis e as premissas forem testadas.</p></li>
+</ol>
+</li>
+<li>Determinar o or&ccedil;amento
+<ol>
+<p>O processo de agrega&ccedil;&atilde;o dos custos estimados de atividades individuais ou pacotes de trabalho para estabelecer uma linha de base dos custos autorizada.</p>
+<p>O or&ccedil;amento do projeto inclui todos os fundos autorizados para execut&aacute;-lo o projeto.</p>
+</ol>
+</li>
+<li>Controlar os custos
+<ol>
+<p>O processo de monitoramento do andamento do projeto para atualiza&ccedil;&atilde;o no seu or&ccedil;amento e gerenciamento das mudan&ccedil;as feitas na linha de base de custos.</p>
+<p>A atualiza&ccedil;&atilde;o no or&ccedil;amento requer o conhecimento dos custos reais gastos at&eacute; a presente data. Qualquer aumento do or&ccedil;amento autorizado somente pode ser aprovado atrav&eacute;s do processo para realizar o controle integrado de mudan&ccedil;as.</p>
+</ol>
+</li>
+</ol>
+	  <h3 id="gestcustoscc">Gestão dos Custos para Implementação do Sistema em Cloud Coumputing</h3>
+	  <p>Para a implementa&ccedil;&atilde;o deste projeto em ambiente de Cloud Computing s&atilde;o necess&aacute;rios alguns recursos, estes s&atilde;o analisados, calculados e especificados a seguir.</p>
+	  <h3 id="procgestcust">Processos da gestão de custos</h3>
+	  <p class="Estilo1">Como dito anteriormente, a gest&atilde;o dos custos est&aacute; resumida em 4 processos sendo estes o Plano de gerenciamento de custos, Estimativa de custos, Defini&ccedil;&atilde;o do or&ccedil;amento e Controle dos custos. Com isso foi detalhado todo o processo de gerenciamento de custos para a implementa&ccedil;&atilde;o do sistema em ambiente de Cloud Computing, demonstrado a seguir.</p>
+	  <h3 id="plano">Plano de Gerenciamento dos Custos</h3>
+	  <p>A primeira etapa neste processo &eacute; analisar o ambiente empresarial, para saber qual plataforma se enquadra melhor, quais ferramentas ser&atilde;o utilizadas, se necess&aacute;rio, que reformula&ccedil;&otilde;es a empresa ter&aacute; de fazer, como por exemplo melhoria na infraestrutura de rede.</p>
+<p>Feito este levantamento &eacute; realizada uma an&aacute;lise para saber qual plataforma de Cloud Computing deve ser utilizada. Existem boas op&ccedil;&otilde;es no mercado. Pode-se citar AWS, fornecida pela Amazon; Cloud Platform, fornecida pela Google, e Azure, fornecida pela Microsoft.</p>
+<p>Como este projeto est&aacute; em desenvolvimento com a plataforma .NET, a plataforma cloud mais vi&aacute;vel &eacute; a Microsoft Azure, pois j&aacute; tem um ambiente preparado para aplica&ccedil;&otilde;es .NET.</p>
+<p>Ap&oacute;s a an&aacute;lise do ambiente empresarial e da defini&ccedil;&atilde;o da plataforma cloud, &eacute; realizada uma an&aacute;lise de quais ferramentas da plataforma &lsquo;cloud&rsquo; ser&atilde;o utilizadas, quantidade de m&aacute;quinas da plataforma, taxa de transfer&ecirc;ncia de unidades de dados pelo banco de dados, bem como capacidade de processamento.</p>
+<p>Para o projeto, &eacute; necess&aacute;rio, inicialmente, de um servi&ccedil;o de banco de dados relacional, um servi&ccedil;o de aplica&ccedil;&atilde;o, monitorador de aplica&ccedil;&atilde;o e um plano de suporte. O servi&ccedil;o de banco de dados relacional a ser usado &eacute; o SQL Database, nele ficar&aacute; armazenado o banco de dados e ter&aacute; conex&atilde;o constante com o servi&ccedil;o de aplica&ccedil;&atilde;o.</p>
+<p class="Estilo1">O servi&ccedil;o de aplica&ccedil;&atilde;o (App Service) conter&aacute; a aplica&ccedil;&atilde;o em si. Para an&aacute;lise das m&eacute;tricas da aplica&ccedil;&atilde;o (quantidade de acesso, requisi&ccedil;&otilde;es de banco de dados, erros, entre outros), &eacute; utilizada a ferramenta Application Insight. E por fim, para corre&ccedil;&atilde;o de falhas, como problemas de conex&atilde;o com o banco de dados, erro no servi&ccedil;o de aplica&ccedil;&otilde;es, &eacute; contratado um suporte t&eacute;cnico fornecido pela Microsoft.</p>
+	  <h3 id="estimativa">Estimativa de Custos</h3>
+	  <p>Os softwares utilizados ser&atilde;o custeados seguindo a tabela de pre&ccedil;os da plataforma, sendo assim, contratado um plano que se adeque &agrave;s necessidades do projeto. Atrav&eacute;s da ferramenta Microsoft Azure Price Calculator, &eacute; poss&iacute;vel fazer uma estimativa dos custos seguindo a tabela de pre&ccedil;os do Microsoft Azure.</p>
+<p>Para o servi&ccedil;o de banco de dados, &eacute; calculado, inicialmente, um Simple Database, ao inv&eacute;s de Elastic Database, pois este opera sobre v&aacute;rios bancos de dados, em contrapartida este projeto utiliza apenas um banco de dados, sendo assim, o Simple Database se torna a op&ccedil;&atilde;o mais vi&aacute;vel. Com configura&ccedil;&atilde;o em modo Standard S0, consiste em taxa de 10 DTUs (Data Transfer Unit), 250GB de armazenamento, com plano mensal ativo durante 31 dias, totalizando um custo estimado de R$56,36 por m&ecirc;s.</p>
+<p>Para o servi&ccedil;o de aplica&ccedil;&atilde;o, estima-se apenas o modo Basic como plano inicial. Esse modo consiste em 1 n&uacute;cleo de processamento com 1.75GB de RAM e 10GB de armazenamento. Assim como o plano do servi&ccedil;o de banco de dados, o plano do App service ser&aacute; mensal, ativo durante 31 dias, totalizando um custo de R$209,25 por m&ecirc;s.</p>
+<p>O Application Insight tem como uma de suas modalidades, um plano gratuito, onde &eacute; disponibilizado at&eacute; 7 dias de dados brutos (n&atilde;o filtrados), at&eacute; 90 dias de dados agregados (filtrados) e 5 milh&otilde;es de pontos de medi&ccedil;&atilde;o, por ser um plano gratuito, n&atilde;o h&aacute; custo.</p>
+<p>O suporte t&eacute;cnico provido pela empresa fornecedora da plataforma Cloud, ser&aacute; inclu&iacute;do inicialmente como plano b&aacute;sico, o qual j&aacute; vem com a assinatura na assinatura. Esse plano &eacute; gratuito e cont&eacute;m as seguintes caracter&iacute;sticas: gest&atilde;o de 15 faturamento e subscri&ccedil;&atilde;o da conta, dashboard de servi&ccedil;os, e submiss&atilde;o de solicita&ccedil;&otilde;es para incidentes via web. Por ser plano gratuito, n&atilde;o h&aacute; custo.</p>
+<p>A partir disso, somando o servi&ccedil;o de banco de dados (R$56,36), o App service (R$209,25), Application Insight (gratuito) e o suporte t&eacute;cnico (gratuito), t&ecirc;m se um custo inicial total estimado em R$256,61 por m&ecirc;s.</p>
+	  <h3 id="orçamento">Determinar o Orçamento</h3>
+	  <p>Ap&oacute;s a defini&ccedil;&atilde;o dos servi&ccedil;os a serem usados da plataforma e do c&aacute;lculo de custo de cada servi&ccedil;o, bem como o tempo de utiliza&ccedil;&atilde;o de cada servi&ccedil;o, &eacute; realizado um or&ccedil;amento final, envolvendo n&atilde;o apenas o custo do contrato da plataforma e de seus servi&ccedil;os, mas tamb&eacute;m dos custos extras, bem como melhorias de infraestrutura (Ex.: Conex&atilde;o com a internet).</p>
+<p>Para fazer a contrata&ccedil;&atilde;o dos servi&ccedil;os do Cloud Computing, &eacute; necess&aacute;rio saber quanto a empresa pode investir por m&ecirc;s, ou seja, para implementa&ccedil;&atilde;o destes servi&ccedil;os &eacute; necess&aacute;rio que a empresa tenha no m&iacute;nimo R$350,00 para que invista R$256,61 na plataforma e tenha R$93,39 como margem de seguran&ccedil;a.</p>
+	  <h3 id="controlar">Controlar os Custos</h3>
+	  <p>Para o controle dos custos deste projeto, ap&oacute;s a contrata&ccedil;&atilde;o dos servi&ccedil;os, &eacute; necess&aacute;rio que a empresa invista mensalmente R$256,61 para poder ter acesso constante dos servi&ccedil;os contratados. Sendo assim, permanece a margem de seguran&ccedil;a estimada no or&ccedil;amento em R$93,39.</p>
+<p>Como resumo de investimento para a implementa&ccedil;&atilde;o da aplica&ccedil;&atilde;o, tem se a seguinte tabela:</p>
+	  <div style="text-align:center"><img src="img/figura31.png"/></div>
+	  <p>Caso os mantenedores do sistema, tenham condi&ccedil;&atilde;o de investir mais na plataforma de Cloud Computing, e a aplica&ccedil;&atilde;o necessite de mais processamento, maior taxa de DTUs, mais pontos de an&aacute;lise das m&eacute;tricas, ou contratar um suporte t&eacute;cnico mais eficaz, conv&ecirc;m para a realizar este investimento.</p>
+<p>Os c&aacute;lculos para o servi&ccedil;o de banco de dados s&atilde;o estimados atrav&eacute;s do DTU (Data Transfer Unit), a Tabela 2 demonstra claramente a rela&ccedil;&atilde;o pre&ccedil;o por DTU.</p>
+<div style="text-align:center"><img src="img/figura32.png"/></div>
+<p class="Estilo1">Como pode ser observado, ao aumentar a quantidade de DTUs o pre&ccedil;o do servi&ccedil;o aumenta aproximadamente o dobro, partindo de R$56,36 para 10 DTUs, at&eacute; atingir R$562,46 para 100 DTUs. A forma de c&aacute;lculo de custo do App Service n&atilde;o &eacute; muito diferente do c&aacute;lculo para o servi&ccedil;o de banco de dados, ou seja, o pre&ccedil;o varia conforme sejam alocados mais n&uacute;cleos para o processamento. Na Tabela 3 abaixo pode se observar essa rela&ccedil;&atilde;o.</p>
+<div style="text-align:center"><img src="img/figura33.png"/></div>
+<p class="Estilo1">Assim, igualmente a taxa de aumento do custo para o servi&ccedil;o de banco de dados, o App Service tem um aumento de duas vezes o valor do plano anterior, visto que o n&uacute;mero de n&uacute;cleos aumenta nesta mesma taxa (duas vezes). Observa-se a varia&ccedil;&atilde;o no pre&ccedil;o para investir em Application Insight com mais pontos de an&aacute;lises.</p>
+<div style="text-align:center"><img src="img/figura34.png"/></div>
+<p class="Estilo1">Como dito anteriormente, &eacute; fornecido uma camada de plano gratuitos (R$0,00) com apenas 5 milh&otilde;es de pontos de an&aacute;lise. O dr&aacute;stico aumento de mais 10 milh&otilde;es acarreta em um custo de aproximadamente R$90,00 e, ao aumentar para o plano full de 50 milh&otilde;es, tem se o custo na margem dos R$370,00.</p>
+<p class="Estilo1">Na Tabela 5, encontra-se a taxa de adi&ccedil;&atilde;o para contrata&ccedil;&atilde;o de servi&ccedil;os de suporte t&eacute;cnico. O plano do suporte t&eacute;cnico &eacute; calculado de modo diferente, pois depende de mais de um fator para alterar o pre&ccedil;o.</p>
+<div style="text-align:center"><img src="img/figura35.png"/></div>
+<p>Pode-se observar que os planos s&atilde;o escal&aacute;veis, ou seja, o plano Developer cont&eacute;m as fun&ccedil;&otilde;es do plano Included, o plano Standard cont&eacute;m as fun&ccedil;&otilde;es do plano Developer, e o plano Professional cont&eacute;m as do plano Standard. Tais planos acabam por encarecer o plano de custo do projeto, por&eacute;m, tempo e dinheiro, que seriam gastos nas corre&ccedil;&otilde;es de erros, s&atilde;o eliminados, pois estes ficam a cargo da empresa fornecedora da plataforma.</p>
+<p class="Estilo1">Sendo assim, cabe ao respons&aacute;vel o controle da plataforma Cloud, analisar qual a necessidade de investir mais, e se h&aacute; processos consumindo os servi&ccedil;os que n&atilde;o deveriam ou precisam utiliz&aacute;-los; Ou ent&atilde;o, se o plano atual n&atilde;o suporta as necessidades da aplica&ccedil;&atilde;o. Dessa forma, mant&eacute;m o custo dentro dos limites do que &eacute; necess&aacute;rio para a aplica&ccedil;&atilde;o.</p>
+	  <h2 id="final">Considerações Finais e Recomendações</h2>
+	  <p>O setor acad&ecirc;mico exige um controle mais moderno e informatizado, facilitando assim, o seu gerenciamento e otimizando a sua comunica&ccedil;&atilde;o interna.</p>
+<p>Tendo em vista que, uma institui&ccedil;&atilde;o acad&ecirc;mica envolve uma grande quantidade de fun&ccedil;&otilde;es e entidades participantes de todo o processo acad&ecirc;mico (alunos, professores, coordenadores, administra&ccedil;&atilde;o acad&ecirc;mica e outros), o Nimbus Acad amplia esta comunica&ccedil;&atilde;o e viabiliza a troca de informa&ccedil;&otilde;es entre todos os usu&aacute;rios do sistema, al&eacute;m, tamb&eacute;m, de agir como ferramenta auxiliar, informatizada, que otimiza as fun&ccedil;&otilde;es de uma institui&ccedil;&atilde;o acad&ecirc;mica.</p>
+<p>Ao final do projeto, pode-se ressaltar que as escolhas realizadas ao longo do planejamento de todo o sistema, levando em considera&ccedil;&atilde;o todo o aprendizado para o desenvolvimento desta aplica&ccedil;&atilde;o, desde a implementa&ccedil;&atilde;o de um visual moderno e em ascens&atilde;o no mercado como &eacute; a ferramenta Bootstrap, utilizada no visual do sistema, chegando at&eacute; ao mais complexo, como a arquitetura MVC e toda a modelagem do sistema.</p>
+<p>O mercado vem em constante crescimento para com este modelo de arquitetura, uma vez que o desenvolvimento planejado e bem estruturado de tal maneira, como &eacute; o MVC, melhora o desenvolvimento do projeto, mantendo n&atilde;o apenas uma organiza&ccedil;&atilde;o como tamb&eacute;m a agilidade, onde &nbsp;a divis&atilde;o das tr&ecirc;s partes distintas do sistema (banco de dados, interface, e a mec&acirc;nica da aplica&ccedil;&atilde;o) facilita o seu desenvolvimento e tamb&eacute;m a sua manuten&ccedil;&atilde;o, j&aacute; que, o mesmo, se mantem dividido em suas devidas partes, bem categorizada e de f&aacute;cil localiza&ccedil;&atilde;o ao longo de todo o c&oacute;digo.</p>
+<p>Tamb&eacute;m pode ser considerado, ao longo do &uacute;ltimo cap&iacute;tulo sobre o gerenciamento de custos do projeto, onde foi retratado os processos para a an&aacute;lise da melhor op&ccedil;&atilde;o quanto ao servidor em Cloud Computing que melhor atender&aacute; o sistema, que a ferramenta Azure, da Microsoft, &eacute; a melhor op&ccedil;&atilde;o para este projeto, levando em considera&ccedil;&atilde;o todo o seu custo benef&iacute;cio, e o seu potencial de suporte, que se encaixa ao projeto, suprindo bem a sua necessidade.</p>
+<p>Por fim uma expectativa nova para o Nimbus Acad &eacute; estabelecida a partir das escolhas dos recursos do projeto realizadas no planejamento, onde o sistema pode ser ampliado, baseado na arquitetura multi-tenancy, que permite que m&uacute;ltiplos inquilinos compartilhem os mesmos recursos f&iacute;sicos como um aplicativo ERP, mas permane&ccedil;am isolados logicamente. Trazendo assim o sistema para um novo ambiente de mercado, permitindo que todas as institui&ccedil;&otilde;es que utilizarem do sistema Nimbus Acad, interajam e se mantenham em um mesmo ambiente de ERP Acad&ecirc;mico, facilitando assim a comunica&ccedil;&atilde;o e a troca de informa&ccedil;&otilde;es entre elas. Visando assim, rumar o projeto para um novo patamar em que o Nimbus Acad se torne o mais completo ERP acad&ecirc;mico na medida em que suas necessidades v&atilde;o sendo atendidas.</p>
+	  <h3 id="referencia">Referências</h3>
+	  <ul>
+<li>ALVES, Deriks Marques et al. Avalia&ccedil;&atilde;o de Implanta&ccedil;&atilde;o de Sistema Enterprise Resources Planning (ERP) - Fatores de Sucesso e Dificuldades.&nbsp;<strong>Revista Pensar: Revista Acad&ecirc;mica da Faculdade Promove,</strong><strong>&nbsp;</strong>Belo Horizonte, Mg, v. 2, n. 2, p.01-18, jul. 2013. Semestral. Dispon&iacute;vel em: &lt;http://revistapensar.com.br/tecnologia/artigo/no=a57.pdf&gt;. Acesso em: 07 set. 2016.</li>
+<li>ARMBRUST, Michael et al. <strong>A view of cloud computing. Communications Of The Acm</strong>, [s.l.], v. 53, n. 4, p.50-58, 1 abr. 2010. Association for Computing Machinery (ACM). Dispon&iacute;vel em: &lt;http://dx.doi.org/10.1145/1721654.1721672&gt;. Acesso em: 14 nov. 2016.</li>
+<li>BEN-GAN, Itzik.&nbsp;<strong>Microsoft SQL Server 2012 T-SQL Fundamentals.</strong><strong>&nbsp;</strong>United States Of America: Online Training Solutions, Inc., 2012. 412 p.</li>
+<li>BRITO, Edivaldo. <strong>Visual Studio: crie apps em C# e .NET e exporte para m&uacute;ltiplas plataformas</strong>. 2015. Dispon&iacute;vel em: &lt;http://www.techtudo.com.br/tudo-sobre/visual-studio.html&gt;. Acesso em: 13 jun. 2016.</li>
+<li>CRISTO, Wallace Borges; FERREIRA, Jo&atilde;o Carlos Peixoto; FURTADO, Jo&atilde;o Paulo Coelho. GEST&Atilde;O DE TI NAS ORGANIZA&Ccedil;&Otilde;ES CONTEMPOR&Acirc;NEAS.&nbsp;<strong>Revista Pensar: Revista Acad&ecirc;mica da Faculdade Promove,</strong><strong>&nbsp;</strong>Belo Horizonte, Mg, v. 2, n. 1, p.01-14, jan. 2013. Semestral. Dispon&iacute;vel em: &lt;http://revistapensar.com.br/tecnologia/artigo/no=a23.pdf&gt;. Acesso em: 07 set. 2016.</li>
+<li>DYKSTRA, Tom; ANDERSON, Rick. <strong>Getting Started with Entity Framework 6 Cody First using MVC 5: Step by Step Guide</strong>. The ContosoUniversity: Syncfusion, 2014. 291 p. Dispon&iacute;vel em: &lt;https://drive.google.com/file/d/0By-qrrle2MiQVENnX3VmZFFJMTQ/view&gt;. Acesso em: 06 jun. 2016.</li>
+<li>HARRISON, Nick. <strong>ASP .NET MVC Succinctly</strong>. Morrisville: Syncfusion, 2015. 84 p. Dispon&iacute;vel em: &lt;https://drive.google.com/file/d/0By-qrrle2MiQdllFQXdBcWQ1UDQ/view&gt;. Acesso em: 05 abr. 2016.</li>
+<li>HOLANDA., Itsmf da.&nbsp;<strong>Fundamentos do Gerenciamento de Servi&ccedil;os em TI:</strong><strong>&nbsp;</strong>baseado na ITIL. Holanda: van Haren Publishing., 2006. 236 p.</li>
+<li>KURHEKAR, Shantanu. <strong>What is SQL Database? </strong><strong>Introduction to SQL Database</strong>. Dispon&iacute;vel em: &lt;https://docs.microsoft.com/en-us/azure/sql-database/sql-database-technical-overview&gt;. Acesso em: 14 nov. 2016.</li>
+<li>MAYO, Joey. <strong>C# Succinctly</strong>. Morrisville: Syncfusion, 2015. 100 p. Dispon&iacute;vel em: &lt;https://drive.google.com/file/d/0By-qrrle2MiQRFJRQ1VjREhOZ2c/view&gt;. Acesso em: 22 abr. 2016.</li>
+<li>MICROSOFT (Seattle). Microsoft App Service (Org.). <strong>Aplicativos Web</strong>. 2016. Dispon&iacute;vel em: &lt;https://azure.microsoft.com/pt-br/services/app-service/web/&gt;. Acesso em: 20 out. 2016.</li>
+<li>MICROSOFT (Seattle). Microsoft Azure (Org.). <strong>O que &eacute; o Azure?</strong> 2016. Dispon&iacute;vel em: &lt;https://azure.microsoft.com/pt-br/overview/what-is-azure/&gt;. Acesso em: 20 out. 2016.</li>
+<li><strong>O QUE &eacute; ERP? Para que serve esse software</strong>? 2015. Dispon&iacute;vel em: &lt;http://sistemaserp.org/o-que-e-erp/&gt;. Acesso em: 12 ago. 2015.</li>
+<li>OLIVEIRA, Fernando Andr&eacute; de; VASCONCELLOS, Fabr&iacute;cio. Avalia&ccedil;&atilde;o de Implanta&ccedil;&atilde;o de Sistema Enterprise Resources Planning (ERP) - Fatores de Sucesso e Dificuldades.&nbsp;<strong>Revista Pensar: Revista Acad&ecirc;mica da Faculdade Promove,</strong><strong>&nbsp;</strong>Belo Horizonte, Mg, v. 4, n. 1, p.01-15, jan. 2015. Semestral. Dispon&iacute;vel em: &lt;http://revistapensar.com.br/tecnologia/artigo/no=a94.pdf&gt;. Acesso em: 07 set. 2016.</li>
+<li>PERES, Ricardo. <strong>Entity Framework CodeFirstSuccinctly</strong>. Morrisville: Syncfusion, 2014 121 p. Dispon&iacute;vel em: &lt;https://drive.google.com/file/d/0By-qrrle2MiQcUtMV2EtbjVSUFk/view&gt;. Acesso em: 25 abr. 2016.</li>
+<li>RANGEL, Jo&atilde;o. <strong>Bootstrap - Primeiros Passos</strong>. Dispon&iacute;vel em: &lt;https://www.html5dev.com.br/blog/2013/01/16/bootstrap-primeiros-passos/&gt;. Acesso em: 15 nov. 2016.</li>
+<li>SAMPAIO, Marcos Costa; FARIAS, Arthur Lucio; NETO, El&oacute;i Rocha. <strong>UML - Unified Modeling Language.</strong> Dispon&iacute;vel em:&lt;http://www.dsc.ufcg.edu.br/~sampaio/cursos/2007.1/Graduacao/SI-II/Uml/diagramas/usecases/usecases.htm&gt;. Acesso em:14out. 2016.</li>
+<li>SILVA, D&eacute;bora Cristiane; ZADRA, Augusto Nogueira. <strong>Cloud Computing: o reflexo das pol&iacute;ticas de seguran&ccedil;a nas organiza&ccedil;&otilde;es de grande porte</strong>.&nbsp;<strong>Revista Pensar: Revista Acad&ecirc;mica da Faculdade Promove,</strong><strong>&nbsp;</strong>Belo Horizonte, Mg, v. 4, n. 1, p.1-17, jan. 2015. Semestral. Dispon&iacute;vel em: &lt;http://revistapensar.com.br/tecnologia/artigo/no=a92.pdf&gt;. Acesso em: 07 set. 2016.</li>
+<li>TEIXEIRA, Jos&eacute; Ricardo. <strong>Utilizando CSS Media Queries</strong>. Dispon&iacute;vel em: &lt;http://www.devmedia.com.br/utilizando-css-media-queries/27085&gt;. Acesso em: 15 nov. 2016.</li>
+<li>VASCONCELLOS, Fabricio Pires; NUNES, Diogo de Freitas; FERNANDES, Wellington Machado. Avalia&ccedil;&atilde;o de Implanta&ccedil;&atilde;o de Sistema Enterprise Resources Planning (ERP) - Fatores de Sucesso e Dificuldades.&nbsp;<strong>Revista Pensar: Revista Acad&ecirc;mica da Faculdade Promove,</strong><strong>&nbsp;</strong>Belo Horizonte, Mg, v. 3, n. 2, p.01-15, jul. 2014. Semestral. Dispon&iacute;vel em: &lt;http://revistapensar.com.br/tecnologia/artigo/no=a86.pdf&gt;. Acesso em: 07 set. 2016.</li>
+<li>ZYMLER, Benjamin et al. <strong>Boas Pr&aacute;ticas em Seguran&ccedil;a da Informa&ccedil;&atilde;o.</strong> 4. ed. Bras&iacute;lia: Tcu - Tribunal de Contas da Uni&atilde;o, 2012. 108 p. Dispon&iacute;vel em: &lt;http://www4.planalto.gov.br/cgti/assuntos/publicacoes/2511466.pdf&gt;. Acesso em: 18 out. 2016</li>
+</ul>
+	  <h3 id="glossario">Glossário</h3>
+<table>
+<tbody>
+<tr>
+<td width="201">
+<p>Arquivo</p>
+</td>
+<td width="532">
+<p>Conjunto de dados digitalizados que podem ser gravados em um dispositivo de armazenamento e tratado como ente &uacute;nico.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Asp.net</p>
+</td>
+<td width="532">
+<p>Plataforma desenvolvida pela Microsoft Corporation para desenvolvimento de aplica&ccedil;&otilde;es.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Backup</p>
+</td>
+<td width="532">
+<p>C&oacute;pia de seguran&ccedil;a dos arquivos.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Banco de dados</p>
+</td>
+<td width="532">
+<p>Conjunto de arquivos relacionados entre si.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Bootstrap</p>
+</td>
+<td width="532">
+<p>Framework de aux&iacute;lio para desenvolvimento Front-End responsivo.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>CPD</p>
+</td>
+<td width="532">
+<p>Sigla de centro de processamento de dados.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>CRUD</p>
+</td>
+<td width="532">
+<p>Opera&ccedil;&otilde;es que podem ser realizadas em tabelas de um banco de dados,sendo elas: Create (Criar), Read (Ler), Update (Atualizar) e Delete (Deletar).</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>CSS</p>
+</td>
+<td width="532">
+<p>Linguagem de desenvolvimento para a folha de estilos do site, com finalidade de otimizar o visual da p&aacute;gina Web.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Dados</p>
+</td>
+<td width="532">
+<p>Uma sequ&ecirc;ncia de s&iacute;mbolos quantificados ou quantific&aacute;veis. Ex.: um texto &eacute; um dado</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>P&aacute;gina Din&acirc;mica</p>
+</td>
+<td width="532">
+<p>P&aacute;ginas web com maior flexibilidade na altera&ccedil;&atilde;o de conte&uacute;do.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Diret&oacute;rio</p>
+</td>
+<td width="532">
+<p>Subdivis&atilde;o de um disco ou de outro meio de armazenamento capaz de conter arquivos.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Disco r&iacute;gido</p>
+</td>
+<td width="532">
+<p>Disco r&iacute;gido, popularmente chamado tamb&eacute;m de hd (hard drive) &eacute; a mem&oacute;ria secund&aacute;ria, local onde s&atilde;o armazenados os arquivos do computador.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>ERP</p>
+</td>
+<td width="532">
+<p>Enterprise Resource Planning (planejamento dos recursos da empresa), s&atilde;o softwares que integram todos os dados e processos de uma organiza&ccedil;&atilde;o em um &uacute;nico sistema.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Framework</p>
+</td>
+<td width="532">
+<p>Estrutura real ou conceitual destinada a servir de suporte ou guia para a constru&ccedil;&atilde;o de algo que expande a estrutura em algo &uacute;til.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Front-End</p>
+</td>
+<td width="532">
+<p>Parte do desenvolvimento do sistema que se refere apenas a interface da p&aacute;gina Web que servira de intera&ccedil;&atilde;o homem e m&aacute;quina.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>GET</p>
+</td>
+<td width="532">
+<p>Fun&ccedil;&atilde;o de acesso a informa&ccedil;&atilde;o de banco de dados para consulta.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>HTML</p>
+</td>
+<td width="532">
+<p>Linguagem de Marca&ccedil;&atilde;o de Hipertexto, que permite a cria&ccedil;&atilde;o de documentos para a produ&ccedil;&atilde;o de p&aacute;gina web.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>IIS</p>
+</td>
+<td width="532">
+<p>&Eacute; um servidor Web flex&iacute;vel, seguro e gerenci&aacute;vel para hospedar qualquer coisa na Web.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Interatividade</p>
+</td>
+<td width="532">
+<p>Capacidade de um sistema de comunica&ccedil;&atilde;o ou intera&ccedil;&atilde;o.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Interface</p>
+</td>
+<td width="532">
+<p>Meio pelo qual o usu&aacute;rio interage com um programa ou sistema operacional.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Interface amig&aacute;vel</p>
+</td>
+<td width="532">
+<p>Interface visual do sistema no qual facilita a interpreta&ccedil;&atilde;o e o uso de suas ferramentas.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Login</p>
+</td>
+<td width="532">
+<p>Forma de identifica&ccedil;&atilde;o do usu&aacute;rio no sistema.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Megabyte</p>
+</td>
+<td width="532">
+<p>M&uacute;ltiplo do byte, que vale 1.000 kilobytes (s&iacute;mbolo: mb).</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Multim&iacute;dia</p>
+</td>
+<td width="532">
+<p>T&eacute;cnica para apresenta&ccedil;&atilde;o de informa&ccedil;&otilde;es que recorre simultaneamente a diversos meios de comunica&ccedil;&atilde;o, mesclando texto, som, imagens fixas e animadas.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Pendrive</p>
+</td>
+<td width="532">
+<p>Pen drive ou mem&oacute;ria USB flash drive &eacute; um dispositivo que permite o armazenamento de arquivos.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>PMBOK</p>
+</td>
+<td width="532">
+<p>Guia para o conjunto de conhecimentos de gerenciamento do projeto.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>POST</p>
+</td>
+<td width="532">
+<p>Fun&ccedil;&atilde;o de atribui&ccedil;&atilde;o de uma nova linha de informa&ccedil;&otilde;es &agrave; um banco de dados.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Rede</p>
+</td>
+<td width="532">
+<p>Sistema constitu&iacute;do pela interliga&ccedil;&atilde;o de dois ou mais computadores e seus perif&eacute;ricos, com o objetivo de comunica&ccedil;&atilde;o, compartilhamento e interc&acirc;mbio de dados.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Responsivo</p>
+</td>
+<td width="532">
+<p>M&eacute;todo de desenvolvimento Front-End &uacute;nico, para Web, que otimiza a adapta&ccedil;&atilde;o da p&aacute;gina Web ao ambiente do dispositivo a ser acessado.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Scripting</p>
+</td>
+<td width="532">
+<p>Programas escritos para um ambiente de tempo de execu&ccedil;&atilde;o especial que automatizam a execu&ccedil;&atilde;o de tarefas que poderiam ser executadas uma a uma por um operador humano.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Servidor</p>
+</td>
+<td width="532">
+<p>Sistema de computa&ccedil;&atilde;o centralizada que fornece servi&ccedil;os a uma rede de computadores.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Sistema operacional</p>
+</td>
+<td width="532">
+<p>O sistema operacional &eacute; respons&aacute;vel por alocar recursos de Hardware e escalonar tarefas.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>SQL</p>
+</td>
+<td width="532">
+<p>Structured Query Language (linguagem de consulta estruturada) &eacute; uma linguagem Padr&atilde;o de gerenciamento de dados para manipula&ccedil;&atilde;o de arquivos e tabelas em bancos de Dados.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Switch</p>
+</td>
+<td width="532">
+<p>Equipamento que interliga os computadores em uma rede.</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Terabyte</p>
+</td>
+<td width="532">
+<p>M&uacute;ltiplo do byte, que vale 1000 gigabytes (s&iacute;mbolo: tb).</p>
+</td>
+</tr>
+<tr>
+<td width="201">
+<p>Web</p>
+</td>
+<td width="532">
+<p>Nome pelo qual a rede mundial de computadores (internet) se tornou conhecida, e possibilita a comunica&ccedil;&atilde;o entre todos os computadores conectados a essa rede.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</tbody>
+</table>
+    </div>
+  </div>
+</section>
+<section class="vibrant centered">
+  <div class="">
+    <img style="width:10%; margin-left:-65%;" src="img/logo-fatec-corfatec.png"><img style="width:10%; padding-left:15%; position:absolute;" src="img/logo-centropaulasouza-corfatec.png"><img style="width:20%; padding-left:40%; position:absolute;" src="img/logo-govsp-corfatec.png">
+  </div>
+</section>
+<footer>
+  <div class="">
+    <p> &copy; Alyne da Cruz Barbosa Bartolotto; João Gustavo Reis de Lima; João Otávio Reis de Lima;</p>
+  </div>
+</footer>
+</div>
+<script src="js/jquery.min.js"></script> 
+<script type="text/javascript" src="js/prettify/prettify.js"></script> 
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="js/layout.js"></script>
+</body>
+</html>

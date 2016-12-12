@@ -44,7 +44,7 @@ namespace NimbusACAD.Controllers
             {
                 db.RBAC_Permissao.Add(rBAC_Permissao);
                 db.SaveChanges();
-                return RedirectToAction("Index", "RBACPerfil");
+                return RedirectToAction("Index");
             }
 
             return View(rBAC_Permissao);
@@ -78,7 +78,7 @@ namespace NimbusACAD.Controllers
             {
                 db.Entry(rBAC_Permissao).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "RBACPerfil");
+                return RedirectToAction("Index");
             }
             return View(rBAC_Permissao);
         }
@@ -106,7 +106,7 @@ namespace NimbusACAD.Controllers
         public ActionResult DeletarConfirmacao(int id)
         {
             _permissaoStore.DeletePermissao(id);
-            return RedirectToAction("Index", "RBACPerfil");
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

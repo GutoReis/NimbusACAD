@@ -282,6 +282,53 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DocWeb\css\prettify.css" />
+    <Content Include="Content\DocWeb\css\style.css" />
+    <Content Include="Content\DocWeb\img\download.png" />
+    <Content Include="Content\DocWeb\img\figura1.png" />
+    <Content Include="Content\DocWeb\img\figura10.png" />
+    <Content Include="Content\DocWeb\img\figura11.png" />
+    <Content Include="Content\DocWeb\img\figura12.png" />
+    <Content Include="Content\DocWeb\img\figura13.png" />
+    <Content Include="Content\DocWeb\img\figura14.png" />
+    <Content Include="Content\DocWeb\img\figura15.png" />
+    <Content Include="Content\DocWeb\img\figura16.png" />
+    <Content Include="Content\DocWeb\img\figura17.png" />
+    <Content Include="Content\DocWeb\img\figura18.png" />
+    <Content Include="Content\DocWeb\img\figura19.png" />
+    <Content Include="Content\DocWeb\img\figura2.png" />
+    <Content Include="Content\DocWeb\img\figura20.png" />
+    <Content Include="Content\DocWeb\img\figura21.png" />
+    <Content Include="Content\DocWeb\img\figura22.png" />
+    <Content Include="Content\DocWeb\img\figura23.png" />
+    <Content Include="Content\DocWeb\img\figura24.png" />
+    <Content Include="Content\DocWeb\img\figura25.png" />
+    <Content Include="Content\DocWeb\img\figura26.png" />
+    <Content Include="Content\DocWeb\img\figura27.png" />
+    <Content Include="Content\DocWeb\img\figura28.png" />
+    <Content Include="Content\DocWeb\img\figura29.png" />
+    <Content Include="Content\DocWeb\img\figura3.png" />
+    <Content Include="Content\DocWeb\img\figura30.png" />
+    <Content Include="Content\DocWeb\img\figura31.png" />
+    <Content Include="Content\DocWeb\img\figura32.png" />
+    <Content Include="Content\DocWeb\img\figura33.png" />
+    <Content Include="Content\DocWeb\img\figura34.png" />
+    <Content Include="Content\DocWeb\img\figura35.png" />
+    <Content Include="Content\DocWeb\img\figura4.png" />
+    <Content Include="Content\DocWeb\img\figura5.png" />
+    <Content Include="Content\DocWeb\img\figura6.png" />
+    <Content Include="Content\DocWeb\img\figura7.png" />
+    <Content Include="Content\DocWeb\img\figura8.png" />
+    <Content Include="Content\DocWeb\img\figura9.png" />
+    <Content Include="Content\DocWeb\img\logo-centropaulasouza-corfatec.png" />
+    <Content Include="Content\DocWeb\img\logo-fatec-corfatec.png" />
+    <Content Include="Content\DocWeb\img\logo-govsp-corfatec.png" />
+    <Content Include="Content\DocWeb\img\Logo.png" />
+    <Content Include="Content\DocWeb\img\Logo2.png" />
+    <Content Include="Content\DocWeb\index.html" />
+    <Content Include="Content\DocWeb\js\jquery.min.js" />
+    <Content Include="Content\DocWeb\js\layout.js" />
+    <Content Include="Content\DocWeb\js\prettify\prettify.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -310,6 +357,9 @@
     <Content Include="Models\DB\NimbusAcad_DB.edmx.diagram">
       <DependentUpon>NimbusAcad_DB.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\DocWeb\NimbusAcad_TCC-ADS.pdf" />
+    <None Include="Properties\PublishProfiles\nimbusacad - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\NimbusAcad - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\nimbusacad - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -323,7 +373,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
