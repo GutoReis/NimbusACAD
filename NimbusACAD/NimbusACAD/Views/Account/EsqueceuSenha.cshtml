@@ -4,19 +4,22 @@
     ViewBag.Title = "EsqueceuSenha";
 }
 
-<h2>EsqueceuSenha</h2>
-
-<p>Digite o seu email</p>
-<div class="col-md-10">
-    @Html.TextBoxFor(model => model.Email, new { @class = "form-control"})
-    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger"})
-</div>
-
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Enviar" class="btn btn-default" />
+<h2>Esqueceu sua senha</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <p>Digite o seu email</p>
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
     </div>
-</div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <br /><input type="submit" value="Enviar" class="btn btn-default" />
+        </div>
+    </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

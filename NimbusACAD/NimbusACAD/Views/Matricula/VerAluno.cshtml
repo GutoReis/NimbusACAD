@@ -4,65 +4,51 @@
     ViewBag.Title = "VerAluno";
 }
 
-<h2>Ver Aluno</h2>
-
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
-        <dd>@Html.DisplayFor(model => model.Nome)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Email)</dt>
-        <dd>@Html.DisplayFor(model => model.Email)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Curso)</dt>
-        <dd>@Html.DisplayFor(model => model.Curso)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Ativo)</dt>
-        <dd>@Html.DisplayFor(model => model.Ativo)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.DeveDocumento)</dt>
-        <dd>@Html.DisplayFor(model => model.DeveDocumento)</dd>
+<h2>Ver aluno</h2>
+<hr />
+<div class="col-md-6">
+        <p><b>@Html.DisplayNameFor(model => model.Nome)</b> @Html.DisplayFor(model => model.Nome)</p>
+        <p><b>@Html.DisplayNameFor(model => model.Email)</b> @Html.DisplayFor(model => model.Email)</p>
+        <p><b>@Html.DisplayNameFor(model => model.Curso)</b> @Html.DisplayFor(model => model.Curso)</p>
+        <p><b>@Html.DisplayNameFor(model => model.Ativo)</b> @Html.DisplayFor(model => model.Ativo)</p>
+        <p><b>@Html.DisplayNameFor(model => model.DeveDocumento)</b> @Html.DisplayFor(model => model.DeveDocumento)</p>
     </dl>
 </div>
-
-<p>Módulos</p>
-<p>@Html.ActionLink("Vincular Módulo", "VincularModulo", new { id = Model.matID })</p>
-<table class="table">
-    <tr>
-        <th>Módulo</th>
-        <th>Status</th>
-        <th></th>
-    </tr>
-    
-    @foreach (var item in Model.modulos)
-    {
-        <tr>
-            <th>@Html.DisplayFor(modelItem => item.ModuloNM)</th>
-            <th>@Html.DisplayFor(modelItem => item.StatusVinculo)</th> | 
-            <th>@Html.ActionLink("Detalhes", "VerVinculoModulo", new { id = item.VinculoID })</th>
-        </tr>
-    }
-</table>
-<p>@Html.ActionLink("Vincular disciplina", "VincularDisciplina", new { id = Model.matID })</p>
-
-@if (Model.DeveDocumento.Equals("Sim"))
-{
-    <p>Documentos deventes</p>
-    <p>@Html.ActionLink("Cadastrar documento", "NovoDocumento", new { id = Model.pID })</p>
+<div class="col-md-6">
+    <p>Módulos</p>
+    <p>@Html.ActionLink("Vincular Módulo", "VincularModulo", new { id = Model.matID })</p>
     <table class="table">
-        @foreach (var item in Model.documentos)
+        <tr>
+            <th>Módulo</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.modulos)
         {
             <tr>
-                <th>@Html.DisplayFor(modelItem => item.DocumentoNM)</th>
+                <td>@Html.DisplayFor(modelItem => item.ModuloNM)</td>
+                <td>@Html.DisplayFor(modelItem => item.StatusVinculo)</td>
+                <td>@Html.ActionLink("Detalhes", "VerVinculoModulo", new { id = item.VinculoID })</td>
             </tr>
         }
     </table>
-}
+    <p>@Html.ActionLink("Vincular disciplina", "VincularDisciplina", new { id = Model.matID })</p>
 
-<p>
-    @Html.ActionLink("Voltar", "Index")
-</p>
+    @if (Model.DeveDocumento.Equals("Sim"))
+    {
+        <p>Documentos deventes</p>
+        <table class="table">
+            @foreach (var item in Model.documentos)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DocumentoNM)</td>
+                </tr>
+            }
+        </table>
+        <p>@Html.ActionLink("Cadastrar documento", "NovoDocumento", new { id = Model.pID })</p>
+    }
+</div>
 
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")

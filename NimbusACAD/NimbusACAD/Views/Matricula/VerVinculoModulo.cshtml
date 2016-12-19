@@ -4,7 +4,7 @@
     ViewBag.Title = "VerVinculoModulo";
 }
 
-<h2>VerVinculoModulo</h2>
+<h2>Ver Vinculo Módulo</h2>
 
 <div>
     <hr />
@@ -12,7 +12,7 @@
         <dt>@Html.DisplayNameFor(model => model.ModuloNM)</dt>
         <dd>@Html.DisplayFor(model => model.ModuloNM)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.StatusVinculo)</dt>
+        <dt>Status</dt>
         <dd>@Html.DisplayFor(model => model.StatusVinculo)</dd>
     </dl>
 </div>
@@ -22,16 +22,15 @@
     @foreach (var item in Model.disciplinas)
     {
         <tr>
-            <th>@Html.DisplayFor(modelItem => item.DisciplinaNM)</th> |
-            <th>@Html.ActionLink("Detalhes", "VerVinculoDisciplina", new { discID = item.DisciplinaID, matID = Model.MatID })</th>
+            <td>@Html.DisplayFor(modelItem => item.DisciplinaNM)</td>
+            <td>@Html.ActionLink("Detalhes", "VerVinculoDisciplina", new { discID = item.DisciplinaID, matID = Model.MatID })</td>
         </tr>
     }
 </table>
 
 <p>
     @Html.ActionLink("Editar", "EditarVinculoModulo", new { id = Model.VinculoID }) | 
-    @Html.ActionLink("Remover", "RemoverVinculoModulo", new { id = Model.VinculoID}) | 
-    @Html.ActionLink("Voltar", "VerAluno", new { id = Model.MatID})
+    @Html.ActionLink("Remover", "RemoverVinculoModulo", new { id = Model.VinculoID})
 </p>
 
 @section Scripts{

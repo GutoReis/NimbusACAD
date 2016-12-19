@@ -5,32 +5,25 @@
 }
 
 <h2>Deletar</h2>
-
-<h3>Você tem certeza de que deseja deletar este curso, esta operação não poderá ser desfeita?</h3>
+<hr />
+<h4>Você tem certeza de que deseja deletar este curso, esta operação não poderá ser desfeita?</h4>
+<br />
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Curso_Nome)</dt>
-        <dd>@Html.DisplayFor(model => model.Curso_Nome)</dd>
+        <p><b>Nome do curso: </b> @Html.DisplayFor(model => model.Curso_Nome)</p>
 
-        <dt>@Html.DisplayNameFor(model => model.Descricao)</dt>
-        <dd>@Html.DisplayFor(model => model.Descricao)</dd>
+         <p><b>Descrição: </b>@Html.DisplayFor(model => model.Descricao)</p>
 
-        <dt>@Html.DisplayNameFor(model => model.Periodo)</dt>
-        <dd>@Html.DisplayFor(model => model.Periodo)</dd>
+         <p><b>Periodo: </b>@Html.DisplayFor(model => model.Periodo)</p>
 
-        <dt>@Html.DisplayNameFor(model => model.Carga_Horaria)</dt>
-        <dd>@Html.DisplayFor(model => model.Carga_Horaria)</dd>
+         <p><b>Carga Horária: </b>@Html.DisplayFor(model => model.Carga_Horaria)</p>
 
-        <dt>@Html.DisplayNameFor(model => model.Negocio_Funcionario.Negocio_Pessoa.Primeiro_Nome)</dt>
-        <dd>@Html.DisplayFor(model => model.Negocio_Funcionario.Negocio_Pessoa.Primeiro_Nome)</dd>
-    </dl>
+         <p><b>Primeiro nome: </b>@Html.DisplayFor(model => model.Negocio_Funcionario.Negocio_Pessoa.Primeiro_Nome)</p>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
+        <br />
         <div class="form-actions no-color">
-            <input type="submit" value="Deletar" class="btn btn-default" /> |
+            <input type="submit" value="Deletar" class="btn btn-default" />
         </div>
     }
 </div>

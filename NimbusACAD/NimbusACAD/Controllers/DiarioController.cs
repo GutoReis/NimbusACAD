@@ -253,11 +253,18 @@ namespace NimbusACAD.Controllers
         [RBAC]
         [HttpPost, ActionName("RemoverPresenca")]
         [ValidateAntiForgeryToken]
-        public ActionResult RemoverPresencaConfirmacao(int id)
+        public async Task<ActionResult> RemoverPresencaConfirmacao(int id)
         {
             Negocio_Frequencia frequencia = db.Negocio_Frequencia.Find(id);
+
+            Negocio_Vinculo_Disciplina vinculo = db.Negocio_Vinculo_Disciplina.Where(o => o.Disciplina_ID == frequencia.Disciplina_ID && o.Matricula_ID == frequencia.Matricula_ID).FirstOrDefault();
+            vinculo.Frequencia = vinculo.Frequencia.Value - frequencia.Qtde_Aula.Value;
+            db.Entry(vinculo).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
             db.Negocio_Frequencia.Remove(frequencia);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
+
             return RedirectToAction("ListarPresencas");
         }
 

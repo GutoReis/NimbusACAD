@@ -6,15 +6,10 @@
 
 <h2>Detalhes</h2>
 
+<hr />
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Cargo)</dt>
-        <dd>@Html.DisplayFor(model => model.Cargo)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Descricao)</dt>
-        <dd>@Html.DisplayFor(model => model.Descricao)</dd>
-    </dl>
+        <p><b>@Html.DisplayNameFor(model => model.Cargo): </b>@Html.DisplayFor(model => model.Cargo)</p>
+        <p><b>@Html.DisplayNameFor(model => model.Descricao): </b>@Html.DisplayFor(model => model.Descricao)</p>
 </div>
 <p>
     @Html.ActionLink("Editar", "Editar", new { id = Model.Tipo_Funcionario_ID}) | 

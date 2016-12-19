@@ -4,17 +4,17 @@
     ViewBag.Title = "VerNotasAluno";
 }
 
-<h2>VerNotasAluno</h2>
+<h2>Ver notas</h2>
 
 <table class="table">
     <tr>
-        <td>Modulo</td>
-        <td>Disciplina</td>
-        <td>Professor</td>
-        <td>Nota 1</td>
-        <td>Nota 2</td>
-        <td>Media Final</td>
-        <td>Frequencia</td>
+        <th>Modulo</th>
+        <th>Disciplina</th>
+        <th>Professor</th>
+        <th>Nota 1</th>
+        <th>Nota 2</th>
+        <th>Media Final</th>
+        <th>Frequencia</th>
     </tr>
 
     @foreach (var item in Model.notas)
@@ -26,7 +26,7 @@
             <td>@Html.DisplayFor(modelItem => item.Nota1)</td>
             <td>@Html.DisplayFor(modelItem => item.Nota2)</td>
             <td>@Html.DisplayFor(modelItem => item.MediaFinal)</td>
-            <td>@Html.DisplayFor(modelItem => item.Frequencia)</td>s
+            <td>@Html.DisplayFor(modelItem => item.Frequencia)</td>
         </tr>
     }
 </table>

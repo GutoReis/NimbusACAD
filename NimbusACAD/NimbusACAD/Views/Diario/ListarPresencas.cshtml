@@ -4,15 +4,16 @@
     ViewBag.Title = "ListarPresencas";
 }
 
-<h2>ListarPresencas</h2>
+<h2>Listar presencas</h2>
+<br />
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.Negocio_Disciplina.Disciplina_Nome)</th>
-        <th>@Html.DisplayNameFor(model => model.Negocio_Funcionario.Negocio_Pessoa.Primeiro_Nome)</th>
-        <th>@Html.DisplayNameFor(model => model.Dt_Aula)</th>
-        <th>@Html.DisplayNameFor(model => model.Qtde_Aula)</th>
-        <th>@Html.DisplayNameFor(model => model.Aula_Ministrada)</th>
-        <th>@Html.DisplayNameFor(model => model.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome)</th>
+        <th>Nome da disciplina</th>
+        <th>Professor</th>
+        <th>Data da aula</th>
+        <th>Aulas</th>
+        <th>Descrição da aula</th>
+        <th>Aluno</th>
         <th></th>
     </tr>
 
@@ -20,10 +21,10 @@
     <tr>
         <td>@Html.DisplayFor(modelItem => item.Negocio_Disciplina.Disciplina_Nome)</td>
         <td>@Html.DisplayFor(modelItem => item.Negocio_Funcionario.Negocio_Pessoa.Primeiro_Nome)</td>
-        <td>@Html.DisplayFor(modelItem => item.Dt_Aula)</td>
+        <td>@Html.DisplayFor(modelItem => item.Dt_Aula).ToString().Substring(1,10)</td>
         <td>@Html.DisplayFor(modelItem => item.Qtde_Aula)</td>
-        <td>@Html.DisplayFor(modelItem => item.Aula_Ministrada)</td>
-        <td>@Html.DisplayFor(modelItem => item.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome)</td> | 
+        <td style="width: 20%">@Html.DisplayFor(modelItem => item.Aula_Ministrada)</td>
+        <td>@Html.DisplayFor(modelItem => item.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome)</td>
         <td>@Html.ActionLink("Remover Presença", "RemoverPresenca", new { id = item.Frequencia_ID })</td>
     </tr>
 }

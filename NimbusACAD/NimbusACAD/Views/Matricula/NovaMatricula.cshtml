@@ -4,7 +4,7 @@
     ViewBag.Title = "NovaMatricula";
 }
 
-<h2>NovaMatricula</h2>
+<h2>Nova Matricula</h2>
 
 
 @using (Html.BeginForm()) 
@@ -17,30 +17,15 @@
         @Html.HiddenFor(model => model.PessoaID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CursoID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CursoID, "Curso", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CursoID, ViewBag.Cursos as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control"})
-                @*@Html.DropDownListFor(model => model.CursoID,
-                        new SelectList(ViewBag.CursosList, "Curso_ID", "Curso_Nome"),
-                        "",
-                        new { @class = "form-control", @onchange="FillModulo()" })*@
                 @Html.ValidationMessageFor(model => model.CursoID, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.ModuloID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ModuloID,
-                        new SelectList(Enumerable.Empty<SelectListItem>(), "Modulo_ID", "Modulo_Nome"),
-                            "", new { @class = "form-control" })
-                @Html.DropDownList("ModuloID", ViewBag.Modulos as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control"})
-                @Html.ValidationMessageFor(model => model.ModuloID, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Ano, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ano, "Ano", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Ano, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Ano, "", new { @class = "text-danger" })
@@ -48,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DeveDocumento, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DeveDocumento, "Deve documento", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.DeveDocumento)
@@ -67,22 +52,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @*<script>
-        function FillModulo() {
-            var cursoID = $('#Negocio_Curso').val();
-            $.ajax({
-                url: '/Matricula/FillModulo',
-                type: "GET",
-                dataType: "JSON",
-                data: { Negocio_Curso: Curso_ID },
-                success: function (modulos) {
-                    $("#Negocio_Modulo").html("");
-                    $.each(modulos, function (i, modulo) {
-                        $("#Negocio_Modulo").append(
-                            $('<option></option>').val(modulo.Modulo_ID).html(modulo.Modulo_Nome));
-                    });
-                }
-            });
-        }
-    </script>*@
 }

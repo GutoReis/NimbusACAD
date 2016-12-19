@@ -8,10 +8,7 @@
 
 <div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Documento_Nome)</dt>
-        <dd>@Html.DisplayFor(model => model.Documento_Nome)</dd>
-    </dl>
+        <p><b>Nome do documento: </b>@Html.DisplayFor(model => model.Documento_Nome)</p>
 </div>
 <p>
     @Html.ActionLink("Editar", "Editar", new { id = Model.Documento_ID }) | 

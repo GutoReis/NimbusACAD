@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - NimbusAcad</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="~/Content/DocWeb/js/jquery.min.js"></script> 
     <script type="text/javascript">
         var appInsights=window.appInsights||function(config){
             function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace","Ajax"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
@@ -15,144 +16,174 @@
         
         window.appInsights=appInsights;
         appInsights.trackPageView();
+
+        $(document).ready(function () {
+            $('.dropdown-submenu a.test').on("click", function (e) {
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+        });
     </script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("NimbusAcad", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        if (User.HasPermission("Curso-Index") || User.HasPermission("Horario-Index") || User.HasPermission("Matricula-Buscar") || User.HasPermission("Matricula-Criar") || 
-                            User.HasPermission("Diario-Index") || User.HasPermission("Diario-ListarPresenca") || User.HasPermission("Diario-VerNotasAluno") || User.HasPermission("Diario-VerNotasDisciplinas"))
+    <div class="navbar-fixed-top">
+        <div style="text-align:center; background-color:#ededed;"><a href="@Url.Action("Index", "Home")"><img style="width:15%; margin:20px;" src="~/Content/DocWeb/img/Logo.png" /></a></div>
+        <div class="navbar" style="background-color:#ff7800; border:none;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="links" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                    Institucional
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    @if (User.HasPermission("Curso-Index")){<li>@Html.ActionLink("Curso", "Index", "Curso")</li>}
-                                    @if (User.HasPermission("Horario-Index")) {<li>@Html.ActionLink("Horario", "Index", "Horario")</li>}
-                                    @if (User.HasPermission("Matricula-Index") || User.HasPermission("Matricula-NovaPessoa"))
-                                    {
-                                        <li class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                                Matricula
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                @if (User.HasPermission("Matricula-Index")){<li>@Html.ActionLink("Buscar", "Index", "Matricula")</li>}
-                                                @if (User.HasPermission("Matricula-NovaPessoa")){<li>@Html.ActionLink("Matricular", "NovaPessoa", "Matricula")</li>}
-                                            </ul>
-                                        </li>
-                                    }
-                                    @if (User.HasPermission("Diario-Index") || User.HasPermission("Diario-ListarPresenca") || User.HasPermission("Diario-VerNotasAluno") || User.HasPermission("Diario-VerNotasDisciplinas"))
-                                    {
-                                        <li class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                                Diário de classe
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                @if (User.HasPermission("Diario-Index")){<li>@Html.ActionLink("Diário de classe", "Index", "Diario")</li>}
-                                                @if (User.HasPermission("Diario-ListarPresenca")){<li>@Html.ActionLink("Listar Presenças", "ListarPresencas", "Diario")</li>}
-                                                @if (User.HasPermission("Diario-VerNotasAluno")){<li>@Html.ActionLink("Ver notas por aluno", "VerNotasAluno", "Diario")</li>}
-                                                @if (User.HasPermission("Diario-VerNotasDisciplinas")){<li>@Html.ActionLink("Ver notas por disciplina", "VerNotasDisciplina", "Diario")</li>}
-                                            </ul>
-                                        </li>
-                                    }
+                            <li id="dropd" class="dropdown" style="padding-left:70%; position:absolute;">
+                                <a data-toggle="dropdown">
+                                    @User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu" style="margin-left:90%;">
+                                    @if (User.Identity.Name != "Admin")
+                                    { <li><a href="/Mensagem">Mensagem (@User.TotNotificacao())</a></li> }
+                                    <li>@Html.ActionLink("Gerenciar", "Index", "Gerenciar")</li>
+                                    <li>@Html.ActionLink("Sair", "LogOff", "Account")</li>
                                 </ul>
                             </li>
-                        }
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                            if (User.HasPermission("Curso-Index") || User.HasPermission("Horario-Index") || User.HasPermission("Matricula-Buscar") || User.HasPermission("Matricula-Criar") ||
+                                User.HasPermission("Diario-Index") || User.HasPermission("Diario-ListarPresencas") || User.HasPermission("Diario-VerNotasAluno"))
+                            {
+                                <li id="dropd" class="dropdown">
+                                    <a data-toggle="dropdown">
+                                        Institucional
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        @if (User.HasPermission("Curso-Index"))
+                                        {
+                                            <li>@Html.ActionLink("Curso", "Index", "Curso")</li>}
+                                        @if (User.HasPermission("Horario-Index"))
+                                        {
+                                            <li>@Html.ActionLink("Horario", "Index", "Horario")</li>}
+                                        @if (User.HasPermission("Matricula-Index") || User.HasPermission("Matricula-NovaPessoa"))
+                                        {
+                                            <li id="dropd" class="dropdown-submenu">
+                                                <a class="test" tabindex="-1">
+                                                    Matricula
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    @if (User.HasPermission("Matricula-Index"))
+                                                    {
+                                                        <li>@Html.ActionLink("Ver Matriculas", "Index", "Matricula")</li>}
+                                                    @if (User.HasPermission("Matricula-NovaPessoa"))
+                                                    {
+                                                        <li>@Html.ActionLink("Matricular", "NovaPessoa", "Matricula")</li>}
+                                                </ul>
+                                            </li>
+                                        }
+                                        @if (User.HasPermission("Diario-Index") || User.HasPermission("Diario-ListarPresencas") || User.HasPermission("Diario-VerNotasAluno"))
+                                        {
+                                            <li id="dropd" class="dropdown-submenu">
+                                                <a class="test" tabindex="-1">
+                                                    Diário de classe
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    @if (User.HasPermission("Diario-Index"))
+                                                    {
+                                                        <li>@Html.ActionLink("Diário de classe", "Index", "Diario")</li>}
+                                                    @if (User.HasPermission("Diario-ListarPresencas"))
+                                                    {
+                                                        <li>@Html.ActionLink("Listar Presenças", "ListarPresencas", "Diario")</li>}
+                                                    @if (User.HasPermission("Diario-VerNotasAluno"))
+                                                    {
+                                                        <li>@Html.ActionLink("Ver notas por aluno", "VerNotasAluno", "Diario")</li>}
+                                                </ul>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
 
-                        if (User.HasPermission("Cargo-Index") || User.HasPermission("Documento-Index") || User.HasPermission("Funcionario-Index") || User.HasPermission("Funcionario-Criar") ||
-                            User.HasPermission("RBACPerfil-Index") || User.HasPermission("RBACPermissao-Index") || User.HasPermission("RBACUsuario-Index"))
+                            if (User.HasPermission("Cargo-Index") || User.HasPermission("Documento-Index") || User.HasPermission("Funcionario-Index") || User.HasPermission("Funcionario-Criar") ||
+                                User.HasPermission("RBACPerfil-Index") || User.HasPermission("RBACPermissao-Index") || User.HasPermission("RBACUsuario-Index"))
+                            {
+                                <li id="dropd" class="dropdown">
+                                    <a data-toggle="dropdown">
+                                        Administrativo
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        @if (User.HasPermission("Cargo-Index"))
+                                        {
+                                            <li>@Html.ActionLink("Cargo", "Index", "Cargo")</li>}
+                                        @if (User.HasPermission("Documento-Index"))
+                                        {
+                                            <li>@Html.ActionLink("Documentos", "Index", "Documento")</li>}
+                                        @if (User.HasPermission("Funcionario-Index") || User.HasPermission("Funcionario-NovaPessoa"))
+                                        {
+                                            <li id="dropd" class="dropdown-submenu">
+                                                <a class="test" tabindex="-1">
+                                                    Funcionário
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    @if (User.HasPermission("Funcionario-Index"))
+                                                    {
+                                                        <li>@Html.ActionLink("Funcionarios", "Index", "Funcionario")</li>}
+                                                    @if (User.HasPermission("Funcionario-NovaPessoa"))
+                                                    {
+                                                        <li>@Html.ActionLink("Cadastrar", "NovaPessoa", "Funcionario")</li>}
+                                                </ul>
+                                            </li>
+                                        }
+                                        @if (User.HasPermission("RBACPerfil-Index") || User.HasPermission("RBACPermissao-Index") || User.HasPermission("RBACUsuario-Index"))
+                                        {
+                                            <li id="dropd" class="dropdown-submenu">
+                                                <a class="test" tabindex="-1">
+                                                    Gerenciar Sistema
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    @if (User.HasPermission("RBACPerfil-Index"))
+                                                    {
+                                                        <li>@Html.ActionLink("Perfis de Acesso", "Index", "RBACPerfil")</li>}
+                                                    @if (User.HasPermission("RBACPermissao-Index"))
+                                                    {
+                                                        <li>@Html.ActionLink("Permissões", "Index", "RBACPermissao")</li>}
+                                                    @if (User.HasPermission("RBACUsuario-Index"))
+                                                    {
+                                                        <li>@Html.ActionLink("Usuários", "Index", "RBACUsuario")</li>}
+                                                </ul>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                            
+                        }
+                        else
                         {
-                            <li class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                    Administrativo
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    @if (User.HasPermission("Cargo-Index")){<li>@Html.ActionLink("Cargo", "Index", "Cargo")</li>}
-                                    @if (User.HasPermission("Documento-Index")){<li>@Html.ActionLink("Documentos", "Index", "Documento")</li>}
-                                    @if (User.HasPermission("Funcionario-Index") || User.HasPermission("Funcionario-NovaPessoa"))
-                                    {
-                                        <li class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                                Funcionário
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                @if (User.HasPermission("Funcionario-Index")){<li>@Html.ActionLink("Funcionarios", "Index", "Funcionario")</li>}
-                                                @if (User.HasPermission("Funcionario-NovaPessoa")){<li>@Html.ActionLink("Cadastrar", "NovaPessoa", "Funcionario")</li>}
-                                            </ul>
-                                        </li>
-                                    }
-                                    @if (User.HasPermission("RBACPerfil-Index") || User.HasPermission("RBACPermissao-Index") || User.HasPermission("RBACUsuario-Index"))
-                                    {
-                                        <li class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                                Gerenciar Sistema
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                @if (User.HasPermission("RBACPerfil-Index")) {<li>@Html.ActionLink("Perfis de Acesso", "Index", "RBACPerfil")</li>}
-                                                @if (User.HasPermission("RBACPermissao-Index")) {<li>@Html.ActionLink("Permissões", "Index", "RBACPermissao")</li>}
-                                                @if (User.HasPermission("RBACUsuario-Index")) {<li>@Html.ActionLink("Usuários", "Index", "RBACUsuario")</li>}
-                                            </ul>
-                                        </li>
-                                    }
+                            <li id="dropd" class="dropdown" style="padding-left:70%; position:absolute;">
+                                <a data-toggle="dropdown">
+                                    Entrar
+                                </a>
+                                <ul class="dropdown-menu"style="margin-left:90%;">
+                                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                                    <li>@Html.ActionLink("Assinatura", "Assinatura", "Home")</li>
                                 </ul>
                             </li>
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Sobre", "About", "Home")</li>
                         }
-                        <li class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                @User.Identity.Name
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="/Mensagem">Mensagem (@User.TotNotificacao())</a></li>
-                                <li>@Html.ActionLink("Gerenciar", "Index", "Gerenciar")</li>
-                                <li>@Html.ActionLink("Sair", "LogOff", "Account")</li>
-                            </ul>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                Entrar
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                                <li>@Html.ActionLink("Assinatura", "Assinatura", "Home")</li>
-                            </ul>
-                        </li>                        
-                    }
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" style="padding-top:180px;">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - NimbusAcad</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

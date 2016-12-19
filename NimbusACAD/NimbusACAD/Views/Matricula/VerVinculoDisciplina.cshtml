@@ -9,28 +9,28 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.DisciplinaNm)</dt>
+        <dt>Disciplina</dt>
         <dd>@Html.DisplayFor(model => model.DisciplinaNm)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Professor)</dt>
+        <dt>Professor</dt>
         <dd>@Html.DisplayFor(model => model.Professor)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.NmAluno)</dt>
+        <dt>Aluno</dt>
         <dd>@Html.DisplayFor(model => model.NmAluno)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.TotAulasDadas)</dt>
+        <dt>Total de aulas dadas</dt>
         <dd>@Html.DisplayFor(model => model.TotAulasDadas)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Frequencia)</dt>
+        <dt>Frequência</dt>
         <dd>@Html.DisplayFor(model => model.Frequencia)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Nota1)</dt>
+        <dt>Nota 1</dt>
         <dd>@Html.DisplayFor(model => model.Nota1)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Nota2)</dt>
+        <dt>Nota 2</dt>
         <dd>@Html.DisplayFor(model => model.Nota2)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.MediaFinal)</dt>
+        <dt>Média</dt>
         <dd>@Html.DisplayFor(model => model.MediaFinal)</dd>
     </dl>
 </div>
@@ -38,24 +38,23 @@
 <p>Horários dessa disciplina</p>
 <table class="table">
     <tr>
-        <th>Dia</th>
-        <th>Inicio</th>
-        <th>Fim</th>
+        <th>Dia da semana</th>
+        <th>Inicio da aula</th>
+        <th>Término da aula</th>
     </tr>
 
     @foreach (var item in Model.horarios)
     {
         <tr>
-            <th>@Html.DisplayFor(modelItem => item.DiaSemana)</th>
-            <th>@Html.DisplayFor(modelItem => item.HoraInicio)</th>
-            <th>@Html.DisplayFor(modelItem => item.HoraFim)</th>
+            <td>@Html.DisplayFor(modelItem => item.DiaSemana)</td>
+            <td>@Html.DisplayFor(modelItem => item.HoraInicio)</td>
+            <td>@Html.DisplayFor(modelItem => item.HoraFim)</td>
         </tr>
     }
 </table>
 
 <p>
-    @Html.ActionLink("Remover vinculo", "RemoverVinculoDisciplina", new { id = Model.VinculoID}) | 
-    @Html.ActionLink("Voltar", "VerAluno", new { id = Model.MatriculaID})
+    @Html.ActionLink("Remover vinculo", "RemoverVinculoDisciplina", new { id = Model.VinculoID})
 </p>
 
 @section Scripts{

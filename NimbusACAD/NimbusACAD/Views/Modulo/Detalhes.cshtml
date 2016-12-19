@@ -9,19 +9,16 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.CursoNM)</dt>
+        <dt>Curso</dt>
         <dd>@Html.DisplayFor(model => model.CursoNM)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.ModuloNome)</dt>
+        <dt>Nome do modulo</dt>
         <dd>@Html.DisplayFor(model => model.ModuloNome)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.MaxAlunos)</dt>
+        <dt>Máximo de alunos</dt>
         <dd>@Html.DisplayFor(model => model.MaxAlunos)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.TotAlunos)</dt>
-        <dd>@Html.DisplayFor(model => model.TotAlunos)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.CargaHoraria)</dt>
+        <dt>Carga horária</dt>
         <dd>@Html.DisplayFor(model => model.CargaHoraria)</dd>
     </dl>
 </div>
@@ -42,8 +39,7 @@
 
 <p>
     @Html.ActionLink("Editar", "Editar", new { id = Model.ModuloID }) | 
-    @Html.ActionLink("Deletar", "Deletar", new { id = Model.ModuloID}) | 
-    @Html.ActionLink("Voltar para o curso", "Detalhes", "Curso", new { id = Model.CursoID }, null)
+    @Html.ActionLink("Deletar", "Deletar", new { id = Model.ModuloID})
 </p>
 
 @section Scripts {

@@ -5,23 +5,14 @@
 }
 
 <h2>Deletar</h2>
-
-<h3>Você tem certeza de que deseja remover este horário, esta operação não poderão ser desfeita?</h3>
+<hr />
+<h4>Você tem certeza de que deseja remover este horário, esta operação não poderão ser desfeita?</h4>
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Dia_Semana)</dt>
-        <dd>@Html.DisplayFor(model => model.Dia_Semana)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Hora_Inicio)</dt>
-        <dd>@Html.DisplayFor(model => model.Hora_Inicio)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Hora_Fim)</dt>
-        <dd>@Html.DisplayFor(model => model.Hora_Fim)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Negocio_Disciplina.Disciplina_Nome)</dt>
-        <dd>@Html.DisplayFor(model => model.Negocio_Disciplina.Disciplina_Nome)</dd>
-    </dl>
+        <br />
+        <p><b>Disciplina: </b>@Html.DisplayFor(model => model.Negocio_Disciplina.Disciplina_Nome)</p>
+        <p><b>Dia da semana: </b>@Html.DisplayFor(model => model.Dia_Semana)</p>
+        <p><b>Início da aula: </b>@Html.DisplayFor(model => model.Hora_Inicio)</p>
+        <p><b>Término da aula: </b>@Html.DisplayFor(model => model.Hora_Fim)</p>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()

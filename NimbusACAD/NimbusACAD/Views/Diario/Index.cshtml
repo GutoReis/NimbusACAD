@@ -4,21 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
+<h2>Diario</h2>
+<hr />
 <table class="table">
-    <tr>
-        <td>Disciplinas</td>
-        <td></td>
-    </tr>
+        <h4>Disciplinas</h4>
+    <br />
     @foreach (var item in Model.disciplinas)
     {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.DisciplinaNM)</td> | 
-            <td>@Html.ActionLink("Chamada", "Chamada", new { discID = item.DisciplinaID, profID = Model.ProfessorID })</td> | 
-            <td>@Html.ActionLink("Lançar Notas", "LancarNotas", new { discID = item.DisciplinaID, profID = Model.ProfessorID })</td>| 
-            <td>@Html.ActionLink("Ver Notas", "VerNotasDisciplina", new { discID = item.DisciplinaID })</td>
-        </tr>
+        <p>@Html.DisplayFor(modelItem => item.DisciplinaNM)</p>
+        <p>@Html.ActionLink("Chamada", "Chamada", new { discID = item.DisciplinaID, profID = Model.ProfessorID })
+        @Html.ActionLink("Lançar Notas", "LancarNotas", new { discID = item.DisciplinaID, profID = Model.ProfessorID })
+        @Html.ActionLink("Ver Notas", "VerNotasDisciplina", new { discID = item.DisciplinaID })</p>
     }
 </table>
 

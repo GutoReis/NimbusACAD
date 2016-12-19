@@ -80,7 +80,7 @@ namespace NimbusACAD.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult EsqueceuSenha(EsqueceuSenhaViewModel model)
+        public async System.Threading.Tasks.Task<ActionResult> EsqueceuSenha(EsqueceuSenhaViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace NimbusACAD.Controllers
                 }
 
                 string _tempAcess = _userStore.ForgotPassword(usuario.UsuarioID);
-                _signInManager.SendEmail(usuario.Email, "Senha alterada", "Aqui está sua nova senha: " + _tempAcess + ", por favor altere esta senha para sua senha própria");
+                await _signInManager.SendEmail(usuario.Email, "Senha alterada", "Aqui está sua nova senha: " + _tempAcess + ", por favor altere esta senha para sua senha própria");
                 return View("EsqueceuSenhaCOnfirmacao");
             }
             return View(model);

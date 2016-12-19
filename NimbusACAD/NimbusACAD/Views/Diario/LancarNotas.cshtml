@@ -4,7 +4,7 @@
     ViewBag.Title = "LancarNotas";
 }
 
-<h2>LancarNotas</h2>
+<h2>Lanca notas</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,47 +12,34 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <hr />
+        <br />
         @Html.HiddenFor(model => model.DisciplinaID)
         @Html.HiddenFor(model => model.DisciplinaNm)
-        <p>@Html.DisplayFor(model => model.DisciplinaNm)</p>
+        <h4>Notas dos alunos de @Html.DisplayFor(model => model.DisciplinaNm)</h4>
 
         <table class="table">
             <tr>
-                <td>Aluno</td>
-                <td>Nota 1</td>
-                <td>Nota 2</td>
-                <td>Media Final</td>
+                <th>Aluno</th>
+                <th>Nota 1</th>
+                <th>Nota 2</th>
             </tr>
-            @*@foreach (var item in Model.notas.ToList())*@
             @for (int i = 0; i < Model.notas.Count(); i++)
             {
-                //<tr>@Html.DisplayFor(modelItem => item.AlunoNm)</tr>
-                @*<tr>
-                    @Html.EditorFor(modelItem => item.Nota1, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(modelItem => item.Nota1, "", new { @class = "text-danger" })
-                </tr>
-                <tr>
-                    @Html.EditorFor(modelItem => item.Nota2, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(modelItem => item.Nota2, "", new { @class = "text-danger" })
-                </tr>*@
                 @Html.HiddenFor(model => model.notas[i].MatriculaID)
                 @Html.HiddenFor(model => model.notas[i].AlunoNm)
+                <tr>
                 @Html.HiddenFor(model => model.notas[i].VinculoID)
-                @Html.DisplayFor(model => model.notas[i].AlunoNm)
-                <tr>
-                    @Html.EditorFor(model => model.notas[i].Nota1, new { htmlAttributes = new { @class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.notas[i].Nota1, "", new { @class = "text-danger"})
-                </tr>
-                <tr>
-                    @Html.EditorFor(model => model.notas[i].Nota2, new { htmlAttributes = new { @class = "form-control" }})
-                    @Html.ValidationMessageFor(model => model.notas[i].Nota2, "", new { @class = "text-danger"})
+                <td>@Html.DisplayFor(model => model.notas[i].AlunoNm)</td>
+                <td>@Html.EditorFor(model => model.notas[i].Nota1, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                    @Html.ValidationMessageFor(model => model.notas[i].Nota1, "", new { @class = "text-danger" })</td>
+                <td>@Html.EditorFor(model => model.notas[i].Nota2, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                    @Html.ValidationMessageFor(model => model.notas[i].Nota2, "", new { @class = "text-danger" })</td>
                 </tr>
             }
         </table>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div style="text-align:right; padding-right:10%;">
                 <input type="submit" value="Salvar" class="btn btn-default" />
             </div>
         </div>

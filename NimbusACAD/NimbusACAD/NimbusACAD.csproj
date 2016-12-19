@@ -284,6 +284,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DocWeb\css\prettify.css" />
     <Content Include="Content\DocWeb\css\style.css" />
+    <Content Include="Content\DocWeb\img\BannerBG.jpg" />
     <Content Include="Content\DocWeb\img\download.png" />
     <Content Include="Content\DocWeb\img\figura1.png" />
     <Content Include="Content\DocWeb\img\figura10.png" />
@@ -325,6 +326,7 @@
     <Content Include="Content\DocWeb\img\logo-govsp-corfatec.png" />
     <Content Include="Content\DocWeb\img\Logo.png" />
     <Content Include="Content\DocWeb\img\Logo2.png" />
+    <Content Include="Content\DocWeb\img\name.png" />
     <Content Include="Content\DocWeb\index.html" />
     <Content Include="Content\DocWeb\js\jquery.min.js" />
     <Content Include="Content\DocWeb\js\layout.js" />

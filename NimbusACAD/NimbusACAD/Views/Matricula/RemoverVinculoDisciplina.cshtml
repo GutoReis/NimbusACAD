@@ -10,19 +10,18 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Negocio_Disciplina.Disciplina_Nome)</dt>
+        <dt>Disciplina</dt>
         <dd>@Html.DisplayFor(model => model.Negocio_Disciplina.Disciplina_Nome)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome)</dt>
-        <dd>@Html.DisplayFor(model => model.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome)</dd>
+        <dt>Aluno</dt>
+        <dd>@Html.DisplayFor(model => model.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome) @Html.DisplayFor(model => model.Negocio_Matricula_Aluno.Negocio_Pessoa.Sobrenome)</dd>
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Remover" class="btn btn-default" /> |
-            @Html.ActionLink("Voltar", "VerVinculoDisciplina", new { id = Model.Vinculo_ID })
+            <input type="submit" value="Remover" class="btn btn-default" />
         </div>
     }
 </div>

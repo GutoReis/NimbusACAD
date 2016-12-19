@@ -632,7 +632,7 @@ namespace NimbusACAD.Controllers
             VVDVM.DisciplinaNm = vinculo.Negocio_Disciplina.Disciplina_Nome;
             VVDVM.Professor = vinculo.Negocio_Disciplina.Negocio_Funcionario.Negocio_Pessoa.Primeiro_Nome + " " + vinculo.Negocio_Disciplina.Negocio_Funcionario.Negocio_Pessoa.Sobrenome;
             VVDVM.NmAluno = vinculo.Negocio_Matricula_Aluno.Negocio_Pessoa.Primeiro_Nome + " " + vinculo.Negocio_Matricula_Aluno.Negocio_Pessoa.Sobrenome;
-            VVDVM.NumChamada = vinculo.Num_Chamada.Value;
+            VVDVM.NumChamada = 0;
             VVDVM.Nota1 = vinculo.Nota1.Value;
             VVDVM.Nota2 = vinculo.Nota2.Value;
             VVDVM.MediaFinal = vinculo.Media_Final.Value;

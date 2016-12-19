@@ -4,6 +4,7 @@ using System.Web.Security;
 using NimbusACAD.Identity.User;
 using NimbusACAD.Identity.Email;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace NimbusACAD.Identity.Security
 {
@@ -82,7 +83,7 @@ namespace NimbusACAD.Identity.Security
 
         #region CONFIRM-EMAIL
 
-        public async void SendEmail(string _userName, string _subject, string _body)
+        public async Task SendEmail(string _userName, string _subject, string _body)
         {
             EmailMessage message = new EmailMessage(_userName, _subject, _body);
             EmailService service = new EmailService();
